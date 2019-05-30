@@ -1,0 +1,17 @@
+html{
+    background-image: url(../../pics/utilities/Party.jpg);
+}
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+main {
+    flex: 1 0 auto;
+}
+#FooterPart{
+    background: rgb(77, 51, 172);
+}
+#RegistrerCard{
+    margin-top:3rem;
+}
