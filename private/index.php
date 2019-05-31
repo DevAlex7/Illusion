@@ -17,7 +17,7 @@
     
 <!--NavBar -->
 <div class="navbar-fixed">
-    <nav class="nav-extended green accent-4">
+    <nav class="nav-extended" id="NavBar">
         <div class="nav-wrapper">
             <a href="/PopMovies/feed/home/main.php" class="brand-logo center">Illusion</a>
         </div>
@@ -45,7 +45,7 @@
                             <label for="pass">Contraseña</label>
                         </div>
                     </div>
-                    <button type="submit" class="btn col s12 m6 offset-m3 green accent-4">Entrar</button>
+                    <button type="submit" class="btn col s12 m6 offset-m3 red">Entrar</button>
                 </form>
             </div>
         </div>

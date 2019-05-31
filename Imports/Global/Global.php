@@ -12,6 +12,10 @@ class ImportGlobal{
         print
         '<link rel="stylesheet" href="../Imports/resources/css/utilities/'. $fileCss .'.css">';
     }
+    public static function ImportSidenavCss($sidenavCss){
+        print 
+        '<link rel="stylesheet" href="../Imports/resources/css/Global/'. $sidenavCss. '.css">';
+    }
     public static function ImportMaterialIcons(){
         print 
         '<link rel="stylesheet" href="../Imports/resources/css/Global/material-icons.css">';
@@ -35,6 +39,28 @@ class ImportGlobal{
     public static function ImportControllerJs($Controller){
         print 
         '<script src="../Http/Controllers/'.$Controller.'.js"></script>';
+    }
+    public static function ImportFooter(){
+        print 
+        '  
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                <h5 class="white-text">Distribuira Illusion</h5>
+                <p class="grey-text text-lighten-4">Tu organizador de eventos, más especializado</p>
+                </div>
+                <div class="col l4 offset-l2 s12">
+                <h6 class="white-text">¡Puedes encontrarnos en donde sea!</h6>
+                <ul>
+                    <li><a class="grey-text text-lighten-3" href="#!">Facebook</a></li>
+                    <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+                    <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+                    <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+                </ul>
+                </div>
+            </div>
+        </div>
+        ';
     }
 }
 ?>

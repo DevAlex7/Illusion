@@ -1,6 +1,11 @@
-
+$(document).ready(function () {
+   
+});
+function modal(){
+    $('.modal').modal('');
+}
 function requestGET(API,Action){
-    const APIGet = '../../Api/'+ API +'+.php?request=GET&action=' + Action;
+    const APIGet = '../Api/'+ API +'.php?request=GET&action=' + Action;
     return APIGet;
 }
 

@@ -17,32 +17,31 @@ class AdminSideNav {
                 self::modals();
                 print('
                 <ul id="slide-out" class="sidenav sidenav-fixed">
-                    <li>
+                    <li id="Sidenav">
                         <div class="user-view">
-                        <div class="card center green accent-4 white-text">
+                        <div class="card center white-text" id="TitleSidenav">
                                 <span class="card-title">Illusion</span>
                             </div>
                             <a href="#name"><span class="black-text name">'. $_SESSION['UsernameActive'].'</span></a>
                             <a href="#email"><span class="black-text email">'. $_SESSION['NameUser'].' '.$_SESSION['LastnameUser'] .'</span></a>
-                            
                         </div>
                     </li>
-                    <li><a class="white-text" href=""><i class="material-icons green-text accent-4">dashboard</i>Inicio</a></li>
-                    <li><a href=""><i class="material-icons">person</i>Mi perfil</a></li>
-                    <li><a href=""><i class="material-icons">drag_indicator</i>Bitacora</a></li>
+                    <div id="OptionsBar">
+                    <li><a class="green-text accent-4" href=""><i class="material-icons green-text accent-4">dashboard</i>Inicio</a></li>
+                    <li><a class="green-text accent-4" href=""><i class="material-icons green-text accent-4">person</i>Mi perfil</a></li>
+                    <li><a class="green-text accent-4" href=""><i class="material-icons green-text accent-4">drag_indicator</i>Bitacora</a></li>
                     <li><div class="divider"></div></li>
-                    <li><a class="subheader white-text">Menu</a></li>
-                    <li><a href="/PopMovies/feed/account/movies.php"><i class="material-icons">movies</i>Stock</a></li>
-                    <li><a href="/PopMovies/feed/account/clasifications.php"><i class="material-icons">list</i>Clasificaciones</a></li>
-                    <li><a href="/PopMovies/feed/account/genders.php"><i class="material-icons">sentiment_satisfied_alt</i>Generos</a></li>
-                    <li><a href="#!"><i class="material-icons">shop</i>Ventas</a></li>
-                    <li><a href="/PopMovies/feed/account/customers.php"><i class="material-icons">business</i>Proveedores</a></li>
+                    <li><a class="subheader grey-text">Menu</a></li>
+                    <li><a href="/Illusion/private/events.php"><i class="material-icons">calendar_today</i>Eventos</a></li>
+                    <li><a href="/PopMovies/feed/account/clasifications.php"><i class="material-icons">pan_tool</i>Personal</a></li>
+                    <li><a href="/PopMovies/feed/account/genders.php"><i class="material-icons">subject</i>Tipos de eventos</a></li>
+                    <li><a href="/PopMovies/feed/account/customers.php"><i class="material-icons">room</i>Lugares</a></li>
                     <li><a href="/PopMovies/feed/account/managers.php"><i class="material-icons">account_circle</i>Administradores</a></li>
-                    <li><a href="/PopMovies/feed/account/clients.php"><i class="material-icons">accessibility</i>Clientes</a></li>
-                    <li><a href="/PopMovies/feed/account/memberships.php"><i class="material-icons">bookmark</i>Membresias</a></li>
-                    <li><a href="/PopMovies/feed/account/actors.php"><i class="material-icons">face</i>Actores</a></li>
+                    <li><a href="/PopMovies/feed/account/clients.php"><i class="material-icons">local_mall</i>Productos</a></li>
+                    <li><a href="/PopMovies/feed/account/memberships.php"><i class="material-icons">inbox</i>Solicitudes</a></li>
                     <li><div class="divider"></div></li>
                     <li><a href="#ModalCloseSession" class="modal-trigger"><i class="material-icons">exit_to_app</i>Cerrar Sesión</a></li>
+                    </div>
                 </ul>  
                 ');
             }

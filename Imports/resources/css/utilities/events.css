@@ -1,0 +1,28 @@
+  html{
+    background-color: rgb(32, 68, 90)  ;
+  }
+  header, main, footer {
+    padding-left: 300px;
+  }
+ 
+  @media only screen and (max-width : 992px) {
+    header, main, footer {
+      padding-left: 0;
+    }
+  }
+  #FooterPart{
+      background: rgb(77, 51, 172);
+  }
+  #Title{
+    margin-left: 38rem;
+  }
+  #map {
+    height: 400px;  /* The height is 400 pixels */
+    width: 100%;  /* The width is the width of the web page */
+   }
+   #PrincipalEvent{
+    border-left: 5px solid #a0a9e7 ; /* Just change the color value and that's it*/
+  }
+  #DetailEvent{
+    border-left: 5px solid rgb(245, 29, 47); 
+  }

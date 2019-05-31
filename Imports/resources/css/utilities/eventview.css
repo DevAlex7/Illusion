@@ -1,0 +1,24 @@
+html{
+    background-color: rgb(32, 68, 90)  ;
+  }
+#TitlePart{
+  margin-top: 1rem;
+}
+#Divider{margin-top: 2rem;}
+#DetailPersonal{margin-top: 2rem;}
+#mapEvent{
+  margin-top: 1rem;
+}
+iframe{
+  width: 72rem;
+  height: 40rem;;  
+}
+#CardView{
+  background-color: transparent
+}
+#DividerProducts{
+  margin-top: 1rem;
+}
+#ListofProducts{
+  margin-top: 1rem;
+}

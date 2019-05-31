@@ -20,15 +20,19 @@ require_once('../Imports/Global/Global.php')?>
         <?php AdminSideNav::SideNav(); ?>
     </header>
     <main>
+    <nav class="green accent-4">
 
-    </main>
-    <footer>
+    </nav>
+    <div class="row">
 
-    </footer>
+    </div>
+</main>
+<footer class="page-footer" id="FooterPart">
+</footer>
 <?php
-ImportGlobal::ImportJQuery();
-ImportGlobal::ImportMaterializeJS();
-ImportGlobal::ImportJSFunctions();
+    ImportGlobal::ImportJQuery();
+    ImportGlobal::ImportMaterializeJS();
+    ImportGlobal::ImportJSFunctions();
 ?>
 </body>
 </html>
