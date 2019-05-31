@@ -6,10 +6,9 @@ $(document).ready(function () {
     getProducts();
     
 });
-function setCheck(id){
-    console.log(id);
-}
+
 var idEvent;
+
 function getQueryVariable(variable)
 {
        var query = window.location.search.substring(1);
@@ -93,11 +92,11 @@ function setProducts(rows){
                 <td>${row.nameProduct}</td>
                 <td>${row.count}</td>
                 <td>
-                    <a class="btn green" onclick="add(${row.id})"><i class="material-icons"> add </i></a>
-                    <a class="btn red"><i class="material-icons"> remove </i></a>
+                    <a class="btn green tooltipped" data-position="bottom" data-tooltip="Agregar"><i class="material-icons"> add </i></a>
+                    <a class="btn red tooltipped" data-position="bottom" data-tooltip="Restar"><i class="material-icons"> remove </i></a>
                 </td>
                 <td>
-                <a class="btn red"> <i class="material-icons"> delete </i></a>
+                <a class="btn red tooltipped" data-position="right" data-tooltip="Eliminar'"> <i class="material-icons"> delete </i></a>
                 </td>
             </tr>
             `;
@@ -121,6 +120,7 @@ function getProducts(){
                 M.toast({html:result.exception});
             }
             setProducts(result.dataset);
+            $('.tooltipped').tooltip();
         }
         else{
             console.log(response);
@@ -136,12 +136,12 @@ function setListProducts(rows){
     if(rows.length>0){
         rows.forEach(function(row){
             content+=`
-            <p>
-                <label>
-                    <input type="checkbox" onclick="setCheck(${row.id})"/>
-                    <span>${row.nameProduct}</span>
-                </label>
-            </p>
+                <p>
+                    <label>
+                        <input type="checkbox" onclick="add(${row.id})"/>
+                        <span>${row.nameProduct}</span>
+                    </label>
+                </p>
             `;
         })
     }
@@ -151,7 +151,9 @@ function ListProducts(){
     $.ajax({
         url:requestGET('products','getProducts'),
         type:'POST',
-        data:null,
+        data:{
+            idEvent
+        },
         datatype:'JSON'
     })
     .done(function(response){
@@ -173,10 +175,10 @@ function ListProducts(){
 }
 function add(product_id){
     $.ajax({
-        url:requestGET('events'),
+        url:requestPOST('List_products_in_Event','insertProductinList'),
         type:'POST',
         data:{
-            idEvent,product_id
+            idEvent , product_id
         },
         datatype:'JSON'
     })
@@ -184,7 +186,9 @@ function add(product_id){
         if(isJSONString(response)){
             const result = JSON.parse(response);
             if(result.status){
-               console.log(response);
+               M.toast({html:'añadido correctamente'});
+               ListProducts();
+               getProducts();
             }
             else{
                 M.toast({html:result.exception});
@@ -197,4 +201,7 @@ function add(product_id){
     .fail(function(jqXHR){
         console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
     });
+}
+function SumCount(number){
+    
 }

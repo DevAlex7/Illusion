@@ -8,7 +8,7 @@ class List_products_in_Event extends Validator{
     private $status;
 
     public function id($value){
-        if($this->ValidateInt($value)){
+        if($this->validateId($value)){
             $this->id=$value;
             return true;
         }
@@ -17,7 +17,7 @@ class List_products_in_Event extends Validator{
         }
     }
     public function id_product($value){
-        if($this->ValidateInt($value)){
+        if($this->validateId($value)){
             $this->id_product=$value;
             return true;
         }
@@ -25,16 +25,49 @@ class List_products_in_Event extends Validator{
             return false;
         }
     }
-    public function count(){
-
+    public function count($value){
+        if($this->ValidateInt($value)){
+            $this->count=$value;
+            return true;
+        }
+        else{
+            return false;
+        }
     }
-    public function id_event(){
-
+    public function id_event($value){
+        if($this->validateId($value)){
+            $this->id_event=$value;
+            return true;
+        }
+        else{
+            return false;
+        }
     }
-    public function date(){
-
+    public function date($value){
+        if($this->validateDate($value)){
+            $this->date=$value;
+            return true;
+        }   
+        else{
+            return false;
+        }
     }
-    public function status(){
+    public function exist(){
+        $sql='SELECT list_products_event.id_product, list_products_event.id_event FROM list_products_event WHERE list_products_event.id_product=? AND list_products_event.id_event=?';
+        $params=array($this->id_product,$this->id_event);
+        return Database::getRow($sql,$params);
+    }
+    public function getCount(){
+        $sql='SELECT list_products_event.count FROM list_products_event WHERE id_product=? AND id_event=?';
+        $params=array($this->id_product,$this->id_event);
+        return Database::getRow($sql,$params);
+    }
+    public function save(){
+        $sql='INSERT INTO list_products_event (id_product, count, id_event, date) VALUES (?,?,?,?)';
+        $params=array($this->id_product,$this->count, $this->id_event, $today = date('Y-m-d'));
+        return Database::executeRow($sql,$params);
+    }
+    public function delete(){
 
     }
 }

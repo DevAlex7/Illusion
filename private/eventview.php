@@ -50,7 +50,7 @@
                                         <div class="col s12 m12">
                                             <div class="card">
                                                 <div class="card-content">
-                                                    <span class="card-title"> <i class="material-icons left">edit</i> Ubicación del evento</span>
+                                                    <a href=""><i class="material-icons left">edit</i></a><span class="card-title"> Ubicación del evento</span>
                                                     <div class="divider"></div>
                                                     <div class="row">
                                                         <div class="col s12 m12">

@@ -16,14 +16,21 @@
         {
             case 'GET':
                 switch($_GET['action']){
+
                     case 'getProducts':
-                        if($result['dataset']=Select::all()->from('products')->getAll()){
-                            $result['status']=1;
+                        if($event->id($_POST['idEvent'])){
+                            if($result['dataset']=$event->allProductsinNotList()){
+                                $result['status']=1;
+                            }
+                            else{
+                                $result['exception']='No hay productos disponibles';
+                            }
                         }
                         else{
-                            $result['exception']='';
+                            $result['exception']='Evento no identificado';
                         }
                     break;
+
                     default:
                     exit('acción no disponible');
                 }
@@ -36,7 +43,7 @@
                 }
             break;
             case 'PUT':
-            
+                
             break;
             case 'DELETE':
             

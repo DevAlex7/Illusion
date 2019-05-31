@@ -108,19 +108,27 @@ class Events extends Validator{
         return Database::getRow($sql,$params);
     }
     public function getProductsinEvent(){
-        $sql=' 
-            SELECT products.id, products.nameProduct, list_products_event.count 
-            FROM ((products 
-            INNER JOIN list_products_event ON products.id=list_products_event.id_product) 
-            INNER JOIN status_products_in_events ON status_products_in_events.id=list_products_event.id 
-            AND status_products_in_events.id=1 
-            INNER JOIN events ON events.id=list_products_event.id_event 
-            AND events.id=?)
+        $sql='  SELECT products.id, products.nameProduct, list_products_event.count 
+                FROM ((products 
+                INNER JOIN list_products_event 
+                ON products.id=list_products_event.id_product) 
+                INNER JOIN events 
+                ON events.id=list_products_event.id_event AND events.id=?)
         ';
         $params=array($this->id);
         return Database::getRows($sql,$params);
     }
-    
+    public function allProductsinNotList(){
+        $sql='  SELECT products.id, products.nameProduct 
+                FROM products
+                WHERE NOT EXISTS 
+                (SELECT 1 FROM list_products_event 
+                WHERE products.id = list_products_event.id_product 
+                AND list_products_event.id_event=?)';
+        $params=array($this->id);
+        return Database::getRows($sql,$params);
+        
+    }
 
 }
 
