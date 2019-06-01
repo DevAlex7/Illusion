@@ -5,6 +5,7 @@ require_once('../Helpers/validator.php');
 require_once('../Helpers/select.php');
 require_once('../Backend/Models/Products.php');
 require_once('../Backend/Models/List_products_in_Event.php');
+require_once('../Backend/Models/Events.php');
 require_once('../Helpers/Statics.php');
 
 
@@ -13,6 +14,7 @@ if (isset($_GET['request']) && isset($_GET['action'])) {
     $result = array('status' => 0, 'exception' => '','price'=>0);
     $static = new Static_Helpers();
     $list = new List_products_in_Event();
+    $event = new Events();
     $product = new Product();
 
     switch ($_GET['request']) {
@@ -85,16 +87,9 @@ if (isset($_GET['request']) && isset($_GET['action'])) {
                                     } 
                                     else {
                                         if ($product->count($cantidadStock - 1)) {
-                                                $product->editCount();
-                                                $countList = Select::all()->from('list_products_event')->where('id',$_POST['id_list'])->get();
-                                                
-                                                if(!$countList==0){
-                                                    
-                                                    $price_Event = $countList['count'] * $priceProduct;
-                                                    $static->setPrice_Event($price_Event);
-                                                    $result['price']=$static->getPrice();
-                                                    $result['status'] = 1;
-                                                }
+                                            
+                                            $product->editCount();
+                                            $result['status']=1;
                                         }
                                         else{
                                             $result['exception']='Cantidad no definida de producto';
@@ -147,24 +142,7 @@ if (isset($_GET['request']) && isset($_GET['action'])) {
                                     if ($product->count($cantidadStock + 1)) {
                                         
                                         $product->editCount();
-                                        $countList = Select::all()->from('list_products_event')->where('id',$_POST['id_list'])->get();
-                                        
-                                        if(!$countList==0){
-                                                    
-                                            $price_Event = $countList['count'] * $priceProduct;
-                                            $price_Event;
-                                            $static->setPrice_Event($price_Event);
-                                            $result['price']=$static->getPrice();
-                                            $result['status'] = 1;
-                                        }
-                                        else{
-
-                                            $price_Event = $countList['count'] * $priceProduct;
-                                            $price_Event;
-                                            $static->setPrice_Event($price_Event);
-                                            $result['price']=$static->getPrice();
-                                            $result['status'] = 2;
-                                        }
+                                        $result['status']=1;                                        
                                     }
                                     else{
                                         $result['exception']='Cantidad no definida de producto';
@@ -205,11 +183,8 @@ if (isset($_GET['request']) && isset($_GET['action'])) {
                             $stockProducts=$product_info['count'] + $list_info['count'];
 
                             if($product->count($stockProducts)){
-                                
                                 $list->delete();
                                 $product->editCount();
-                                $static->setPrice_Event(0);
-                                $result['price']=$static->getPrice();
                                 $result['status']=1;
                             }
                             else{

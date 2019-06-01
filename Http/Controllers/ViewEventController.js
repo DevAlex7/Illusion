@@ -98,7 +98,7 @@ function setProducts(rows){
                     <a onClick="getCountMin(${row.id})"class="btn red tooltipped" data-position="bottom" data-tooltip="Restar"><i class="material-icons"> remove </i></a>
                 </td>
                 <td>
-                    <a onClick="confirm(${row.idProductList},${row.id})" href="#ConfirmDeleteProduct" class="btn red tooltipped modal-trigger" data-position="right" data-tooltip="Eliminar'"> <i class="material-icons"> delete </i></a>
+                    <a onClick="confirm(${row.idProductList},${row.id})" href="#ConfirmDeleteProduct" class="btn red tooltipped modal-trigger" data-position="right" data-tooltip="Eliminar"> <i class="material-icons"> delete </i></a>
                 </td>
             </tr>
             `;
@@ -256,7 +256,7 @@ function SumCount(id_list, id_product){
             const result=JSON.parse(response);
             if(result.status){
                 getProducts();
-                $('#PriceEvent').text("Costo evento: $"+result.price);
+                showPrice();
                 $('.tooltipped').tooltip();
             }
             else{
@@ -318,12 +318,7 @@ function MinCount(id_list, id_product){
         if(isJSONString(response)){
             const result=JSON.parse(response);
             if(result.status==1){
-                $('#PriceEvent').text("Costo evento: $"+result.price);
-                getProducts();
-                $('.tooltipped').tooltip();
-            }
-            else if(result.status==2){
-                $('#PriceEvent').text("Costo evento: $"+result.price);
+                showPrice();
                 getProducts();
                 $('.tooltipped').tooltip();
             }
@@ -358,7 +353,7 @@ function removeFromList(){
             if(result.status){
                 M.toast({html:'Eliminado Correctamente'});
                 getProducts();
-                $('#PriceEvent').text("Costo evento: $"+result.price);
+                showPrice();
                 $('.tooltipped').tooltip();
                 $('#ConfirmDeleteProduct').modal('close');
             }

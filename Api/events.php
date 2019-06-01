@@ -73,6 +73,7 @@
                         if($event->id($_POST['idEvent'])){
                             
                             $event_info = $event->getCostinEvent();
+                            
                             if($event_info['Cost']==0){
                                 $result['price']=0.00;
                                 $result['status']=2;

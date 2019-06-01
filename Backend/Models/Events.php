@@ -130,7 +130,7 @@ class Events extends Validator{
         
     }
     public function getCostinEvent(){
-        $sql='  SELECT products.price * list_products_event.count AS Cost FROM ((list_products_event 
+        $sql='  SELECT SUM(products.price * list_products_event.count) AS Cost FROM ((list_products_event 
                 INNER JOIN products 
                 ON list_products_event.id_product=products.id) 
                 INNER JOIN events 
