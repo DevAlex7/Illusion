@@ -6,6 +6,7 @@
         public static $model_name;
         public static $field_name;
         public static $all="*";
+        public static $value_filter;
         //ComboBoxes
         public function allFrom($Model){
             $sql='SELECT * FROM '. $Model;
@@ -20,50 +21,41 @@
             return Database::getRow($sql, $params);
         }
 
-        public static function in($Model, $column){
-            static::$model_name=$Model;
-            static::$column_field=$column;
-            return new static;
-        }
-
         public static function all(){
             static::$all;
             return new static;
         }
         public static function from($Model){
-            static::$model_name=$Model;
+            static::$model_name = $Model;
             return new static;
         }
-        public function and(){
-            static::$and;
-            return new static;
-        }
-        public static function where($field){
-            static::$field_name=$field;
+        public static function where($columnName, $value){
+            static::$column_field = $columnName;
+            static::$value_filter = $value;
             return new static;
         }
 
-        public static function getCount(){
-            $sql='SELECT SELECT '.static::$model_name . static::$column_field .'FROM'. static::$model_name .'WHERE '.static::$field_name[0] .'= ?'.static::$and .static::$field_name[1].'= ?';
-            $params=array(static::$value_filter[0],static::$value_filter[1]);
+        //Method to get all row with all and from and where
+        public static function get(){
+            $sql='SELECT '. static::$all .' FROM '. static::$model_name .' WHERE '.static::$column_field.' =?';
+            $params = array(static::$value_filter);
             return Database::getRow($sql,$params);
-        }
-    
-        public static function getOne(){
-            $sql='SELECT '. static::$column_field .' FROM '.static::$model_name.' WHERE '. static::$column_field .'= ?';
-            $params=array(static::$field_name);
-            return Database::getRow($sql,$params);
-        }
-        public static function getAll(){
-            $sql='SELECT '. static::$all .' FROM '.static::$model_name;
-            $params=array(null);
-            return Database::getRows($sql,$params);
         }
         
-        public static function findOne(){
-            $sql='SELECT '.static::$all .' FROM '.static::$model_name. ' WHERE '.static::$column_field.' = ?';
-            $params=array(static::$field_name);
+        public static function in($Model, $column){
+            static::$model_name=$Model;
+            static::$column_field=$column;
+            return new static;
+        }
+        //Method to get one field with in and where
+        public static function getOne(){
+            $sql='SELECT '. static::$column_field .' FROM '.static::$model_name.' WHERE '. static::$column_field .' = ?';
+            $params=array(static::$value_filter);
             return Database::getRow($sql,$params);
         }
+        
+
+
+       
     }
 ?>

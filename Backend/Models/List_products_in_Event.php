@@ -58,7 +58,7 @@ class List_products_in_Event extends Validator{
         return Database::getRow($sql,$params);
     }
     public function getCount(){
-        $sql='SELECT list_products_event.count FROM list_products_event WHERE id_product=? AND id_event=?';
+        $sql='SELECT list_products_event.id, list_products_event.count as count FROM list_products_event WHERE id_product=? AND id_event=?';
         $params=array($this->id_product,$this->id_event);
         return Database::getRow($sql,$params);
     }
@@ -67,8 +67,16 @@ class List_products_in_Event extends Validator{
         $params=array($this->id_product,$this->count, $this->id_event, $today = date('Y-m-d'));
         return Database::executeRow($sql,$params);
     }
-    public function delete(){
-
+    public function updateCount(){
+        $sql='UPDATE list_products_event SET count=? WHERE id=?';
+        $params=array($this->count,$this->id);
+        return Database::executeRow($sql,$params);
     }
+    public function delete(){
+        $sql='DELETE FROM list_products_event WHERE id=?';
+        $params=array($this->id);
+        return Database::executeRow($sql,$params);
+    }
+    
 }
 ?>

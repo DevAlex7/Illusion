@@ -4,11 +4,14 @@
     require_once('../Helpers/validator.php');
     require_once('../Helpers/select.php');
     require_once('../Backend/Models/Events.php');
+    require_once('../Helpers/Statics.php');
+    
 
     if( isset($_GET['request']) && isset($_GET['action']) ){
         
         session_start();
-        $result = array('status'=>0,'exception'=>'');
+        $result = array('status'=>0,'exception'=>'','price'=>0);
+        $statics = new Static_Helpers;
         $select = new Select();
         $event = new Events();
 
@@ -25,7 +28,7 @@
                         }
                     break;
                     case 'getId':
-                        if(Select::in('events','id')->where($_POST['idEvent'])->getOne()){
+                        if(Select::in('events','id')->where('id',$_POST['idEvent'])->getOne()){
                             $result['status']=1;
                         }
                         else{
@@ -64,6 +67,23 @@
                         }
                         else{
                             $result['exception']='Fallo';
+                        }
+                    break;
+                    case 'getPrice':
+                        if($event->id($_POST['idEvent'])){
+                            
+                            $event_info = $event->getCostinEvent();
+                            if($event_info['Cost']==0){
+                                $result['price']=0.00;
+                                $result['status']=2;
+                            }
+                            else{
+                                $result['price']=$event_info['Cost'];
+                                $result['status']=1;
+                            }
+                        }
+                        else{
+                            $result['exception']='Evento no definido';
                         }
                     break;
                     default:

@@ -44,7 +44,35 @@ class Product extends Validator{
             return false;
         }
     }
-    public function 
+    public function price($value){
+        if($this->validateMoney($value)){
+            $this->price = $value;
+            return true;
+        }
+        else{
+            return false;
+        }   
+    }
+
+    public function save(){
+
+    }
+    public function edit(){
+
+    }
+    public function delete(){
+
+    }
+    public function find(){
+        $sql='SELECT * FROM products WHERE id=?';
+        $params=array($this->id);
+        return Database::getRow($sql,$params);
+    }
+    public function editCount(){
+        $sql='UPDATE products SET count=? WHERE id=?';
+        $params=array($this->count,$this->id);
+        return Database::executeRow($sql,$params);
+    }
 
 }
 

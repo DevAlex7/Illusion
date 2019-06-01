@@ -74,6 +74,7 @@
                                                             <thead>
                                                             <tr>
                                                                 <th>Productos</th>
+                                                                <th>Precio</th>
                                                                 <th>Cantidad</th>
                                                                 <th>Controles</th>
                                                                 <th>Acción</th>
@@ -83,6 +84,11 @@
                                                             
                                                             </tbody>
                                                         </table>
+                                                        <div class="row">
+                                                            <div class="card-panel">
+                                                                <span class="card-title" id="PriceEvent"></span>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -104,6 +110,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="modal" id="AddProducts">
                 <div class="modal-content">
                     <div class="card">
@@ -119,6 +126,19 @@
             <div class="modal" id="AddInvites">
                 <div class="modal-content">
 
+                </div>
+            </div>
+            <div class="modal red" id="ConfirmDeleteProduct">
+                <div class="modal-content">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="center">
+                                <span class="card-title">¿Desea eliminar este producto de su lista?</span>
+                                <a onclick="removeFromList()" class="btn red">Si, eliminar</a>
+                                <a class="btn grey modal-close">Cancelar</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </main>

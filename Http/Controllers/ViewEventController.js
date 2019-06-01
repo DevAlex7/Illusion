@@ -4,10 +4,11 @@ $(document).ready(function () {
     $('.tooltipped').tooltip();
     $('.modal').modal();
     getProducts();
-    
+    showPrice();
 });
-
+var idList;
 var idEvent;
+var idProduct;
 
 function getQueryVariable(variable)
 {
@@ -90,13 +91,14 @@ function setProducts(rows){
             content+=`
             <tr>
                 <td>${row.nameProduct}</td>
+                <td>${row.price}</td>
                 <td>${row.count}</td>
                 <td>
-                    <a class="btn green tooltipped" data-position="bottom" data-tooltip="Agregar"><i class="material-icons"> add </i></a>
-                    <a class="btn red tooltipped" data-position="bottom" data-tooltip="Restar"><i class="material-icons"> remove </i></a>
+                    <a onClick="getCountSum(${row.id})" class="btn green tooltipped" data-position="bottom" data-tooltip="Agregar"><i class="material-icons"> add </i></a>
+                    <a onClick="getCountMin(${row.id})"class="btn red tooltipped" data-position="bottom" data-tooltip="Restar"><i class="material-icons"> remove </i></a>
                 </td>
                 <td>
-                <a class="btn red tooltipped" data-position="right" data-tooltip="Eliminar'"> <i class="material-icons"> delete </i></a>
+                    <a onClick="confirm(${row.idProductList},${row.id})" href="#ConfirmDeleteProduct" class="btn red tooltipped modal-trigger" data-position="right" data-tooltip="Eliminar'"> <i class="material-icons"> delete </i></a>
                 </td>
             </tr>
             `;
@@ -104,6 +106,7 @@ function setProducts(rows){
     }
     $('#ProductsinList').html(content);
 }
+//Get products in events
 function getProducts(){
     $.ajax({
         url:requestGET('events','getProducts'),
@@ -202,6 +205,202 @@ function add(product_id){
         console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
     });
 }
-function SumCount(number){
+function getCountSum(id_product){
     
+    $.ajax({
+        url:requestGET('List_products_in_Event','getCount'),
+        type:'POST',
+        data:{
+            idEvent:idEvent,
+            id_product:id_product
+        },
+        datatype:'JSON'
+    })
+    .done(function(response){
+        if(isJSONString(response)){
+            const result=JSON.parse(response);
+            if(result.status){
+
+                var idList=result.dataset.id;
+                var count =result.dataset.count;
+                SumCount(idList, id_product);
+                $('.tooltipped').tooltip();
+            }
+            else{
+                M.toast({html:result.exception});
+            }
+        }
+        else{
+            console.log(response);
+        }
+    })
+    .fail(function(jqXHR){
+        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+    });
+}
+function SumCount(id_list, id_product){
+    var count = parseInt(1);
+    $.ajax({
+        url:requestPUT('List_products_in_Event','AgregateCountinList'),
+        type:'POST',
+        data:{
+            count: count,
+            id_list:id_list,
+            id_product:id_product,
+            idEvent:idEvent
+        },
+        datatype:'JSON'
+    })
+    .done(function(response){
+        if(isJSONString(response)){
+            const result=JSON.parse(response);
+            if(result.status){
+                getProducts();
+                $('#PriceEvent').text("Costo evento: $"+result.price);
+                $('.tooltipped').tooltip();
+            }
+            else{
+                M.toast({html:result.exception});
+            }   
+        }
+        else{
+            console.log(response);
+        }
+    })
+    .fail(function(jqXHR){
+        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+    });
+}
+function getCountMin(id_product){
+    $.ajax({
+        url:requestGET('List_products_in_Event','getCount'),
+        type:'POST',
+        data:{
+            idEvent:idEvent,
+            id_product:id_product
+        },
+        datatype:'JSON'
+    })
+    .done(function(response){
+        if(isJSONString(response)){
+            const result=JSON.parse(response);
+            if(result.status){
+
+                var idList=result.dataset.id;
+                var count =result.dataset.count;
+                MinCount(idList, id_product);
+                $('.tooltipped').tooltip();
+            }
+            else{
+                M.toast({html:result.exception});
+            }
+        }
+        else{
+            console.log(response);
+        }
+    })
+    .fail(function(jqXHR){
+        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+    });
+}
+function MinCount(id_list, id_product){
+    $.ajax({
+        url:requestPUT('List_products_in_Event','RestList'),
+        type:'POST',
+        data:{
+            id_list:id_list,
+            id_product:id_product,
+            idEvent:idEvent
+        },
+        datatype:'JSON'
+    })
+    .done(function(response){
+        if(isJSONString(response)){
+            const result=JSON.parse(response);
+            if(result.status==1){
+                $('#PriceEvent').text("Costo evento: $"+result.price);
+                getProducts();
+                $('.tooltipped').tooltip();
+            }
+            else if(result.status==2){
+                $('#PriceEvent').text("Costo evento: $"+result.price);
+                getProducts();
+                $('.tooltipped').tooltip();
+            }
+            else{
+                M.toast({html:result.exception});
+            }   
+        }
+        else{
+            console.log(response);
+        }
+    })
+    .fail(function(jqXHR){
+        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+    });
+}
+function confirm(id_List,id_Product){
+    idList=id_List;
+    idProduct = id_Product;
+}
+function removeFromList(){
+    $.ajax({
+        url:requestDELETE('List_products_in_Event','deleteListbyId'),
+        type:'POST',
+        data:{
+            idList, idProduct
+        },
+        datatype:'JSON'
+    })
+    .done(function(response){
+        if(isJSONString(response)){
+            const result = JSON.parse(response);
+            if(result.status){
+                M.toast({html:'Eliminado Correctamente'});
+                getProducts();
+                $('#PriceEvent').text("Costo evento: $"+result.price);
+                $('.tooltipped').tooltip();
+                $('#ConfirmDeleteProduct').modal('close');
+            }
+            else{
+                M.toast({html:result.exception});
+            }
+        }
+        else{
+            console.log(response);
+        }
+    })
+    .fail(function(jqXHR){
+        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+    });
+}
+function showPrice(){
+    $.ajax({
+        url:requestGET('events','getPrice'),
+        type:'POST',
+        data:{
+            idEvent
+        },
+        datatype:'JSON'
+    })
+    .done(function(response){
+        if(isJSONString(response)){
+            const result = JSON.parse(response);
+            if(result.status==1){
+                $('#PriceEvent').text("Costo evento: $"+result.price);
+            }
+            else if(result.status==2){
+                $('#PriceEvent').text("Costo evento: $"+result.price);
+            }
+            else{
+                M.toast({html:result.exception});
+            }
+        }    
+        else{
+            console.log(response);
+        }
+    })
+    .fail(function(jqXHR){
+        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+    });
 }

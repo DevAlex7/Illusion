@@ -108,7 +108,7 @@ class Events extends Validator{
         return Database::getRow($sql,$params);
     }
     public function getProductsinEvent(){
-        $sql='  SELECT products.id, products.nameProduct, list_products_event.count 
+        $sql='  SELECT list_products_event.id AS idProductList, products.id, products.nameProduct, list_products_event.count, products.price 
                 FROM ((products 
                 INNER JOIN list_products_event 
                 ON products.id=list_products_event.id_product) 
@@ -128,6 +128,15 @@ class Events extends Validator{
         $params=array($this->id);
         return Database::getRows($sql,$params);
         
+    }
+    public function getCostinEvent(){
+        $sql='  SELECT products.price * list_products_event.count AS Cost FROM ((list_products_event 
+                INNER JOIN products 
+                ON list_products_event.id_product=products.id) 
+                INNER JOIN events 
+                ON list_products_event.id_event=events.id AND events.id=?)';
+        $params=array($this->id);
+        return Database::getRow($sql,$params);
     }
 
 }
