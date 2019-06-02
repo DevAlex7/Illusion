@@ -4,14 +4,12 @@
     require_once('../Helpers/validator.php');
     require_once('../Helpers/select.php');
     require_once('../Backend/Models/Events.php');
-    require_once('../Helpers/Statics.php');
     
 
     if( isset($_GET['request']) && isset($_GET['action']) ){
         
         session_start();
         $result = array('status'=>0,'exception'=>'','price'=>0);
-        $statics = new Static_Helpers;
         $select = new Select();
         $event = new Events();
 
@@ -20,7 +18,7 @@
             case 'GET':
                 switch($_GET['action']){
                     case 'getEvents':
-                        if($result['dataset']=$select->allFrom('events')){
+                        if($result['dataset']=$event->all()){
                             $result['status']=1;
                         }   
                         else{

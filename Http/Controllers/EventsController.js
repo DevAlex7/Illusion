@@ -4,19 +4,22 @@ $(document).ready(function () {
     CallEvents();
 });
 function setEvents(events){
-    console.log(events);
-    let content ='';
+        let content ='';
     if(events.length>0){
         events.forEach(function(event){
+
+            
             content+=`
             <div class="col s12 m12">
-                <div class="card-panel z-depth-2">
+                <div class="card z-depth-4" id="CardEvent">
+                    <div class="card-content">
                         <blockquote id="PrincipalEvent">
                             <p>Evento: ${event.name_event}</p>
                             <blockquote id="DetailEvent"> <p>Cliente: ${event.client_name}</p> </blockquote>
-                            <blockquote id="DetailEvent"> <p>Fecha de evento: ${event.date}</p> </blockquote>
+                            <blockquote id="DetailEvent"> <p>Fecha de evento: ${ event.date }</p> </blockquote>
                             <blockquote id="DetailEvent"> <a href="/Illusion/private/eventview.php?event=${event.id}">Ver evento</a></blockquote>
                         </blockquote>
+                    </div>
                 </div>
             </div>
             `;
@@ -64,6 +67,7 @@ $('#FormCreateEvent').submit(function(){
                 M.toast({html:'Agregado correctamente'});
                 $('#FormCreateEvent')[0].reset();
                 $('#CreateEvent').modal('close');
+                CallEvents();
             }
             else{
                 M.toast({html:result.exception});

@@ -40,6 +40,10 @@ class ImportGlobal{
         print 
         '<script src="../Http/Controllers/'.$Controller.'.js"></script>';
     }
+    public static function ImportMomentJS(){
+        print 
+        '<script src="../Imports/resources/js/global/moment.min.js"></script>';
+    }
     public static function ImportFooter(){
         print 
         '  

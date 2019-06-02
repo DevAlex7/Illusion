@@ -1,0 +1,12 @@
+html{
+    background-color: rgb(32, 68, 90)  ;
+}
+#Card{
+    border-radius: 10px;
+}
+#SearchBar{
+    margin-top: 1rem;
+}
+#InfoProduct{
+    margin-right: 1rem;
+}

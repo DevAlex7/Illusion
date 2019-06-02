@@ -1,0 +1,21 @@
+html{
+    background-color: rgb(32, 68, 90)  ;
+}
+#BtnAddType{
+    margin-top: 2rem;
+}
+#NameTypeEventCard{
+    margin-top: 2rem;
+}
+#btnAdd{
+    background-color: rgb(32, 68, 90)  ;
+}
+blockquote{
+    border-left: 5px solid #a0a9e7 ;
+}
+#ContentTypes{
+    margin-top: 1rem;
+}
+#editPart{
+    color: rgb(32, 68, 90)  ;
+}

@@ -93,6 +93,11 @@ class Events extends Validator{
             return false;
         }
     }
+    public function all(){
+        $sql='SELECT * FROM events ORDER BY id DESC';
+        $params=array(null);
+        return Database::getRows($sql,$params);
+    }
     public function save(){
         $sql='INSERT INTO events (name_event, date, client_name, id_employee, price, pay_status, type_event, place) VALUES (?,?,?,?,?,?,?,?)';
         $params = array($this->nameEvent, $this->date, $this->clientName, $this->id_employee, $this->price, $this->pay_status, $this->type_event, $this->place);

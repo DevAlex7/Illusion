@@ -6,10 +6,14 @@ $(document).ready(function () {
     getProducts();
     showPrice();
 });
+//To get the id List of product
 var idList;
+//To get the id of event
 var idEvent;
+//To get id product, when we select the product
 var idProduct;
 
+//Validate variable in the URL
 function getQueryVariable(variable)
 {
        var query = window.location.search.substring(1);
@@ -20,6 +24,7 @@ function getQueryVariable(variable)
        }
        return(false);
 }
+//Validate if value in the variable exits in DB
 function exist(){
     if(getQueryVariable("event")){
         idEvent=getQueryVariable("event");
@@ -84,6 +89,7 @@ function getInformation(){
         console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
     });
 }
+//Set information products in the list of products
 function setProducts(rows){
     let content='';
     if(rows.length>0){
@@ -133,6 +139,7 @@ function getProducts(){
         console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
     });
 }
+//Call all products that it doesnt is in the list of the event
 function setListProducts(rows){
     let content='';
     console.log(rows);
@@ -150,6 +157,7 @@ function setListProducts(rows){
     }
     $('#ListofProducts').html(content);
 }
+//Call all products from the list of event
 function ListProducts(){
     $.ajax({
         url:requestGET('products','getProducts'),
@@ -176,6 +184,7 @@ function ListProducts(){
         console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
     });
 }
+//Check the product to add to the list
 function add(product_id){
     $.ajax({
         url:requestPOST('List_products_in_Event','insertProductinList'),
@@ -205,6 +214,7 @@ function add(product_id){
         console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
     });
 }
+//Get the count of product in the list products from the event
 function getCountSum(id_product){
     
     $.ajax({
@@ -238,6 +248,7 @@ function getCountSum(id_product){
         console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
     });
 }
+//Add 1 product to the list of products from the event
 function SumCount(id_list, id_product){
     var count = parseInt(1);
     $.ajax({
@@ -271,6 +282,7 @@ function SumCount(id_list, id_product){
         console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
     });
 }
+//Get the count of product in the list from the event to remove count
 function getCountMin(id_product){
     $.ajax({
         url:requestGET('List_products_in_Event','getCount'),
@@ -303,6 +315,7 @@ function getCountMin(id_product){
         console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
     });
 }
+//remove 1 product to the list of products from the event
 function MinCount(id_list, id_product){
     $.ajax({
         url:requestPUT('List_products_in_Event','RestList'),
@@ -334,10 +347,13 @@ function MinCount(id_list, id_product){
         console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
     });
 }
+//Confirm in the button delete if delete the product from the list
 function confirm(id_List,id_Product){
     idList=id_List;
     idProduct = id_Product;
 }
+
+//Remove product from the list
 function removeFromList(){
     $.ajax({
         url:requestDELETE('List_products_in_Event','deleteListbyId'),
@@ -369,6 +385,7 @@ function removeFromList(){
         console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
     });
 }
+//Show the acumulate prices of the products
 function showPrice(){
     $.ajax({
         url:requestGET('events','getPrice'),

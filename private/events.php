@@ -92,6 +92,7 @@
     ImportGlobal::ImportJQuery();
     ImportGlobal::ImportMaterializeJS();
     ImportGlobal::ImportJSFunctions();
+    ImportGlobal::ImportMomentJS();
     ImportGlobal::ImportControllerJs('EventsController');
 ?>
 

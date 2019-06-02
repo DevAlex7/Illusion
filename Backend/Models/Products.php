@@ -1,5 +1,5 @@
 <?php 
-
+date_default_timezone_set("America/El_Salvador");
 class Product extends Validator{
     private $id;
     private $nameProduct;
@@ -55,7 +55,9 @@ class Product extends Validator{
     }
 
     public function save(){
-
+        $sql='INSERT INTO products (nameProduct, count, date, id_employee, price) VALUES (?,?,?,?,?)';
+        $params=array($this->nameProduct, $this->count , $today = date("Y-m-d"), $this->id_employee, $this->price );
+        return Database::executeRow($sql,$params);
     }
     public function edit(){
 

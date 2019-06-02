@@ -177,10 +177,10 @@ if (isset($_GET['request']) && isset($_GET['action'])) {
                     if($list->id($_POST['idList'])){
                         if($product->id($_POST['idProduct'])){
 
-                            $list_info = Select::all()->from('list_products_event')->where('id', $_POST['idList'])->get();
-                            $product_info = Select::all()->from('products')->where('id', $_POST['idProduct'])->get();
+                            $listInfo = Select::all()->from('list_products_event')->where('id', $_POST['idList'])->get();
+                            $productInfo = Select::all()->from('products')->where('id', $_POST['idProduct'])->get();
                             
-                            $stockProducts=$product_info['count'] + $list_info['count'];
+                            $stockProducts=$productInfo['count'] + $listInfo['count'];
 
                             if($product->count($stockProducts)){
                                 $list->delete();

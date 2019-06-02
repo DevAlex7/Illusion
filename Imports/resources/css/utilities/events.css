@@ -10,6 +10,9 @@
       padding-left: 0;
     }
   }
+  #CardEvent{
+    border-radius: 10px;
+  }
   #FooterPart{
       background: rgb(77, 51, 172);
   }
