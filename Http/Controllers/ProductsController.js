@@ -1,8 +1,8 @@
 $(document).ready(function () {
-    $('.modal').modal();
     $('.fixed-action-btn').floatingActionButton();
     $('.tooltipped').tooltip(); 
     callProducts();
+    $('.modal').modal();
 });
 function setProducts(products){
     let content='';
@@ -13,8 +13,8 @@ function setProducts(products){
                     <div class="card z-depth-4" id="Card">
                         <div class="card-content">
                             <div class="row">
-                                <a href="" class="right tooltipped" data-position="bottom" data-tooltip="Eliminar" id="InfoProduct"> <i class="material-icons">delete</i> </a>
-                                <a href="" class="right tooltipped" data-position="left" data-tooltip="Información" id="InfoProduct"> <i class="material-icons">info</i> </a>
+                                <a class="right tooltipped" data-position="bottom" data-tooltip="Eliminar" id="InfoProduct"> <i class="material-icons">delete</i> </a>
+                                <a onClick="getInformationEdit(${product.id})" class="right tooltipped modal-trigger" href="#EditModalProduct" data-position="left" data-tooltip="Información" id="InfoProduct"> <i class="material-icons">info</i> </a>
                             </div>
                             <span class="card-title">${product.nameProduct}</span>
                             <span class="grey-text">Cantidad: <span class="card-title">${product.count}</span>  </span>
@@ -83,4 +83,70 @@ $('#FormAddProduct').submit(function(){
     .fail(function(jqXHR){
         console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
     });
+})
+function getInformationEdit(product){
+
+    $.ajax(
+        {
+            url:requestGET('products','GetbyId'),
+            type:'POST',
+            data:{product},
+            datatype:'JSON'
+        }
+    )
+    .done(function(response
+    )
+        {
+            if(isJSONString(response)){
+                const result = JSON.parse(response);
+                if(result.status){
+                    var date = moment(result.dataset.date);
+                    $('#EditId').val(result.dataset.id);
+                    $('#userResponsable').text("Ingresado por: "+result.dataset.name +" "+result.dataset.lastname);
+                    $('#dateProduct').text("Fecha de ingreso: "+ date.lang('es').format('dddd D MMMM , YYYY'));
+                    $('#EditNameProduct').val(result.dataset.nameProduct);
+                    $('#EditCountProduct').val(result.dataset.count);
+                    $('#EditPriceProduct').val(result.dataset.price);
+                }
+                else{
+                    M.toast({html:result.exception});
+                }
+            }
+            else{
+                console.log(response);
+            }
+        }
+    )
+    .fail(function(jqXHR){
+        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+    });
+}
+$('#FormEditProduct').submit(function(){
+    event.preventDefault();
+    $.ajax(
+        {
+            url:requestPUT('products','EditProduct'),
+            type:'POST',
+            data:$('#FormEditProduct').serialize(),
+            datatype:'JSON'
+        }
+    )
+    .done(function(response)
+        {   
+            if(isJSONString(response)){
+                const result = JSON.parse(response);
+                if(result.status){
+                    ToastSucces('Actualizado Correctamente');
+                    ClearForm('FormEditProduct');
+                    closeModal('EditModalProduct');
+                }
+                else{
+                    ToastError(result.exception);
+                }
+            }
+            else{
+                console.log(response);
+            }
+        }
+    )
 })

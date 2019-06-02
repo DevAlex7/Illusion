@@ -6,13 +6,11 @@ require_once('../Helpers/select.php');
 require_once('../Backend/Models/Products.php');
 require_once('../Backend/Models/List_products_in_Event.php');
 require_once('../Backend/Models/Events.php');
-require_once('../Helpers/Statics.php');
 
 
 if (isset($_GET['request']) && isset($_GET['action'])) {
     session_start();
     $result = array('status' => 0, 'exception' => '','price'=>0);
-    $static = new Static_Helpers();
     $list = new List_products_in_Event();
     $event = new Events();
     $product = new Product();

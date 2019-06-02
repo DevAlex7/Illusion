@@ -37,3 +37,17 @@ function isJSONString(string)
         return false;
     }
 }
+function ToastSucces(messageSucces){
+    var success = M.toast({html:messageSucces});
+    return success;
+}
+function ToastError(messageError){
+    var error = M.toast({html:messageError});
+    return error;
+}
+function ClearForm(Form){
+    $('#'+Form)[0].reset();
+}
+function closeModal(modal){
+    $('#'+modal).modal('close');
+}

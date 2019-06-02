@@ -89,6 +89,47 @@
                     </div>
                 </div>
             </div>
+            
+            <div class="modal" id="EditModalProduct">
+                <div class="modal-content">
+                    <div class="card">
+                        <div class="card-content">
+                            <form method="POST" id="FormEditProduct">
+                                <div class="center"> <span class="card-title">Información general</span> </div>
+                                <blockquote id="LineAllDetails">
+                                    <input type="hidden" id="EditId" name="EditId">
+                                    <span class="card-title" id="userResponsable"></span>
+                                    <span class="card-title" id="dateProduct"></span>
+                                    <blockquote id="LineDetails">
+                                        <div class="row">
+                                            <div class="col s12 m6">
+                                                <label> <h6>Nombre de producto</h6> </label>
+                                                <input type="text" name="EditNameProduct" id="EditNameProduct">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col s12 m6">
+                                            <label> <h6>Cantidad de producto</h6> </label>
+                                                <input type="number" min="0" name="EditCountProduct" id="EditCountProduct">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col s12 m6">
+                                            <label> <h6>Precio de producto</h6> </label>
+                                                <input type="text" name="EditPriceProduct" id="EditPriceProduct">
+                                            </div>
+                                        </div>
+                                    </blockquote>
+                                </blockquote>
+                                <div class="center">
+                                    <button type="submit" class="btn green accent-4"> <i class="material-icons left">edit</i> Editar</button>
+                                    <a class="btn grey modal-close"> <i class="material-icons left">close</i> Cancelar </a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
     </main>
     <footer>
 
@@ -96,6 +137,7 @@
 <?php 
     ImportGlobal::ImportJQuery();
     ImportGlobal::ImportMaterializeJS();
+    ImportGlobal::ImportMomentJS();
     ImportGlobal::ImportJSFunctions();
     ImportGlobal::ImportControllerJs('ProductsController');
 ?>

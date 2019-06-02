@@ -10,3 +10,9 @@ html{
 #InfoProduct{
     margin-right: 1rem;
 }
+#LineAllDetails{
+    border-left: 5px solid #031d556e ;
+}
+#LineDetails{
+    border-left: 5px solid #03ff42ad ;
+}

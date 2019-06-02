@@ -8,7 +8,7 @@ function setEvents(events){
     if(events.length>0){
         events.forEach(function(event){
 
-            
+            var fecha = moment(event.date);
             content+=`
             <div class="col s12 m12">
                 <div class="card z-depth-4" id="CardEvent">
@@ -16,7 +16,7 @@ function setEvents(events){
                         <blockquote id="PrincipalEvent">
                             <p>Evento: ${event.name_event}</p>
                             <blockquote id="DetailEvent"> <p>Cliente: ${event.client_name}</p> </blockquote>
-                            <blockquote id="DetailEvent"> <p>Fecha de evento: ${ event.date }</p> </blockquote>
+                            <blockquote id="DetailEvent"> <p>Fecha de evento: ${ fecha.lang('es').format('dddd D MMMM , YYYY') }</p> </blockquote>
                             <blockquote id="DetailEvent"> <a href="/Illusion/private/eventview.php?event=${event.id}">Ver evento</a></blockquote>
                         </blockquote>
                     </div>

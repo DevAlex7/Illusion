@@ -10,6 +10,7 @@
         
         session_start();
         $result = array('status'=>0,'exception'=>'','price'=>0);
+        $validate = new Validator();
         $select = new Select();
         $event = new Events();
 
@@ -93,44 +94,49 @@
                 switch($_GET['action']){
                     case 'saveEvent':
                         if($event->nameEvent($_POST['EventName'])){
-                            if($event->date($_POST['DateEvent'])){
-                                if($event->clientName($_POST['NameClient'])){
-                                    if($event->id_employee($_SESSION['idUser'])){
-                                        if($event->price('0.00')){
-                                            if($event->pay_status(2)){
-                                                if($event->type_event($_POST['TypeEventSelect'])){
-                                                    if($event->place($_POST['PlaceEvent']))
-                                                    {
-                                                        
-                                                        $event->save();
-                                                        $result['status']=1;
+                            if($validate->validateToday($_POST['DateEvent'])){
+                                if($event->date($_POST['DateEvent'])){
+                                    if($event->clientName($_POST['NameClient'])){
+                                        if($event->id_employee($_SESSION['idUser'])){
+                                            if($event->price('0.00')){
+                                                if($event->pay_status(2)){
+                                                    if($event->type_event($_POST['TypeEventSelect'])){
+                                                        if($event->place($_POST['PlaceEvent']))
+                                                        {
+                                                            $event->save();
+                                                            $result['status']=1;
+                                                        }
+                                                        else{
+                                                            $result['exception']='Mal formato de HTML';
+                                                        }
                                                     }
                                                     else{
-                                                        $result['exception']='Mal formato de HTML';
+                                                        $result['exception']='No se ha seleccionado ningun tipo de evento';
                                                     }
                                                 }
                                                 else{
-                                                    $result['exception']='No se ha seleccionado ningun tipo de evento';
+                                                    $result['exception']='El estado de pago del evento ha fallado';
                                                 }
                                             }
                                             else{
-                                                $result['exception']='El estado de pago del evento ha fallado';
+                                                $result['exception']='Mal formato de precio sobre el evento';
                                             }
-                                        }
+                                        }   
                                         else{
-                                            $result['exception']='Mal formato de precio sobre el evento';
+                                            $result['exception']='Algo ha fallado con el usuario logueado';
                                         }
-                                    }   
+                                    }
                                     else{
-                                        $result['exception']='Algo ha fallado con el usuario logueado';
+                                        $result['exception']='Nombre de cliente incorrecto';
                                     }
                                 }
                                 else{
-                                    $result['exception']='Nombre de cliente incorrecto';
+                                    $result['exception']='Fecha mal ingresada. Formato de fecha Año-Mes-Dia';
                                 }
                             }
-                            else{
-                                $result['exception']='Fecha mal ingresada. Formato de fecha Año-Mes-Dia';
+                            else
+                            {
+                                $result['exception']='No se pueden crear eventos con fechas anteriores a la de hoy';
                             }
                         }
                         else{

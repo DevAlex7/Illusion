@@ -60,13 +60,19 @@ class Product extends Validator{
         return Database::executeRow($sql,$params);
     }
     public function edit(){
-
+        $sql = 'UPDATE products SET nameProduct=?, count=?, price=? WHERE id=?';
+        $params=array($this->nameProduct, $this->count, $this->price, $this->id);
+        return Database::executeRow($sql,$params);
     }
     public function delete(){
 
     }
     public function find(){
-        $sql='SELECT * FROM products WHERE id=?';
+        $sql='  SELECT products.id, products.nameProduct, products.count, products.date, employees.name, employees.lastname, products.price 
+                FROM (( products 
+                INNER JOIN employees 
+                ON employees.id=products.id_employee 
+                AND products.id=?))';
         $params=array($this->id);
         return Database::getRow($sql,$params);
     }

@@ -194,6 +194,18 @@ class Validator{
 			return false;
 		}
 	}
+	public function validateToday($value){
+
+			$today = date("Y-m-d");
+			$userDate = $value;
+
+			if ($today <= $userDate) {
+				return true;
+			}
+			else {
+				return false;
+			}
+	}
 }
 
 

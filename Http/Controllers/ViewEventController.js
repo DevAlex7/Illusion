@@ -70,7 +70,7 @@ function getInformation(){
             const result = JSON.parse(response);
             if(result.status){
                 $('#TitleEvent').text("Evento: "+result.dataset.name_event);
-                $('#TypeEvent').text(result.dataset.type)
+                $('#TypeEvent').text("Tipo de evento: "+result.dataset.type)
                 $('#ClientName').text("Cliente: "+result.dataset.client_name);
                 $('#DateEvent').text("Fecha: "+result.dataset.date);
                 $('#NameCreator').text("Encargado: "+result.dataset.name +' '+result.dataset.lastname);
