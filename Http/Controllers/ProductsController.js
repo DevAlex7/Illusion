@@ -4,6 +4,9 @@ $(document).ready(function () {
     callProducts();
     $('.modal').modal();
 });
+
+var idProduct;
+
 function setProducts(products){
     let content='';
     if(products.length>0){
@@ -13,7 +16,7 @@ function setProducts(products){
                     <div class="card z-depth-4" id="Card">
                         <div class="card-content">
                             <div class="row">
-                                <a class="right tooltipped" data-position="bottom" data-tooltip="Eliminar" id="InfoProduct"> <i class="material-icons">delete</i> </a>
+                                <a onClick="deleteProduct(${product.id})" class="right tooltipped modal-trigger" href="#DeleteProduct" data-position="bottom" data-tooltip="Eliminar" id="InfoProduct"> <i class="material-icons">delete</i> </a>
                                 <a onClick="getInformationEdit(${product.id})" class="right tooltipped modal-trigger" href="#EditModalProduct" data-position="left" data-tooltip="Información" id="InfoProduct"> <i class="material-icons">info</i> </a>
                             </div>
                             <span class="card-title">${product.nameProduct}</span>
@@ -85,7 +88,6 @@ $('#FormAddProduct').submit(function(){
     });
 })
 function getInformationEdit(product){
-
     $.ajax(
         {
             url:requestGET('products','GetbyId'),
@@ -121,6 +123,7 @@ function getInformationEdit(product){
         console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
     });
 }
+
 $('#FormEditProduct').submit(function(){
     event.preventDefault();
     $.ajax(
@@ -149,4 +152,72 @@ $('#FormEditProduct').submit(function(){
             }
         }
     )
+     .fail(function(jqXHR){
+        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+    });
+})
+function deleteProduct(product){
+    idProduct=product;
+}
+function confirmDelete(){
+    $.ajax(
+        {
+            url:requestDELETE('products','deleteProduct'),
+            type:'POST',
+            data:{
+                idProduct
+            },
+            datatype:'JSON'
+        }
+    )
+    .done(function(response)
+        {
+            if(isJSONString(response)){
+                const result = JSON.parse(response);
+                if(result.status){
+                    ToastSucces('¡Producto eliminado exitosamente!');
+                    closeModal('DeleteProduct');
+                    callProducts();
+                }
+                else{
+                    ToastError(result.exception);
+                }
+            }else{
+                console.log(response);
+            }
+        }
+    )
+    .fail(function(jqXHR){
+        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+    });
+}
+//Search products
+$('#SearchForm').submit(function(){
+    event.preventDefault();
+    $.ajax(
+        {
+            url:requestGET('products','Search'),
+            type:'POST',
+            data:$('#SearchForm').serialize(),
+            datatype:'JSON'
+        }
+    )
+    .done(function(response)
+        {
+            if(isJSONString(response)){
+                const result = JSON.parse(response);
+                if(!result.status){
+                    ToastError(result.exception);
+                }
+                setProducts(result.dataset);
+                console.log(result.dataset);
+            }   
+            else{
+                console.log(response);
+            } 
+        }
+    )
+    .fail(function(jqXHR){
+        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+    });
 })

@@ -31,9 +31,9 @@
                 <div class="col s12 m12">
                     <nav class="white">
                         <div class="nav-wrapper">
-                        <form>
+                        <form id="SearchForm" method="POST">
                             <div class="input-field">
-                                <input id="SearchInput" type="search" placeholder="Busca algun producto...">
+                                <input id="SearchInput" name="SearchInput" type="search" placeholder="Busca algun producto...">
                                 <label class="label-icon" for="search"><i class="material-icons black-text">search</i></label>
                                 <i class="material-icons">close</i>
                             </div>
@@ -50,7 +50,6 @@
             </div>
 
             <div class="row" id="ProductsRead">
-                
             </div>            
 
             <div class="modal" id="AddProductModal">
@@ -100,32 +99,47 @@
                                     <input type="hidden" id="EditId" name="EditId">
                                     <span class="card-title" id="userResponsable"></span>
                                     <span class="card-title" id="dateProduct"></span>
-                                    <blockquote id="LineDetails">
-                                        <div class="row">
-                                            <div class="col s12 m6">
+                                    <div class="row">
+                                        <div class="col s12 m7">
+                                            <blockquote id="LineDetails">
                                                 <label> <h6>Nombre de producto</h6> </label>
                                                 <input type="text" name="EditNameProduct" id="EditNameProduct">
-                                            </div>
+                                            </blockquote>
                                         </div>
-                                        <div class="row">
-                                            <div class="col s12 m6">
-                                            <label> <h6>Cantidad de producto</h6> </label>
+                                        <div class="col s12 m7">
+                                            <blockquote id="LineDetails">
+                                                <label> <h6>Cantidad de producto</h6> </label>
                                                 <input type="number" min="0" name="EditCountProduct" id="EditCountProduct">
-                                            </div>
+                                                </blockquote>    
                                         </div>
-                                        <div class="row">
-                                            <div class="col s12 m6">
-                                            <label> <h6>Precio de producto</h6> </label>
+                                        <div class="col s12 m7">
+                                            <blockquote id="LineDetails">
+                                                <label> <h6>Precio de producto</h6> </label>
                                                 <input type="text" name="EditPriceProduct" id="EditPriceProduct">
-                                            </div>
+                                            </blockquote>
                                         </div>
-                                    </blockquote>
+                                    </div>
                                 </blockquote>
                                 <div class="center">
                                     <button type="submit" class="btn green accent-4"> <i class="material-icons left">edit</i> Editar</button>
                                     <a class="btn grey modal-close"> <i class="material-icons left">close</i> Cancelar </a>
                                 </div>
                             </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal" id="DeleteProduct">
+                <div class="modal-content">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="center"> <span class="card-title"> ¿Deseas eliminar este producto? </span> </div>
+                            <div class="modal-footer transparent">
+                                <div class="center">
+                                    <a onclick="confirmDelete()" class="btn red"> <i class="material-icons left">delete</i> Eliminar</a>
+                                    <a class="btn modal-close grey"> <i class="material-icons left">close</i> Cancelar</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

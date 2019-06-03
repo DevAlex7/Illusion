@@ -18,7 +18,7 @@
             case 'GET':
                 switch($_GET['action']){
 
-                    //This action is for events
+                    //This action is to select all products doesnt exist in list product
                     case 'getProducts':
                         if($event->id($_POST['idEvent'])){
                             if($result['dataset']=$event->allProductsinNotList()){
@@ -32,6 +32,7 @@
                             $result['exception']='Evento no identificado';
                         }
                     break;
+                    //This action is for select all products
                     case 'AllList':
                     if($result['dataset']=$select->allFrom('products')){
                         $result['status']=1;
@@ -40,6 +41,7 @@
                         $result['exception']='No hay productos registrados';
                     }
                     break;
+                    //This action is for get information by product Id
                     case 'GetbyId':
                         if($product->id($_POST['product'])){
                             
@@ -55,7 +57,20 @@
                             $result['exception']='Producto no identificado';
                         }   
                     break;
-
+                    //This action is for get search results
+                    case 'Search':
+                        if($product->searchbyUser($_POST['SearchInput'])){
+                            if($result['dataset']=$product->search()){
+                                $result['status']=1;
+                            }
+                            else{
+                                $result['exception']='No se encontraron resultados';
+                            }
+                        }
+                        else{
+                            $result['exception']='Busqueda invalida';
+                        }
+                    break;
                     default:
                     exit('acción no disponible');
                 }
@@ -120,7 +135,19 @@
                 }
             break;
             case 'DELETE':
-            
+                switch($_GET['action']){
+                    case 'deleteProduct':
+                        if($product->id($_POST['idProduct'])){
+                            $product->delete();
+                            $result['status']=1;
+                        }
+                        else{
+                            $result['exception']='No hay información del producto';
+                        }
+                    break;
+                    default:
+                    exit('Acción no disponible');
+                }
             break;
 
             default:
