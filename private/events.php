@@ -1,6 +1,7 @@
 <?php 
     require_once('../Imports/Global/Global.php');   
-    require_once('../Helpers/Dashboard.php'); 
+    require_once('../Helpers/Dashboard.php');
+    require_once('../Helpers/Roles.php'); 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,21 +25,28 @@
         <main>
             
             <!-- NavBar -->
-            <div class="navbar-fixed">
-                <nav class="" id="Bar">
-                    <div class="nav-wrapper">
-                    <ul class="left hide-on-med-and-down">
-                        <li><a > <i class="material-icons left">view_agenda</i> Ver eventos</a></li>
-                        <li><a class="modal-trigger" href="#CreateEvent"> <i class="material-icons left">calendar_today</i> Crear evento</a></li>
-                        <li><a > <i class="material-icons left"> attach_money </i> Gastos</a></li>
-                    </ul>
-                    </div>
-                </nav>
+            <?php 
+                Permissions::eventBar();
+            ?>
+
+            <div class="row" id="SearchBar">
+                <div class="col s12 m12">
+                    <nav class="white">
+                        <div class="nav-wrapper">
+                        <form id="SearchForm" method="POST">
+                            <div class="input-field">
+                                <input id="SearchInput" name="SearchInput" type="search" placeholder="Busca un evento o cliente">
+                                <label class="label-icon" for="search"><i class="material-icons black-text">search</i></label>
+                                <i class="material-icons">close</i>
+                            </div>
+                        </form>
+                        </div>
+                    </nav>
+                </div>
             </div>
 
             <!-- Information -->
             <div class="row" id="Information">
-               
             </div>
 
             <div class="modal" id="CreateEvent">

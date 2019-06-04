@@ -14,35 +14,68 @@ class AdminSideNav {
             
             if($filename != '../private/')
             {
-                self::modals();
-                print('
-                <ul id="slide-out" class="sidenav sidenav-fixed">
-                    <li id="Sidenav">
-                        <div class="user-view">
-                        <div class="card center white-text" id="TitleSidenav">
-                                <span class="card-title">Illusion</span>
+                if($_SESSION['Role']==0){
+                    self::modals();
+                    print('
+                    <ul id="slide-out" class="sidenav sidenav-fixed">
+                        <li id="Sidenav">
+                            <div class="user-view">
+                            <div class="card center white-text" id="TitleSidenav">
+                                    <span class="card-title">Illusion</span>
+                                </div>
+                                <a href="#name"><span class="black-text name">'. $_SESSION['UsernameActive'].'</span></a>
+                                <a href="#email"><span class="black-text email">'. $_SESSION['NameUser'].' '.$_SESSION['LastnameUser'] .'</span></a>
                             </div>
-                            <a href="#name"><span class="black-text name">'. $_SESSION['UsernameActive'].'</span></a>
-                            <a href="#email"><span class="black-text email">'. $_SESSION['NameUser'].' '.$_SESSION['LastnameUser'] .'</span></a>
+                        </li>
+                        <div id="OptionsBar">
+                        <li><a class="green-text accent-4" href=""><i class="material-icons green-text accent-4">dashboard</i>Inicio</a></li>
+                        <li><a class="green-text accent-4" href=""><i class="material-icons green-text accent-4">person</i>Mi perfil</a></li>
+                        <li><a class="green-text accent-4" href=""><i class="material-icons green-text accent-4">drag_indicator</i>Bitacora</a></li>
+                        <li><div class="divider"></div></li>
+                        <li><a class="subheader grey-text">Menu</a></li>
+                        <li><a href="/Illusion/private/events.php"><i class="material-icons">calendar_today</i>Eventos</a></li>
+                        <li><a href="/PopMovies/feed/account/clasifications.php"><i class="material-icons">pan_tool</i>Personal</a></li>
+                        <li><a href="/Illusion/private/typeevents.php"><i class="material-icons">subject</i>Tipos de eventos</a></li>
+                        <li><a href="/PopMovies/feed/account/managers.php"><i class="material-icons">account_circle</i>Administradores</a></li>
+                        <li><a href="/Illusion/private/products.php"><i class="material-icons">local_mall</i>Productos</a></li>
+                        <li><a href="/PopMovies/feed/account/memberships.php"><i class="material-icons">inbox</i>Solicitudes</a></li>
+                        <li><div class="divider"></div></li>
+                        <li><a href="#ModalCloseSession" class="modal-trigger"><i class="material-icons">exit_to_app</i>Cerrar Sesión</a></li>
                         </div>
-                    </li>
-                    <div id="OptionsBar">
-                    <li><a class="green-text accent-4" href=""><i class="material-icons green-text accent-4">dashboard</i>Inicio</a></li>
-                    <li><a class="green-text accent-4" href=""><i class="material-icons green-text accent-4">person</i>Mi perfil</a></li>
-                    <li><a class="green-text accent-4" href=""><i class="material-icons green-text accent-4">drag_indicator</i>Bitacora</a></li>
-                    <li><div class="divider"></div></li>
-                    <li><a class="subheader grey-text">Menu</a></li>
-                    <li><a href="/Illusion/private/events.php"><i class="material-icons">calendar_today</i>Eventos</a></li>
-                    <li><a href="/PopMovies/feed/account/clasifications.php"><i class="material-icons">pan_tool</i>Personal</a></li>
-                    <li><a href="/Illusion/private/typeevents.php"><i class="material-icons">subject</i>Tipos de eventos</a></li>
-                    <li><a href="/PopMovies/feed/account/managers.php"><i class="material-icons">account_circle</i>Administradores</a></li>
-                    <li><a href="/Illusion/private/products.php"><i class="material-icons">local_mall</i>Productos</a></li>
-                    <li><a href="/PopMovies/feed/account/memberships.php"><i class="material-icons">inbox</i>Solicitudes</a></li>
-                    <li><div class="divider"></div></li>
-                    <li><a href="#ModalCloseSession" class="modal-trigger"><i class="material-icons">exit_to_app</i>Cerrar Sesión</a></li>
-                    </div>
-                </ul>  
-                ');
+                    </ul>  
+                    ');
+                }
+                else if($_SESSION['Role']==1){
+                    self::modals();
+                    print('
+                    <ul id="slide-out" class="sidenav sidenav-fixed">
+                        <li id="Sidenav">
+                            <div class="user-view">
+                            <div class="card center white-text" id="TitleSidenav">
+                                    <span class="card-title">Illusion</span>
+                                </div>
+                                <a href="#name"><span class="black-text name">'. $_SESSION['UsernameActive'].'</span></a>
+                                <a href="#email"><span class="black-text email">'. $_SESSION['NameUser'].' '.$_SESSION['LastnameUser'] .'</span></a>
+                            </div>
+                        </li>
+                        <div id="OptionsBar">
+                        <li><a class="green-text accent-4" href=""><i class="material-icons green-text accent-4">dashboard</i>Inicio</a></li>
+                        <li><a class="green-text accent-4" href=""><i class="material-icons green-text accent-4">person</i>Mi perfil</a></li>
+                        <li><a class="green-text accent-4" href=""><i class="material-icons green-text accent-4">drag_indicator</i>Bitacora</a></li>
+                        <li><div class="divider"></div></li>
+                        <li><a class="subheader grey-text">Menu Empleado</a></li>
+                        <li><a href="/Illusion/private/events.php"><i class="material-icons">calendar_today</i>Eventos</a></li>
+                        <li><a href="/PopMovies/feed/account/clasifications.php"><i class="material-icons">pan_tool</i>Personal</a></li>
+                        <li><a href="/Illusion/private/typeevents.php"><i class="material-icons">subject</i>Tipos de eventos</a></li>
+                        <li><a href="/PopMovies/feed/account/managers.php"><i class="material-icons">account_circle</i>Administradores</a></li>
+                        <li><a href="/Illusion/private/products.php"><i class="material-icons">local_mall</i>Productos</a></li>
+                        <li><a href="/PopMovies/feed/account/memberships.php"><i class="material-icons">inbox</i>Solicitudes</a></li>
+                        <li><div class="divider"></div></li>
+                        <li><a href="#ModalCloseSession" class="modal-trigger"><i class="material-icons">exit_to_app</i>Cerrar Sesión</a></li>
+                        </div>
+                    </ul>
+                    ');  
+                }
             }
             else
             {

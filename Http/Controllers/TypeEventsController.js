@@ -5,24 +5,38 @@ $(document).ready(function () {
 //Global variables 
 var idTypeEvent;
 //Set the information of types in cards 
-function setTypes(types){
+function setTypes(types,role){
     let content='';
     if(types.length>0){
         types.forEach(function(type){
-            content+=
-            `
-            <div class="col s12 m12">
-                <blockquote>
-                    <div class="card-panel">
-                        <div class="right">
-                            <a onClick="showtoEdit(${type.id})" class="tooltipped modal-trigger" href="#ModalEditType" data-position="left" data-tooltip="Editar" id="editPart"> <i class="material-icons">edit</i> </a>
-                            <a onClick="showtoDelete(${type.id})" class="red-text tooltipped modal-trigger" href="#ModalDeleteType" data-position="top" data-tooltip="Eliminar"> <i class="material-icons">delete</i> </a>
+            if(role==0){
+                content+=
+                `
+                <div class="col s12 m12">
+                    <blockquote>
+                        <div class="card-panel">
+                            <div class="right">
+                                <a onClick="showtoEdit(${type.id})" class="tooltipped modal-trigger" href="#ModalEditType" data-position="left" data-tooltip="Editar" id="editPart"> <i class="material-icons">edit</i> </a>
+                                <a onClick="showtoDelete(${type.id})" class="red-text tooltipped modal-trigger" href="#ModalDeleteType" data-position="top" data-tooltip="Eliminar"> <i class="material-icons">delete</i> </a>
+                            </div>
+                            <p>${type.type}</p>
                         </div>
-                        <p>${type.type}</p>
-                    </div>
-                </blockquote>
-            </div>
-            `;
+                    </blockquote>
+                </div>
+                `;
+            }
+            else{
+                content+=
+                `
+                <div class="col s12 m12">
+                    <blockquote>
+                        <div class="card-panel">
+                            <p>${type.type}</p>
+                        </div>
+                    </blockquote>
+                </div>
+                `;
+            }
         })
     }
     else{
@@ -44,7 +58,7 @@ function callTypes(){
             const result = JSON.parse(response);
             if(!result.status){
             }
-            setTypes(result.dataset);
+            setTypes(result.dataset,result.role);
             $('.tooltipped').tooltip(); 
         }
         else{
@@ -101,7 +115,7 @@ $('#FormSearch').submit(function(){
             const result = JSON.parse(response);
             if(!result.status){
             }
-            setTypes(result.dataset);
+            setTypes(result.dataset, result.role);
         }
         else{
             console.log(response);

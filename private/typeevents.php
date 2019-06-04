@@ -1,6 +1,7 @@
 <?php 
     require_once('../Imports/Global/Global.php'); 
     require_once('../Helpers/Dashboard.php'); 
+    require_once('../Helpers/Roles.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,25 +22,7 @@
         <?php AdminSideNav::SideNav(); ?> 
     </header>
     <main>
-        <div class="row">
-            <div class="col s12 m6 offset-m3">
-                <div class="card z-depth-5" id="NameTypeEventCard">
-                    <div class="card-content">
-                        <form method="POST" id="FormAddType">
-                            <div class="row">
-                                <div class="col s12 m9">
-                                    <label for="NameTypeEvent">Tipo de evento</label>    
-                                    <input name="NameTypeEvent" id="NameTypeEvent" type="text">
-                                </div>
-                                <div class="col s12 m1" id="BtnAddType">
-                                    <button type="submit" class="btn" id="btnAdd">Listar</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <?php Permissions::addTypeEvent()  ?>
         <div class="row">
             <div class="col s12 m12">
                 <div class="card">

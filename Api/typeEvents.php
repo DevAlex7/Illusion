@@ -8,7 +8,7 @@
     if( isset($_GET['request']) && isset($_GET['action']) ){
         
         session_start();
-        $result=array('status'=>0,'exception'=>'');
+        $result=array('status'=>0,'exception'=>'','role'=>0);
         $select = new Select();
         $type = new eventTypes();
         
@@ -19,6 +19,7 @@
                     case 'getTypes':
                         if( $result['dataset']= $select->allFrom('event_types')){
                             $result['status']=1;
+                            $result['role']=$_SESSION['Role'];
                         }
                         else{
                             $result['exception']='No hay tipos de eventos registrados';
@@ -28,6 +29,7 @@
                         if($type->valueSearch($_POST['searchType'])){
                             if($result['dataset']=$type->search()){
                                 $result['status']=1;
+                                $result['role']=$_SESSION['Role'];
                             }
                             else{
                                 $result['exception']='No hay resultados';

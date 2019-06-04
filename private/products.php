@@ -33,7 +33,7 @@
                         <div class="nav-wrapper">
                         <form id="SearchForm" method="POST">
                             <div class="input-field">
-                                <input id="SearchInput" name="SearchInput" type="search" placeholder="Busca algun producto...">
+                                <input id="SearchInput" name="SearchInput" type="search" placeholder="Busca alguna información">
                                 <label class="label-icon" for="search"><i class="material-icons black-text">search</i></label>
                                 <i class="material-icons">close</i>
                             </div>

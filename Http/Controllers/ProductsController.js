@@ -1,12 +1,19 @@
 $(document).ready(function () {
+    
+    //Iniciar el boton flotante
     $('.fixed-action-btn').floatingActionButton();
+    //Iniciar los tooltips
     $('.tooltipped').tooltip(); 
+    //Llamar a todos los productos de primera instancia
     callProducts();
+    //Iniciar todos los modales
     $('.modal').modal();
 });
 
+//Variable global del id del producto, que seleccionemos
 var idProduct;
 
+//Función para rellenar la información en la carta, recibe como parametro el arreglo de dataset
 function setProducts(products){
     let content='';
     if(products.length>0){
@@ -29,26 +36,37 @@ function setProducts(products){
     }
     $('#ProductsRead').html(content);   
 }
+//Función para llamar a todos los productos
 function callProducts(){
-    $.ajax({
-        url:requestGET('Products','AllList'),
-        type:'POST',
-        data:null,
-        datatype:'JSON'
-    })
-    .done(function(response){
-        if(isJSONString(response)){
-            const result = JSON.parse(response);
-            if(!result.status){
-                M.toast({html:result.exception});
+    $.ajax(
+        {
+            /**
+             * Utilizamos la funcion requestGET para obtener la dirección de la API, dandole como parametro 
+             * @method mandamos el metodo GET para la API
+             * @param Nombre de el archivo php de la API
+             * @param Nombre de la acción 
+             * */ 
+            url:requestGET('Products','AllList'),
+            type:'POST',
+            data:null,
+            datatype:'JSON'
+        }
+    )
+    .done(function(response)
+        {
+            if(isJSONString(response)){
+                const result = JSON.parse(response);
+                if(!result.status){
+                    M.toast({html:result.exception});
+                }
+                setProducts(result.dataset);
+                $('.tooltipped').tooltip(); 
             }
-            setProducts(result.dataset);
-            $('.tooltipped').tooltip(); 
+            else{
+                console.log(response);
+            }
         }
-        else{
-            console.log(response);
-        }
-    })
+    )
     .fail(function(jqXHR){
         console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
     });
@@ -191,7 +209,8 @@ function confirmDelete(){
         console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
     });
 }
-//Search products
+
+//Buscar productos
 $('#SearchForm').submit(function(){
     event.preventDefault();
     $.ajax(
@@ -221,3 +240,4 @@ $('#SearchForm').submit(function(){
         console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
     });
 })
+

@@ -9,7 +9,7 @@
     if( isset($_GET['request']) && isset($_GET['action']) ){
         
         session_start();
-        $result = array('status'=>0,'exception'=>'','price'=>0);
+        $result = array('status'=>0,'exception'=>'','price'=>0,'role'=>0);
         $validate = new Validator();
         $select = new Select();
         $event = new Events();
@@ -50,6 +50,7 @@
                     case 'getProducts':
                         if($event->id($_POST['idEvent'])){
                             if($result['dataset']=$event->getProductsinEvent()){
+                                $result['role']=$_SESSION['Role'];
                                 $result['status']=1;
                             }
                             else{
@@ -84,6 +85,30 @@
                         }
                         else{
                             $result['exception']='Evento no definido';
+                        }
+                    break;
+                    case 'getCostsinEvents':
+                        if($result['dataset']=$event->getEventsCosts()){
+                            $result['status']=1;
+                        }
+                        else{
+                            $result['exception']='No hay costos';
+                        }
+                    break;
+                    case 'Lost':
+                        if($result['dataset']=$event->getTotalLost()){
+                            $result['status']=1;
+                        }
+                        else{
+                            $result['exception']='No hay información de eventos con productos';
+                        }
+                    break;
+                    case 'Win':
+                        if($result['dataset']=$event->getTotalWin()){
+                            $result['status']=1;
+                        }
+                        else{
+                            $result['exception']='No hay información de eventos con productos';
                         }
                     break;
                     default:
@@ -141,6 +166,19 @@
                         }
                         else{
                             $result['exception']='Nombre de evento incorrecto';
+                        }
+                    break;
+                    case 'Search':
+                        if($event->searchbyUser($_POST['SearchInput'])){
+                            if($result['dataset']=$event->search()){
+                                $result['status']=1;
+                            }
+                            else{
+                                $result['exception']='No hay resultados';
+                            }
+                        }
+                        else{
+                            $result['exception']='Busqueda invalida';
                         }
                     break;
                     default: 

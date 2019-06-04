@@ -1,6 +1,7 @@
 <?php 
     require_once('../Imports/Global/Global.php');   
     require_once('../Helpers/Dashboard.php'); 
+    require_once('../Helpers/Roles.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,6 +31,9 @@
                                     <div class="row">
                                         <div class="col s12 m12">
                                             <div class="card-panel">
+                                                <div class="right">
+                                                    <a href="#EditTitleEvent" class="modal-trigger"> <i class="material-icons left">edit</i> </a>
+                                                </div>
                                                 <div id="TitlePart">
                                                     <span class="card-title" id="TitleEvent"></span>
                                                     <p class="grey-text" id="TypeEvent"></p>
@@ -39,6 +43,9 @@
                                         </div>
                                         <div class="col s12 m12">
                                             <div class="card-panel">
+                                                <div class="right">
+                                                    <a> <i class="material-icons left">edit</i> </a>
+                                                </div>
                                                 <p id="ClientName"></p>   
                                                 <p id="DateEvent"></p>
                                                 <p id="NameCreator"></p> 
@@ -50,7 +57,10 @@
                                         <div class="col s12 m12">
                                             <div class="card">
                                                 <div class="card-content">
-                                                    <a href=""><i class="material-icons left">edit</i></a><span class="card-title"> Ubicación del evento</span>
+                                                    <div class="right">
+                                                        <a href=""> <i class="material-icons">edit</i> </a>
+                                                    </div>
+                                                    <span class="card-title"> Ubicación del evento</span>
                                                     <div class="divider"></div>
                                                     <div class="row">
                                                         <div class="col s12 m12">
@@ -65,9 +75,7 @@
                                         <div class="col s12 m6">
                                             <div class="card">
                                                 <div class="card-content">
-                                                    <div class="right">
-                                                        <a href="#AddProducts" onclick="ListProducts();" class="btn left tooltipped modal-trigger"  data-position="left" data-tooltip="Agregar un producto al evento"> <i class="material-icons">add</i> </a>
-                                                    </div>
+                                                   <?php Permissions::addProduct(); ?>
                                                     <span class="card-title">Lista de productos</span>
                                                     <div>
                                                         <table class="responsive-table">
@@ -124,6 +132,32 @@
                 </div>
             </div>
             <div class="modal" id="AddInvites">
+                <div class="modal-content">
+
+                </div>
+            </div>
+            <div class="modal" id="EditTitleEvent">
+                <div class="modal-content">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="row">
+                                <form class="col s12">
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            <i class="material-icons prefix black-text">mode_edit</i>
+                                            <input type="text" name="NameEventEdit" id="NameEventEdit">
+                                            <label for="NameEventEdit">Nombre de evento</label>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn amber lighten-1">Editar</button>
+                                    <a class="btn modal-close red">Cerrar</a>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal" id="EditInformationEvent">
                 <div class="modal-content">
 
                 </div>

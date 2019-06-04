@@ -10,6 +10,7 @@ class Events extends Validator{
     private $pay_status;
     private $type_event;
     private $place;
+    private $search;
 
     public function id($value){
         if($this->ValidateInt($value)){
@@ -93,6 +94,15 @@ class Events extends Validator{
             return false;
         }
     }
+    public function searchbyUser($value){
+        if($this->validateAlphanumeric($value,1,70)){
+            $this->search=$value;
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
     public function all(){
         $sql='SELECT * FROM events ORDER BY id DESC';
         $params=array(null);
@@ -142,6 +152,50 @@ class Events extends Validator{
                 ON list_products_event.id_event=events.id AND events.id=?)';
         $params=array($this->id);
         return Database::getRow($sql,$params);
+    }
+    public function getEventsCosts(){
+        $sql='  SELECT events.name_event, events.pay_status, products.price * list_products_event.count AS Cost FROM 
+                ((events 
+                INNER JOIN list_products_event ON list_products_event.id_event=events.id) 
+                INNER JOIN products ON list_products_event.id_product=products.id 
+                INNER JOIN payment_event_status ON events.pay_status=payment_event_status.id)
+            ';
+        $params=array(null);
+        return Database::getRows($sql,$params);
+    }
+    public function getTotalWin(){
+        $sql='  SELECT SUM(list_products_event.count*products.price) AS Cost 
+                FROM (products 
+                INNER JOIN list_products_event ON products.id=list_products_event.id_product
+                INNER JOIN events ON list_products_event.id_event=events.id AND events.pay_status=1)
+        ';
+        $params=array(null);
+        return Database::getRow($sql,$params);
+    }
+    public function getTotalLost(){
+        $sql='  SELECT SUM(list_products_event.count*products.price) AS Cost 
+        FROM (products 
+        INNER JOIN list_products_event ON products.id=list_products_event.id_product
+        INNER JOIN events ON list_products_event.id_event=events.id AND events.pay_status=2)
+';
+$params=array(null);
+return Database::getRow($sql,$params);
+    }
+    public function search(){
+        $sql = '
+                SELECT events.*, 
+                employees.name, employees.lastname 
+                FROM events 
+                INNER JOIN employees ON events.id_employee = employees.id 
+                WHERE 
+                events.name_event LIKE ?
+                OR events.date LIKE ?
+                OR events.client_name  LIKE ?
+                OR employees.name LIKE ?
+                OR employees.lastname LIKE ?
+        ';
+        $params=array("%$this->search%","%$this->search%","%$this->search%","%$this->search%","%$this->search%");
+        return Database::getRows($sql,$params);
     }
 
 }

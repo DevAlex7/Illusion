@@ -38,7 +38,7 @@ function CallEvents(){
         if(isJSONString(response)){
             const result = JSON.parse(response);
             if(!result.status){
-                M.toast({html:result.exception});
+               ToastError(result.exception);
             }
             setEvents(result.dataset);
         }
@@ -64,13 +64,13 @@ $('#FormCreateEvent').submit(function(){
             
             const result = JSON.parse(response);
             if(result.status){
-                M.toast({html:'Agregado correctamente'});
-                $('#FormCreateEvent')[0].reset();
-                $('#CreateEvent').modal('close');
+                ToastSucces('¡Evento agregado correctamente!')
+                ClearForm('FormCreateEvent')
+                closeModal('CreateEvent');
                 CallEvents();
             }
             else{
-                M.toast({html:result.exception});
+                toastError(result.exception);
             }
         }
         else{
@@ -117,3 +117,33 @@ function selectTypeEvents(Select, value){
         console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
     });
 }
+//Buscar evento
+$('#SearchForm').submit(function(){
+    event.preventDefault();
+    $.ajax(
+        {
+            url:requestPOST('events','Search'),
+            type:'POST',
+            data:$('#SearchForm').serialize(),
+            datatype:'JSON'
+        }
+    )
+    .done(function(response)
+        {
+            if(isJSONString(response)){
+                const result = JSON.parse(response);
+                if(!result.status){
+                    toastError(result.status);
+                }
+                setEvents(result.dataset);
+            }
+            else{
+                console.log(response);
+            }
+        }
+    )
+    .fail(function(jqXHR){
+        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+    });
+
+})

@@ -5,6 +5,7 @@ $(document).ready(function () {
     $('.modal').modal();
     getProducts();
     showPrice();
+    
 });
 //To get the id List of product
 var idList;
@@ -90,24 +91,35 @@ function getInformation(){
     });
 }
 //Set information products in the list of products
-function setProducts(rows){
+function setProducts(rows, role){
     let content='';
     if(rows.length>0){
         rows.forEach(function(row){
-            content+=`
-            <tr>
-                <td>${row.nameProduct}</td>
-                <td>${row.price}</td>
-                <td>${row.count}</td>
-                <td>
-                    <a onClick="getCountSum(${row.id})" class="btn green tooltipped" data-position="bottom" data-tooltip="Agregar"><i class="material-icons"> add </i></a>
-                    <a onClick="getCountMin(${row.id})"class="btn red tooltipped" data-position="bottom" data-tooltip="Restar"><i class="material-icons"> remove </i></a>
-                </td>
-                <td>
-                    <a onClick="confirm(${row.idProductList},${row.id})" href="#ConfirmDeleteProduct" class="btn red tooltipped modal-trigger" data-position="right" data-tooltip="Eliminar"> <i class="material-icons"> delete </i></a>
-                </td>
-            </tr>
+            if(role==0){
+                content+=`
+                    <tr>
+                        <td>${row.nameProduct}</td>
+                        <td>${row.price}</td>
+                        <td>${row.count}</td>
+                        <td>
+                            <a onClick="getCountSum(${row.id})" class="btn green tooltipped" data-position="bottom" data-tooltip="Agregar"><i class="material-icons"> add </i></a>
+                            <a onClick="getCountMin(${row.id})"class="btn red tooltipped" data-position="bottom" data-tooltip="Restar"><i class="material-icons"> remove </i></a>
+                        </td>
+                        <td>
+                            <a onClick="confirm(${row.idProductList},${row.id})" href="#ConfirmDeleteProduct" class="btn red tooltipped modal-trigger" data-position="right" data-tooltip="Eliminar"> <i class="material-icons"> delete </i></a>
+                        </td>
+                    </tr>
             `;
+            }
+            else{
+                content+=`
+                    <tr>
+                        <td>${row.nameProduct}</td>
+                        <td>${row.price}</td>
+                        <td>${row.count}</td>
+                    </tr>
+            `;
+            }
         })
     }
     $('#ProductsinList').html(content);
@@ -128,7 +140,7 @@ function getProducts(){
             if(!result.status){
                 M.toast({html:result.exception});
             }
-            setProducts(result.dataset);
+            setProducts(result.dataset, result.role);
             $('.tooltipped').tooltip();
         }
         else{
@@ -415,4 +427,7 @@ function showPrice(){
     .fail(function(jqXHR){
         console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
     });
+}
+function editNameEvent(){
+
 }

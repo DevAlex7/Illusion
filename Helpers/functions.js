@@ -1,7 +1,7 @@
 $(document).ready(function () {
    
 });
-function modal(){
+function modalInit(){
     $('.modal').modal('');
 }
 function requestGET(API,Action){
