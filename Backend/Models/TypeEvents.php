@@ -25,13 +25,8 @@ class eventTypes extends Validator{
         }
     }   
     public function type($value){
-        if($this->validateAlphanumeric($value,5,30)){
-            $this->type=$value;
-            return true;
-        }
-        else{
-            return false;
-        }
+        $this->type=$value;
+        return true;
     }
     public function save(){
         $sql = 'INSERT INTO event_types (type) VALUES (?)';

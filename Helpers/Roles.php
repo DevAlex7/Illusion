@@ -41,7 +41,8 @@
          */
         //Barra de eventos
         public static function eventBar(){
-            //If user is admin, he can create events
+
+            //Si el usuario es admin, puede crear eventos
             if($_SESSION['Role']==0){
                 print ('
                 <div class="navbar-fixed">
@@ -58,7 +59,7 @@
                 ');
             }
             else{
-                 //If user is employee, he cant create events
+                 //Si es empleado no lo podra hacer
                 print ('
                 <div class="navbar-fixed">
                     <nav class="" id="Bar">
@@ -75,6 +76,7 @@
         }
         public static function addProduct(){
             if($_SESSION['Role']==0){
+                //Si el usuario es admin puede agregar productos a la lista del evento
                 print ('
                 <div class="right">
                     <a href="#AddProducts" onclick="ListProducts();" class="btn left tooltipped modal-trigger"  data-position="left" data-tooltip="Agregar un producto al evento"> <i class="material-icons">add</i> </a>

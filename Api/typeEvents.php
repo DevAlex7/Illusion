@@ -4,6 +4,7 @@
     require_once('../Helpers/validator.php');
     require_once('../Helpers/select.php');
     require_once('../Backend/Models/TypeEvents.php');
+    require_once('../Helpers/validates.php');
 
     if( isset($_GET['request']) && isset($_GET['action']) ){
         
@@ -59,11 +60,13 @@
             case 'POST':
                 switch($_GET['action']){
                     case 'AddType':
-                        if($type->type($_POST['NameTypeEvent'])){
+                        if(Validate::this($_POST['NameTypeEvent'], 5, 150)->Alphanumeric()){
+                            $type->type($_POST['NameTypeEvent']);
                             $type->save();
                             $result['status']=1;
-                        }else{
-                            $result['exception']='Nombre de tipo de evento invalido, debe contar al menos con 5 carácteres';
+                        }
+                        else{
+                            $result['exception']='Nombre de tipo de evento invalido';
                         }
                     break;
                     default:
@@ -74,18 +77,18 @@
             case 'PUT':
                 switch($_GET['action']){
                     case 'editType':
-                     if($type->id($_POST['Id_Type'])){
-                        if($type->type($_POST['EditTypeInput'])){
-                            $type->edit();
-                            $result['status']=1;
+                        if($type->id($_POST['Id_Type'])){
+                            if($type->type($_POST['EditTypeInput'])){
+                                $type->edit();
+                                $result['status']=1;
+                            }
+                            else{
+                                $result['exception']='Nombre de tipo de evento incorrecto, debe llevar 5 carácteres';
+                            }
                         }
                         else{
-                            $result['exception']='Nombre de tipo de evento incorrecto, debe llevar 5 carácteres';
+                            $result['exception']='Tipo de evento no definido';
                         }
-                    }
-                    else{
-                        $result['exception']='Tipo de evento no definido';
-                    }
                     break;
                     default:
                     exit('acción no definida');
@@ -94,15 +97,15 @@
 
             case 'DELETE':
                 switch($_GET['action']){
-                    case 'Deletetype':
-                        if($type->id($_POST['idTypeEvent'])){
-                            $type->delete();
-                            $result['status']=1;
-                        }
-                        else{
-                            $result['exception']='No hay tipo de evento definido';
-                        }
-                    break;
+                        case 'Deletetype':
+                            if($type->id($_POST['idTypeEvent'])){
+                                $type->delete();
+                                $result['status']=1;
+                            }
+                            else{
+                                $result['exception']='No hay tipo de evento definido';
+                            }
+                        break;
                     default:
                     exit('acción no definida');
                 }
