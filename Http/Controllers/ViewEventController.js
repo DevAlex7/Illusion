@@ -77,6 +77,7 @@ function getInformation(){
                 $('#NameCreator').text("Encargado: "+result.dataset.name +' '+result.dataset.lastname);
                 $('#StatusEvent').text("Estado del evento: "+result.dataset.status);
                 $('#mapEvent').html(result.dataset.place);
+                
             }
             else{
                 M.toast({html:result.exception});
@@ -429,5 +430,67 @@ function showPrice(){
     });
 }
 function editNameEvent(){
-
+    $.ajax(
+        {
+            url:requestGET('events','getallbyId'),
+            type:'POST',
+            data:{
+                idEvent
+            },
+            datatype:'JSON'
+        }
+    )
+    .done(function(response)
+        {
+            if(isJSONString(response)){
+                const result = JSON.parse(response);
+                if(result.status){
+                    $('#IdEventEdit').val(idEvent);
+                    $('#NameEventEdit').val(result.dataset.name_event);
+                }
+                else{
+                    ToastError(result.exception);
+                }
+            }
+            else{
+                console.log(response);
+            }
+        }
+    )
+    .fail(function(jqXHR){
+        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+    });   
 }
+
+$('#EditEventNameForm').submit(function(){
+    event.preventDefault();
+    $.ajax(
+        {
+            url:requestPUT('events','updateOne'),
+            type:'POST',
+            data:$('#EditEventNameForm').serialize(),
+            datatype:'JSON'
+        }
+    )
+    .done(function(response)
+        {
+            if(isJSONString(response)){
+                const result = JSON.parse(response);
+                if(result.status){
+                    ToastSucces('¡Nombre de evento actualizado!');
+                    getInformation();
+                    closeModal('ModalEditTitleEvent');
+                }else{
+                    console.log("hola");
+                    ToastError(result.exception);
+                }
+            }
+            else{
+                console.log(response);
+            }
+        }
+    )
+    .fail(function(jqXHR){
+        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+    }); 
+})

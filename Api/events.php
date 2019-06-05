@@ -3,6 +3,7 @@
     require_once('../Backend/Instance/instance.php');
     require_once('../Helpers/validator.php');
     require_once('../Helpers/select.php');
+    require_once('../Helpers/update.php');
     require_once('../Backend/Models/Events.php');
     
 
@@ -12,6 +13,7 @@
         $result = array('status'=>0,'exception'=>'','price'=>0,'role'=>0);
         $validate = new Validator();
         $select = new Select();
+        $update = new Update();
         $event = new Events();
 
         switch($_GET['request'])
@@ -186,7 +188,25 @@
                 }
             break;
             case 'PUT':
-            
+                switch($_GET['action']){
+                    case 'updateOne':
+                        if($validate->validateId($_POST['IdEventEdit'])){
+                            if($validate->validateAlphanumeric($_POST['NameEventEdit'],5,150)){
+                                Update::set('events','name_event')->replace($_POST['NameEventEdit'])->where('id','=',$_POST['IdEventEdit'])->updateOne();
+                                $result['status']=1;
+                            }
+                            else{
+                                $result['exception']='El nombre del evento es invalido';
+                            }
+                        }
+                        else{
+                            $result['exception']='No hay información';
+                        }
+                        
+                    break;
+                    default:
+                    exit('acción no disponible');
+                }
             break;
             case 'DELETE':
             

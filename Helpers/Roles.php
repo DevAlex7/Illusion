@@ -84,6 +84,23 @@
             else{
             }
         }
+        public static function addPersons(){
+            if($_SESSION['Role']==0){
+
+            }
+            else{
+                
+            }
+        }
+        public static function hasTo_Edit_Eventname(){
+
+        }
+        public static function hasTo_Edit_Location(){
+
+        }
+        public static function hasTo_Edit_Eventinfo(){
+
+        }
     }
 
 ?>

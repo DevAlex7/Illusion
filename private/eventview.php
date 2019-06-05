@@ -32,7 +32,7 @@
                                         <div class="col s12 m12">
                                             <div class="card-panel">
                                                 <div class="right">
-                                                    <a href="#EditTitleEvent" class="modal-trigger"> <i class="material-icons left">edit</i> </a>
+                                                    <a href="#ModalEditTitleEvent" onclick="editNameEvent()" class="modal-trigger"> <i class="material-icons left">edit</i> </a>
                                                 </div>
                                                 <div id="TitlePart">
                                                     <span class="card-title" id="TitleEvent"></span>
@@ -136,17 +136,21 @@
 
                 </div>
             </div>
-            <div class="modal" id="EditTitleEvent">
+            <div class="modal" id="ModalEditTitleEvent">
                 <div class="modal-content">
                     <div class="card">
                         <div class="card-content">
+
                             <div class="row">
-                                <form class="col s12">
+                                <form class="col s12" id="EditEventNameForm" method="POST">
+                                    <input type="hidden" name="IdEventEdit" id="IdEventEdit">
                                     <div class="row">
+                                    <span class="card-title">Editar nombre de evento</span>
+                                    
                                         <div class="input-field col s12">
+                                            
                                             <i class="material-icons prefix black-text">mode_edit</i>
                                             <input type="text" name="NameEventEdit" id="NameEventEdit">
-                                            <label for="NameEventEdit">Nombre de evento</label>
                                         </div>
                                     </div>
                                     <button type="submit" class="btn amber lighten-1">Editar</button>

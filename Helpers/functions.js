@@ -51,3 +51,4 @@ function ClearForm(Form){
 function closeModal(modal){
     $('#'+modal).modal('close');
 }
+
