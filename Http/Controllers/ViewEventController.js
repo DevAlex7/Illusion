@@ -494,3 +494,138 @@ $('#EditEventNameForm').submit(function(){
         console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
     }); 
 })
+function selectEmployees(Select, value){
+    $.ajax({
+        url: requestGET('userEmployees','allEmployees'),
+        type: 'POST',
+        data: null,
+        datatype: 'JSON'
+    })
+    .done(function(response){
+        if (isJSONString(response)) {
+            const result = JSON.parse(response);
+            if (result.status) {
+                let content = '';
+                if (!value) {
+                    content += '<option value="" disabled selected>Seleccione un encargado</option>';
+                }
+                result.dataset.forEach(function(row){
+                    if (row.id != value) {
+                        content += `<option value="${row.id}">${row.name}</option>`;
+                    } else {
+                        content += `<option value="${row.id}" selected>${row.name}</option>`;
+                    }
+                });
+                $('#' + Select).html(content);
+            } else {
+                $('#' + Select).html('<option value="">No hay Empleados</option>');
+            }
+            $('select').formSelect();
+        } else {
+            console.log(response);
+        }
+    })
+    .fail(function(jqXHR){
+        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+    });
+}
+function selectTypeEvents(Select, value){
+    $.ajax({
+        url: requestGET('typeEvents','getTypes'),
+        type: 'POST',
+        data: null,
+        datatype: 'JSON'
+    })
+    .done(function(response){
+        if (isJSONString(response)) {
+            const result = JSON.parse(response);
+            if (result.status) {
+                let content = '';
+                if (!value) {
+                    content += '<option value="" disabled selected>Seleccione tipo de evento</option>';
+                }
+                result.dataset.forEach(function(row){
+                    if (row.id != value) {
+                        content += `<option value="${row.id}">${row.type}</option>`;
+                    } else {
+                        content += `<option value="${row.id}" selected>${row.type}</option>`;
+                    }
+                });
+                $('#' + Select).html(content);
+            } else {
+                $('#' + Select).html('<option value="">No hay tipos de eventos</option>');
+            }
+            $('select').formSelect();
+        } else {
+            console.log(response);
+        }
+    })
+    .fail(function(jqXHR){
+        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+    });
+}
+function InfoEvent(){
+    $.ajax(
+        {
+            url:requestGET('events','getallbyId'),
+            type:'POST',
+            data:{
+                idEvent
+            },
+            datatype:'JSON'
+        }
+    )
+    .done(function(response)
+        {
+            if(isJSONString(response)){
+                const result = JSON.parse(response);
+                if(result.status){
+                    $('#EditIdEventInfo').val(idEvent);
+                    $('#DateEdit').val(result.dataset.date);
+                    selectEmployees('EmployeeEdit',result.dataset.id_employee);
+                    selectTypeEvents('TypeEventsEdit',result.dataset.type_event);                    
+                }
+                else{
+                    ToastError(result.exception);
+                }
+            }
+            else{
+                console.log(response);
+            }
+        }
+    )
+    .fail(function(jqXHR){
+        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+    });
+}
+$('#EditInfoForm').submit(function(){
+    event.preventDefault();
+    $.ajax(
+        {
+            url:requestPUT('events','updateInfoEvent'),
+            type:'POST',
+            data:$('#EditInfoForm').serialize(),
+            datatype:'JSON'
+        }
+    )
+    .done(function(response)
+        {
+            if(isJSONString(response)){
+                const result = JSON.parse(response);
+                if(result.status){
+                    ToastSucces('¡Información del evento modificada exitosamente!');
+                    closeModal('EditInformationEvent');
+                }
+                else{
+                    ToastError(result.exception);
+                }
+            }
+            else{
+                console.log(response);
+            }
+        }
+    )
+    .fail(function(jqXHR){
+        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+    });
+})

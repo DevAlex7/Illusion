@@ -16,7 +16,19 @@
             
             case 'GET':
                 switch($_GET['action']){
-                    
+                    case 'allEmployees':
+                       if($employe->id($_SESSION['idUser'])){
+                            if($result['dataset']=$employe->all()){
+                                $result['status']=1;
+                            }   
+                            else{
+                                $result['exception']='No hay empleados disponibles';
+                            }
+                       }
+                       else{
+
+                       }
+                    break;
                 }
             break;
             

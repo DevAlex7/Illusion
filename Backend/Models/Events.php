@@ -114,7 +114,7 @@ class Events extends Validator{
         return Database::executeRow($sql,$params);
     }
     public function getInformation(){
-        $sql='  SELECT events.name_event, events.date, events.client_name, employees.name, employees.lastname, events.price, payment_event_status.status, event_types.type, events.place 
+        $sql='  SELECT events.name_event, events.date, events.id_employee, events.type_event ,  events.client_name, employees.name, employees.lastname, events.price, payment_event_status.status, event_types.type, events.place 
                 FROM ((employees 
                 INNER JOIN events ON events.id_employee=employees.id) 
                 INNER JOIN payment_event_status ON events.pay_status=payment_event_status.id 
@@ -177,9 +177,9 @@ class Events extends Validator{
         FROM (products 
         INNER JOIN list_products_event ON products.id=list_products_event.id_product
         INNER JOIN events ON list_products_event.id_event=events.id AND events.pay_status=2)
-';
-$params=array(null);
-return Database::getRow($sql,$params);
+        ';
+        $params=array(null);
+        return Database::getRow($sql,$params);
     }
     public function search(){
         $sql = '
@@ -197,6 +197,21 @@ return Database::getRow($sql,$params);
         $params=array("%$this->search%","%$this->search%","%$this->search%","%$this->search%","%$this->search%");
         return Database::getRows($sql,$params);
     }
+    public function updateInfo(){
+        $sql='UPDATE events SET date=?, type_event=?, id_employee=? WHERE id=?';
+        $params=array($this->date,$this->type_event, $this->id_employee, $this->id);
+        return Database::executeRow($sql,$params);
+    }
+    public function verifyAdmin(){
+        $sql='
+            SELECT events.name_event, employees.name, employees.lastname, roles.role FROM ((events 
+            INNER JOIN employees ON events.id_employee=employees.id AND employees.id=?)
+            INNER JOIN roles ON employees.role=roles.id AND roles.id=0 	AND events.id=?)
+        ';
+        $params=array($this->id_employee,$this->id);
+        return Database::getRow($sql,$params);
+    }
+    
 
 }
 

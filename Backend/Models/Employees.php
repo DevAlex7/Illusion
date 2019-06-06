@@ -133,6 +133,20 @@ class Employee extends Validator{
         $params = array($this->name, $this->lastname, $this->email, $this->username, $hash, $this->role);
         return Database::executeRow($sql,$params);
     }
+    public function verifyRole(){
+        $sql='
+            SELECT roles.id, employees.id AS User, roles.role, employees.name, employees.lastname 
+            FROM (employees INNER JOIN roles 
+            ON employees.role=roles.id AND employees.id=?)
+        ';
+        $params=array($this->id);
+        return Database::getRow($sql,$params);
+    }
+    public function all(){
+        $sql='SELECT * FROM employees WHERE employees.id NOT IN (?)';
+        $params=array($this->id);
+        return Database::getRows($sql,$params);
+    }
     
 }
 ?>

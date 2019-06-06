@@ -44,7 +44,7 @@
                                         <div class="col s12 m12">
                                             <div class="card-panel">
                                                 <div class="right">
-                                                    <a> <i class="material-icons left">edit</i> </a>
+                                                    <a href="#EditInformationEvent" onclick="InfoEvent()" class="modal-trigger"> <i class="material-icons left">edit</i> </a>
                                                 </div>
                                                 <p id="ClientName"></p>   
                                                 <p id="DateEvent"></p>
@@ -146,9 +146,7 @@
                                     <input type="hidden" name="IdEventEdit" id="IdEventEdit">
                                     <div class="row">
                                     <span class="card-title">Editar nombre de evento</span>
-                                    
                                         <div class="input-field col s12">
-                                            
                                             <i class="material-icons prefix black-text">mode_edit</i>
                                             <input type="text" name="NameEventEdit" id="NameEventEdit">
                                         </div>
@@ -163,7 +161,37 @@
             </div>
             <div class="modal" id="EditInformationEvent">
                 <div class="modal-content">
-
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="row">
+                                <form class="col s12" method="POST" id="EditInfoForm">
+                                    <div class="row">
+                                        <input type="hidden" name="EditIdEventInfo" id="EditIdEventInfo">
+                                        <div class="input-field col s6">
+                                          
+                                            <i class="material-icons prefix">calendar_today</i>
+                                            <input type="text" name="DateEdit" id="DateEdit">
+                                            <h6>Fecha de evento</h6>
+                                        </div>
+                                        <div class="input-field col s6">
+                                            <i class="material-icons prefix">account_circle</i>
+                                            <select name="EmployeeEdit" id="EmployeeEdit"></select>
+                                            <label for="icon_prefix">Nombre de encargado</label>
+                                        </div>
+                                        <div class="input-field col s6">
+                                            <i class="material-icons prefix">list</i>
+                                            <select name="TypeEventsEdit" id="TypeEventsEdit"></select>
+                                            <label for="icon_telephone">Tipo de evento</label>
+                                        </div>
+                                        <div class="center">
+                                            <button type="submit" class="btn green accent-4">Editar</button>
+                                            <a class="btn modal-close">Cerrar</a>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="modal red" id="ConfirmDeleteProduct">

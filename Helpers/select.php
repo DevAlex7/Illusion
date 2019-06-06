@@ -7,6 +7,7 @@
         public static $field_name;
         public static $all="*";
         public static $value_filter;
+        
         //ComboBoxes
         public function allFrom($Model){
             $sql='SELECT * FROM '. $Model;
@@ -53,6 +54,8 @@
             $params=array(static::$value_filter);
             return Database::getRow($sql,$params);
         }
+
+        
         
 
 

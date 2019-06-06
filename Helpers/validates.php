@@ -1,7 +1,6 @@
 <?php 
-
+    
     class Validate{
-
         //Propiedades para Letras y numeros entre letras
         public static $value_param;
         public static $min_value;
@@ -13,6 +12,7 @@
         //Propiedades para cualquier tipo
         public static $type_param;
 
+        //Propiedad fecha para validar las fechas
         public static $date_param;
 
         public static function this($value, $min, $maximum){
@@ -37,6 +37,7 @@
             }
         }
         
+        //Validaciones para ID
         public function Integer($value){
             static::$integer_param = $value;
             return new static;
@@ -50,6 +51,7 @@
             }
         }
         
+        //Validaciones para tipos de texto 
         public static function type($value){
             static::$type_param = $value;
             return new static;
@@ -80,14 +82,15 @@
             }
         }
 
-        public function date($date){
+        //Validaciones para fechas
+        public static function date($date){
             static::$date_param = $date;
             return new static;
         }
-        public function Format($format){
+        public static function format($format){
             if($format=='Y-m-d'){
                 if(preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", static::$date_param )) {
-                    return true;
+                    return true ;
                 } else {
                     return false;
                 }
@@ -96,8 +99,8 @@
                 return false;
             }
         }
-        public function Today(){
-            
+        public static function afterToday(){
+
             $today = date("Y-m-d");
 			$userDate = static::$date_param;
 
@@ -109,8 +112,40 @@
 			}
         }
 
-
+        //Si es admin
+        public function isAdmin($id_event, $employee){
+            $events = new Events();
+            if($events->id($id_event)){
+                if($events->id_employee($employee)){
+                    if($events->verifyAdmin()){
+                        return true;
+                    }
+                    else{
+                        return false;
+                    }
+                }
+                else{
+                    return false;
+                }
+            }
+            else{
+                return false;
+            }
+        }
+        public function verifyRole($id_user){
+            $employee = new Employee();
+            if($employee->id($id_user)){
+                $auth = $employee->verifyRole();
+                if($auth['id']==0){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            }
+            else{
+                return false;
+            }
+        }
     }
-
-
 ?>

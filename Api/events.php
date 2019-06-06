@@ -5,7 +5,8 @@
     require_once('../Helpers/select.php');
     require_once('../Helpers/update.php');
     require_once('../Backend/Models/Events.php');
-    
+    require_once('../Helpers/validates.php');  
+    require_once('../Backend/Models/Employees.php');
 
     if( isset($_GET['request']) && isset($_GET['action']) ){
         
@@ -15,6 +16,7 @@
         $select = new Select();
         $update = new Update();
         $event = new Events();
+        $rules = new Validate();
 
         switch($_GET['request'])
         {
@@ -192,7 +194,10 @@
                     case 'updateOne':
                         if($validate->validateId($_POST['IdEventEdit'])){
                             if($validate->validateAlphanumeric($_POST['NameEventEdit'],5,150)){
-                                Update::set('events','name_event')->replace($_POST['NameEventEdit'])->where('id','=',$_POST['IdEventEdit'])->updateOne();
+                                Update::set('events','name_event')
+                                        ->replace($_POST['NameEventEdit'])
+                                        ->where('id','=',$_POST['IdEventEdit'])
+                                        ->updateOne();
                                 $result['status']=1;
                             }
                             else{
@@ -202,7 +207,41 @@
                         else{
                             $result['exception']='No hay información';
                         }
-                        
+                    break;
+
+                    case 'updateInfoEvent':
+                        if($event->id($_POST['EditIdEventInfo'])){
+                            if($event->id_employee($_POST['EmployeeEdit'])){
+                                if($event->type_event($_POST['TypeEventsEdit'])){
+                                    if($rules->verifyRole($_POST['EmployeeEdit'])){
+                                        if($event->date($_POST['DateEdit'])){
+                                            if($rules->date($_POST['DateEdit'])->afterToday()){
+                                                $event->updateInfo();
+                                                $result['status']=1;
+                                            }
+                                            else{
+                                                $result['exception']='No puedes ingresar fechas inferiores a la de ahora';
+                                            }
+                                        }   
+                                        else{
+                                            $result['exception']='Mal formato de fecha';
+                                        }
+                                     }
+                                    else{
+                                         $result['exception']='Se ha seleccionado un empleado, solo los administradores pueden estar a cargo de los eventos';
+                                    }
+                                }
+                                else{
+                                    $result['exception']='No se ha seleccionado ningun tipo de evento';
+                                }
+                            }
+                            else{
+                                $result['exception']='No se ha seleccionado a ningun encargado';
+                            }
+                        }
+                        else{
+                            $result['exception']='No hay información del evento';
+                        }
                     break;
                     default:
                     exit('acción no disponible');
