@@ -22,3 +22,24 @@ iframe{
 #ListofProducts{
   margin-top: 1rem;
 }
+#CollaborationsPart{
+  margin-top: 1rem;
+}
+#contributors{
+  margin-top: 1rem;
+}
+#IconLink{
+}
+#contributorsText{
+}
+.disabled {
+  pointer-events: none;
+  cursor: default;
+  color:rgba(158, 155, 155, 0.822);
+
+}  
+.disabled {
+  pointer-events: none;
+  cursor: default;
+  color:rgba(158, 155, 155, 0.822);
+}

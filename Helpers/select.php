@@ -42,6 +42,12 @@
             $params = array(static::$value_filter);
             return Database::getRow($sql,$params);
         }
+
+        public static function getAll(){
+            $sql='SELECT '. static::$all .' FROM '. static::$model_name .' WHERE '.static::$column_field.' =?';
+            $params = array(static::$value_filter);
+            return Database::getRows($sql,$params);
+        }
         
         public static function in($Model, $column){
             static::$model_name=$Model;

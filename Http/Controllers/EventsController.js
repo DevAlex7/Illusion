@@ -9,6 +9,7 @@ function setEvents(events){
         events.forEach(function(event){
 
             var fecha = moment(event.date);
+            
             content+=`
             <div class="col s12 m12">
                 <div class="card z-depth-4" id="CardEvent">
@@ -17,6 +18,7 @@ function setEvents(events){
                             <p>Evento: ${event.name_event}</p>
                             <blockquote id="DetailEvent"> <p>Cliente: ${event.client_name}</p> </blockquote>
                             <blockquote id="DetailEvent"> <p>Fecha de evento: ${ fecha.lang('es').format('dddd D MMMM , YYYY') }</p> </blockquote>
+                            <blockquote id="DetailEvent"> <p>Fecha de evento: ${ fecha.lang('es').format('dd MMM D YYYY') }</p> </blockquote>
                             <blockquote id="DetailEvent"> <a href="/Illusion/private/eventview.php?event=${event.id}">Ver evento</a></blockquote>
                         </blockquote>
                     </div>
@@ -68,9 +70,10 @@ $('#FormCreateEvent').submit(function(){
                 ClearForm('FormCreateEvent')
                 closeModal('CreateEvent');
                 CallEvents();
+                
             }
             else{
-                toastError(result.exception);
+                ToastError(result.exception);
             }
         }
         else{
@@ -133,7 +136,7 @@ $('#SearchForm').submit(function(){
             if(isJSONString(response)){
                 const result = JSON.parse(response);
                 if(!result.status){
-                    toastError(result.status);
+                    ToastError(result.exception);
                 }
                 setEvents(result.dataset);
             }
@@ -143,7 +146,7 @@ $('#SearchForm').submit(function(){
         }
     )
     .fail(function(jqXHR){
-        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+        catchError(jqXHR);  
     });
 
 })

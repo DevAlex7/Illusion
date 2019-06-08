@@ -38,12 +38,12 @@
         }
         
         //Validaciones para ID
-        public function Integer($value){
+        public static function Integer($value){
             static::$integer_param = $value;
             return new static;
         }
 
-        public function Id(){
+        public static function Id(){
             if (filter_var(static::$integer_param, FILTER_VALIDATE_INT, array('min_range' => 1))) {
                 return true;
             } else {

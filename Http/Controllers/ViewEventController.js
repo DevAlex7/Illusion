@@ -5,7 +5,10 @@ $(document).ready(function () {
     $('.modal').modal();
     getProducts();
     showPrice();
-    
+    GetPersonsList();
+    $('.fixed-action-btn').floatingActionButton();
+    verifyActions();
+    getCountCollaborators();
 });
 //To get the id List of product
 var idList;
@@ -13,6 +16,8 @@ var idList;
 var idEvent;
 //To get id product, when we select the product
 var idProduct;
+
+var idlistInvite;
 
 //Validate variable in the URL
 function getQueryVariable(variable)
@@ -77,7 +82,6 @@ function getInformation(){
                 $('#NameCreator').text("Encargado: "+result.dataset.name +' '+result.dataset.lastname);
                 $('#StatusEvent').text("Estado del evento: "+result.dataset.status);
                 $('#mapEvent').html(result.dataset.place);
-                
             }
             else{
                 M.toast({html:result.exception});
@@ -494,41 +498,7 @@ $('#EditEventNameForm').submit(function(){
         console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
     }); 
 })
-function selectEmployees(Select, value){
-    $.ajax({
-        url: requestGET('userEmployees','allEmployees'),
-        type: 'POST',
-        data: null,
-        datatype: 'JSON'
-    })
-    .done(function(response){
-        if (isJSONString(response)) {
-            const result = JSON.parse(response);
-            if (result.status) {
-                let content = '';
-                if (!value) {
-                    content += '<option value="" disabled selected>Seleccione un encargado</option>';
-                }
-                result.dataset.forEach(function(row){
-                    if (row.id != value) {
-                        content += `<option value="${row.id}">${row.name}</option>`;
-                    } else {
-                        content += `<option value="${row.id}" selected>${row.name}</option>`;
-                    }
-                });
-                $('#' + Select).html(content);
-            } else {
-                $('#' + Select).html('<option value="">No hay Empleados</option>');
-            }
-            $('select').formSelect();
-        } else {
-            console.log(response);
-        }
-    })
-    .fail(function(jqXHR){
-        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
-    });
-}
+
 function selectTypeEvents(Select, value){
     $.ajax({
         url: requestGET('typeEvents','getTypes'),
@@ -582,8 +552,8 @@ function InfoEvent(){
                 if(result.status){
                     $('#EditIdEventInfo').val(idEvent);
                     $('#DateEdit').val(result.dataset.date);
-                    selectEmployees('EmployeeEdit',result.dataset.id_employee);
-                    selectTypeEvents('TypeEventsEdit',result.dataset.type_event);                    
+                    selectTypeEvents('TypeEventsEdit',result.dataset.type_event); 
+                    M.updateTextFields();                   
                 }
                 else{
                     ToastError(result.exception);
@@ -615,6 +585,7 @@ $('#EditInfoForm').submit(function(){
                 if(result.status){
                     ToastSucces('¡Información del evento modificada exitosamente!');
                     closeModal('EditInformationEvent');
+                    getInformation();
                 }
                 else{
                     ToastError(result.exception);
@@ -629,3 +600,272 @@ $('#EditInfoForm').submit(function(){
         console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
     });
 })
+
+//Call map information
+function editMap(){
+    $.ajax(
+        {
+            url:requestGET('events','getallbyId'),
+            type:'POST',
+            data:{
+                idEvent
+            },
+            datatype:'JSON'
+        }
+    )
+    .done(function(response)
+        {   
+            if(isJSONString(response)){
+                const result = JSON.parse(response);
+                if(result.status){
+                    $('#EditMapId').val(result.dataset.id);
+                    $('#EditMap').val(result.dataset.place);
+                }
+                else{
+                    ToastError(result.exception);
+                }
+            }
+            else{
+                console.log(response);
+            }
+        }
+
+    )
+    .fail(function(jqXHR){
+        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+    });
+}
+//Edit map
+$('#MapEditForm').submit(function(){
+    event.preventDefault();
+    $.ajax(
+        {
+            url:requestPUT('events','editMap'),
+            type:'POST',
+            data:$('#MapEditForm').serialize(),
+            datatype:'JSON'
+        }
+    )
+    .done(function(response)
+        {
+            if(isJSONString(response)){
+                const result = JSON.parse(response);
+                if(result.status){
+                    ToastSucces('¡Se ha actualizado el mapa!');
+                }
+                else{
+                    ToastError(result.exception);
+                }
+            }
+            else{
+                console.log(response);
+            }
+        }
+    )
+    .fail(function(jqXHR){
+        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+    });
+})
+function setInvites(invites,role){
+    let content='';
+    if(invites.length>0){
+        invites.forEach(function(invite){
+            if(role==0){
+                content+=`
+                    <tr>
+                        <td>${invite.namePerson}</td>
+                        <td>${invite.lastnamePerson}</td>
+                        <td>
+                            <a onClick="deletePerson(${invite.id})" href="#DeleteInviteModal" class="btn red tooltipped modal-trigger" data-position="right" data-tooltip="Eliminar"> <i class="material-icons"> delete </i></a>
+                        </td>
+                    </tr>
+                `;
+            }
+            else{
+                content+=`
+                    <tr>
+                        <td>${invite.namePerson}</td>
+                        <td>${invite.lastnamePerson}</td>
+                    </tr>
+                `;
+            }
+        })
+    }
+    $('#InvitesRead').html(content);
+}
+function GetPersonsList(){
+    $.ajax(
+        {
+            url:requestGET('List_invites_in_Event','ListInvites'),
+            type:'POST',
+            data:{idEvent},
+            datatype:'JSON'
+        }
+    )
+    .done(function(response)
+        {
+            if(isJSONString(response)){
+                const result = JSON.parse(response);
+                if(!result.status){
+                    ToastError(result.exception);
+                }
+                setInvites(result.dataset,result.role);
+            }
+            else{
+                console.log(response);
+            }
+        }
+    )
+    .fail(function(jqXHR){
+        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+    });
+}
+$('#InvitesForm').submit(function(){
+    event.preventDefault();
+    $.ajax(
+        {
+            url:requestPOST('List_invites_in_Event','SaveInvite'),
+            type:'POST',
+            data:$('#InvitesForm').serialize(),
+            datatype:'JSON'
+        }
+    )
+    .done(function(response)
+        {
+            if(isJSONString(response)){
+                const result = JSON.parse(response);
+                if(result.status){
+                    ToastSucces('¡La persona ha sido agregada exitosamente!');
+                    ClearForm('InvitesForm');
+                    closeModal('AddInvites');
+                }
+                else{
+                    ToastError(result.exception);
+                }
+            }
+            else{
+                console.log(response);
+            }
+        }
+    )
+    .fail(function(jqXHR){
+        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+    });
+})
+
+function deletePerson(invite_list){
+idlistInvite = invite_list;
+}
+function deleteInvite(){
+    $.ajax(
+        {
+            url:requestDELETE('List_invites_in_Event','deleteInvite'),
+            type:'POST',
+            data:{
+                idlistInvite
+            },
+            datatype:'JSON'
+
+        }
+    )
+    .done(function(response)
+        {
+            if(isJSONString(response)){
+                const result = JSON.parse(response);
+                if(result.status){
+                    ToastSucces('¡Invitado eliminado de la lista satisfactoriamente!');
+                    closeModal('DeleteInviteModal');
+                    GetPersonsList();
+                }
+                else{
+                    ToastError(result.status);
+                }
+            }
+            else{
+                console.log(response);
+            }
+        }
+    )
+    .fail(function(jqXHR){
+        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+    });
+}
+function verifyActions(){
+    $.ajax(
+        {
+            url:requestGET('events','verifyActions'),
+            type:'POST',
+            data:{
+                idEvent
+            },
+            datatype:'JSON'
+        }
+    )
+    .done(function(response)
+        {
+            if(isJSONString(response)){
+                const result = JSON.parse(response);
+                if(result.status==1){
+                    $('#EditEventNameBtn').removeClass('disabled');
+                    $('#EditInformationBtn').removeClass('disabled');
+                    $('#EditMapBtn').removeClass('disabled');
+                    $('#AddProductsBtn').removeClass('disabled');
+                    $('#BtnAddInvites').removeClass('disabled');
+                }
+                else if(result.status==2){
+                    $('#EditEventNameBtn').removeClass('disabled');
+                    $('#EditInformationBtn').removeClass('disabled');
+                    $('#EditMapBtn').removeClass('disabled');
+                    $('#AddProductsBtn').removeClass('disabled');
+                    $('#BtnAddInvites').removeClass('disabled');
+                }
+                else{
+                    $('#EditEventNameBtn').addClass('disabled');
+                    $('#EditInformationBtn').addClass('disabled');
+                    $('#EditMapBtn').addClass('disabled');
+                    $('#AddProductsBtn').addClass('disabled');
+                    $('#BtnAddInvites').addClass('disabled');
+                }
+            }
+            else{
+                console.log(response);
+            }
+        }
+    )
+    .fail(function(jqXHR){
+        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+    });
+}
+function getCountCollaborators(){
+    $.ajax(
+        {
+            url:requestGET('events','getCountCollaborators'),
+            type:'POST',
+            data:{
+                idEvent
+            },
+            datatype:'JSON'
+        }
+    )
+    .done(function(response)
+        {
+            if(isJSONString(response)){
+                const result = JSON.parse(response);
+                if(result.status){
+                    $('#collaboratorLink').append(result.dataset.Count+" Colaboradores");
+                }
+                else{
+                    ToastError(result.exception);
+                }
+            }
+            else{
+                console.log(response);
+            }
+        }
+    )
+    .fail(function(jqXHR){
+        
+    })
+}
+
+

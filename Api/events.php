@@ -7,11 +7,12 @@
     require_once('../Backend/Models/Events.php');
     require_once('../Helpers/validates.php');  
     require_once('../Backend/Models/Employees.php');
+    require_once('../Backend/Models/Share_events.php');
 
     if( isset($_GET['request']) && isset($_GET['action']) ){
         
         session_start();
-        $result = array('status'=>0,'exception'=>'','price'=>0,'role'=>0);
+        $result = array('status'=>0,'exception'=>'','price'=>0,'role'=>0,'lastId'=>0);
         $validate = new Validator();
         $select = new Select();
         $update = new Update();
@@ -115,6 +116,68 @@
                             $result['exception']='No hay información de eventos con productos';
                         }
                     break;
+                    case 'getMyEvents':
+                        if($event->id_employee($_SESSION['idUser'])){
+                            if($result['dataset']=$event->getMyEvents()){
+                                $result['status']=1;
+                            }
+                            else{
+                                $result['exception']='No hay eventos creados por ti';
+                            }
+                        }
+                        else{
+                            $result['exception']='no hay información para brindarte información';
+                        }
+                    break;
+                    case 'verifyActions':
+                            if($event->id($_POST['idEvent'])){
+                                if($event->id_employee($_SESSION['idUser'])){
+                                    if($event->verifyCreator()){
+                                        $result['status']=1;
+                                    }
+                                    else{
+                                        if(ShareEvents::set()->id_event($_POST['idEvent'])->id_employee($_SESSION['idUser'])->existInEvent()){
+                                            $result['status']=2;
+                                        }
+                                        else{
+                                            $result['exception']='No tienes permisos de este evento';
+                                        }
+                                    }
+                                }
+                                else{
+                                    $result['exception']='Usuario no definido';
+                                }
+                            }
+                            else{
+                                $result['exception']='Información del evento no definido';
+                            }
+                    break;
+                    case 'SharesEvents':
+                        if($event->id_employee($_SESSION['idUser'])){
+                            if($result['dataset']=$event->getSharesEvents()){
+                                $result['status']=1;
+                            }
+                            else{
+                                $result['exception']='No tiene eventos compartidos todavia';
+                            }
+                        }
+                        else{
+                            $result['exception']='No podemos conseguir información de sus eventos compartidos';
+                        }
+                    break;
+                    case 'getCountCollaborators':
+                        if($event->id($_POST['idEvent'])){
+                            if($result['dataset']=$event->getCollaborators()){
+                                $result['status']=1;
+                            }
+                            else{
+                                $result['exception']='0';
+                            }
+                        }
+                        else{
+                            $result['exception']='Evento no definido';
+                        }
+                    break;
                     default:
                     exit('acción no disponible');
                 }
@@ -185,6 +248,24 @@
                             $result['exception']='Busqueda invalida';
                         }
                     break;
+                    case 'searchMyEvent':
+                        if($event->searchbyUser($_POST['SearchMyEventsInput'])){
+                            if($event->id_employee($_SESSION['idUser'])){
+                                if($result['dataset']=$event->searchInMyEvents()){
+                                    $result['status']=1;
+                                }
+                                else{
+                                    $result['exception']='No hay resultados';
+                                }
+                            }
+                            else{
+                                $result['exception']='No hay información de usuario para busquedas';
+                            }
+                        }
+                        else{
+                            $result['exception']='Busqueda invalida';
+                        }
+                    break;
                     default: 
                     exit('acción no disponible');
                 }
@@ -211,32 +292,36 @@
 
                     case 'updateInfoEvent':
                         if($event->id($_POST['EditIdEventInfo'])){
-                            if($event->id_employee($_POST['EmployeeEdit'])){
-                                if($event->type_event($_POST['TypeEventsEdit'])){
-                                    if($rules->verifyRole($_POST['EmployeeEdit'])){
-                                        if($event->date($_POST['DateEdit'])){
-                                            if($rules->date($_POST['DateEdit'])->afterToday()){
-                                                $event->updateInfo();
-                                                $result['status']=1;
-                                            }
-                                            else{
-                                                $result['exception']='No puedes ingresar fechas inferiores a la de ahora';
-                                            }
-                                        }   
-                                        else{
-                                            $result['exception']='Mal formato de fecha';
-                                        }
-                                     }
-                                    else{
-                                         $result['exception']='Se ha seleccionado un empleado, solo los administradores pueden estar a cargo de los eventos';
+                            if($event->type_event($_POST['TypeEventsEdit'])){
+                                if($event->date($_POST['DateEdit'])){
+                                    if($rules->date($_POST['DateEdit'])->afterToday()){
+                                        $event->updateInfo();
+                                        $result['status']=1;
                                     }
-                                }
+                                    else{
+                                        $result['exception']='No puedes ingresar fechas inferiores a la de ahora';
+                                    }
+                                }   
                                 else{
-                                    $result['exception']='No se ha seleccionado ningun tipo de evento';
+                                    $result['exception']='Mal formato de fecha';
                                 }
                             }
                             else{
-                                $result['exception']='No se ha seleccionado a ningun encargado';
+                                $result['exception']='No se ha seleccionado ningun tipo de evento';
+                            }
+                        }
+                        else{
+                            $result['exception']='No hay información del evento';
+                        }
+                    break;
+                    case 'editMap':
+                        if(Validate::Integer($_POST['EditMapId'])->Id()){
+                            if(Validate::type($_POST['EditMap'])->HTML()){
+                                Update::set('events','place')->replace($_POST['EditMap'])->where('id','=',$_POST['EditMapId'])->updateOne();
+                                $result['status']=1;
+                            }
+                            else{
+                                $result['exception']='Formato incorrecto de HTML ';
                             }
                         }
                         else{
@@ -254,7 +339,7 @@
             default:
             exit('Petición rechazada');
         }
-    print(json_encode($result));
+        print(json_encode($result));
     }
     else{
         exit('Petición Http y acción no definidas');

@@ -26,7 +26,7 @@
             
             <!-- NavBar -->
             <?php 
-                Permissions::eventBar();
+                Permissions::eventsBar();
             ?>
 
             <div class="row" id="SearchBar">

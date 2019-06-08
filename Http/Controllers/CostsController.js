@@ -17,7 +17,7 @@ function setCostsDontPay(costs){
                         <div class="col s12 m12">
                             <div class="card-panel">
                             <blockquote id="EventBar">
-                            <span class="card-title">$${cost.name_event} </span>
+                            <span class="card-title">${cost.name_event} </span>
                                 <blockquote id="EventBar">
                                 <span class="card-title"> <i class="material-icons left red-text">arrow_downward</i> $${cost.Cost} </span>
                                 </blockquote>
@@ -82,6 +82,9 @@ function CallCostsInEventsPay(){
             }
         }
     )
+    .fail(function(jqXHR){
+        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+    });
 }
 //Llamar todos los eventos pendientes de pago
 function CallCostsInEventsPending(){
@@ -107,6 +110,9 @@ function CallCostsInEventsPending(){
             }
         }
     )
+    .fail(function(jqXHR){
+        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+    });
 }
 //Llamar para obtener las perdidas
 function CallLost(){
@@ -133,6 +139,9 @@ function CallLost(){
             }
         }
     )
+    .fail(function(jqXHR){
+        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+    });
 }
 function CallWin(){
     $.ajax(
@@ -158,4 +167,7 @@ function CallWin(){
             }
         }
     )
+    .fail(function(jqXHR){
+        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+    });
 }

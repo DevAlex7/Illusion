@@ -51,4 +51,8 @@ function ClearForm(Form){
 function closeModal(modal){
     $('#'+modal).modal('close');
 }
+function catchError(jqueryError){
+    var failMessage =  console.log('Error: ' + jqueryError.status + ' ' + jqueryError.statusText);
+    return failMessage;
+}
 

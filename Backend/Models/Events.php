@@ -103,6 +103,7 @@ class Events extends Validator{
             return false;
         }
     }
+    
     public function all(){
         $sql='SELECT * FROM events ORDER BY id DESC';
         $params=array(null);
@@ -114,11 +115,11 @@ class Events extends Validator{
         return Database::executeRow($sql,$params);
     }
     public function getInformation(){
-        $sql='  SELECT events.name_event, events.date, events.id_employee, events.type_event ,  events.client_name, employees.name, employees.lastname, events.price, payment_event_status.status, event_types.type, events.place 
-                FROM ((employees 
-                INNER JOIN events ON events.id_employee=employees.id) 
-                INNER JOIN payment_event_status ON events.pay_status=payment_event_status.id 
-                INNER JOIN event_types ON events.type_event=event_types.id AND events.id=?)';
+                $sql='  SELECT events.id, events.name_event, events.date, events.id_employee, events.type_event ,  events.client_name, employees.name, employees.lastname, events.price, payment_event_status.status, event_types.type, events.place 
+                        FROM ((employees 
+                        INNER JOIN events ON events.id_employee=employees.id) 
+                        INNER JOIN payment_event_status ON events.pay_status=payment_event_status.id 
+                        INNER JOIN event_types ON events.type_event=event_types.id AND events.id=?)';
         $params=array($this->id);
         return Database::getRow($sql,$params);
     }
@@ -198,8 +199,8 @@ class Events extends Validator{
         return Database::getRows($sql,$params);
     }
     public function updateInfo(){
-        $sql='UPDATE events SET date=?, type_event=?, id_employee=? WHERE id=?';
-        $params=array($this->date,$this->type_event, $this->id_employee, $this->id);
+        $sql='UPDATE events SET date=?, type_event=? WHERE id=?';
+        $params=array($this->date,$this->type_event, $this->id);
         return Database::executeRow($sql,$params);
     }
     public function verifyAdmin(){
@@ -211,6 +212,67 @@ class Events extends Validator{
         $params=array($this->id_employee,$this->id);
         return Database::getRow($sql,$params);
     }
+    public function verifyisAdmin_In_Event(){
+        $sql='  SELECT employees.name, employees.lastname, events.name_event, roles.role 
+                FROM ((events 
+                INNER JOIN employees 
+                ON events.id_employee=employees.id ) 
+                INNER JOIN roles 
+                ON employees.role=roles.id 
+                AND events.id=? AND employees.id=?)';
+        $params=array($this->id,$this->id_employee);
+        return Database::getRow($sql,$params);
+    }
+    public function getMyEvents(){
+        $sql='  SELECT events.id, events.name_event, events.client_name, events.date FROM ((events 
+                INNER JOIN employees 
+                ON events.id_employee=employees.id AND employees.id=?) 
+                INNER JOIN roles ON employees.role=roles.id AND roles.id=0)';
+        $params=array($this->id_employee);
+        return Database::getRows($sql,$params);
+    }
+    public function searchInMyEvents(){
+        $sql='  SELECT events.*, 
+                    employees.name, employees.lastname 
+                    FROM events 
+                    INNER JOIN employees ON events.id_employee = employees.id AND employees.id=?
+                    INNER JOIN roles ON employees.role=roles.id
+                    WHERE 
+                    events.name_event LIKE ?
+                    OR events.date LIKE ?
+                    OR events.client_name  LIKE ?
+                    OR employees.name LIKE ?
+                    OR employees.lastname LIKE ?
+                ';
+        $params=array($this->id_employee,"%$this->search%","%$this->search%","%$this->search%","%$this->search%","%$this->search%");
+        return Database::getRows($sql,$params);
+    }
+    public function verifyCreator(){
+        $sql='  SELECT events.name_event, employees.name, roles.role 
+                FROM ((events 
+                INNER JOIN employees ON employees.id=events.id_employee AND employees.id=?) 
+                INNER JOIN roles ON roles.id=employees.role AND roles.id=0 AND events.id=?)';
+        $params=array($this->id_employee,$this->id);
+        return Database::getRow($sql,$params);
+    }
+    public function getSharesEvents(){
+        $sql='  SELECT events.id, events.name_event, events.client_name, events.date 
+                FROM ((events 
+                INNER JOIN share_events ON share_events.id_event=events.id) 
+                INNER JOIN employees ON employees.id=share_events.id_employee AND employees.id=?)';
+        $params=array($this->id_employee);
+        return Database::getRows($sql,$params);
+    }
+    public function getCollaborators(){
+        $sql='  SELECT COUNT(share_events.id_employee) AS Count FROM 
+            (share_events 
+            INNER JOIN events 
+            ON events.id=share_events.id_event AND events.id=?)';
+        $params=array($this->id);
+        return Database::getRow($sql,$params);
+    }
+    
+    
     
 
 }
