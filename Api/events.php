@@ -10,7 +10,6 @@
     require_once('../Backend/Models/Share_events.php');
 
     if( isset($_GET['request']) && isset($_GET['action']) ){
-        
         session_start();
         $result = array('status'=>0,'exception'=>'','price'=>0,'role'=>0,'lastId'=>0);
         $validate = new Validator();
@@ -18,7 +17,6 @@
         $update = new Update();
         $event = new Events();
         $rules = new Validate();
-
         switch($_GET['request'])
         {
             case 'GET':
@@ -315,7 +313,6 @@
                             $result['exception']='No hay información';
                         }
                     break;
-
                     case 'updateInfoEvent':
                         if($event->id($_POST['EditIdEventInfo'])){
                             if($event->type_event($_POST['TypeEventsEdit'])){
@@ -370,6 +367,4 @@
     else{
         exit('Petición Http y acción no definidas');
     }
-
-
 ?>

@@ -9,8 +9,7 @@ $(document).ready(function () {
     GetPersonsList();
     $('.fixed-action-btn').floatingActionButton();
     verifyActions();
-   
-    
+    ShowComments();
 });
 //To get the id List of product
 var idList;
@@ -18,7 +17,7 @@ var idList;
 var idEvent;
 //To get id product, when we select the product
 var idProduct;
-
+//Id de la lista de invitados
 var idlistInvite;
 
 //Validate variable in the URL
@@ -77,6 +76,7 @@ function getInformation(){
         if(isJSONString(response)){
             const result = JSON.parse(response);
             if(result.status){
+                $('#IdEventComment').val(idEvent);
                 $('#TitleEvent').text("Evento: "+result.dataset.name_event);
                 $('#TypeEvent').text("Tipo de evento: "+result.dataset.type)
                 $('#ClientName').text("Cliente: "+result.dataset.client_name);
@@ -877,7 +877,7 @@ function setCollaborators(colaborators){
                 <td>${colaborator.name}</td>
                 <td>${colaborator.lastname}</td>
                 <td>
-                    <a onClick="deletePerson(${colaborator.id})" href="#DeleteInviteModal" class="btn red tooltipped modal-trigger" data-position="right" data-tooltip="Eliminar"> <i class="material-icons"> delete </i></a>
+                    <a onClick="deleteAdmin(${colaborator.id})" class="btn red tooltipped" data-position="right" data-tooltip="Eliminar"> <i class="material-icons"> delete </i></a>
                 </td>
             </tr>
             `;
@@ -994,6 +994,120 @@ function addCollaborator(id_employee){
         catchError(jqXHR);
     })
 }
+function deleteAdmin(id_share){
+    $.ajax(
+        {   
+            url:requestDELETE('Shares_events','deleteShare'),
+            type:'POST',
+            data:{
+                id_share
+            },
+            datatype:'JSON'
+        }
+    )
+    .done(function(response)
+        {
+            if(isJSONString(response)){
+                const result = JSON.parse(response)
+                if(result.status){
+                    getCountCollaborators();
+                    loadUsers();
+                    ToastSucces('¡Eliminado!');
+                }   
+                else{
+                    ToastError(result.exception);
+                }
+            }
+            else{
+                console.log(response);
+            }
+        }
+    )
+    .fail(function(jqXHR){
+        catchError(jqXHR);
+    })
+}
+function setMessages(messages){
+    let content='';
+    if(messages.length>0){
+        messages.forEach(function(message){
+            content+=`
+                <ul class="collection" id="CollectionComments">
+                    <li class="collection-item">
+                        <p class="title"> <b>${message.name+" "+message.lastname}</b></p>
+                        <div class="white-text" id="ChipComment" style="display: inline-block;">
+                        <span id="TitleComment">${message.message}</span>
+                        </div>
+                        <a href=""> <i class="material-icons" id="IconReply">reply</i> </a>
+                        <a class="secondary-content"> <i class="material-icons blue-text modal-trigger" data-target="MessageUser" onClick="EditModalComment()">edit</i> <i class="material-icons red-text modal-trigger" data-target="DeleteMessageUser" onClick="DeleteComment()">delete</i> </a>
+                        <div class="right" id="right">
+                        <a href="" class="grey-text"> ${message.trendingTotal} respuestas </a>
+                        </div>
+                    </li>
+                </ul>
+            `;
+        })
+    }
+    $('#CommentsPart').html(content);
+}
+function ShowComments(){
+    $.ajax(
+        {
+            url:requestGET('Comments_in_event','ListComments'),
+            type:'POST',
+            data:{
+                idEvent
+            },
+            datatype:'JSON'
+        }
+    )
+    .done(function(response)
+        {
+            if(isJSONString(response)){
+                const result = JSON.parse(response);
+                if(!result.status){
+                    ToastError(result.exception);
+                }
+                setMessages(result.dataset);
+            }
+            else{
+                console.log(response);
+            }
+        }
+    )
+    .fail(function(jqXHR){
+        catchError(jqXHR);
+    });
 
-
-
+}
+$('#FormCommentUser').submit(function(){
+    event.preventDefault();
+    $.ajax(
+        {
+            url:requestPOST('Comments_in_event','SaveComment'),
+            type:'POST',
+            data:$('#FormCommentUser').serialize(),
+            datatype:'JSON'
+        }
+    )
+    .done(function(response)
+        {
+            if(isJSONString(response)){
+                const result = JSON.parse(response);
+                if(result.status){
+                    ToastSucces('Mensaje agregado correctamente!');
+                    ShowComments();
+                }
+                else{
+                    ToastError(result.exception);
+                }
+            }
+            else{
+                console.log(response);
+            }
+        }
+    )
+    .fail(function(jqXHR){
+        catchError(jqXHR);
+    })
+})

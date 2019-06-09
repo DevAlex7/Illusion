@@ -138,6 +138,31 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col s12 m12">
+                        <div class="card">
+                            <div class="card-content">
+                                <div class="row">
+                                    <span class="card-title">Comentarios</span>
+                                    <div class="row" id="CommentsPart" style="height:330px; overflow-y:scroll;">
+                                        
+                                    </div>
+                                    <div class="row">
+                                        <form class="col s12" id="FormCommentUser">
+                                            <div class="row">
+                                                <div class="input-field col s12">
+                                                <input type="hidden" name="IdEventComment" id="IdEventComment">
+                                                <textarea id="Comment" name="Comment" class="materialize-textarea" placeholder="Escriba su comentario..."></textarea>
+                                                </div>
+                                            </div>
+                                            <button type="submit" class="btn blue">Comentar</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <!--Modal add products list -->
             <div class="modal" id="AddProducts">
@@ -306,6 +331,31 @@
                                 <tbody id="ReadCollaborators">
                                 </tbody>
                             </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal">
+                <div class="modal-content">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="row">
+                                <span class="card-title">Respuestas</span>
+                                <div class="row" id="ReplyesPart" style="height:330px; overflow-y:scroll;">
+                                    
+                                </div>
+                                <div class="row">
+                                    <form class="col s12" id="FormReplytUser">
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                            <input type="hidden" name="IdComment" id="IdComment">
+                                            <textarea id="CommentReply" name="CommentReply" class="materialize-textarea" placeholder="Escriba su comentario..."></textarea>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn blue">Comentar</button>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -50,6 +50,11 @@ class ShareEvents{
         $params=array(static::$id_event);
         return Database::getRows($sql,$params);
     }
+    public static function delete(){
+        $sql='DELETE FROM share_events WHERE id=?';
+        $params=array(static::$id);
+        return Database::executeRow($sql,$params);
+    }
 }
 
 ?>

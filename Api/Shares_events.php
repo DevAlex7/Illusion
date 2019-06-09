@@ -57,6 +57,19 @@
             case 'PUT':
             break;
             case 'DELETE':
+                switch($_GET['action']){
+                    case 'deleteShare':
+                        if(Validate::Integer($_POST['id_share'])->Id()){
+                            ShareEvents::set()->id($_POST['id_share'])->delete();
+                            $result['status']=1;
+                        }
+                        else{
+                            $result['exception']='No hay información de el administrador';
+                        }
+                    break;
+                    default:
+                    break;
+                }
             break;
         }
         print(json_encode($result));

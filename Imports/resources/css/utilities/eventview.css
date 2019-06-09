@@ -28,10 +28,7 @@ iframe{
 #contributors{
   margin-top: 1rem;
 }
-#IconLink{
-}
-#contributorsText{
-}
+
 .disabled {
   pointer-events: none;
   cursor: default;
@@ -42,4 +39,28 @@ iframe{
   pointer-events: none;
   cursor: default;
   color:rgba(158, 155, 155, 0.822);
+}
+#Message{
+  border-radius: 10px;
+  background-color: rgb(161, 154, 154);
+}
+#CollectionComments{
+  border: none;
+}
+#ChipComment{
+  margin-top: 0.5rem;
+  border-radius: 20px;
+  padding-top: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 5px;
+  background-color:rgb(177, 169, 169); 
+}
+#right{
+  margin-right: 1rem;
+}
+#IconReply{
+  margin-top:1rem;
+  color:white;
+  text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
 }
