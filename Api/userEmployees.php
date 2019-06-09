@@ -26,9 +26,10 @@
                             }
                        }
                        else{
-
+                        $result['exception']='No hay información';
                        }
                     break;
+                    
                 }
             break;
             

@@ -53,7 +53,7 @@ $('#SearchFormMyEvents').submit(function(){
     event.preventDefault();
     $.ajax(
         {
-            url:requestPOST('events','searchMyEvent'),
+            url:requestPOST('events','searchInShares'),
             type:'POST',
             data:$('#SearchFormMyEvents').serialize(),
             datatype:'JSON'

@@ -5,10 +5,12 @@ $(document).ready(function () {
     $('.modal').modal();
     getProducts();
     showPrice();
+    getCountCollaborators();
     GetPersonsList();
     $('.fixed-action-btn').floatingActionButton();
     verifyActions();
-    getCountCollaborators();
+   
+    
 });
 //To get the id List of product
 var idList;
@@ -56,7 +58,7 @@ function exist(){
             }
         })
         .fail(function(jqXHR){
-            console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+            catchError(jqXHR); 
         });
     }
     else{
@@ -92,7 +94,7 @@ function getInformation(){
         }
     })
     .fail(function(jqXHR){
-        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+        catchError(jqXHR); 
     });
 }
 //Set information products in the list of products
@@ -153,7 +155,7 @@ function getProducts(){
         }
     })
     .fail(function(jqXHR){
-        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+        catchError(jqXHR); 
     });
 }
 //Call all products that it doesnt is in the list of the event
@@ -198,7 +200,7 @@ function ListProducts(){
         }
     })
     .fail(function(jqXHR){
-        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+        catchError(jqXHR); 
     });
 }
 //Check the product to add to the list
@@ -228,7 +230,7 @@ function add(product_id){
         }
     })
     .fail(function(jqXHR){
-        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+        catchError(jqXHR); 
     });
 }
 //Get the count of product in the list products from the event
@@ -262,7 +264,7 @@ function getCountSum(id_product){
         }
     })
     .fail(function(jqXHR){
-        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+        catchError(jqXHR); 
     });
 }
 //Add 1 product to the list of products from the event
@@ -296,7 +298,7 @@ function SumCount(id_list, id_product){
         }
     })
     .fail(function(jqXHR){
-        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+        catchError(jqXHR); 
     });
 }
 //Get the count of product in the list from the event to remove count
@@ -329,7 +331,7 @@ function getCountMin(id_product){
         }
     })
     .fail(function(jqXHR){
-        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+        catchError(jqXHR); 
     });
 }
 //remove 1 product to the list of products from the event
@@ -361,7 +363,7 @@ function MinCount(id_list, id_product){
         }
     })
     .fail(function(jqXHR){
-        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+        catchError(jqXHR); 
     });
 }
 //Confirm in the button delete if delete the product from the list
@@ -399,7 +401,7 @@ function removeFromList(){
         }
     })
     .fail(function(jqXHR){
-        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+        catchError(jqXHR); 
     });
 }
 //Show the acumulate prices of the products
@@ -430,7 +432,7 @@ function showPrice(){
         }
     })
     .fail(function(jqXHR){
-        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+        catchError(jqXHR); 
     });
 }
 function editNameEvent(){
@@ -462,7 +464,7 @@ function editNameEvent(){
         }
     )
     .fail(function(jqXHR){
-        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+        catchError(jqXHR); 
     });   
 }
 
@@ -495,7 +497,7 @@ $('#EditEventNameForm').submit(function(){
         }
     )
     .fail(function(jqXHR){
-        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+        catchError(jqXHR); 
     }); 
 })
 
@@ -531,7 +533,7 @@ function selectTypeEvents(Select, value){
         }
     })
     .fail(function(jqXHR){
-        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+        catchError(jqXHR); 
     });
 }
 function InfoEvent(){
@@ -565,7 +567,7 @@ function InfoEvent(){
         }
     )
     .fail(function(jqXHR){
-        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+        catchError(jqXHR); 
     });
 }
 $('#EditInfoForm').submit(function(){
@@ -597,7 +599,7 @@ $('#EditInfoForm').submit(function(){
         }
     )
     .fail(function(jqXHR){
-        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+        catchError(jqXHR); 
     });
 })
 
@@ -632,7 +634,7 @@ function editMap(){
 
     )
     .fail(function(jqXHR){
-        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+        catchError(jqXHR); 
     });
 }
 //Edit map
@@ -663,7 +665,7 @@ $('#MapEditForm').submit(function(){
         }
     )
     .fail(function(jqXHR){
-        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+        catchError(jqXHR); 
     });
 })
 function setInvites(invites,role){
@@ -717,7 +719,7 @@ function GetPersonsList(){
         }
     )
     .fail(function(jqXHR){
-        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+        catchError(jqXHR); 
     });
 }
 $('#InvitesForm').submit(function(){
@@ -749,12 +751,11 @@ $('#InvitesForm').submit(function(){
         }
     )
     .fail(function(jqXHR){
-        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+        catchError(jqXHR); 
     });
 })
-
 function deletePerson(invite_list){
-idlistInvite = invite_list;
+    idlistInvite = invite_list;
 }
 function deleteInvite(){
     $.ajax(
@@ -787,7 +788,7 @@ function deleteInvite(){
         }
     )
     .fail(function(jqXHR){
-        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+        catchError(jqXHR); 
     });
 }
 function verifyActions(){
@@ -833,7 +834,7 @@ function verifyActions(){
         }
     )
     .fail(function(jqXHR){
-        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+        catchError(jqXHR); 
     });
 }
 function getCountCollaborators(){
@@ -852,7 +853,7 @@ function getCountCollaborators(){
             if(isJSONString(response)){
                 const result = JSON.parse(response);
                 if(result.status){
-                    $('#collaboratorLink').append(result.dataset.Count+" Colaboradores");
+                    $('#collaboratorLink').html(`<i class="material-icons left">link</i>`+result.dataset.Count+" Colaboradores");
                 }
                 else{
                     ToastError(result.exception);
@@ -864,8 +865,135 @@ function getCountCollaborators(){
         }
     )
     .fail(function(jqXHR){
-        
+        catchError(jqXHR);   
     })
 }
+function setCollaborators(colaborators){
+    let content ='';
+    if(colaborators.length>0){
+        colaborators.forEach(function(colaborator){
+            content+=`
+            <tr>
+                <td>${colaborator.name}</td>
+                <td>${colaborator.lastname}</td>
+                <td>
+                    <a onClick="deletePerson(${colaborator.id})" href="#DeleteInviteModal" class="btn red tooltipped modal-trigger" data-position="right" data-tooltip="Eliminar"> <i class="material-icons"> delete </i></a>
+                </td>
+            </tr>
+            `;
+        })
+    }
+    $('#ReadCollaborators').html(content);
+}
+function CallColaborators(){
+    $.ajax(
+        {
+            url:requestGET('Shares_events','getListShares'),
+            type:'POST',
+            data:{
+                idEvent
+            },
+            datatype:'JSON'
+        }
+    )
+    .done(function(response)
+        {
+            if(isJSONString(response)){
+                const result = JSON.parse(response);
+                if(!result.status){
+                    ToastError(result.exception);
+                }
+                setCollaborators(result.dataset);
+                
+            }
+            else{
+                console.log(response);
+            }
+        }
+    )
+    .fail(function(jqXHR){
+        catchError(jqXHR);
+    })
+}
+function setUsers(users){
+    let content='';
+    if(users.length>0){
+        users.forEach(function(user){
+            content+=`
+            <p>
+                <label>
+                    <input type="checkbox" onClick="addCollaborator(${user.id})"/>
+                    <span>${user.name}</span>
+                </label>
+            </p>
+            `;
+        })
+    }
+    $('#ReadUsers').html(content);
+}
+function loadUsers(){
+    $.ajax(
+        {   
+            url:requestGET('events','ListAdmins'),
+            type:'POST',
+            data:{
+                idEvent
+            },
+            datatype:'JSON'
+        }
+    )
+    .done(function(response)
+        {
+            if(isJSONString(response)){
+                const result = JSON.parse(response);
+                if(!result.status){
+                    ToastError(result.exception);
+                }
+                setUsers(result.dataset);
+                CallColaborators();
+            }
+            else{
+                console.log(response);
+            }
+        }
+    )
+    .fail(function(jqXHR){
+        catchError(jqXHR);
+    })
+}
+function addCollaborator(id_employee){
+    $.ajax(
+        {
+            url:requestPOST('Shares_events','SaveShare'),
+            type:'POST',
+            data:{
+                idEvent, id_employee
+            },
+            datatype:'JSON'
+        }
+    )
+    .done(function(response)
+        {
+            if(isJSONString(response)){
+                const result = JSON.parse(response);
+                if(result.status){
+                    
+                    loadUsers();
+                    getCountCollaborators();
+                    ToastSucces('¡Administrador agregado al evento satisfactoriamente!');
+                }
+                else{
+                    ToastError(result.exception);
+                }
+            }else{
+                console.log(response);
+            }
+        }
+    )
+    .fail(function(jqXHR){
+        catchError(jqXHR);
+    })
+}
+
 
 

@@ -39,7 +39,7 @@
                                                     <span class="card-title" id="TitleEvent"></span>
                                                     <p class="grey-text" id="TypeEvent"></p>
                                                     <div id="contributors">
-                                                        <a id="collaboratorLink" href="#CollaboratosModal" class="modal-trigger"><i class="material-icons left">link</i></a>
+                                                        <a onclick="loadUsers()" id="collaboratorLink" href="#CollaboratosModal" class="modal-trigger"></a>
                                                     </div>
                                                     <div class="divider" id="Divider"></div>
                                                 </div>
@@ -292,6 +292,9 @@
                 <div class="card-panel green accent-4 white-text center">Colaboradores</div>
                     <div class="card">
                         <div class="card-content">
+                            <span class="card-title">Administradores disponibles</span>
+                            <div class="row" id="ReadUsers">
+                            </div>
                             <table class="centered">
                                 <thead>
                                 <tr>
@@ -300,19 +303,7 @@
                                 </tr>
                                 </thead>
 
-                                <tbody>
-                                <tr>
-                                    <td>Alvin</td>
-                                    <td>Eclair</td>
-                                </tr>
-                                <tr>
-                                    <td>Alan</td>
-                                    <td>Jellybean</td>
-                                </tr>
-                                <tr>
-                                    <td>Jonathan</td>
-                                    <td>Lollipop</td>
-                                </tr>
+                                <tbody id="ReadCollaborators">
                                 </tbody>
                             </table>
                         </div>

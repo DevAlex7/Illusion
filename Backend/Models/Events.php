@@ -271,6 +271,34 @@ class Events extends Validator{
         $params=array($this->id);
         return Database::getRow($sql,$params);
     }
+    public function searchInMyShares(){
+        $sql='
+                SELECT events.*, 
+                employees.name, employees.lastname 
+                FROM events 
+                INNER JOIN employees ON events.id_employee = employees.id 
+                WHERE 
+                events.name_event LIKE ?
+                OR events.date LIKE ?
+                OR events.client_name  LIKE ?
+                OR employees.name LIKE ?
+                OR employees.lastname LIKE ?
+        ';
+        $params=array("%$this->search%","%$this->search%","%$this->search%","%$this->search%","%$this->search%");
+        return Database::getRows($sql,$params);
+    }
+    public function ListAdministrators(){
+        $sql='  SELECT employees.id, employees.name, roles.role 
+                FROM employees, roles 
+                WHERE employees.role=roles.id AND roles.id=0 
+                AND 
+                NOT EXISTS (SELECT 1 FROM share_events 
+                WHERE employees.id = share_events.id_employee 
+                AND share_events.id_event=?)';
+        $params=array($this->id);
+        return Database::getRows($sql,$params);
+        
+    }
     
     
     

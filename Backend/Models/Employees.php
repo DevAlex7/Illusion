@@ -148,5 +148,6 @@ class Employee extends Validator{
         return Database::getRows($sql,$params);
     }
     
+    
 }
 ?>

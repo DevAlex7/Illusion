@@ -34,6 +34,22 @@ class ShareEvents{
         $params=array(static::$id_event,static::$id_employee);
         return Database::executeRow($sql,$params);
     }
+    public static function existShare(){
+        $sql =' SELECT share_events.id_event, share_events.id_employee 
+                FROM ((share_events INNER JOIN events ON events.id=share_events.id_event) 
+                INNER JOIN employees 
+                ON employees.id=share_events.id_employee AND events.id=? AND employees.id=?)';
+        $params=array(static::$id_event,static::$id_employee);
+        return Database::getRow($sql,$params);
+    
+        
+    }
+    public static function ListShares(){
+        $sql='SELECT share_events.id, employees.name, employees.lastname FROM ((share_events INNER JOIN events ON events.id=share_events.id_event) INNER JOIN employees
+        ON employees.id=share_events.id_employee AND events.id=?)';
+        $params=array(static::$id_event);
+        return Database::getRows($sql,$params);
+    }
 }
 
 ?>

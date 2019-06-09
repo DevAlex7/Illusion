@@ -132,6 +132,7 @@
                     case 'verifyActions':
                             if($event->id($_POST['idEvent'])){
                                 if($event->id_employee($_SESSION['idUser'])){
+                                    //Verifica 
                                     if($event->verifyCreator()){
                                         $result['status']=1;
                                     }
@@ -176,6 +177,18 @@
                         }
                         else{
                             $result['exception']='Evento no definido';
+                        }
+                    break;
+                    case 'ListAdmins':
+                        if($event->id($_POST['idEvent'])){
+                            if($result['dataset']=$event->ListAdministrators()){
+                                $result['status']=1;
+                            }   
+                            else{
+                                $result['exception']='Ya no hay administradores para agregar';
+                            }                         
+                        }else{
+                            $result['exception']='No hay información del evento';
                         }
                     break;
                     default:
@@ -266,6 +279,19 @@
                             $result['exception']='Busqueda invalida';
                         }
                     break;
+                    case 'searchInShares':
+                            if($event->searchbyUser($_POST['SearchMyEventsInput'])){
+                                if($result['dataset']=$event->search()){
+                                    $result['status']=1;
+                                }
+                                else{
+                                    $result['exception']='No hay coincidencias';
+                                }
+                            }
+                            else{
+                                $result['exception']='Busqueda invalida';
+                            }
+                    break;  
                     default: 
                     exit('acción no disponible');
                 }
