@@ -37,7 +37,7 @@ class Comments{
     }
     public static function getComments(){
         $sql='
-                SELECT employees.name, employees.lastname, comments_in_event.message , COUNT(replies_comments.id_message) AS trendingTotal 
+                SELECT employees.id, employees.name, employees.lastname, comments_in_event.id AS idMessage ,comments_in_event.message , COUNT(replies_comments.id_message) AS trendingTotal 
                 FROM comments_in_event
                 LEFT JOIN events
                 ON events.id=comments_in_event.id_event                
@@ -47,7 +47,7 @@ class Comments{
                 ON comments_in_event.id=replies_comments.id_message 
                 WHERE events.id=?  
                 GROUP BY comments_in_event.message
-                ORDER BY comments_in_event.id DESC
+                ORDER BY comments_in_event.id ASC
         ';
         $params=array(static::$id_event);
         return Database::getRows($sql,$params);

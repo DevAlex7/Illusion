@@ -155,7 +155,7 @@
                                                 <textarea id="Comment" name="Comment" class="materialize-textarea" placeholder="Escriba su comentario..."></textarea>
                                                 </div>
                                             </div>
-                                            <button type="submit" class="btn blue">Comentar</button>
+                                            <button  id="SendComment" type="submit" class="btn blue">Comentar</button>
                                         </form>
                                     </div>
                                 </div>
@@ -335,14 +335,13 @@
                     </div>
                 </div>
             </div>
-            <div class="modal">
+            <div class="modal" id="ReplyesModal">
                 <div class="modal-content">
                     <div class="card">
                         <div class="card-content">
                             <div class="row">
                                 <span class="card-title">Respuestas</span>
-                                <div class="row" id="ReplyesPart" style="height:330px; overflow-y:scroll;">
-                                    
+                                <div class="row" id="ReplyesPart" style="height:315px; overflow-y:scroll;">
                                 </div>
                                 <div class="row">
                                     <form class="col s12" id="FormReplytUser">

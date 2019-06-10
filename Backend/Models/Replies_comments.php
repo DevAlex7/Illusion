@@ -11,19 +11,19 @@ class Replie{
         return new static;
     }
     public static function id($value){
-        static::$id =$value;
+        static::$id = $value;
         return new static;
     }
     public static function id_message($value){
-        static::$id_message =$value;
+        static::$id_message = $value;
         return new static;
     }
     public static function id_employee($value){
-        static::$id_employee =$value;
+        static::$id_employee = $value;
         return new static;
     }
     public static function message($value){
-        static::$message =$value;
+        static::$message = $value;
         return new static;
     }
     public static function date($value){
@@ -37,13 +37,15 @@ class Replie{
         return Database::executeRow($sql,$params);
     }
     public static function getReplys(){
-        $sql='  SELECT employees.name, employees.lastname, replies_comments.message 
+        $sql='  SELECT employees.id, employees.name, employees.lastname, replies_comments.message 
                 FROM ((replies_comments 
                 INNER JOIN comments_in_event 
                 ON comments_in_event.id=replies_comments.id_message) 
                 INNER JOIN employees 
                 ON employees.id=replies_comments.id_employee 
-                AND comments_in_event.id=?)';
+                AND comments_in_event.id=?)
+                GROUP BY replies_comments.message
+                ORDER BY replies_comments.id ASC';
         $params=array(static::$id_message);
         return Database::getRows($sql,$params);
     }

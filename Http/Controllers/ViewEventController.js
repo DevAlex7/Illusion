@@ -812,6 +812,7 @@ function verifyActions(){
                     $('#EditMapBtn').removeClass('disabled');
                     $('#AddProductsBtn').removeClass('disabled');
                     $('#BtnAddInvites').removeClass('disabled');
+                    $('#SendComment').removeClass('disabled');
                 }
                 else if(result.status==2){
                     $('#EditEventNameBtn').removeClass('disabled');
@@ -819,6 +820,7 @@ function verifyActions(){
                     $('#EditMapBtn').removeClass('disabled');
                     $('#AddProductsBtn').removeClass('disabled');
                     $('#BtnAddInvites').removeClass('disabled');
+                    $('#SendComment').removeClass('disabled');
                 }
                 else{
                     $('#EditEventNameBtn').addClass('disabled');
@@ -826,6 +828,8 @@ function verifyActions(){
                     $('#EditMapBtn').addClass('disabled');
                     $('#AddProductsBtn').addClass('disabled');
                     $('#BtnAddInvites').addClass('disabled');
+                    $('#collaboratorLink').addClass('disabled');
+                    $('#SendComment').addClass('disabled');
                 }
             }
             else{
@@ -1013,6 +1017,7 @@ function deleteAdmin(id_share){
                     getCountCollaborators();
                     loadUsers();
                     ToastSucces('¡Eliminado!');
+                    verifyActions();
                 }   
                 else{
                     ToastError(result.exception);
@@ -1027,18 +1032,19 @@ function deleteAdmin(id_share){
         catchError(jqXHR);
     })
 }
-function setMessages(messages){
+function setMessages(messages, id_user){
     let content='';
     if(messages.length>0){
         messages.forEach(function(message){
-            content+=`
+            if(message.id==id_user){
+                content+=`
                 <ul class="collection" id="CollectionComments">
                     <li class="collection-item">
                         <p class="title"> <b>${message.name+" "+message.lastname}</b></p>
                         <div class="white-text" id="ChipComment" style="display: inline-block;">
                         <span id="TitleComment">${message.message}</span>
                         </div>
-                        <a href=""> <i class="material-icons" id="IconReply">reply</i> </a>
+                        <a href="#ReplyesModal" class="modal-trigger" onClick="getReplyes(${message.idMessage})"> <i class="material-icons" id="IconReply">reply</i> </a>
                         <a class="secondary-content"> <i class="material-icons blue-text modal-trigger" data-target="MessageUser" onClick="EditModalComment()">edit</i> <i class="material-icons red-text modal-trigger" data-target="DeleteMessageUser" onClick="DeleteComment()">delete</i> </a>
                         <div class="right" id="right">
                         <a href="" class="grey-text"> ${message.trendingTotal} respuestas </a>
@@ -1046,6 +1052,23 @@ function setMessages(messages){
                     </li>
                 </ul>
             `;
+            }
+            else{
+                content+=`
+                    <ul class="collection" id="CollectionComments">
+                        <li class="collection-item">
+                            <p class="title"> <b>${message.name+" "+message.lastname}</b></p>
+                            <div class="white-text" id="ChipComment" style="display: inline-block;">
+                            <span id="TitleComment">${message.message}</span>
+                            </div>
+                            <a href="#ReplyesModal" class="modal-trigger"  onClick="getReplyes(${message.idMessage})"> <i class="material-icons" id="IconReply">reply</i> </a>
+                            <div class="right" id="right">
+                                <a href="" class="grey-text"> ${message.trendingTotal} respuestas </a>
+                            </div>
+                        </li>
+                    </ul>
+                `;
+            }
         })
     }
     $('#CommentsPart').html(content);
@@ -1068,7 +1091,7 @@ function ShowComments(){
                 if(!result.status){
                     ToastError(result.exception);
                 }
-                setMessages(result.dataset);
+                setMessages(result.dataset, result.User);
             }
             else{
                 console.log(response);
@@ -1095,8 +1118,9 @@ $('#FormCommentUser').submit(function(){
             if(isJSONString(response)){
                 const result = JSON.parse(response);
                 if(result.status){
-                    ToastSucces('Mensaje agregado correctamente!');
+                    ToastSucces('Comentario agregado correctamente!');
                     ShowComments();
+                    $('#Comment').val('');
                 }
                 else{
                     ToastError(result.exception);
@@ -1110,4 +1134,108 @@ $('#FormCommentUser').submit(function(){
     .fail(function(jqXHR){
         catchError(jqXHR);
     })
+})
+function setReplys(replys, id_user){
+    let content= '';
+    if(replys.length>0){
+        replys.forEach(function(reply){
+            if(reply.id==id_user){
+                content+=`
+                <ul class="collection" id="CollectionComments">
+                    <li class="collection-item">
+                        <p class="title"> <b>${reply.name+" "+reply.lastname}</b></p>
+                        <div class="white-text" id="ChipComment" style="display: inline-block;">
+                        <span id="TitleComment">${reply.message}</span>
+                        </div>
+                        <a class="secondary-content"> <i class="material-icons blue-text modal-trigger" data-target="MessageUser" onClick="EditModalComment()">edit</i> <i class="material-icons red-text modal-trigger" data-target="DeleteMessageUser" onClick="DeleteComment()">delete</i> </a>
+                        <div class="right" id="right">
+                        </div>
+                    </li>
+                </ul>
+            `;
+            }
+            else{
+                content+=`
+                    <ul class="collection" id="CollectionComments">
+                        <li class="collection-item">
+                            <p class="title"> <b>${reply.name+" "+reply.lastname}</b></p>
+                            <div class="white-text" id="ChipComment" style="display: inline-block;">
+                            <span id="TitleComment">${reply.message}</span>
+                            </div>
+                            <div class="right" id="right">
+                            </div>
+                        </li>
+                    </ul>
+                `;
+            }
+        })
+    }
+    $('#ReplyesPart').html(content);
+    
+}
+var idComment;
+function getReplyes(id_comment){
+    $('#IdComment').val(id_comment);
+    idComment=id_comment;
+    $.ajax(
+        {
+            url:requestGET('Comments_in_event','ListReplies'),
+            type:'POST',
+            data:{
+                id_comment
+            },
+            datatype:'JSON'
+        }
+    )
+    .done(function(response)
+        {
+            if(isJSONString(response)){
+                const result = JSON.parse(response);
+                if(!result.status){
+                    ToastError(result.exception);
+                }
+                setReplys(result.dataset, result.User);
+            }
+            else{
+                console.log(response);
+            }
+        }
+    )
+    .fail(function(jqXHR){
+        catchError(jqXHR);
+    })
+}
+$('#FormReplytUser').submit(function(){
+    event.preventDefault();
+    $.ajax(
+        {
+            url:requestPOST('Comments_in_event','SaveReply'),
+            type:'POST',
+            data:$('#FormReplytUser').serialize(),
+            datatype:'JSON'
+        }
+    )
+    .done(function(response)
+        {
+            if(isJSONString(response)){
+                const result = JSON.parse(response);
+                if(result.status){
+                    ToastSucces('¡Respondiste al comentario!');
+                    getReplyes(idComment);
+                    ShowComments();
+                    $('#CommentReply').val('');
+                }
+                else{
+                    ToastError(result.exception);
+                }
+            }
+            else{
+                console.log(response);
+            }
+        }
+    )
+    .fail(function(jqXHR){
+        catchError(jqXHR);
+    })
+
 })

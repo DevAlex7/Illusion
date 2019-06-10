@@ -179,12 +179,12 @@
                     break;
                     case 'ListAdmins':
                         if($event->id($_POST['idEvent'])){
-                            if($result['dataset']=$event->ListAdministrators()){
-                                $result['status']=1;
-                            }   
-                            else{
-                                $result['exception']='Ya no hay administradores para agregar';
-                            }                         
+                                if($result['dataset']=$event->ListAdministrators()){
+                                    $result['status']=1;
+                                }   
+                                else{
+                                    $result['exception']='Ya no hay administradores para agregar';
+                                }  
                         }else{
                             $result['exception']='No hay información del evento';
                         }

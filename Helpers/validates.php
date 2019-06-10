@@ -30,7 +30,7 @@
             }
         }
         public static function Alphanumeric(){
-            if (preg_match('/^[a-zA-Z0-9ñÑáÁéÉíÍóÓúÚ\s\.]{'.static::$min_value.','.static::$max_value.'}$/', static::$value_param)) {
+            if (preg_match('/^[a-zA-Z0-9ñÑáÁéÉíÍóÓúÚ\s\.?,:]{'.static::$min_value.','.static::$max_value.'}$/', static::$value_param)) {
                 return true;
             } else {
                 return false;
