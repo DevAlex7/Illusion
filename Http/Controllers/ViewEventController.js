@@ -807,6 +807,7 @@ function verifyActions(){
             if(isJSONString(response)){
                 const result = JSON.parse(response);
                 if(result.status==1){
+                     //Permisos si el usuario creo el evento 
                     $('#EditEventNameBtn').removeClass('disabled');
                     $('#EditInformationBtn').removeClass('disabled');
                     $('#EditMapBtn').removeClass('disabled');
@@ -815,6 +816,7 @@ function verifyActions(){
                     $('#SendComment').removeClass('disabled');
                 }
                 else if(result.status==2){
+                     //verifica si el usuario es colaborador del evento
                     $('#EditEventNameBtn').removeClass('disabled');
                     $('#EditInformationBtn').removeClass('disabled');
                     $('#EditMapBtn').removeClass('disabled');
@@ -823,6 +825,7 @@ function verifyActions(){
                     $('#SendComment').removeClass('disabled');
                 }
                 else{
+                    //No tiene permisos para nada
                     $('#EditEventNameBtn').addClass('disabled');
                     $('#EditInformationBtn').addClass('disabled');
                     $('#EditMapBtn').addClass('disabled');

@@ -1,8 +1,9 @@
 <?php
     require('../Imports/Global/Global.php');
     require('../Helpers/Dashboard.php');
+    require_once('../Helpers/Roles.php'); 
 ?>
-<!DOCTYPE html>da
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -17,6 +18,30 @@
     ?>
 </head>
 <body>
-    
+    <header>
+        <?php AdminSideNav::SideNav(); ?>
+    </header>
+    <main>
+            <?php 
+                Permissions::AdminBar();
+            ?>
+            <div class="row" id="GetPersons">
+                
+            </div>
+            <div class="modal" id="CreateAdministrator">
+                <div class="modal-content">
+
+                </div>
+            </div>
+    </main>
+    <footer>
+
+    </footer>
+<?php
+    ImportGlobal::ImportJQuery();
+    ImportGlobal::ImportMaterializeJS();
+    ImportGlobal::ImportJSFunctions();
+    ImportGlobal::ImportControllerJs('EmployeesController');
+?>
 </body>
 </html>

@@ -130,11 +130,14 @@
                     case 'verifyActions':
                             if($event->id($_POST['idEvent'])){
                                 if($event->id_employee($_SESSION['idUser'])){
-                                    //Verifica 
+                                    
+                                    //Verifica si ese empleado creo el evento 
                                     if($event->verifyCreator()){
+                                        //Si el lo creo le da los permisos
                                         $result['status']=1;
                                     }
                                     else{
+                                        //verifica si es colaborador del evento
                                         if(ShareEvents::set()->id_event($_POST['idEvent'])->id_employee($_SESSION['idUser'])->existInEvent()){
                                             $result['status']=2;
                                         }

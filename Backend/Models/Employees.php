@@ -147,6 +147,11 @@ class Employee extends Validator{
         $params=array($this->id);
         return Database::getRows($sql,$params);
     }
+    public function ListPersons(){
+        $sql='SELECT employees.*, roles.role FROM ((employees INNER JOIN roles ON employees.role=roles.id)) WHERE employees.id NOT IN (?)';
+        $params=array($this->id);
+        return Database::getRows($sql,$params);
+    }
     
     
 }

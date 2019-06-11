@@ -135,7 +135,24 @@
 
             }
         }
+        public static function AdminBar(){
+            if($_SESSION['Role']==0){
+                print('
+                <div class="navbar-fixed">
+                    <nav class="" id="Bar">
+                        <div class="nav-wrapper">
+                        <ul class="left hide-on-med-and-down">
+                            <li><a class="modal-trigger" href="#CreateAdministrator"> <i class="material-icons left">person</i> Registrar administrador</a></li>
+                        </ul>
+                        </div>
+                    </nav>
+                </div>
+                ');
+            }
+            else{
 
+            }
+        }
         /*public static function addProduct($event_id){
             if(Validate::Integer($event_id)->Id()){
                 if(Validate::Integer( $_SESSION['idUser'] )->Id()){

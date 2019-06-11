@@ -1,0 +1,49 @@
+html{
+    background-color: rgb(32, 68, 90)  ;
+  }
+ #CardDetail{
+    border-radius: 10px;
+ }
+ #DetailsEmployee{
+     margin-top: 1rem;
+ }
+ #MoreDetails{
+     margin-top: 2rem;
+ }
+ #chipColor{
+     background-color: blue;
+ }
+ #OtherDetails{
+     margin-top:1rem;
+ }
+ #divider1{
+     margin-top: 0.5rem;
+ }
+ #UsernameTitle{
+     margin-top: 1rem;
+ }
+ #UsernamePart{
+     margin-top: 1rem;
+ }
+ #chipColor{
+    margin-top: 0.5rem;
+    border-radius: 20px;
+    padding-top: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 5px;
+ }
+ #Desplegable{
+     margin-top: 1rem;
+ }
+ #Actions{
+     margin-top: 1rem;
+ }
+ #ActionsCard{
+    border-radius: 10px;
+    height: 3rem;
+    margin-top: 4rem;
+ }
+ #ActionsIcons{
+     margin-top: -0.8rem;
+ }
