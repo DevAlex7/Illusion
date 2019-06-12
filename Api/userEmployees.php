@@ -128,6 +128,9 @@
             
             case 'PUT':
                 switch($_GET['action']){
+                    case 'updatePassword':
+
+                    break;
                 }
             break;
 
