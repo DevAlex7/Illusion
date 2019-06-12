@@ -740,6 +740,7 @@ $('#InvitesForm').submit(function(){
                     ToastSucces('¡La persona ha sido agregada exitosamente!');
                     ClearForm('InvitesForm');
                     closeModal('AddInvites');
+                    GetPersonsList();
                 }
                 else{
                     ToastError(result.exception);
@@ -1050,7 +1051,7 @@ function setMessages(messages, id_user){
                         <a href="#ReplyesModal" class="modal-trigger" onClick="getReplyes(${message.idMessage})"> <i class="material-icons" id="IconReply">reply</i> </a>
                         <a class="secondary-content"> <i class="material-icons blue-text modal-trigger" data-target="MessageUser" onClick="EditModalComment()">edit</i> <i class="material-icons red-text modal-trigger" data-target="DeleteMessageUser" onClick="DeleteComment()">delete</i> </a>
                         <div class="right" id="right">
-                        <a href="" class="grey-text"> ${message.trendingTotal} respuestas </a>
+                        <a class="grey-text"> ${message.trendingTotal} respuestas </a>
                         </div>
                     </li>
                 </ul>
@@ -1066,7 +1067,7 @@ function setMessages(messages, id_user){
                             </div>
                             <a href="#ReplyesModal" class="modal-trigger"  onClick="getReplyes(${message.idMessage})"> <i class="material-icons" id="IconReply">reply</i> </a>
                             <div class="right" id="right">
-                                <a href="" class="grey-text"> ${message.trendingTotal} respuestas </a>
+                                <a class="grey-text"> ${message.trendingTotal} respuestas </a>
                             </div>
                         </li>
                     </ul>

@@ -70,7 +70,9 @@
                                                     <div class="divider"></div>
                                                     <div class="row">
                                                         <div class="col s12 m12">
-                                                            <div id="mapEvent"></div>
+                                                            <div id="mapEvent">
+                                                                
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>

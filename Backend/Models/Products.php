@@ -8,6 +8,7 @@ class Product extends Validator{
     private $id_employee;
     private $price;
     private $search;
+    
     public function id($value){
         if($this->validateId($value)){
             $this->id=$value;

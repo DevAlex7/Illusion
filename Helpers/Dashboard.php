@@ -21,7 +21,7 @@ class AdminSideNav {
                         <li id="Sidenav">
                             <div class="user-view">
                             <div class="card center white-text" id="TitleSidenav">
-                                    <span class="card-title">Illusion</span>
+                                    <span class="card-title">Illussion</span>
                                 </div>
                                 <a href="#name"><span class="black-text name">'. $_SESSION['UsernameActive'].'</span></a>
                                 <a href="#email"><span class="black-text email">'. $_SESSION['NameUser'].' '.$_SESSION['LastnameUser'] .'</span></a>
@@ -51,7 +51,7 @@ class AdminSideNav {
                         <li id="Sidenav">
                             <div class="user-view">
                             <div class="card center white-text" id="TitleSidenav">
-                                    <span class="card-title">Illusion</span>
+                                    <span class="card-title">Illussion</span>
                                 </div>
                                 <a href="#name"><span class="black-text name">'. $_SESSION['UsernameActive'].'</span></a>
                                 <a href="#email"><span class="black-text email">'. $_SESSION['NameUser'].' '.$_SESSION['LastnameUser'] .'</span></a>
@@ -64,9 +64,7 @@ class AdminSideNav {
                         <li><div class="divider"></div></li>
                         <li><a class="subheader grey-text">Menu Empleado</a></li>
                         <li><a href="/Illusion/private/events.php"><i class="material-icons">calendar_today</i>Eventos</a></li>
-                        <li><a href="/PopMovies/feed/account/clasifications.php"><i class="material-icons">pan_tool</i>Personal</a></li>
                         <li><a href="/Illusion/private/typeevents.php"><i class="material-icons">subject</i>Tipos de eventos</a></li>
-                        <li><a href="/PopMovies/feed/account/managers.php"><i class="material-icons">account_circle</i>Administradores</a></li>
                         <li><a href="/Illusion/private/products.php"><i class="material-icons">local_mall</i>Productos</a></li>
                         <li><a href="/PopMovies/feed/account/memberships.php"><i class="material-icons">inbox</i>Solicitudes</a></li>
                         <li><div class="divider"></div></li>

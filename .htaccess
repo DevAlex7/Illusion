@@ -2,8 +2,8 @@
 # | Custom error messages/pages                                        |
 # ----------------------------------------------------------------------
 
-ErrorDocument 404 /Illusion/redirects/404.html
-ErrorDocument 403 /Illusion/redirects/404.html
+ErrorDocument 404 /Illusion/redirects/404.php
+ErrorDocument 403 /Illusion/redirects/404.php
 
 # ----------------------------------------------------------------------
 # | Error prevention                                                   |

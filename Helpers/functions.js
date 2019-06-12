@@ -23,6 +23,26 @@ function requestDELETE(API, Action){
     const APIDelete = '../Api/'+ API + '.php?request=DELETE&action='+Action;
     return APIDelete;
 }
+/** request to Public sites */
+function requestPublicGET(API,Action){
+    const APIGet = 'Api/'+ API +'.php?request=GET&action=' + Action;
+    return APIGet;
+}
+
+function requestPublicPOST(API, Action){
+    const APIPost = 'Api/'+ API + '.php?request=POST&action=' + Action;
+    return APIPost;
+}
+
+function requestPublicPUT(API,Action){
+    const APIPut = 'Api/'+ API + '.php?request=PUT&action='+Action;
+    return APIPut;
+}
+
+function requestPublicDELETE(API, Action){
+    const APIDelete = 'Api/'+ API + '.php?request=DELETE&action='+Action;
+    return APIDelete;
+}
 
 function isJSONString(string)
 {

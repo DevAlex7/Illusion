@@ -129,7 +129,11 @@ function CallLost(){
             if(isJSONString(response)){
                 const result = JSON.parse(response);
                 if(result.status){
+                   if(result.dataset.Cost==null){
+                   }
+                   else{
                     $('#TitleCost').text("Perdida: "+"$"+result.dataset.Cost);
+                   }
                 }else{
                     ToastError(result.exception);
                 }
@@ -154,10 +158,16 @@ function CallWin(){
     )
     .done(function(response)
         {
+            
             if(isJSONString(response)){
                 const result = JSON.parse(response);
                 if(result.status){
-                    $('#TitleWin').text("Ganancia: " + "$" + result.dataset.Cost);
+                    if(result.dataset.Cost==null){
+                        $('#TitleWin').text("Ganacia: "+"$"+0.00);
+                   }
+                   else{
+                        $('#TitleWin').text("Ganancia: "+"$"+result.dataset.Cost);
+                   }
                 }else{
                     ToastError(result.exception);
                 }

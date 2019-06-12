@@ -50,6 +50,14 @@
                 return false;
             }
         }
+        public static function Int(){
+            if(preg_match('/^\d+$/', static::$type_param)){
+                return true;	
+            } 
+            else {
+                return false;
+            }
+        }
         
         //Validaciones para tipos de texto 
         public static function type($value){
@@ -63,14 +71,7 @@
                 return false;
             }
         }
-        public static function Int(){
-            if(preg_match('/^\d+$/', static::$type_param)){
-                return true;	
-            } 
-            else {
-                return false;
-            }
-        }
+        
         public static function HTML(){
             return static::$type_param != strip_tags(static::$type_param) ? true:false;
         }

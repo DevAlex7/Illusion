@@ -130,7 +130,6 @@
                     case 'verifyActions':
                             if($event->id($_POST['idEvent'])){
                                 if($event->id_employee($_SESSION['idUser'])){
-                                    
                                     //Verifica si ese empleado creo el evento 
                                     if($event->verifyCreator()){
                                         //Si el lo creo le da los permisos
