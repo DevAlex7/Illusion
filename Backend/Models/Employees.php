@@ -152,6 +152,11 @@ class Employee extends Validator{
         $params=array($this->id);
         return Database::getRows($sql,$params);
     }
+    public function updatePassword(){
+        $sql='UPDATE employees SET password =? WHERE id=?';
+        $params=array($this->password,$this->id);
+        return Database::getRows($sql,$params);
+    }
     
     
 }
