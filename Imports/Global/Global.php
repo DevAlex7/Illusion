@@ -66,5 +66,57 @@ class ImportGlobal{
         </div>
         ';
     }
+    
+    /** Funciones para sitios publicos  */
+    
+    public static function ImportPublicMaterializeCss(){
+        print 
+        '<link rel="stylesheet" href="Imports/resources/css/global/materialize.min.css">';
+    }
+    public static function ImportPublicFileCss($fileCss){
+        print
+        '<link rel="stylesheet" href="Imports/resources/css/utilities/'. $fileCss .'.css">';
+    }
+    public static function publicStyle(){
+        print ('
+            <link rel="stylesheet" href="Imports/resources/css/utilities/style.css"></link>
+            <link rel="stylesheet" href="Imports/resources/css/utilities/font.css"></link>
+        ');
+    }
+    public static function publicIco(){
+        print ('
+            <link rel="stylesheet" href="Imports/resources/pics/utilities/ico.png"></link>
+        ');
+    }
+   
+    public static function ImportPublicMaterialIcons(){
+        print 
+        '<link rel="stylesheet" href="Imports/resources/css/Global/material-icons.css">';
+    }
+    //To import the Global Jquery 
+    public static function ImportPublicJQuery(){
+        print 
+        '<script src="Imports/resources/js/global/jquery-3.2.1.min.js"></script>';
+    }
+    //To import the Global Materialize Js
+    public static function ImportPublicMaterializeJS(){
+        print 
+        '<script src="Imports/resources/js/global/materialize.min.js"></script>';
+    }
+    //To import the global JS functions
+    public static function ImportPublicJSFunctions(){
+        print 
+        '<script src="Helpers/functions.js"></script>';
+    }
+    //To import the Controller that you will use :)
+    public static function ImportPublicControllerJs($Controller){
+        print 
+        '<script src="Http/Public/'.$Controller.'.js"></script>';
+    }
+    public static function ImportPublicPlugin(){
+        print 
+        '<script src="Imports/resources/js/global/plugin.js"></script>';
+    }
+    
 }
 ?>

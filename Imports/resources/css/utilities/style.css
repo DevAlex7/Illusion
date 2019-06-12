@@ -1,0 +1,21 @@
+.Aki
+{
+    background-image: url('../../pics/utilities/BG.jpg');
+    background-repeat: round;
+}
+#RegisterStyle
+{
+    display: flex;
+    height: 86vh;
+    justify-content: center;
+    align-items: center;
+}
+#RegisterStyle .card-panel.border-radius-6.Card
+{
+    margin-left: 0 !important;
+    width: 802px;
+}
+
+.ico {
+    margin: 0 auto 0 30px;
+}
