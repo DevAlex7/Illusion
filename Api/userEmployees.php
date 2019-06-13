@@ -121,6 +121,15 @@
                         $result['exception']='El usuario debe contar con 7 carácteres';
                     }   
                     break;
+                    case 'Logoff':
+                        if($employe->logOff()){
+                                header('location: /Illusion/private/');
+                        }
+                        else{
+                            header('location: /Illusion/private/home.php');
+                            
+                        }
+                    break;
                     default:
                     exit('Acción no disponible');
                 }

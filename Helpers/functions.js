@@ -1,5 +1,5 @@
 $(document).ready(function () {
-   
+    $('.modal').modal('');
 });
 function modalInit(){
     $('.modal').modal('');
@@ -74,5 +74,8 @@ function closeModal(modal){
 function catchError(jqueryError){
     var failMessage =  console.log('Error: ' + jqueryError.status + ' ' + jqueryError.statusText);
     return failMessage;
+}
+function LogOff(){
+    location.href =  requestPOST('userEmployees','Logoff');
 }
 

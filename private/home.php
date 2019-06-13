@@ -21,14 +21,17 @@ require_once('../Imports/Global/Global.php')?>
         <?php AdminSideNav::SideNav(); ?>
     </header>
     <main>
-    <nav class="green accent-4">
-
-    </nav>
-    <div class="row">
-
-    </div>
-</main>
-<footer class="page-footer" id="FooterPart">
+        <div class="row" id="PresentationCard">
+           <div class="card col s12 m5 offset-m3">
+                <div class="card-content">
+                    <span class="card-title center">¡Bienvenido!</span>
+                    <span class="card-title center"> <?php print $_SESSION['NameUser'].' '.$_SESSION['LastnameUser']   ?> </span>
+                </div>
+           </div>
+        </div>
+    </main>
+<footer class="red">
+    <?php ImportGlobal::ImportFooter();?>
 </footer>
 <?php
     ImportGlobal::ImportJQuery();
