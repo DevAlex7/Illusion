@@ -1,5 +1,6 @@
 $(document).ready(function () {
     selectTypeEvents('TIpoeventos', null);
+   
 });
 function selectTypeEvents(Select, value){
     $.ajax({
