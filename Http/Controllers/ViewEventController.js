@@ -482,12 +482,17 @@ $('#EditEventNameForm').submit(function(){
         {
             if(isJSONString(response)){
                 const result = JSON.parse(response);
-                if(result.status){
+                if(result.status==1){
                     ToastSucces('¡Nombre de evento actualizado!');
                     getInformation();
                     closeModal('ModalEditTitleEvent');
-                }else{
-                    console.log("hola");
+                }
+                else if(result.status==2){
+                    ToastSucces('¡Nombre de evento actualizado!');
+                    getInformation();
+                    closeModal('ModalEditTitleEvent');
+                }
+                else{
                     ToastError(result.exception);
                 }
             }
@@ -584,7 +589,12 @@ $('#EditInfoForm').submit(function(){
         {
             if(isJSONString(response)){
                 const result = JSON.parse(response);
-                if(result.status){
+                if(result.status==1){
+                    ToastSucces('¡Información del evento modificada exitosamente!');
+                    closeModal('EditInformationEvent');
+                    getInformation();
+                }
+                else if(result.status==2){
                     ToastSucces('¡Información del evento modificada exitosamente!');
                     closeModal('EditInformationEvent');
                     getInformation();
@@ -654,6 +664,8 @@ $('#MapEditForm').submit(function(){
                 const result = JSON.parse(response);
                 if(result.status){
                     ToastSucces('¡Se ha actualizado el mapa!');
+                    closeModal('ModalEditMapEvent');
+                    getInformation();
                 }
                 else{
                     ToastError(result.exception);

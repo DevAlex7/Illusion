@@ -47,7 +47,7 @@ class ImportGlobal{
     public static function ImportFooter(){
         print 
         '  
-        <div class="container">
+        <div class="container red">
             <div class="row">
                 <div class="col l6 s12">
                 <h5 class="white-text">Distribuira Illusion</h5>
@@ -80,7 +80,6 @@ class ImportGlobal{
     public static function publicStyle(){
         print ('
             <link rel="stylesheet" href="Imports/resources/css/utilities/style.css"></link>
-            <link rel="stylesheet" href="Imports/resources/css/utilities/font.css"></link>
         ');
     }
     public static function publicIco(){

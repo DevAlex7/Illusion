@@ -75,6 +75,7 @@
         public static function HTML(){
             return static::$type_param != strip_tags(static::$type_param) ? true:false;
         }
+        
         public static function Email(){
             if (filter_var(static::$type_param, FILTER_VALIDATE_EMAIL)) {
                 return true;

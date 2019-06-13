@@ -301,11 +301,41 @@
                     case 'updateOne':
                         if($validate->validateId($_POST['IdEventEdit'])){
                             if($validate->validateAlphanumeric($_POST['NameEventEdit'],5,150)){
-                                Update::set('events','name_event')
-                                        ->replace($_POST['NameEventEdit'])
-                                        ->where('id','=',$_POST['IdEventEdit'])
-                                        ->updateOne();
-                                $result['status']=1;
+                               if($validate->validateId($_SESSION['idUser'])){
+                                    if($event->id($_POST['IdEventEdit'])){
+                                        if($event->id_employee($_SESSION['idUser'])){
+                                            if($event->verifyCreator()){
+                                                Update::set('events','name_event')
+                                                ->replace($_POST['NameEventEdit'])
+                                                ->where('id','=',$_POST['IdEventEdit'])
+                                                ->updateOne();
+                                                $result['status']=1;
+                                            }
+                                            else{
+                                                //verifica si es colaborador del evento
+                                                if(ShareEvents::set()->id_event($_POST['IdEventEdit'])->id_employee($_SESSION['idUser'])->existInEvent()){
+                                                    Update::set('events','name_event')
+                                                    ->replace($_POST['NameEventEdit'])
+                                                    ->where('id','=',$_POST['IdEventEdit'])
+                                                    ->updateOne();
+                                                    $result['status']=2;
+                                                }
+                                                else{
+                                                    $result['exception']='No tienes permisos de este evento';
+                                                }
+                                            }   
+                                        }
+                                        else{
+                                            $result['exception']='No hay información de usuario para verificar';
+                                        }
+                                    }
+                                    else{
+                                        $result['exception']='No hay información de evento';
+                                    }
+                               }
+                               else{
+                                    $result['exception']='No hay información de usuario ';
+                               }
                             }
                             else{
                                 $result['exception']='El nombre del evento es invalido';
@@ -320,8 +350,25 @@
                             if($event->type_event($_POST['TypeEventsEdit'])){
                                 if($event->date($_POST['DateEdit'])){
                                     if($rules->date($_POST['DateEdit'])->afterToday()){
-                                        $event->updateInfo();
-                                        $result['status']=1;
+                                        if($event->id_employee($_SESSION['idUser'])){
+                                            if($event->verifyCreator()){
+                                                $event->updateInfo();
+                                                $result['status']=1;
+                                            }
+                                            else{
+                                                //verifica si es colaborador del evento
+                                                if(ShareEvents::set()->id_event($_POST['EditIdEventInfo'])->id_employee($_SESSION['idUser'])->existInEvent()){
+                                                    $event->updateInfo();
+                                                    $result['status']=2;
+                                                }
+                                                else{
+                                                    $result['exception']='No tienes permisos de este evento';
+                                                }
+                                            }
+                                        }
+                                        else{
+                                            $result['exception']='No hay información de usuario';
+                                        }
                                     }
                                     else{
                                         $result['exception']='No puedes ingresar fechas inferiores a la de ahora';
@@ -342,8 +389,33 @@
                     case 'editMap':
                         if(Validate::Integer($_POST['EditMapId'])->Id()){
                             if(Validate::type($_POST['EditMap'])->HTML()){
-                                Update::set('events','place')->replace($_POST['EditMap'])->where('id','=',$_POST['EditMapId'])->updateOne();
-                                $result['status']=1;
+                                if($event->id($_POST['EditMapId'])){
+                                    if($event->id_employee($_SESSION['idUser'])){
+                                        if($event->verifyCreator()){
+                                            Update::set('events','place')->replace($_POST['EditMap'])->where('id','=',$_POST['EditMapId'])->updateOne();
+                                            $result['status']=1;
+                                        }
+                                        else{
+                                            //verifica si es colaborador del evento
+                                            if(ShareEvents::set()->id_event($_POST['EditMapId'])->id_employee($_SESSION['idUser'])->existInEvent()){
+                                                Update::set('events','place')
+                                                ->replace($_POST['EditMap'])
+                                                ->where('id','=', $_POST['EditMapId'])
+                                                ->updateOne();
+                                                $result['status']=2;
+                                            }
+                                            else{
+                                                $result['exception']='No tienes permisos de este evento';
+                                            }
+                                        }
+                                    }
+                                    else{
+                                        $result['exception']='No hay información de usuario';
+                                    }
+                                }
+                                else{
+                                    $result['exception']='No hay información de evento para verificación';
+                                }
                             }
                             else{
                                 $result['exception']='Formato incorrecto de HTML ';
