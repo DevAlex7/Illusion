@@ -39,45 +39,45 @@
         <div class="slider">
             <ul class="slides">
                 <li>
-                    <img src="../files/img/O1.png">
+                    <img src="Imports/resources/pics/carousel/O1.png">
                     <div class="caption center-align">
                     </div>
                 </li>
                 <li>
-                    <img src="../files/img/slider-1.jpg">
+                    <img src="Imports/resources/pics/carousel/slider-1.jpg">
                     <div class="caption center-align">
                         <h3 class="white-text text-lighten-5">Bienvenido a la página oficial de</h3>
                         <h5 class="light grey-text text-lighten-3">Illussion Party Supplies</h5>
                     </div>
                 </li>
                 <li>
-                    <img src="../files/img/slider-2.jpg">
+                    <img src="Imports/resources/pics/carousel/slider-2.jpg">
                     <div class="caption left-align">
                         <h3 class="white-text text-lighten-5">Para todo tipo de</h3>
                         <h5 class="light grey-text text-lighten-3">celebraciones</h5>
                     </div>
                 </li>
                 <li>
-                    <img src="../files/img/slider-3.jpg">
+                    <img src="Imports/resources/pics/carousel/slider-3.jpg">
                     <div class="caption right-align">
                         <h3 class="black-text text-lighten-5">La mejor calidad en</h3>
                         <h5 class="black-text text-lighten-3">todos nuestros productos</h5>
                     </div>
                 </li>
                 <li>
-                    <img src="../files/img/slider-4.jpg">
+                    <img src="Imports/resources/pics/carousel/slider-4.jpg">
                     <div class="caption center-align">
                         <h3 class="white-text text-lighten-5">Con la mejor atención y eficacia</h3>
                         <h5 class="light grey-text text-lighten-3">para complacer a nuestros clientes</h5>
                     </div>
                 </li>
                 <li>
-                    <img src="../files/img/O3.png">
+                    <img src="Imports/resources/pics/carousel/O3.png">
                     <div class="caption center-align">
                     </div>
                 </li>
                 <li>
-                    <img src="../files/img/O2.png">
+                    <img src="Imports/resources/pics/carousel/O2.png">
                     <div class="caption center-align">
                     </div>
                 </li>
@@ -110,7 +110,11 @@
         </div>
         <!-- END: Acerca de -->
 
+        <!-- BUTTON: Solicitud de evento. -->
         <h5 class="center">Algunos de nuestros productos</h5>
+        <div class="input-field col s12 center">
+            <a href="requests.php" class="btn waves-effect waves-light black border-round">Solicitar reservación</button>
+        </div>
 
         <!-- BEGIN: Productos -->
         <div class="carousel">
@@ -126,8 +130,29 @@
         </div>
 
         <!-- BEGIN: Footer -->
-            <footer>
-
+            <footer class="page-footer grey darken-4">
+                <div class="container">
+                    <div class="row">
+                        <div class="col 16 s12">
+                            <h5 class="white-text">Distribuidora Illussion</h5>
+                            <p class="grey-text text-lighten-4">Todo tipo de decoración y accesorios para fiestas y eventos.</p>
+                        </div>
+                        <div class="col l4 offset-l2 s12">
+                            <h5 class="white-text">¡Contáctanos!</h5>
+                            <ul>
+                                <li><a class="grey-text text-lighten-3" href="https://www.facebook.com/distribuidora.illussion">Facebook</a></li>
+                                <li><a class="grey-text text-lighten-3" href="https://www.instagram.com/">Instagram</a></li>
+                                <li><a class="grey-text text-lighten-3" href="https://www.twitter.com/">Twitter</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-copyright black">
+                    <div class="container">
+                    © 2014 Copyright Illussion Party Supplies
+                    <a class="grey-text text-lighten-4 right">Todos los derechos reservados</a>
+                    </div>
+                </div>
             </footer>
         <!-- END: Footer -->
 
