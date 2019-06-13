@@ -112,8 +112,11 @@
 
         <!-- BUTTON: Solicitud de evento. -->
         <h5 class="center">Algunos de nuestros productos</h5>
-        <div class="input-field col s12 center">
-            <a href="requests.php" class="btn waves-effect waves-light black border-round">Solicitar reservación</button>
+       
+        <div class="row">
+            <div class="center">
+                <a href="requests.php" class="btn waves-effect waves-light black ">Solicitar reservación</a>
+            </div>
         </div>
 
         <!-- BEGIN: Productos -->
