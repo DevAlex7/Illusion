@@ -2,11 +2,15 @@
 
     require_once('../Backend/Instance/instance.php');
     require_once('../Helpers/validates.php');
+    require_once('../Helpers/validator.php');
     require_once('../Backend/Models/Comments_in_event.php');
     require_once('../Backend/Models/Replies_comments.php');
+    require_once('../Backend/Models/Share_events.php');
+    require_once('../Backend/Models/Events.php');
 
     if( isset($_GET['request']) && isset($_GET['action'])){
         session_start();
+        $event = new Events();
         $result = array('status'=>0,'exception'=>'', 'Count'=>0, 'User'=>0);
         switch($_GET['request']){
             case 'GET':
@@ -49,11 +53,35 @@
                         if(Validate::Integer($_POST['IdEventComment'])->Id()){
                             if(Validate::Integer($_SESSION['idUser'])->Id()){
                                 if(Validate::this($_POST['Comment'],3,255)->Alphanumeric()){
-                                    Comments::set()->id_event($_POST['IdEventComment'])
+                                    if($event->id($_POST['IdEventComment'])){
+                                        if($event->id_employee($_SESSION['idUser'])){
+                                            if($event->verifyCreator()){
+                                                Comments::set()->id_event($_POST['IdEventComment'])
+                                                ->id_employee($_SESSION['idUser'])
+                                                ->message($_POST['Comment'])
+                                                ->Insert();
+                                                $result['status']=1;
+                                            }
+                                            else{
+                                                if(ShareEvents::set()->id_event($_POST['IdEventComment'])->id_employee($_SESSION['idUser'])->existInEvent()){
+                                                    Comments::set()->id_event($_POST['IdEventComment'])
                                                     ->id_employee($_SESSION['idUser'])
                                                     ->message($_POST['Comment'])
                                                     ->Insert();
-                                    $result['status']=1;
+                                                    $result['status']=2;
+                                                }
+                                                else{
+                                                    $result['exception']='No tienes permisos de este evento';
+                                                }
+                                            }
+                                        }
+                                        else{
+                                            $result['exception']='No hay información de usuario para verificar';
+                                        }
+                                    }
+                                    else{
+                                        $result['exception']='No hay información de evento';
+                                    }
                                 }
                                 else{
                                     $result['excpetion']='Comentario invalido';

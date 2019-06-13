@@ -2,13 +2,18 @@
 
     require_once('../Backend/Instance/instance.php');
     require_once('../Backend/Models/List_invites_in_Event.php');
+    require_once('../Helpers/validator.php');
     require_once('../Helpers/validates.php');
     require_once('../Helpers/select.php');
+    require_once('../Backend/Models/Share_events.php');
+    require_once('../Backend/Models/Events.php');
+   
     
     if( isset($_GET['request']) && isset($_GET['action'])){
         session_start();
         $result = array('status'=>0, 'exception'=>'','role'=>'');
         $invite = new List_Invites();
+        $event = new Events();
         switch($_GET['request']){
             case 'GET':
                 switch ($_GET['action']) {
@@ -37,12 +42,37 @@
                         if(Validate::this($_POST['NameInvite'], 3, 150)->Alphabetic()){
                             if(Validate::this($_POST['LastnameInvite'], 3, 150)->Alphabetic()){
                                 if(Validate::Integer($_POST['IdEvent'])->Id()){
-                                    List_Invites::set()
-                                                ->namePerson($_POST['NameInvite'])
-                                                ->lastnamePerson($_POST['LastnameInvite'])
-                                                ->id_event($_POST['IdEvent'])
-                                                ->Insert();
-                                    $result['status']=1;
+                                   if($event->id($_POST['IdEvent'])){
+                                        if($event->id_employee($_SESSION['idUser'])){   
+                                            if($event->verifyCreator()){
+                                                List_Invites::set()
+                                                    ->namePerson($_POST['NameInvite'])
+                                                    ->lastnamePerson($_POST['LastnameInvite'])
+                                                    ->id_event($_POST['IdEvent'])
+                                                    ->Insert();
+                                                    $result['status']=1;
+                                            }
+                                            else{
+                                                if(ShareEvents::set()->id_event($_POST['IdEvent'])->id_employee($_SESSION['idUser'])->existInEvent()){
+                                                        List_Invites::set()
+                                                        ->namePerson($_POST['NameInvite'])
+                                                        ->lastnamePerson($_POST['LastnameInvite'])
+                                                        ->id_event($_POST['IdEvent'])
+                                                        ->Insert();
+                                                    $result['status']=2;
+                                                }
+                                                else{
+                                                    $result['exception']='No tienes permisos de este evento';
+                                                }
+                                            }
+                                        }
+                                        else{
+                                            $result['exception']='No hay información de usuario';
+                                        }
+                                   }
+                                   else{
+                                        $result['exception']='No hay información de usuario';
+                                    }                                
                                 }
                                 else{
                                     $result['exception']='Información del evento no definida';

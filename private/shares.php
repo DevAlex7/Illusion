@@ -13,6 +13,7 @@
     <?php 
         ImportGlobal::ImportMaterializeCss();
         ImportGlobal::ImportMaterialIcons();
+        ImportGlobal::ImportIco();
         ImportGlobal::ImportFileCss('events');
         ImportGlobal::ImportFileCss('eventview');
         ImportGlobal::ImportSidenavCss('sidenav');

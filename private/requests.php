@@ -12,6 +12,7 @@
     <?php 
         ImportGlobal::ImportMaterializeCss();
         ImportGlobal::ImportMaterialIcons();
+        ImportGlobal::ImportIco();
         ImportGlobal::ImportSidenavCss('sidenav');
         ImportGlobal::ImportFileCss('requests')
     ?> 
@@ -21,10 +22,32 @@
     <?php AdminSideNav::SideNav(); ?>
     </header>
     <main>
-
+        <nav class="red">
+            <div class="nav-wrapper">
+                 <a href="#" class="center brand-logo">Solicitudes</a>
+            </div>
+        </nav>
+       <div class="row">
+           <div class="col s12 m12">
+            <div class="card">
+                    <div class="card-content">
+                        <div class="row" id="RequestsList">
+                           
+                        </div> 
+                    </div>
+                </div>
+           </div>
+       </div>
     </main>
     <footer class="red">
         <?php ImportGlobal::ImportFooter(); ?>
     </footer>
+<?php
+    ImportGlobal::ImportJQuery();
+    ImportGlobal::ImportMaterializeJS();
+    ImportGlobal::ImportJSFunctions();
+    ImportGlobal::ImportMomentJS();
+    ImportGlobal::ImportControllerJs('RequestController');
+?>
 </body>
 </html>

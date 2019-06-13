@@ -6,6 +6,7 @@ require_once('../Helpers/select.php');
 require_once('../Backend/Models/Products.php');
 require_once('../Backend/Models/List_products_in_Event.php');
 require_once('../Backend/Models/Events.php');
+require_once('../Backend/Models/Share_events.php');
 
 
 if (isset($_GET['request']) && isset($_GET['action'])) {
@@ -42,8 +43,29 @@ if (isset($_GET['request']) && isset($_GET['action'])) {
                         if ($list->count(0)) {
                             if ($list->id_event($_POST['idEvent'])) {
                                 if (!$list->exist()) {
-                                    $list->save();
-                                    $result['status'] = 1;
+                                   if($event->id_employee($_SESSION['idUser'])){
+                                        if($event->id($_POST['idEvent'])){
+                                           if($event->verifyCreator()){
+                                                $list->save();
+                                                $result['status'] = 1;
+                                           }
+                                           else{
+                                                if(ShareEvents::set()->id_event($_POST['idEvent'])->id_employee($_SESSION['idUser'])->existInEvent()){
+                                                    $list->save();
+                                                    $result['status']=2;
+                                                }
+                                                else{
+                                                    $result['exception']='No tienes permisos de este evento';
+                                                }
+                                           }
+                                        }
+                                        else{
+                                            $result['exception']='No hay información del empleado';
+                                        }
+                                   }
+                                   else{
+                                    $result['exception']='No hay información del evento';
+                                   }
                                 } else {
                                     $result['exception'] = 'Producto existente en este evento';
                                 }

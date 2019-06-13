@@ -53,14 +53,32 @@ class Request{
         static::$description_event =$value;
         return new static;
     }
-    public static function status(){
+    public static function default_status(){
         static::$status = 3;
+        return new static;
+    }
+    public static function status($value){
+        static::$status = $value;
         return new static;
     }
 
     public static function Insert(){
         $sql='INSERT INTO requests (name_client, last_name, e_mail, date_event, phone_number, type_event, description_event, status) VALUES (?,?,?,?,?,?,?,?)';
         $params = array(static::$name_client, static::$last_name, static::$email, static::$date_event ,static::$phone_number, static::$type_event, static::$description_event, static::$status);
+        return Database::executeRow($sql,$params);
+    }
+    public static function GetRequest(){
+        $sql='  SELECT requests.*, status_requests.status AS status_event, event_types.type AS type_event
+                FROM ((requests 
+                INNER JOIN status_requests ON requests.status=status_requests.id) 
+                INNER JOIN event_types ON requests.type_event=event_types.id)
+        ';
+        $params=array(null);
+        return Database::getRows($sql,$params);
+    }
+    public static function updateStatus(){
+        $sql='UPDATE requests SET status=? WHERE id=?';
+        $params=array(static::$status, static::$id);
         return Database::executeRow($sql,$params);
     }
     

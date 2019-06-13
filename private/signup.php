@@ -11,6 +11,7 @@
     <?php 
         ImportGlobal::ImportMaterializeCss();
         ImportGlobal::ImportMaterialIcons();
+        ImportGlobal::ImportIco();
         ImportGlobal::ImportFileCss('signup');
     ?>
 </head>
