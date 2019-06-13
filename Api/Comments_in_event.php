@@ -2,8 +2,11 @@
 
     require_once('../Backend/Instance/instance.php');
     require_once('../Helpers/validates.php');
+    require_once('../Helpers/validator.php');
     require_once('../Backend/Models/Comments_in_event.php');
     require_once('../Backend/Models/Replies_comments.php');
+    require_once('../Backend/Models/Share_events.php');
+    require_once('../Backend/Models/Events.php');
 
     if( isset($_GET['request']) && isset($_GET['action'])){
         session_start();

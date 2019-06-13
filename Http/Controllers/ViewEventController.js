@@ -223,6 +223,7 @@ function add(product_id){
             }
             else{
                 M.toast({html:result.exception});
+                closeModal('AddProducts');
             }
         }
         else{
