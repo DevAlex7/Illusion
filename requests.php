@@ -33,7 +33,7 @@
             <div class="col s12">
                 <div id="RegisterStyle" class="row">
                     <div class="col s12 m6 l4 z-depth-4 card-panel border-radius-6 Card">
-                        <form class="register-form" method="post">
+                        <form class="register-form" id="RequestForm" method="POST">
                             <div class="row margin">
                                 <div class="input-field col s12 m6">
                                     <h5 class="ml-4">Solicitud de eventos</h5>
@@ -42,8 +42,8 @@
                             <div class="row margin">
                                 <div class="input-field col s12 m6">
                                     <i class="material-icons black-text prefix">person_outline</i>
-                                    <input id="name" type="text" name="first_name" class="validate" required>
-                                    <label for="name" class="center-align">Nombres</label>
+                                    <input id="first_name" type="text" name="first_name" class="validate" required>
+                                    <label for="first_name" class="center-align">Nombres</label>
                                 </div>
                                 <div class="input-field col s12 m6">
                                     <i class="material-icons black-text prefix">person</i>
@@ -58,17 +58,22 @@
                                 <div class="input-field col s12 m6">
                                     <i class="material-icons black-text prefix">event_note</i>
                                     <input id="date" type="text" name="date_event" class="validate" required>
-                                    <label for="date" class="center-align">Fecha del evento</label>
+                                    <label for="date" class="center-align">Fecha del evento formato Año mes dia</label>
                                 </div>
                                 <div class="input-field col s12 m6">
                                     <i class="material-icons black-text prefix">phone</i>
                                     <input id="phone" type="text" name="phone" class="validate" required>
-                                    <label for="phone" class="">Número de teléfono</label>
+                                    <label for="phone" class="">Digite los primeros 4 numeros de teléfono</label>
                                 </div>
                                 <div class="input-field col s12 m6">
-                                    <i class="material-icons black-text prefix">equalizer</i>
-                                    <input id="cate" type="text" name="cate" class="validate" required>
-                                    <label for="cate" class="">Categoría</label>
+                                    <i class="material-icons black-text prefix">phone</i>
+                                    <input id="phone2" type="text" name="phone2" class="validate" required>
+                                    <label for="phone2" class="">Digite los ultimos 4 numeros de teléfono </label>
+                                </div>
+                                <div class="input-field col s12 m6">
+                                    <i class="material-icons black-text prefix">list</i>
+                                    <select name="TIpoeventos" id="TIpoeventos"></select>
+                                    <label for="cate" class="">Seleccione el tipo de evento que quiera solicitar </label>
                                 </div>
                                 <div class="input-field col s12">
                                     <i class="material-icons black-text prefix">edit</i>
@@ -95,5 +100,5 @@
     ImportGlobal::ImportPublicPlugin();
     ImportGlobal::ImportPublicControllerJs('Request');
 ?>
-    </body>
+</body>
 </html>

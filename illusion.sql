@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-06-2019 a las 04:57:51
+-- Tiempo de generación: 13-06-2019 a las 02:09:15
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.2
 
@@ -59,7 +59,8 @@ INSERT INTO `comments_in_event` (`id`, `id_event`, `id_employee`, `message`, `da
 (16, 22, 4, 'NO jeje', '2019-06-11'),
 (17, 22, 4, 'NO ', '2019-06-11'),
 (18, 22, 4, 'asdddasd', '2019-06-11'),
-(19, 22, 4, 'NO jeje', '2019-06-11');
+(19, 22, 4, 'NO jeje', '2019-06-11'),
+(20, 22, 4, 'Hola', '2019-06-12');
 
 -- --------------------------------------------------------
 
@@ -84,7 +85,8 @@ CREATE TABLE `employees` (
 INSERT INTO `employees` (`id`, `name`, `lastname`, `email`, `username`, `password`, `role`) VALUES
 (4, 'Alejandro', 'Gonzalez', 'alexgve7@gmail.com', 'Ale12345', '$2y$10$ztUHP8ADQWauh401IejY3OjdX07W0aFeZTv80muGW6QmGkGNXcoLy', 0),
 (7, 'Marvin', 'Gonzalez', 'alexgve7sss@gmail.com', 'Ale123458', '$2y$10$aV.JaxcfdoRDIJ1CZ8v/4OyZuMZUJcPQqA0mBA4g6q6OuPnfm0ymy', 0),
-(8, 'Steven', 'Diaz', 'Steven@gmail.com', 'StevenDF', '$2y$10$zlRonj/bg.hzPXu5XB2URe2Pm7dYEqZZO/NgGUE2UC96F.PDB3lyG', 1);
+(8, 'Steven', 'Diaz', 'Steven@gmail.com', 'StevenDF', '$2y$10$zlRonj/bg.hzPXu5XB2URe2Pm7dYEqZZO/NgGUE2UC96F.PDB3lyG', 1),
+(9, 'Gabriela ', 'Ramos', 'Akatgaby@gmail.com', 'Akatgaby', '$2y$10$ZbZqeTyn0d/JRUJD/L17TOLcVMud/88mIcrtGIADx0Az79.Inzh66', 0);
 
 -- --------------------------------------------------------
 
@@ -111,7 +113,8 @@ CREATE TABLE `events` (
 INSERT INTO `events` (`id`, `name_event`, `date`, `client_name`, `id_employee`, `price`, `pay_status`, `type_event`, `place`) VALUES
 (19, 'Rick Y Morty', '2019-06-12', 'Cifco', 7, 0.00, 2, 7, '<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3876.504444836977!2d-89.23818658551002!3d13.687869902460365!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f63302e0175567d%3A0x74ed22bace281c11!2sCIFCO!5e0!3m2!1ses-419!2ssv!4v1560010192140!5m2!1ses-419!2ssv\" width=\"600\" height=\"450\" frameborder=\"0\" style=\"border:0\" allowfullscreen></iframe>'),
 (20, 'Mac donalds', '2019-06-12', 'Mac Donalds El Salvador', 7, 0.00, 2, 7, '<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3876.504444836977!2d-89.23818658551002!3d13.687869902460365!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f63302e0175567d%3A0x74ed22bace281c11!2sCIFCO!5e0!3m2!1ses-419!2ssv!4v1560010192140!5m2!1ses-419!2ssv\" width=\"600\" height=\"450\" frameborder=\"0\" style=\"border:0\" allowfullscreen></iframe>'),
-(22, 'Prensa Grafica', '2019-06-12', 'Meme', 4, 0.00, 2, 9, '<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15502.620093661784!2d-89.21818175267451!3d13.739323828975923!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f633a804026a34d%3A0x50e59d1e39c37e33!2sPizza+Hut+Metr%C3%B3polis!5e0!3m2!1ses-419!2ssv!4v1560028302240!5m2!1ses-419!2ssv\" width=\"600\" height=\"450\" frameborder=\"0\" style=\"border:0\" allowfullscreen></iframe>');
+(22, 'Prensa Grafica', '2019-06-13', 'Meme', 4, 0.00, 2, 7, '<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d62017.53585607904!2d-89.22426765956978!3d13.712635737542742!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x34d9616c709a6fc1!2sHotel+Real+InterContinental+San+Salvador!5e0!3m2!1ses-419!2ssv!4v1560371055307!5m2!1ses-419!2ssv\" width=\"600\" height=\"450\" frameborder=\"0\" style=\"border:0\" allowfullscreen></iframe>'),
+(23, 'ITR Intramuros', '2019-06-13', 'Ricaldone', 7, 0.00, 2, 7, '<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15502.620093661784!2d-89.21818175267451!3d13.739323828975923!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f633a804026a34d%3A0x50e59d1e39c37e33!2sPizza+Hut+Metr%C3%B3polis!5e0!3m2!1ses-419!2ssv!4v1560028302240!5m2!1ses-419!2ssv\" width=\"600\" height=\"450\" frameborder=\"0\" style=\"border:0\" allowfullscreen></iframe>');
 
 -- --------------------------------------------------------
 
@@ -134,7 +137,9 @@ INSERT INTO `event_types` (`id`, `type`) VALUES
 (6, 'Navidad'),
 (7, 'Cumpleaños'),
 (8, 'Graduación'),
-(9, 'Aniversario');
+(9, 'Aniversario'),
+(10, 'Conferencias'),
+(11, 'Bodas');
 
 -- --------------------------------------------------------
 
@@ -150,6 +155,15 @@ CREATE TABLE `list_invitations_event` (
   `date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `list_invitations_event`
+--
+
+INSERT INTO `list_invitations_event` (`id`, `namePerson`, `lastnamePerson`, `id_event`, `date`) VALUES
+(1, 'Emmanuel', 'Escobar', 22, '2019-06-12'),
+(2, 'Sebastian ', 'Jimenez', 22, '2019-06-12'),
+(3, 'Gaby', 'Ramos', 22, '2019-06-12');
+
 -- --------------------------------------------------------
 
 --
@@ -163,6 +177,13 @@ CREATE TABLE `list_products_event` (
   `id_event` int(11) NOT NULL,
   `date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `list_products_event`
+--
+
+INSERT INTO `list_products_event` (`id`, `id_product`, `count`, `id_event`, `date`) VALUES
+(1, 4, 0, 22, '2019-06-12');
 
 -- --------------------------------------------------------
 
@@ -252,7 +273,12 @@ INSERT INTO `replies_comments` (`id`, `id_message`, `id_employee`, `message`, `d
 (23, 1, 4, 'Steven me la pela', '2019-06-10'),
 (24, 3, 4, 'Todo bien bien', '2019-06-10'),
 (25, 3, 4, 'nada mal eh', '2019-06-10'),
-(26, 16, 4, 'No mames man', '2019-06-11');
+(26, 16, 4, 'No mames man', '2019-06-11'),
+(27, 8, 4, 'Que pedo maje', '2019-06-12'),
+(28, 7, 4, 'pelamela', '2019-06-12'),
+(29, 12, 4, 'en tu casa perro', '2019-06-12'),
+(30, 1, 4, 'Hola hijo mio ', '2019-06-12'),
+(31, 8, 8, 'que pedo xd\r\n', '2019-06-12');
 
 -- --------------------------------------------------------
 
@@ -262,11 +288,23 @@ INSERT INTO `replies_comments` (`id`, `id_message`, `id_employee`, `message`, `d
 
 CREATE TABLE `requests` (
   `id` int(11) NOT NULL,
-  `client_name` varchar(11) NOT NULL,
-  `date` date NOT NULL,
-  `name_event` varchar(100) NOT NULL,
+  `name_client` varchar(150) NOT NULL,
+  `last_name` varchar(150) NOT NULL,
+  `e_mail` varchar(200) NOT NULL,
+  `date_event` date NOT NULL,
+  `phone_number` varchar(9) NOT NULL,
+  `type_event` int(11) NOT NULL,
+  `description_event` text NOT NULL,
   `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `requests`
+--
+
+INSERT INTO `requests` (`id`, `name_client`, `last_name`, `e_mail`, `date_event`, `phone_number`, `type_event`, `description_event`, `status`) VALUES
+(3, 'Alejandro', 'Gonzalez', 'alexgve7@gmail.com', '2019-06-13', '6171-5087', 7, 'Quiero un cumpleaños para mi hija', 2),
+(6, 'Alejandro', 'Gonzalez', 'alexgve7sv@gmail.com', '2019-06-14', '6172-5087', 8, 'Graduación de  mi hija', 3);
 
 -- --------------------------------------------------------
 
@@ -317,6 +355,15 @@ CREATE TABLE `status_requests` (
   `id` int(11) NOT NULL,
   `status` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `status_requests`
+--
+
+INSERT INTO `status_requests` (`id`, `status`) VALUES
+(1, 'Aceptado'),
+(2, 'Rechazado'),
+(3, 'Pendiente');
 
 --
 -- Índices para tablas volcadas
@@ -396,7 +443,10 @@ ALTER TABLE `replies_comments`
 --
 ALTER TABLE `requests`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `status` (`status`);
+  ADD UNIQUE KEY `e_mail` (`e_mail`),
+  ADD UNIQUE KEY `phone_number` (`phone_number`),
+  ADD KEY `status` (`status`),
+  ADD KEY `type_event` (`type_event`);
 
 --
 -- Indices de la tabla `roles`
@@ -426,37 +476,37 @@ ALTER TABLE `status_requests`
 -- AUTO_INCREMENT de la tabla `comments_in_event`
 --
 ALTER TABLE `comments_in_event`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `employees`
 --
 ALTER TABLE `employees`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `events`
 --
 ALTER TABLE `events`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT de la tabla `event_types`
 --
 ALTER TABLE `event_types`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `list_invitations_event`
 --
 ALTER TABLE `list_invitations_event`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `list_products_event`
 --
 ALTER TABLE `list_products_event`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `payment_event_status`
@@ -474,13 +524,13 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT de la tabla `replies_comments`
 --
 ALTER TABLE `replies_comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT de la tabla `requests`
 --
 ALTER TABLE `requests`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
@@ -498,7 +548,7 @@ ALTER TABLE `share_events`
 -- AUTO_INCREMENT de la tabla `status_requests`
 --
 ALTER TABLE `status_requests`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Restricciones para tablas volcadas
@@ -555,7 +605,8 @@ ALTER TABLE `replies_comments`
 -- Filtros para la tabla `requests`
 --
 ALTER TABLE `requests`
-  ADD CONSTRAINT `requests_ibfk_1` FOREIGN KEY (`status`) REFERENCES `status_requests` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `requests_ibfk_1` FOREIGN KEY (`status`) REFERENCES `status_requests` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `requests_ibfk_2` FOREIGN KEY (`type_event`) REFERENCES `event_types` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `share_events`

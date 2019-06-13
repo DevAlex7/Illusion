@@ -80,7 +80,6 @@ class ImportGlobal{
     public static function publicStyle(){
         print ('
             <link rel="stylesheet" href="Imports/resources/css/utilities/style.css"></link>
-            <link rel="stylesheet" href="Imports/resources/css/utilities/font.css"></link>
         ');
     }
     public static function publicIco(){
