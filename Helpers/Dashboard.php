@@ -28,9 +28,9 @@ class AdminSideNav {
                             </div>
                         </li>
                         <div id="OptionsBar">
-                        <li><a class="green-text accent-4" href=""><i class="material-icons green-text accent-4">dashboard</i>Inicio</a></li>
-                        <li><a class="green-text accent-4" href=""><i class="material-icons green-text accent-4">person</i>Mi perfil</a></li>
-                        <li><a class="green-text accent-4" href=""><i class="material-icons green-text accent-4">drag_indicator</i>Bitacora</a></li>
+                        <li><a class="green-text accent-4" href="/Illusion/private/home.php"><i class="material-icons green-text accent-4">dashboard</i>Inicio</a></li>
+                        <li><a class="green-text accent-4" href="/Illusion/private/profile.php"><i class="material-icons green-text accent-4">person</i>Mi perfil</a></li>
+                        <li><a class="green-text accent-4" href="/Illusion/private/binnacle.php"><i class="material-icons green-text accent-4">drag_indicator</i>Bitacora</a></li>
                         <li><div class="divider"></div></li>
                         <li><a class="subheader grey-text">Menu</a></li>
                         <li><a href="/Illusion/private/events.php"><i class="material-icons">calendar_today</i>Eventos</a></li>
@@ -58,9 +58,9 @@ class AdminSideNav {
                             </div>
                         </li>
                         <div id="OptionsBar">
-                        <li><a class="green-text accent-4" href=""><i class="material-icons green-text accent-4">dashboard</i>Inicio</a></li>
-                        <li><a class="green-text accent-4" href=""><i class="material-icons green-text accent-4">person</i>Mi perfil</a></li>
-                        <li><a class="green-text accent-4" href=""><i class="material-icons green-text accent-4">drag_indicator</i>Bitacora</a></li>
+                        <li><a class="green-text accent-4" href="/Illusion/private/home.php"><i class="material-icons green-text accent-4">dashboard</i>Inicio</a></li>
+                        <li><a class="green-text accent-4" href="/Illusion/private/profile.php"><i class="material-icons green-text accent-4">person</i>Mi perfil</a></li>
+                        <li><a class="green-text accent-4" href="/Illusion/private/binnacle.php"><i class="material-icons green-text accent-4">drag_indicator</i>Bitacora</a></li>
                         <li><div class="divider"></div></li>
                         <li><a class="subheader grey-text">Menu Empleado</a></li>
                         <li><a href="/Illusion/private/events.php"><i class="material-icons">calendar_today</i>Eventos</a></li>
@@ -103,7 +103,7 @@ class AdminSideNav {
     }
     private function modals(){
         print('
-        <div class="modal blue" id="ModalCloseSession">
+        <div class="modal red" id="ModalCloseSession">
             <div class="modal-content col s5">
                 <div class="card">
                     <div class="card-content center">

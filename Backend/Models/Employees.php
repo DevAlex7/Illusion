@@ -157,6 +157,21 @@ class Employee extends Validator{
         $params=array($this->password,$this->id);
         return Database::getRows($sql,$params);
     }
+
+    public function LogOff(){
+		if(isset($_SESSION['idUser'])){
+			unset($_SESSION['idUser']);
+			unset($_SESSION['NameUser']);
+			unset($_SESSION['LastnameUser']);
+            unset($_SESSION['UsernameActive']);
+            unset($_SESSION['Role']);
+			return true;
+		}	
+		else
+		{
+			return false;
+		}	
+	}
     
     
 }

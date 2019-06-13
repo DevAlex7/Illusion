@@ -7,6 +7,17 @@ header, main, footer {
     padding-left: 0;
   }
 }
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+main {
+  flex: 1 0 auto;
+}
+#PresentationCard{
+  margin-top: 4rem;
+}
 #FooterPart{
     background: rgb(104, 82, 185);
 }
