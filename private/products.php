@@ -22,8 +22,8 @@
     </header>
     <main>
             <div class="fixed-action-btn">
-                <a class="btn-floating modal-trigger tooltipped btn-large red" data-position="left" data-tooltip="Agregar producto" href="#AddProductModal">
-                    <i class="large material-icons">add</i>
+                <a class="btn-floating modal-trigger tooltipped btn-large white " data-position="left" data-tooltip="Agregar producto" href="#AddProductModal">
+                    <i class="large material-icons red-text">add</i>
                 </a>
             </div>
             
@@ -145,8 +145,8 @@
                 </div>
             </div>
     </main>
-    <footer>
-
+    <footer class="red">
+        <?php ImportGlobal::ImportFooter(); ?>
     </footer>
 <?php 
     ImportGlobal::ImportJQuery();

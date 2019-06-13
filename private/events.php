@@ -14,7 +14,6 @@
         ImportGlobal::ImportMaterializeCss();
         ImportGlobal::ImportMaterialIcons();
         ImportGlobal::ImportFileCss('events');
-        ImportGlobal::ImportFileCss('eventview');
         ImportGlobal::ImportSidenavCss('sidenav');
     ?> 
 </head>
@@ -23,12 +22,9 @@
         <?php AdminSideNav::SideNav(); ?>
     </header>
         <main>
-            
-            <!-- NavBar -->
             <?php 
                 Permissions::eventsBar();
             ?>
-
             <div class="row" id="SearchBar">
                 <div class="col s12 m12">
                     <nav class="white">
@@ -93,8 +89,8 @@
                 </div>
             </div>    
         </main>
-        <footer>
-        
+        <footer class="red">
+            <?php ImportGlobal::ImportFooter(); ?>
         </footer>
 <?php
     ImportGlobal::ImportJQuery();
@@ -103,6 +99,5 @@
     ImportGlobal::ImportMomentJS();
     ImportGlobal::ImportControllerJs('EventsController');
 ?>
-
 </body>
 </html>

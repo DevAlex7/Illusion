@@ -90,8 +90,8 @@
         </div>  
     </div>
     </main>
-    <footer>
-
+    <footer class="red">
+    <?php ImportGlobal::ImportFooter() ?>
     </footer>
 <?php 
     ImportGlobal::ImportJQuery();

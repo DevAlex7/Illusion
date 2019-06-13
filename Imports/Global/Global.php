@@ -47,7 +47,7 @@ class ImportGlobal{
     public static function ImportFooter(){
         print 
         '  
-        <div class="container">
+        <div class="container red">
             <div class="row">
                 <div class="col l6 s12">
                 <h5 class="white-text">Distribuira Illusion</h5>
