@@ -12,6 +12,7 @@
     <?php 
         ImportGlobal::ImportMaterializeCss();
         ImportGlobal::ImportMaterialIcons();
+        ImportGlobal::ImportIco();
         ImportGlobal::ImportSidenavCss('sidenav');
         ImportGlobal::ImportFileCss('requests')
     ?> 

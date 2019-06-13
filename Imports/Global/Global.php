@@ -20,6 +20,11 @@ class ImportGlobal{
         print 
         '<link rel="stylesheet" href="../Imports/resources/css/Global/material-icons.css">';
     }
+    public static function ImportIco(){
+        print ('
+            <link rel="shortcut icon" type="image/x-icon" href="../Imports/resources/pics/utilities/ico.png"></link>
+        ');
+    }
     //To import the Global Jquery 
     public static function ImportJQuery(){
         print 
@@ -44,6 +49,7 @@ class ImportGlobal{
         print 
         '<script src="../Imports/resources/js/global/moment.min.js"></script>';
     }
+    
     public static function ImportFooter(){
         print 
         '  

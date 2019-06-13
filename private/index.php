@@ -9,7 +9,8 @@
     <?php 
         ImportGlobal::ImportMaterializeCss();
         ImportGlobal::ImportMaterialIcons(); 
-        ImportGlobal::ImportFileCss('index'); 
+        ImportGlobal::ImportFileCss('index');
+        ImportGlobal::ImportIco(); 
     ?>
 </head>
 <body>

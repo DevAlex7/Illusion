@@ -13,6 +13,7 @@
     <?php 
         ImportGlobal::ImportMaterializeCss();
         ImportGlobal::ImportMaterialIcons(); 
+        ImportGlobal::ImportIco();
         ImportGlobal::ImportFileCss('employees');
         ImportGlobal::ImportSidenavCss('sidenav');   
     ?>

@@ -14,6 +14,7 @@
         ImportGlobal::ImportMaterializeCss();
         ImportGlobal::ImportMaterialIcons();
         ImportGlobal::ImportFileCss('events');
+        ImportGlobal::ImportIco();
         ImportGlobal::ImportFileCss('eventview');
         ImportGlobal::ImportSidenavCss('sidenav');
     ?> 
