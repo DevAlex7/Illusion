@@ -37,7 +37,7 @@ class AdminSideNav {
                         <li><a href="/Illusion/private/typeevents.php"><i class="material-icons">subject</i>Tipos de eventos</a></li>
                         <li><a href="/Illusion/private/employees.php"><i class="material-icons">account_circle</i>Administradores</a></li>
                         <li><a href="/Illusion/private/products.php"><i class="material-icons">local_mall</i>Productos</a></li>
-                        <li><a href="/PopMovies/feed/account/memberships.php"><i class="material-icons">inbox</i>Solicitudes</a></li>
+                        <li><a href="/Illusion/private/requests.php"><i class="material-icons">inbox</i>Solicitudes</a></li>
                         <li><div class="divider"></div></li>
                         <li><a href="#ModalCloseSession" class="modal-trigger"><i class="material-icons">exit_to_app</i>Cerrar Sesión</a></li>
                         </div>
