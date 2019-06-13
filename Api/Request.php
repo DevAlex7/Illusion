@@ -7,10 +7,19 @@
     if( isset($_GET['request']) && isset($_GET['action']) ){
         
         session_start();
+        $result = array('status'=>0, 'exception'=>'');
         switch($_GET['request'])
         {
             case 'GET':
                 switch($_GET['action']){
+                    case 'listRequests':
+                        if($result['dataset']=Request::GetRequest()){
+                            $result['status']=1;
+                        }
+                        else{
+                            $result['exception']='No hay solicitudes en lista';
+                        }
+                    break;
                     default:
                     exit('acción no disponible');
                 }
@@ -34,7 +43,7 @@
                                                                     ->phone_number($_POST['phone'],$_POST['phone2'])
                                                                     ->type_event($_POST['TIpoeventos'])
                                                                     ->description_event($_POST['description'])
-                                                                    ->status()
+                                                                    ->default_status()
                                                                     ->Insert();
                                                         $result['status']=1;
                                                     }else{
@@ -75,6 +84,24 @@
             break;
             case 'PUT':
                 switch($_GET['action']){
+                    case 'updateRequest':
+                        if(Validate::Integer($_POST['id'])->Id()){
+                            if(Validate::Integer($_POST['status'])->Id()){
+                                if(Request::set()->id($_POST['id'])->status($_POST['status'])->updateStatus()){
+                                    $result['status']=1;
+                                }
+                                else{
+                                    $result['exception']='Fallo';
+;                                }
+                            }
+                            else{
+                                $result['exception']='No hay información de el estatus';                            
+                            }
+                        }
+                        else{
+                            $result['exception']='No hay información de la solicitud';
+                        }
+                    break;
                     default:
                     exit('Acción no disponible');
                 }
