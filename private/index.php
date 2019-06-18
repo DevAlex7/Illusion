@@ -1,4 +1,7 @@
-<?php require_once('../Imports/Global/Global.php');?>
+<?php 
+require_once('../Imports/Global/Global.php');
+require_once('../Helpers/Roles.php');    
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

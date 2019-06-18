@@ -6,7 +6,6 @@
      * Aqui se van a declarar todos los permisos de los roles dados
      */
     class Permissions {
-
         /**
          * Tipos de eventos
          */

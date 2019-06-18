@@ -8,9 +8,8 @@ class AdminSideNav {
     public static function SideNav(){
 
         session_start();
+        $filename = basename($_SERVER['PHP_SELF']);
         if(isset($_SESSION['idUser'])){
-            
-            $filename = basename($_SERVER['PHP_SELF']);
             
             if($filename != '../private/')
             {

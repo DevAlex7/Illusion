@@ -31,7 +31,26 @@
             </div>
             <div class="modal" id="CreateAdministrator">
                 <div class="modal-content">
-
+                    <div class="card">
+                        <div class="card-content">
+                            <form method="POST">
+                                <div class="row">
+                                    <div class="col s12 m6">
+                                        <input type="text" name="NameAdministrator" id="NameAdministrator">
+                                        <label for="NameAdministrator">Nombre de administrador</label>
+                                    </div>
+                                    <div class="col s12 m6">
+                                        <input type="text" name="LastNameAdministrator" id="LastNameAdministrator">
+                                        <label for="NameAdministrator">Apellido de administrador</label>
+                                    </div>
+                                    <div class="col s12 m6">
+                                        <input type="text" name="UsernameAdministrator" id="UsernameAdministrator">
+                                        <label for="NameAdministrator">Usuario de administrador</label>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>  
                 </div>
             </div>
     </main>
