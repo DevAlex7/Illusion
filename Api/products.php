@@ -4,6 +4,7 @@
     require_once('../Helpers/validator.php');
     require_once('../Helpers/select.php');
     require_once('../Backend/Models/Events.php');
+    require_once('../Backend/Models/Binnacle.php');
     require_once('../Backend/Models/Products.php');
     if( isset($_GET['request']) && isset($_GET['action']) ){
         
@@ -83,6 +84,7 @@
                                 if($product->id_employee($_SESSION['idUser'])){
                                     if($product->price($_POST['PriceProduct'])){
                                         $product->save();
+                                        Binnacle::set()->action("Se ha insertado un nuevo producto")->user($_SESSION['idUser'])->insert();
                                         $result['status']=1;
                                     }
                                     else{

@@ -26,7 +26,6 @@ if( isset($_GET['request']) && isset($_GET['action']) ){
             break;
             case 'POST':
                 switch($_GET['action']){
-                    
                 default: 
                 exit('acción no disponible');
                 }
