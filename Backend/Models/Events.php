@@ -30,6 +30,9 @@ class Events extends Validator{
             return false;
         }
     }
+    public function getEventName(){
+        return $this->nameEvent;
+    }
     public function date($value){
         if($this->validateDate($value)){
             $this->date=$value;

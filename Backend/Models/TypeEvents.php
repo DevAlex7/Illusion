@@ -15,6 +15,9 @@ class eventTypes extends Validator{
            return false;
        }
     }
+    public function getTypeEvent(){
+        return $this->type;
+    }
     public function id($value){
         if($this->validateId($value)){
             $this->id=$value;

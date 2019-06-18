@@ -84,7 +84,7 @@
                                 if($product->id_employee($_SESSION['idUser'])){
                                     if($product->price($_POST['PriceProduct'])){
                                         $product->save();
-                                        Binnacle::set()->action("Se ha insertado un nuevo producto")->user($_SESSION['idUser'])->insert();
+                                        Binnacle::set()->action("Se ha insertado un nuevo producto: ".$product->getNameProduct())->user($_SESSION['idUser'])->insert();
                                         $result['status']=1;
                                     }
                                     else{

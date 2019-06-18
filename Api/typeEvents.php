@@ -5,6 +5,7 @@
     require_once('../Helpers/select.php');
     require_once('../Backend/Models/TypeEvents.php');
     require_once('../Helpers/validates.php');
+    require_once('../Backend/Models/Binnacle.php');
 
     if( isset($_GET['request']) && isset($_GET['action']) ){
         
@@ -62,6 +63,7 @@
                     case 'AddType':
                         if(Validate::this($_POST['NameTypeEvent'], 5, 150)->Alphanumeric()){
                             $type->type($_POST['NameTypeEvent']);
+                            Binnacle::set()->action("ha agregado un nuevo tipo de evento: ".$type->getTypeEvent())->user($_SESSION['idUser'])->insert();
                             $type->save();
                             $result['status']=1;
                         }
