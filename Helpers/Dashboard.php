@@ -1,12 +1,6 @@
 <?php 
 class AdminSideNav {
-
-    private $username;
-    private $email;
-
-    
     public static function SideNav(){
-
         session_start();
         $filename = basename($_SERVER['PHP_SELF']);
         if(isset($_SESSION['idUser'])){
@@ -116,6 +110,6 @@ class AdminSideNav {
             </div>
         </div>
         ');
+        }
     }
-}
 ?>

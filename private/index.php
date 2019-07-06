@@ -79,8 +79,10 @@ require_once('../Helpers/Roles.php');
 <?php 
     ImportGlobal::ImportJQuery();
     ImportGlobal::ImportMaterializeJS();
-    ImportGlobal::ImportJSFunctions();
+    ImportGlobal::ImportJSFunctions(); 
+    ImportGlobal::ImportRoutesJs();
     ImportGlobal::ImportControllerJs('LoginController');
+   
 ?>
 </body>
 </html>

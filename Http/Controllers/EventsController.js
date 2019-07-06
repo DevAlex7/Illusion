@@ -1,4 +1,6 @@
 $(document).ready(function () {
+ 
+    
     selectTypeEvents('TypeEventSelect',null);
     $('.modal').modal();
     CallEvents();

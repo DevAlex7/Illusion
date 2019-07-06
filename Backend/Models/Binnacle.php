@@ -16,11 +16,11 @@
             static::$user_id = $value;
             return new static;
         }
-        public static function action($value){
+        public static function action   ($value){
             static::$action =$value;
             return new static;
         }
-
+ 
         public static function getBinnacle(){
             $sql='SELECT binnacle.action_performed, binnacle.date FROM binnacle ORDER BY date DESC';
             $params=array(null);

@@ -59,6 +59,7 @@
     ImportGlobal::ImportMaterializeJS();
     ImportGlobal::ImportJSFunctions();
     ImportGlobal::ImportMomentJS();
+    ImportGlobal::ImportRoutesJs();
     ImportGlobal::ImportControllerJs('MyEventsController');
 ?>
 

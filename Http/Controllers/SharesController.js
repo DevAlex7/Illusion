@@ -1,4 +1,5 @@
 $(document).ready(function () {
+   
     CallEvents();
 });
 function setEvents(events){

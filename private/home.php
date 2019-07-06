@@ -18,14 +18,14 @@ require_once('../Imports/Global/Global.php')?>
 <body>
 
     <header>
-        <?php AdminSideNav::SideNav(); ?>
+        <?php  AdminSideNav::SideNav(); ?>
     </header>
     <main>
         <div class="row" id="PresentationCard">
            <div class="card col s12 m5 offset-m3">
                 <div class="card-content">
                     <span class="card-title center">¡Bienvenido!</span>
-                    <span class="card-title center"> <?php print $_SESSION['NameUser'].' '.$_SESSION['LastnameUser']   ?> </span>
+                    <span class="card-title center"> <?php print $_SESSION['idUser'].' '.$_SESSION['LastnameUser']   ?> </span>
                 </div>
            </div>
         </div>
@@ -34,9 +34,13 @@ require_once('../Imports/Global/Global.php')?>
     <?php ImportGlobal::ImportFooter();?>
 </footer>
 <?php
+
     ImportGlobal::ImportJQuery();
     ImportGlobal::ImportMaterializeJS();
     ImportGlobal::ImportJSFunctions();
+    ImportGlobal::ImportRoutesJs();
+    ImportGlobal::ImportControllerJs('MainController')
+
 ?>
 </body>
 </html>

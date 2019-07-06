@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    
+  
     //Iniciar el boton flotante
     $('.fixed-action-btn').floatingActionButton();
     //Iniciar los tooltips

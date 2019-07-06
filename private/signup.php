@@ -98,6 +98,8 @@
     ImportGlobal::ImportJQuery();
     ImportGlobal::ImportMaterializeJS();
     ImportGlobal::ImportJSFunctions();
+    ImportGlobal::ImportRoutesJs();
+    ImportGlobal::ImportRoutesJs();
     ImportGlobal::ImportControllerJs('SignUpController');
 ?>
 </body>

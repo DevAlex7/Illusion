@@ -140,6 +140,7 @@
     ImportGlobal::ImportJQuery();
     ImportGlobal::ImportMaterializeJS();
     ImportGlobal::ImportJSFunctions();
+    ImportGlobal::ImportRoutesJs();
     ImportGlobal::ImportControllerJs('EmployeesController');
 ?>
 </body>

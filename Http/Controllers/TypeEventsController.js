@@ -1,4 +1,5 @@
 $(document).ready(function () {
+   
     callTypes();
     $('.modal').modal();
 });
