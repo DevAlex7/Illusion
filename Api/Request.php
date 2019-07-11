@@ -27,55 +27,44 @@
             case 'POST':
                 switch($_GET['action']){
                     case 'sendRequest':
-                        if(Validate::this($_POST['first_name'],2,150)->Alphabetic()){
-                            if(Validate::this($_POST['last_name'], 2, 150)->Alphabetic()){
-                                if(Validate::type($_POST['e_mail'])->Email()){
-                                    if(Validate::date($_POST['date_event'])->afterToday()){
-                                        if( Validate::Integer($_POST['phone'])->Id() && Validate::Integer($_POST['phone2'])->Id() ){
-                                            if(Request::set()->phone_number($_POST['phone'],$_POST['phone2'])){
-                                                if(Validate::Integer($_POST['TIpoeventos'])->Id()){
-                                                    if(Validate::this($_POST['description'],2,300)->Alphabetic()){
-                                                        Request::set()
-                                                                    ->name_client($_POST['first_name'])
-                                                                    ->last_name($_POST['last_name'])
-                                                                    ->email($_POST['e_mail'])
-                                                                    ->date_event($_POST['date_event'])
-                                                                    ->phone_number($_POST['phone'],$_POST['phone2'])
-                                                                    ->type_event($_POST['TIpoeventos'])
-                                                                    ->description_event($_POST['description'])
-                                                                    ->default_status()
-                                                                    ->Insert();
-                                                        $result['status']=1;
-                                                    }else{
-                                                        $result['exception']='Descripción incorrecta';
-                                                    }
-                                                }
-                                                else{
-                                                    $result['exception']='No se ha seleccionado ningun tipo de evento';
-                                                }
-                                            }
-                                            else{
-                                                $result['exception']='Los numeros telefonicos tienen que ser menos a 5 digitos';
-                                            }
+                        if(Validate::this($_POST['nameEvent'],2,100)->Alphanumeric()){
+                            if(Validate::Integer($_POST['typeEvents'])->Id()){
+                                if(Validate::Integer($_POST['countPerson'])->Id()){
+                                    if(Validate::this($_POST['descriptionEvent'],2,200)->Alphanumeric()){
+                                        $var = $_POST['date'];
+                                        $date = str_replace('/', '-', $var);
+                                        $dateuser = date('Y-m-d', strtotime($date));
+                                        
+                                        if($dateuser >= $today = date('Y-m-d')){
+                                            Request::set()
+                                            ->date_event($var)
+                                            ->name_event($_POST['nameEvent'])
+                                            ->type_event($_POST['typeEvents'])
+                                            ->persons($_POST['countPerson'])
+                                            ->description_event($_POST['descriptionEvent'])
+                                            ->default_status()
+                                            ->user_id($_SESSION['idPublicUser'])
+                                            ->Insert();
+                                            $result['status']=1;
                                         }
                                         else{
-                                            $result['exception']='Los campos telefonicos no cumplen las expectativas';
+                                            $result['exception']='No puede solicitar eventos con fechas pasadas';
                                         }
                                     }
                                     else{
-                                        $result['exception']='No podemos agregar evento con fechas pasadas o no cumple el formato, lo sentimos';
+                                        $result['exception']='Descripción no valida';
                                     }
                                 }
                                 else{
-                                    $result['exception']='Formato de email incorrecto';
+                                    $result['exception']='Dato de cantidad de personas invalido';
                                 }
                             }
                             else{
-                                $result['exception']='Apellido incorrecto';     
+                                $result['exception']='No se ha seleccionado un tipo de evento';
                             }
                         }
                         else{
-                            $result['exception']='Nombre invalido';
+                            $result['exception']='Nombre de evento invalido';
                         }
                     break;
                     default: 

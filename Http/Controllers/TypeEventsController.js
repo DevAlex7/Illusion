@@ -55,11 +55,13 @@ function callTypes(){
         datatype:'JSON'
     })
     .done(function(response){
+        console.log(response);
         if(isJSONString(response)){
             const result = JSON.parse(response);
             if(!result.status){
             }
             setTypes(result.dataset,result.role);
+            
             $('.tooltipped').tooltip(); 
         }
         else{

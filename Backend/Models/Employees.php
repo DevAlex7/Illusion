@@ -173,6 +173,21 @@ class Employee extends Validator{
 		}	
 	}
     
+    public function LogOffPublic(){
+		if(isset($_SESSION['idPublicUser'])){
+			unset($_SESSION['idPublicUser']);
+			unset($_SESSION['publicNameUser']);
+			unset($_SESSION['publicLastnameUser']);
+            unset($_SESSION['publicUsernameActive']);
+            unset($_SESSION['publicRole']);
+			return true;
+		}	
+		else
+		{
+			return false;
+		}	
+	}
+    
     
 }
 ?>

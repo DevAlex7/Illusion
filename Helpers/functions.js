@@ -79,3 +79,16 @@ function LogOff(){
     location.href =  requestPOST('userEmployees','Logoff');
 }
 
+function LogOffPublic(){
+    location.href =  requestPOST('userEmployees','LogoffPublic');
+}
+var months =['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+function combobox(nameId){
+    let content ='';
+    for(var i in months){
+        content += `
+        <option value=${ parseInt(i)+1 }>${months[i]}</option>
+        `;
+    }
+    $('#'+nameId).html(content);
+}
