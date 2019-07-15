@@ -126,6 +126,9 @@ class Events extends Validator{
         $params=array($this->id);
         return Database::getRow($sql,$params);
     }
+    public function grt(){
+        
+    }
     public function getProductsinEvent(){
         $sql='  SELECT list_products_event.id AS idProductList, products.id, products.nameProduct, list_products_event.count, products.price 
                 FROM ((products 
