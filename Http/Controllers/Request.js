@@ -71,23 +71,3 @@ $('#RequestForm').submit(function(){
         catchError(jqXHR);
     })
 })
-function callProducts(){
-    $.ajax(
-        {   
-            
-        }
-
-    )
-    .done(function(response)
-        {
-            if(isJSONString(response)){
-                const result = JSON.parse(response);
-            }else{
-                console.log(response);
-            }
-        }
-    )
-    .fail(function(jqXHR){
-
-    })
-}

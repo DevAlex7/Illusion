@@ -56,13 +56,19 @@ class Request{
         return Database::executeRow($sql,$params);
     }
     public static function GetRequest(){
-        $sql='  SELECT requests.*, status_requests.status AS status_event, event_types.type AS type_event
+        $sql='  SELECT requests.*, employees.name, employees.lastname, employees.email, status_requests.status AS status_event, event_types.type AS type_event
                 FROM ((requests 
+                INNER JOIN employees ON requests.public_user_id=employees.id
                 INNER JOIN status_requests ON requests.status=status_requests.id) 
                 INNER JOIN event_types ON requests.type_event=event_types.id)
         ';
         $params=array(null);
         return Database::getRows($sql,$params);
+    }
+    public static function all(){
+        $sql='SELECT requests.*, employees.name, employees.lastname FROM (requests INNER JOIN employees ON employees.id=requests.public_user_id ) WHERE requests.id=?';
+        $params = array(static::$id);
+        return Database::getRow($sql,$params);
     }
     public static function updateStatus(){
         $sql='UPDATE requests SET status=? WHERE id=?';

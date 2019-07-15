@@ -2,11 +2,16 @@
 
     require_once('../Backend/Instance/instance.php');
     require_once('../Backend/Models/Request.php');
+    require_once('../Helpers/validator.php');
+    require_once('../Backend/Models/Events.php');
+    require_once('../Backend/Models/Events_assignments.php');
     require_once('../Helpers/validates.php');
+   
 
     if( isset($_GET['request']) && isset($_GET['action']) ){
         
         session_start();
+        $event = new Events();
         $result = array('status'=>0, 'exception'=>'');
         switch($_GET['request'])
         {
@@ -77,11 +82,28 @@
                         if(Validate::Integer($_POST['id'])->Id()){
                             if(Validate::Integer($_POST['status'])->Id()){
                                 if(Request::set()->id($_POST['id'])->status($_POST['status'])->updateStatus()){
-                                    $result['status']=1;
+                                    $request = Request::all();
+                                    $fullname = $request['name']." ".$request['lastname'];
+                                    if(
+                                        $event->nameEvent($request['name_event']) &&
+                                        $event->date($request['date_event']) && 
+                                        $event->clientName($fullname) &&
+                                        $event->id_employee($_SESSION['idUser']) && 
+                                        $event->pay_status(2) &&
+                                        $event->type_event($request['type_event']) )
+                                    {
+                                        $event->save();
+                                        $event_id = Database::getLastRowId();
+                                        Events_assignments::set()->event_id($event_id)->request_id($_POST['id'])->client_id($_SESSION['idPublicUser'])->save();
+                                        $result['status']=1;
+                                    }
+                                    else{
+                                        $result['Datos erroneos'];
+                                    }
                                 }
                                 else{
                                     $result['exception']='Fallo';
-;                                }
+                                }
                             }
                             else{
                                 $result['exception']='No hay información de el estatus';                            
