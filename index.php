@@ -10,7 +10,7 @@
         <meta charset="UTF-8">
         <!-- TÍTULO DE LA VENTANA -->
         <title>Distribuidora Illussion | Inicio</title>
-        <!-- IMPORTACIONES -->
+        <!-- IMPORTACIONES kk -->
         <?php
             ImportGlobal::publicIco();
             ImportGlobal::ImportPublicMaterializeCss();

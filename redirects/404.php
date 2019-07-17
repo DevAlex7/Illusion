@@ -6,7 +6,7 @@
 <!-- Página para señalar que un objeto no ha sido encontrado en el sistema. -->
     <head>
         <meta charset="utf-8">
-        <title>ERROR 404: ¡Objeto no localizado!</title>
+        <title>ERROR 404: ¡Objeto no localizado pierdete bro!</title>
             <?php
                 ImportGlobal::publicIco();
                 ImportGlobal::ImportPublicMaterializeCss();
