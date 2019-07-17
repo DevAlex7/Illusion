@@ -16,6 +16,7 @@
         ImportGlobal::ImportIco();
         ImportGlobal::ImportFileCss('employees');
         ImportGlobal::ImportSidenavCss('sidenav');   
+        ImportGlobal::ImportFont();
     ?>
 </head>
 <body>

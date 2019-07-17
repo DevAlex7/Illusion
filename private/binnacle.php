@@ -13,6 +13,7 @@ require_once('../Imports/Global/Global.php')?>
         ImportGlobal::ImportMaterialIcons(); 
         ImportGlobal::ImportFileCss('binnacle'); 
         ImportGlobal::ImportIco();
+        ImportGlobal::ImportFont();
     ?>
 </head>
 <body>

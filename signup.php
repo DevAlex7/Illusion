@@ -11,6 +11,7 @@ require_once('Imports/Global/Global.php');
             ImportGlobal::ImportPublicMaterialIcons();
             ImportGlobal::ImportPublicMaterializeCss();
             ImportGlobal::publicIco();
+            ImportGlobal::ImportFont();
             ImportGlobal::ImportPublicFileCss('signupPublic');
     ?>
     <title>Registrarme</title>

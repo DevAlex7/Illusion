@@ -13,6 +13,7 @@
         <!-- IMPORTACIONES kk -->
         <?php
             ImportGlobal::publicIco();
+            ImportGlobal::ImportFont();
             ImportGlobal::ImportPublicMaterializeCss();
             ImportGlobal::ImportPublicMaterialIcons();
             ImportGlobal::publicStyle();

@@ -23,7 +23,7 @@ class AdminSideNav {
                         <div id="OptionsBar">
                         <li><a class="green-text accent-4" href="/Illusion/private/home.php"><i class="material-icons green-text accent-4">dashboard</i>Inicio</a></li>
                         <li><a class="green-text accent-4" href="/Illusion/private/profile.php"><i class="material-icons green-text accent-4">person</i>Mi perfil</a></li>
-                        <li><a class="green-text accent-4" href="/Illusion/private/binnacle.php"><i class="material-icons green-text accent-4">drag_indicator</i>Bitacora</a></li>
+                        <li><a class="green-text accent-4" href="/Illusion/private/binnacle.php"><i class="material-icons green-text accent-4">drag_indicator</i>Bitácora</a></li>
                         <li><div class="divider"></div></li>
                         <li><a class="subheader grey-text">Menu</a></li>
                         <li><a href="/Illusion/private/events.php"><i class="material-icons">calendar_today</i>Eventos</a></li>
@@ -31,6 +31,7 @@ class AdminSideNav {
                         <li><a href="/Illusion/private/employees.php"><i class="material-icons">account_circle</i>Administradores</a></li>
                         <li><a href="/Illusion/private/products.php"><i class="material-icons">local_mall</i>Productos</a></li>
                         <li><a href="/Illusion/private/requests.php"><i class="material-icons">inbox</i>Solicitudes</a></li>
+                        <li><a href="/Illusion/private/charts.php"><i class="material-icons">insert_drive_file</i>Estadísticas</a></li>
                         <li><div class="divider"></div></li>
                         <li><a href="#ModalCloseSession" class="modal-trigger"><i class="material-icons">exit_to_app</i>Cerrar Sesión</a></li>
                         </div>

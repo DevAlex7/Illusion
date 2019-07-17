@@ -14,19 +14,24 @@ require_once('../Helpers/Roles.php');
         ImportGlobal::ImportMaterialIcons(); 
         ImportGlobal::ImportFileCss('index');
         ImportGlobal::ImportIco(); 
+        ImportGlobal::ImportFont();
     ?>
 </head>
 <body>
 <main>
     
-<!--NavBar -->
-<div class="navbar-fixed">
-    <nav class="nav-extended" id="NavBar">
-        <div class="nav-wrapper">
-            <a href="/PopMovies/feed/home/main.php" class="brand-logo center">Illusion</a>
-        </div>
-    </nav>
-</div>
+    <!-- BEGIN: Navbar -->
+    <header>
+            <nav class="grey darken-4">
+                <div class="brand-sidebar black">
+                    <a class="brand-logo center">
+                        <img src="/Illusion/Imports/resources/pics/utilities/ico.png" alt="ico-illusion" height="25">
+                        <span class="white-text">Illussion Party Supplies</span>
+                    </a>
+                </div>
+            </nav>
+        </header>
+    <!-- END: Navbar -->
 <!-- SideNav -->
 <ul class="sidenav" id="mobile-demo">
     <li><a>Salir</a></li>
@@ -56,26 +61,24 @@ require_once('../Helpers/Roles.php');
     </div>
 </div>
 </main>
-<footer class="page-footer" id="FooterPart">
-    <div class="container">
-        <div class="row">
-            <div class="col l6 s12">
-                <div class="card z-depth-3">
-                    <div class="card-content">
-                        <span class="blue-text">Distribuidora Illussion</span>
+        <!-- BEGIN: Footer -->
+        <footer class="page-footer grey darken-4">
+                <div class="container">
+                    <div class="row">
+                        <div class="col 16 s12">
+                            <h5 class="white-text">Distribuidora Illussion</h5>
+                            <p class="grey-text text-lighten-4">Todo tipo de decoración y accesorios para fiestas y eventos.</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col l4 offset-l2 s12">
-            <div class="card z-depth-3">
-                    <div class="card-content">
-                        <span>Hola</span>
+                <div class="footer-copyright black">
+                    <div class="container">
+                    © 2019 Copyright Illussion Party Supplies
+                    <a class="grey-text text-lighten-4 right">Todos los derechos reservados</a>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</footer>
+            </footer>
+        <!-- END: Footer -->
 <?php 
     ImportGlobal::ImportJQuery();
     ImportGlobal::ImportMaterializeJS();
