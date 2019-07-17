@@ -30,6 +30,13 @@
                             $result['exception']='No hay eventos agregados todavia';
                         }
                     break;
+                    case 'chartEvent':
+                    if ($result['dataset'] = $event->chartEvent()) {
+                        $result['status'] = 1;
+                    } else {
+                        $result['exception'] = 'No hay datos disponibles';
+                    }
+                    break;
                     case 'getId':
                         if(Select::in('events','id')->where('id',$_POST['idEvent'])->getOne()){
                             $result['status']=1;
@@ -436,6 +443,7 @@
             break;
 
             default:
+    
             exit('Petición rechazada');
         }
         print(json_encode($result));

@@ -44,6 +44,14 @@ class ImportGlobal{
         print 
         '<script src="../Helpers/functions.js"></script>';
     }
+    public static function ImportChart(){
+        print 
+        '<script src="../Imports/resources/js/global/chart.js"></script>';
+    }
+    public static function ImportComponentChart(){
+        print 
+        '<script src="../Helpers/components.js"></script>';
+    }
     //To import the Controller that you will use :)
     public static function ImportControllerJs($Controller){
         print 

@@ -46,6 +46,7 @@
                                     <div class="divider"></div>
                                     <div class="center-align" id="DetailsEmployee">
                                         <span class="grey-text card-title">Eventos agrupados por tipo.</span>
+                                        <canvas id="chart"></canvas>
                                     </div>
                                 </div>
                             </div>
@@ -65,6 +66,7 @@
                                     <div class="divider"></div>
                                     <div class="center-align" id="DetailsEmployee">
                                         <span class="grey-text card-title">Acciones realizadas por fecha.</span>
+                                        <canvas id="chart"></canvas>
                                     </div>
                                 </div>
                             </div>
@@ -75,13 +77,15 @@
         </div>
     </main>
     <footer class="red">
-       <?php ImportGlobal::ImportFooter() ?>   
+       <?php ImportGlobal::ImportFooter()?>
     </footer>
     <?php
         ImportGlobal::ImportJQuery();
         ImportGlobal::ImportMaterializeJS();
         ImportGlobal::ImportJSFunctions();
-        ImportGlobal::ImportControllerJs('chart.js');
+        ImportGlobal::ImportChart();
+        ImportGlobal::ImportComponentChart();
+        ImportGlobal::ImportControllerJs('ChartsPage');
     ?>
 </body>
 </html>
