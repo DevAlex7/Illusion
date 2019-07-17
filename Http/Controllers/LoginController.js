@@ -1,3 +1,6 @@
+$(document).ready(function () {
+    
+});
 $('#FormLogin').submit(function(){
     event.preventDefault();
     $.ajax({

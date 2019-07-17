@@ -154,6 +154,7 @@
     ImportGlobal::ImportMaterializeJS();
     ImportGlobal::ImportMomentJS();
     ImportGlobal::ImportJSFunctions();
+    ImportGlobal::ImportRoutesJs();
     ImportGlobal::ImportControllerJs('ProductsController');
 ?>
 </body>

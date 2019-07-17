@@ -2,48 +2,32 @@
 class Request{
 
     private static $id;
-    private static $name_client;
-    private static $last_name;
-    private static $email;
     private static $date_event;
-    private static $phone_number;
+    private static $name_event;
     private static $type_event;
+    private static $persons;
     private static $description_event;
     private static $status;
-
+    private static $user_id;
     
     public static function set(){
+        return new static;
+    }
+    public static function name_event($value){
+        static::$name_event=$value;
         return new static;
     }
     public static function id($value){
         static::$id=$value;
         return new static;
     }
-    public static function name_client($value){
-        static::$name_client = $value;
-        return new static;
-    }
-    public static function last_name($value){
-        static::$last_name =$value;
-        return new static;
-    }
-    public static function email($value){
-        static::$email =$value;
-        return new static;
-    }
     public static function date_event($value){
         static::$date_event = $value;
         return new static;
     }
-    public static function phone_number($firstDigits, $secondDigits){
-        if(strlen($firstDigits)>4 || strlen($secondDigits)>4){
-            return false;
-        }
-        else{
-             
-            static::$phone_number=$firstDigits.'-'.$secondDigits;;
-            return new static;
-        }
+    public static function persons($value){
+        static::$persons = $value;
+        return new static;
     }
     public static function type_event($value){
         static::$type_event =$value;
@@ -61,20 +45,30 @@ class Request{
         static::$status = $value;
         return new static;
     }
+    public static function user_id($value){
+        static::$user_id = $value;
+        return new static;
+    }
 
     public static function Insert(){
-        $sql='INSERT INTO requests (name_client, last_name, e_mail, date_event, phone_number, type_event, description_event, status) VALUES (?,?,?,?,?,?,?,?)';
-        $params = array(static::$name_client, static::$last_name, static::$email, static::$date_event ,static::$phone_number, static::$type_event, static::$description_event, static::$status);
+        $sql='INSERT INTO requests VALUES(null,?,?,?,?,?,?,?)';
+        $params = array(static::$date_event,static::$name_event,static::$type_event, static::$persons, static::$description_event, static::$status, static::$user_id);
         return Database::executeRow($sql,$params);
     }
     public static function GetRequest(){
-        $sql='  SELECT requests.*, status_requests.status AS status_event, event_types.type AS type_event
+        $sql='  SELECT requests.*, employees.name, employees.lastname, employees.email, status_requests.status AS status_event, event_types.type AS type_event
                 FROM ((requests 
+                INNER JOIN employees ON requests.public_user_id=employees.id
                 INNER JOIN status_requests ON requests.status=status_requests.id) 
                 INNER JOIN event_types ON requests.type_event=event_types.id)
         ';
         $params=array(null);
         return Database::getRows($sql,$params);
+    }
+    public static function all(){
+        $sql='SELECT requests.*, employees.name, employees.lastname FROM (requests INNER JOIN employees ON employees.id=requests.public_user_id ) WHERE requests.id=?';
+        $params = array(static::$id);
+        return Database::getRow($sql,$params);
     }
     public static function updateStatus(){
         $sql='UPDATE requests SET status=? WHERE id=?';

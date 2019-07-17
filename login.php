@@ -1,6 +1,5 @@
 <?php 
-require_once('../Imports/Global/Global.php');
-require_once('../Helpers/Roles.php');    
+require_once('Imports/Global/Global.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,10 +9,10 @@ require_once('../Helpers/Roles.php');
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Login</title>
     <?php 
-        ImportGlobal::ImportMaterializeCss();
-        ImportGlobal::ImportMaterialIcons(); 
-        ImportGlobal::ImportFileCss('index');
-        ImportGlobal::ImportIco(); 
+            ImportGlobal::ImportPublicMaterialIcons();
+            ImportGlobal::ImportPublicMaterializeCss();
+            ImportGlobal::publicIco();
+            ImportGlobal::ImportPublicFileCss('signupPublic');
     ?>
 </head>
 <body>
@@ -21,7 +20,7 @@ require_once('../Helpers/Roles.php');
     
 <!--NavBar -->
 <div class="navbar-fixed">
-    <nav class="nav-extended" id="NavBar">
+    <nav class="nav-extended" class="black" id="NavBar">
         <div class="nav-wrapper">
             <a href="/PopMovies/feed/home/main.php" class="brand-logo center">Illusion</a>
         </div>
@@ -56,33 +55,13 @@ require_once('../Helpers/Roles.php');
     </div>
 </div>
 </main>
-<footer class="page-footer" id="FooterPart">
-    <div class="container">
-        <div class="row">
-            <div class="col l6 s12">
-                <div class="card z-depth-3">
-                    <div class="card-content">
-                        <span class="blue-text">Distribuidora Illussion</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col l4 offset-l2 s12">
-            <div class="card z-depth-3">
-                    <div class="card-content">
-                        <span>Hola</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
+
 <?php 
-    ImportGlobal::ImportJQuery();
-    ImportGlobal::ImportMaterializeJS();
-    ImportGlobal::ImportJSFunctions(); 
-    ImportGlobal::ImportRoutesJs();
-    ImportGlobal::ImportControllerJs('LoginController');
-   
-?>
+    ImportGlobal::ImportPublicJQuery();
+    ImportGlobal::ImportPublicMaterializeJS();
+    ImportGlobal::ImportPublicJSFunctions();
+    ImportGlobal::ImportPublicPlugin();
+    ImportGlobal::ImportPublicControllerJs('Signup');
+    ?>
 </body>
 </html>

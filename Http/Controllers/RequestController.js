@@ -1,4 +1,5 @@
 $(document).ready(function () {
+  
     $('.collapsible').collapsible();
     CallRequests();
 });
@@ -11,14 +12,13 @@ function setRequests(requests){
                     <div class="col s12 m12">
                         <ul class="collapsible">
                             <li>
-                                <div class="collapsible-header"><i class="material-icons">archive</i>Petición de : ${request.name_client+" "+request.last_name}</div>
+                                <div class="collapsible-header"><i class="material-icons">archive</i>Petición de : ${request.name+" "+request.lastname}</div>
                                 <div class="collapsible-body">
                                     <table class="responsive-table">
                                         <thead>
                                         <tr>
                                             <th>Correo</th>
                                             <th>Fecha de evento solicitado</th>
-                                            <th>Telefono</th>
                                             <th>Tipo de evento</th>
                                             <th>Estado</th>
                                             <th>Acciones</th>
@@ -27,9 +27,8 @@ function setRequests(requests){
                                 
                                         <tbody>
                                             <tr>
-                                                <td>${request.e_mail}</td>
+                                                <td>${request.email}</td>
                                                 <td>${request.date_event}</td>
-                                                <td>${request.phone_number}</td>
                                                 <td>${request.type_event}</td>
                                                 <td> <div class="chip red white-text"> <span> ${request.status_event} </span> </div> </td>
                                                 <td> <a class="btn green accent-4" onClick="updateStatus(${request.id},${1})">Aceptar</a></td>
@@ -50,14 +49,13 @@ function setRequests(requests){
                     <div class="col s12 m12">
                         <ul class="collapsible">
                             <li>
-                                <div class="collapsible-header"><i class="material-icons">archive</i>Petición de : ${request.name_client+" "+request.last_name}</div>
+                                <div class="collapsible-header"><i class="material-icons">archive</i>Petición de : ${request.name+" "+request.lastname}</div>
                                 <div class="collapsible-body">
                                     <table class="responsive-table">
                                         <thead>
                                         <tr>
                                             <th>Correo</th>
                                             <th>Fecha de evento solicitado</th>
-                                            <th>Telefono</th>
                                             <th>Tipo de evento</th>
                                             <th>Estado</th>
                                             <th>Acciones</th>
@@ -66,9 +64,8 @@ function setRequests(requests){
                                 
                                         <tbody>
                                             <tr>
-                                                <td>${request.e_mail}</td>
+                                                <td>${request.email}</td>
                                                 <td>${request.date_event}</td>
-                                                <td>${request.phone_number}</td>
                                                 <td>${request.type_event}</td>
                                                 <td> <div class="chip green accent-4 white-text"> <span> ${request.status_event} </span> </div> </td>
                                                 <td> No hay acciones </td>
@@ -89,14 +86,13 @@ function setRequests(requests){
             <div class="col s12 m12">
                 <ul class="collapsible">
                     <li>
-                        <div class="collapsible-header"><i class="material-icons">archive</i>Petición de : ${request.name_client+" "+request.last_name}</div>
+                        <div class="collapsible-header"><i class="material-icons">archive</i>Petición de : ${request.name+" "+request.lastname}</div>
                         <div class="collapsible-body">
                             <table class="responsive-table">
                                 <thead>
                                 <tr>
                                     <th>Correo</th>
                                     <th>Fecha de evento solicitado</th>
-                                    <th>Telefono</th>
                                     <th>Tipo de evento</th>
                                     <th>Estado</th>
                                     <th>Acciones</th>
@@ -105,9 +101,8 @@ function setRequests(requests){
                         
                                 <tbody>
                                     <tr>
-                                        <td>${request.e_mail}</td>
+                                        <td>${request.email}</td>
                                         <td>${request.date_event}</td>
-                                        <td>${request.phone_number}</td>
                                         <td>${request.type_event}</td>
                                         <td> <div class="chip grey white-text"> <span> ${request.status_event} </span> </div> </td>
                                         <td> <a class="btn green accent-4" onClick="updateStatus(${request.id},${1})">Aceptar</a></td>

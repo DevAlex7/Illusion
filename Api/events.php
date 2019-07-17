@@ -6,6 +6,7 @@
     require_once('../Helpers/update.php');
     require_once('../Backend/Models/Events.php');
     require_once('../Helpers/validates.php');  
+    require_once('../Backend/Models/Binnacle.php');
     require_once('../Backend/Models/Employees.php');
     require_once('../Backend/Models/Share_events.php');
 
@@ -209,6 +210,7 @@
                                                         if($event->place($_POST['PlaceEvent']))
                                                         {
                                                             $event->save();
+                                                            Binnacle::set()->user($_SESSION['idUser'])->action("ha ingresado un evento nuevo: ".$event->getEventName())->insert();
                                                             $result['status']=1;
                                                         }
                                                         else{

@@ -5,11 +5,12 @@
     require_once('../Helpers/select.php');
     require_once('../Backend/Models/TypeEvents.php');
     require_once('../Helpers/validates.php');
+    require_once('../Backend/Models/Binnacle.php');
 
     if( isset($_GET['request']) && isset($_GET['action']) ){
         
         session_start();
-        $result=array('status'=>0,'exception'=>'','role'=>0);
+        $result=array('status'=>0,'exception'=>'','role'=>0,);
         $select = new Select();
         $type = new eventTypes();
         
@@ -21,6 +22,14 @@
                         if( $result['dataset']= $select->allFrom('event_types')){
                             $result['status']=1;
                             $result['role']=$_SESSION['Role'];
+                        }
+                        else{
+                            $result['exception']='No hay tipos de eventos registrados';
+                        }
+                    break;
+                    case 'getTypesEvents':
+                        if( $result['dataset']= $select->allFrom('event_types')){
+                            $result['status']=1;
                         }
                         else{
                             $result['exception']='No hay tipos de eventos registrados';
@@ -62,6 +71,7 @@
                     case 'AddType':
                         if(Validate::this($_POST['NameTypeEvent'], 5, 150)->Alphanumeric()){
                             $type->type($_POST['NameTypeEvent']);
+                            Binnacle::set()->action("ha agregado un nuevo tipo de evento: ".$type->getTypeEvent())->user($_SESSION['idUser'])->insert();
                             $type->save();
                             $result['status']=1;
                         }

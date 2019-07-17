@@ -115,7 +115,7 @@
        
         <div class="row">
             <div class="center">
-                <a href="requests.php" class="btn waves-effect waves-light black ">Solicitar reservación</a>
+                <a href="login.php" class="btn waves-effect waves-light black ">Solicitar reservación</a>
             </div>
         </div>
 

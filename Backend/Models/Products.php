@@ -27,6 +27,9 @@ class Product extends Validator{
             return false;
         }
     }
+    public function getNameProduct(){
+        return $this->nameProduct;
+    }
     public function count($value){
         if($this->ValidateInt($value)){
             $this->count=$value;

@@ -45,6 +45,10 @@ class ImportGlobal{
         print 
         '<script src="../Http/Controllers/'.$Controller.'.js"></script>';
     }
+    public static function ImportRoutesJs(){
+        print 
+        '<script src="../Helpers/router.js"></script>';
+    }
     public static function ImportMomentJS(){
         print 
         '<script src="../Imports/resources/js/global/moment.min.js"></script>';

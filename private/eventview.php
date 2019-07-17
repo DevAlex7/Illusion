@@ -370,6 +370,7 @@
     ImportGlobal::ImportJQuery();
     ImportGlobal::ImportMaterializeJS();
     ImportGlobal::ImportJSFunctions();
+    ImportGlobal::ImportRoutesJs();
     ImportGlobal::ImportControllerJs('ViewEventController');
 ?>
 </body>

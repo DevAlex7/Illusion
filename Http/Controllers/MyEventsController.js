@@ -1,4 +1,5 @@
 $(document).ready(function () {
+   
     CallEvents();
     $('.modal').modal();
 });
@@ -8,7 +9,6 @@ function setEvents(events){
             events.forEach(function(event){
 
                 var fecha = moment(event.date);
-                console.log(event.id);
                 content+=`
                 <div class="col s12 m12">
                     <div class="card z-depth-4" id="CardEvent">

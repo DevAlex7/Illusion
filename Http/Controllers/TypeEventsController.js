@@ -1,4 +1,5 @@
 $(document).ready(function () {
+   
     callTypes();
     $('.modal').modal();
 });
@@ -59,6 +60,7 @@ function callTypes(){
             if(!result.status){
             }
             setTypes(result.dataset,result.role);
+            
             $('.tooltipped').tooltip(); 
         }
         else{

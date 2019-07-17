@@ -1,10 +1,13 @@
 $(document).ready(function () {
-    selectTypeEvents('TIpoeventos', null);
-   
+    selectTypeEvents('typeEvents', null);
+    combobox('month');
+    $('.datepicker').datepicker();
+    
 });
+
 function selectTypeEvents(Select, value){
     $.ajax({
-        url: requestPublicGET('typeEvents','getTypes'),
+        url: requestGET('typeEvents','getTypesEvents'),
         type: 'POST',
         data: null,
         datatype: 'JSON'
@@ -39,9 +42,10 @@ function selectTypeEvents(Select, value){
 }
 $('#RequestForm').submit(function(){
     event.preventDefault();
+
     $.ajax(
         {
-            url:requestPublicPOST('Request','sendRequest'),
+            url:requestPOST('Request','sendRequest'),
             type:'POST',
             data:$('#RequestForm').serialize(),
             datatype:'JSON'
@@ -53,7 +57,7 @@ $('#RequestForm').submit(function(){
                 const result  = JSON.parse(response);
                 if(result.status){
                     ToastSucces('Petición enviada correctamente');
-                    cleanForm('RequestForm');
+                    ClearForm('RequestForm');
                 }else{
                     ToastError(result.exception);
                 }
@@ -66,5 +70,4 @@ $('#RequestForm').submit(function(){
     .fail(function(jqXHR){
         catchError(jqXHR);
     })
-
 })

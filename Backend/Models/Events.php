@@ -30,6 +30,9 @@ class Events extends Validator{
             return false;
         }
     }
+    public function getEventName(){
+        return $this->nameEvent;
+    }
     public function date($value){
         if($this->validateDate($value)){
             $this->date=$value;
@@ -122,6 +125,9 @@ class Events extends Validator{
                         INNER JOIN event_types ON events.type_event=event_types.id AND events.id=?)';
         $params=array($this->id);
         return Database::getRow($sql,$params);
+    }
+    public function grt(){
+        
     }
     public function getProductsinEvent(){
         $sql='  SELECT list_products_event.id AS idProductList, products.id, products.nameProduct, list_products_event.count, products.price 
