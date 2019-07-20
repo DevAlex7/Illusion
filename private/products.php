@@ -68,6 +68,19 @@
                                             <input id="NameProduct" name="NameProduct" type="text">
                                             <label for="NameProduct">Nombre del Producto</label>
                                         </div>
+                                        <div class="file-field input-field col s12 m9" id="TimeSection">
+                                            <div class="btn waves-effect">
+                                                <span><i class="material-icons">image</i></span>
+                                                <input 
+                                                id="ProductImage" 
+                                                type="file" 
+                                                name="ProductImage" 
+                                                required/>
+                                            </div>
+                                            <div class="file-path-wrapper">
+                                                <input type="text" class="file-path validate" placeholder="Seleccione una imagen"/>
+                                            </div>
+                                        </div>
                                         <div class="input-field col s6">
                                             <i class="material-icons prefix">exposure</i>
                                             <input id="CountStock" name="CountStock" min="0" type="number">
@@ -98,6 +111,7 @@
                                 <div class="center"> <span class="card-title">Información general</span> </div>
                                 <blockquote id="LineAllDetails">
                                     <input type="hidden" id="EditId" name="EditId">
+                                    <input type="hidden" name="ImageEditProduct" id="ImageEditProduct">
                                     <span class="card-title" id="userResponsable"></span>
                                     <span class="card-title" id="dateProduct"></span>
                                     <div class="row">
@@ -107,6 +121,20 @@
                                                 <input type="text" name="EditNameProduct" id="EditNameProduct">
                                             </blockquote>
                                         </div>
+                                        <div class="file-field input-field col s12 m9" id="TimeSection">
+                                            <div class="btn waves-effect">
+                                                <span><i class="material-icons">image</i></span>
+                                                <input 
+                                                id="FileEditCover" 
+                                                type="file" 
+                                                name="FileEditCover" 
+                                                />
+                                            </div>
+                                            <div class="file-path-wrapper">
+                                                <input type="text" class="file-path validate" id="Image" placeholder="Seleccione una imagen"/>
+                                            </div>
+                                        </div>
+ 
                                         <div class="col s12 m7">
                                             <blockquote id="LineDetails">
                                                 <label> <h6>Cantidad de producto</h6> </label>

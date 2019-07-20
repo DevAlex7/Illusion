@@ -3,6 +3,8 @@ date_default_timezone_set("America/El_Salvador");
 class Product extends Validator{
     private $id;
     private $nameProduct;
+    private $imageroot='../Imports/resources/pics/products/';
+    private $image_product;
     private $count;
     private $date;
     private $id_employee;
@@ -30,6 +32,23 @@ class Product extends Validator{
     public function getNameProduct(){
         return $this->nameProduct;
     }
+
+    public function getImage(){
+        return $this->image_product;
+    }
+    public function getRoot(){
+        return $this->imageroot;
+    }
+    public function image_product($file, $name){
+        if($this->validateImageFile($file, $this->imageroot, $name, 500, 500)){
+            $this->image_product=$this->getImageName();
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
     public function count($value){
         if($this->ValidateInt($value)){
             $this->count=$value;
@@ -39,6 +58,7 @@ class Product extends Validator{
             return false;
         }
     }
+    
     public function id_employee($value){
         if($this->validateId($value)){
             $this->id_employee=$value;
@@ -69,13 +89,13 @@ class Product extends Validator{
     }
 
     public function save(){
-        $sql='INSERT INTO products (nameProduct, count, date, id_employee, price) VALUES (?,?,?,?,?)';
-        $params=array($this->nameProduct, $this->count , $today = date("Y-m-d"), $this->id_employee, $this->price );
+        $sql='INSERT INTO products (nameProduct, image_product, count, date, id_employee, price) VALUES (?,?,?,?,?,?)';
+        $params=array($this->nameProduct, $this->image_product, $this->count , $today = date("Y-m-d"), $this->id_employee, $this->price );
         return Database::executeRow($sql,$params);
     }
     public function edit(){
-        $sql = 'UPDATE products SET nameProduct=?, count=?, price=? WHERE id=?';
-        $params=array($this->nameProduct, $this->count, $this->price, $this->id);
+        $sql = 'UPDATE products SET nameProduct=?, image_product=? ,count=?, price=? WHERE id=?';
+        $params=array($this->nameProduct, $this->image_product , $this->count, $this->price, $this->id);
         return Database::executeRow($sql,$params);
     }
     public function delete(){
@@ -84,7 +104,7 @@ class Product extends Validator{
         return Database::executeRow($sql,$params);
     }
     public function find(){
-        $sql='  SELECT products.id, products.nameProduct, products.count, products.date, employees.name, employees.lastname, products.price 
+        $sql='  SELECT products.id, products.nameProduct, products.image_product ,products.image_product ,products.count, products.date, employees.name, employees.lastname, products.price 
                 FROM (( products 
                 INNER JOIN employees 
                 ON employees.id=products.id_employee 

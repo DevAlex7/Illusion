@@ -12,6 +12,7 @@ $(document).ready(function () {
 
 //Variable global del id del producto, que seleccionemos
 var idProduct;
+var imageFile;
 
 //Función para rellenar la información en la carta, recibe como parametro el arreglo de dataset
 function setProducts(products){
@@ -21,10 +22,14 @@ function setProducts(products){
             content+=`
                 <div class="col s12 m4">
                     <div class="card z-depth-4" id="Card">
+                        <div class="card-image">
+                            <img src="../Imports/resources/pics/products/${product.image_product}">
+                            <span class="card-title">Card Title</span>
+                        </div>
                         <div class="card-content">
                             <div class="row">
-                                <a onClick="deleteProduct(${product.id})" class="right tooltipped modal-trigger" href="#DeleteProduct" data-position="bottom" data-tooltip="Eliminar" id="InfoProduct"> <i class="material-icons">delete</i> </a>
-                                <a onClick="getInformationEdit(${product.id})" class="right tooltipped modal-trigger" href="#EditModalProduct" data-position="left" data-tooltip="Información" id="InfoProduct"> <i class="material-icons">info</i> </a>
+                                <a onClick="getInformationEdit(${product.id})" class="left tooltipped modal-trigger" href="#EditModalProduct" data-position="left" data-tooltip="Información" id="InfoProduct"> <i class="material-icons">info</i> </a>
+                                <a onClick="deleteProduct(${product.id},'${product.image_product}')" class="left tooltipped modal-trigger" href="#DeleteProduct" data-position="bottom" data-tooltip="Eliminar" id="InfoProduct"> <i class="material-icons">delete</i> </a>
                             </div>
                             <span class="card-title">${product.nameProduct}</span>
                             <span class="grey-text">Cantidad: <span class="card-title">${product.count}</span>  </span>
@@ -77,20 +82,25 @@ $('#FormAddProduct').submit(function(){
         {
             url:requestPOST('products','SaveProduct'),
             type:'POST',
-            data:$('#FormAddProduct').serialize(),
+            data: new FormData($('#FormAddProduct')[0]),
+            cache: false,
+            contentType: false,
+            processData: false,
             datatype:'JSON'
         }
     )
     .done(function(response)
         {
             if(isJSONString(response)){
-                console.log(response);
                 const result = JSON.parse(response);
-                if(result.status){
+                if(result.status==1){
                     M.toast({html:'¡Agregado correctamente!'});
                     callProducts();
                     $('#AddProductModal').modal('close');
                     $('#FormAddProduct')[0].reset();
+                }
+                else if(result.status==2){
+                    M.toast({html:result.exception});
                 }
                 else{
                     M.toast({html:result.exception});
@@ -114,8 +124,7 @@ function getInformationEdit(product){
             datatype:'JSON'
         }
     )
-    .done(function(response
-    )
+    .done(function(response)
         {
             if(isJSONString(response)){
                 const result = JSON.parse(response);
@@ -125,6 +134,8 @@ function getInformationEdit(product){
                     $('#userResponsable').text("Ingresado por: "+result.dataset.name +" "+result.dataset.lastname);
                     $('#dateProduct').text("Fecha de ingreso: "+ date.lang('es').format('dddd D MMMM , YYYY'));
                     $('#EditNameProduct').val(result.dataset.nameProduct);
+                    $('#ImageEditProduct').val(result.dataset.image_product);
+                    $('#Image').val(result.dataset.image_product);
                     $('#EditCountProduct').val(result.dataset.count);
                     $('#EditPriceProduct').val(result.dataset.price);
                 }
@@ -148,7 +159,10 @@ $('#FormEditProduct').submit(function(){
         {
             url:requestPUT('products','EditProduct'),
             type:'POST',
-            data:$('#FormEditProduct').serialize(),
+            data: new FormData($('#FormEditProduct')[0]),
+            cache: false,
+            contentType: false,
+            processData: false,
             datatype:'JSON'
         }
     )
@@ -156,10 +170,20 @@ $('#FormEditProduct').submit(function(){
         {   
             if(isJSONString(response)){
                 const result = JSON.parse(response);
-                if(result.status){
+                if(result.status==1){
                     ToastSucces('Actualizado Correctamente');
                     ClearForm('FormEditProduct');
                     closeModal('EditModalProduct');
+                    callProducts();
+                }
+                else if(result.status==2){
+                    ToastError(result.exception);
+                }
+                else if(result.status==3){
+                    ToastError("Actulizado sin subir algun archivo");
+                    ClearForm('FormEditProduct');
+                    closeModal('EditModalProduct');
+                    callProducts();
                 }
                 else{
                     ToastError(result.exception);
@@ -174,8 +198,10 @@ $('#FormEditProduct').submit(function(){
         console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
     });
 })
-function deleteProduct(product){
+
+function deleteProduct(product, image){
     idProduct=product;
+    imageFile = image;
 }
 function confirmDelete(){
     $.ajax(
@@ -183,7 +209,7 @@ function confirmDelete(){
             url:requestDELETE('products','deleteProduct'),
             type:'POST',
             data:{
-                idProduct
+                idProduct, imageFile
             },
             datatype:'JSON'
         }
@@ -192,10 +218,13 @@ function confirmDelete(){
         {
             if(isJSONString(response)){
                 const result = JSON.parse(response);
-                if(result.status){
+                if(result.status==1){
                     ToastSucces('¡Producto eliminado exitosamente!');
                     closeModal('DeleteProduct');
                     callProducts();
+                }
+                else if(result.status==2){
+                    ToastError(result.exception);
                 }
                 else{
                     ToastError(result.exception);
