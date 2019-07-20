@@ -14,7 +14,8 @@
         ImportGlobal::ImportMaterialIcons();
         ImportGlobal::ImportIco();
         ImportGlobal::ImportSidenavCss('sidenav');
-        ImportGlobal::ImportFileCss('requests')
+        ImportGlobal::ImportFileCss('requests');
+        ImportGlobal::ImportFont();
     ?> 
 </head>
 <body>

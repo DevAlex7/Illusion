@@ -12,6 +12,7 @@
         ImportGlobal::ImportMaterializeCss();
         ImportGlobal::ImportMaterialIcons();
         ImportGlobal::ImportIco();
+        ImportGlobal::ImportFont();
         ImportGlobal::ImportFileCss('signup');
     ?>
 </head>

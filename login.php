@@ -12,6 +12,7 @@ require_once('Imports/Global/Global.php');
             ImportGlobal::ImportPublicMaterialIcons();
             ImportGlobal::ImportPublicMaterializeCss();
             ImportGlobal::publicIco();
+            ImportGlobal::ImportFont();
             ImportGlobal::ImportPublicFileCss('signupPublic');
     ?>
 </head>
@@ -46,6 +47,11 @@ require_once('Imports/Global/Global.php');
                             <i class="material-icons prefix">vpn_key</i>
                             <input id="pass" autocomplete="off" name="pass" type="password">
                             <label for="pass">Contraseña</label>
+                        </div>
+                        <div class="input-field col s12 center">
+                            <p class="margin medium-small">
+                                <a href="signup.php">¿No tienes una cuenta? ¡Registrate en Illusion Party Supplies!</a>
+                            </p>
                         </div>
                     </div>
                     <button type="submit" class="btn col s12 m6 offset-m3 red">Entrar</button>

@@ -10,9 +10,10 @@
         <meta charset="UTF-8">
         <!-- TÍTULO DE LA VENTANA -->
         <title>Distribuidora Illussion | Inicio</title>
-        <!-- IMPORTACIONES -->
+        <!-- IMPORTACIONES kk -->
         <?php
             ImportGlobal::publicIco();
+            ImportGlobal::ImportFont();
             ImportGlobal::ImportPublicMaterializeCss();
             ImportGlobal::ImportPublicMaterialIcons();
             ImportGlobal::publicStyle();
@@ -131,6 +132,7 @@
                 <a class="carousel-item" href="#eight!"><img src="Imports/resources/pics/files/08.jpg"></a>
             <a class="carousel-item" href="#nine!"><img src="Imports/resources/pics/files/09.jpg"></a>
         </div>
+        <!-- END: Productos -->
 
         <!-- BEGIN: Footer -->
             <footer class="page-footer grey darken-4">

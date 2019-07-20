@@ -17,6 +17,7 @@
     ImportGlobal::ImportIco();
     ImportGlobal::ImportFileCss('products');
     ImportGlobal::ImportSidenavCss('sidenav');
+    ImportGlobal::ImportFont();
 ?>
     <header>
         <?php AdminSideNav::SideNav(); ?> 

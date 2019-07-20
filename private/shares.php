@@ -17,6 +17,7 @@
         ImportGlobal::ImportFileCss('events');
         ImportGlobal::ImportFileCss('eventview');
         ImportGlobal::ImportSidenavCss('sidenav');
+        ImportGlobal::ImportFont();
     ?> 
 </head>
 <body>

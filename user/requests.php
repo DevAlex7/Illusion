@@ -12,6 +12,7 @@
             ImportGlobal::ImportMaterialIcons(); 
             ImportGlobal::ImportIco();
             ImportGlobal::ImportFileCss('signupPublic');
+            ImportGlobal::ImportFont();
         ?>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>

@@ -13,6 +13,7 @@ require_once('../Imports/Global/Global.php')?>
      ImportGlobal::ImportMaterialIcons(); 
      ImportGlobal::ImportFileCss('home'); 
      ImportGlobal::ImportIco();
+     ImportGlobal::ImportFont();
     ?>
 </head>
 <body>

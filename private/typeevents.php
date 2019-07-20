@@ -18,6 +18,7 @@
     ImportGlobal::ImportIco();
     ImportGlobal::ImportFileCss('typeEvents');
     ImportGlobal::ImportSidenavCss('sidenav');
+    ImportGlobal::ImportFont();
 ?>
     <header>
         <?php AdminSideNav::SideNav(); ?> 
