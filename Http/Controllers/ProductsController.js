@@ -78,6 +78,7 @@ function callProducts(){
 }
 $('#FormAddProduct').submit(function(){
     event.preventDefault();
+
     $.ajax(
         {
             url:requestPOST('products','SaveProduct'),
@@ -103,6 +104,10 @@ $('#FormAddProduct').submit(function(){
                     M.toast({html:result.exception});
                 }
                 else{
+                    M.toast({html:'¡Agregado correctamente!'});
+                    callProducts();
+                    $('#AddProductModal').modal('close');
+                    $('#FormAddProduct')[0].reset();
                     M.toast({html:result.exception});
                 }
             }
@@ -114,6 +119,7 @@ $('#FormAddProduct').submit(function(){
     .fail(function(jqXHR){
         console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
     });
+    
 })
 function getInformationEdit(product){
     $.ajax(

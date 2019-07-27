@@ -14,6 +14,11 @@ function requestPOST(API, Action){
     return APIPost;
 }
 
+function requestExtends(API, Action){
+    const APIPost = 'https://playaes.000webhostapp.com/Api/'+ API + '.php?request=POST&action=' + Action;
+    return APIPost;
+}
+
 function requestPUT(API,Action){
     const APIPut = '../Api/'+ API + '.php?request=PUT&action='+Action;
     return APIPut;

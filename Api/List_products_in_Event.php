@@ -34,6 +34,14 @@ if (isset($_GET['request']) && isset($_GET['action'])) {
                     $result['exception'] = 'No hay información del evento';
                 }
                 break;
+                case 'eventHasProduct':
+                    if($result['dataset']=$list->eventHasProducts()){
+                        $result['status']=1;
+                    }
+                    else{
+                        $result['exception']='No hay eventos';
+                    }
+                break;
             }
         break;
         case 'POST':
@@ -77,6 +85,19 @@ if (isset($_GET['request']) && isset($_GET['action'])) {
                         }
                     } else {
                         $result['exception'] = 'Producto no añadido correctamente';
+                    }
+                break;
+                case 'getProductperEvent':
+                    if($list->id_product($_POST['idEvent'])){
+                        if($result['dataset']=$list->getProductsPerEvent()){
+                            $result['status']=1;
+                        }
+                        else{
+                            $result['exception']='No hay productos';
+                        }
+                    }
+                    else{
+                        $result['exception']='No hay identificador de evento';
                     }
                 break;
             }

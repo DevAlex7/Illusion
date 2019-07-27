@@ -51,8 +51,8 @@ class Request{
     }
 
     public static function Insert(){
-        $sql='INSERT INTO requests VALUES(null,?,?,?,?,?,?,?)';
-        $params = array(static::$date_event,static::$name_event,static::$type_event, static::$persons, static::$description_event, static::$status, static::$user_id);
+        $sql='INSERT INTO requests VALUES(null,?,?,?,?,?,?,?,?)';
+        $params = array(static::$date_event,static::$name_event,static::$type_event, static::$persons, static::$description_event, static::$status, static::$user_id,$today=date('Y-m-d'));
         return Database::executeRow($sql,$params);
     }
     public static function GetRequest(){
@@ -75,6 +75,10 @@ class Request{
         $params=array(static::$status, static::$id);
         return Database::executeRow($sql,$params);
     }
-    
+    public static function requestPerDay($date1, $date2){
+        $sql='SELECT COUNT(*) AS count FROM requests WHERE date_request BETWEEN ? AND ?';
+        $params=array($date1,$date2);
+        return Database::getRow($sql,$params);
+    }
 }
 ?>

@@ -89,7 +89,7 @@ class Product extends Validator{
     }
 
     public function save(){
-        $sql='INSERT INTO products (nameProduct, image_product, count, date, id_employee, price) VALUES (?,?,?,?,?,?)';
+        $sql='INSERT INTO products VALUES (NULL,?,?,?,?,?,?)';
         $params=array($this->nameProduct, $this->image_product, $this->count , $today = date("Y-m-d"), $this->id_employee, $this->price );
         return Database::executeRow($sql,$params);
     }

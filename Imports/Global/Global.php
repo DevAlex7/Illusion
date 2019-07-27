@@ -14,7 +14,8 @@ class ImportGlobal{
     }
     public static function ImportFont(){
         print
-        '<link rel="stylesheet" href="/Illusion/Imports/resources/css/global/font.css">';
+        '<link href="https://fonts.googleapis.com/css?family=Sarabun&display=swap" rel="stylesheet">
+        ';
     }
     public static function ImportSidenavCss($sidenavCss){
         print 
@@ -57,6 +58,12 @@ class ImportGlobal{
         print 
         '<script src="../Http/Controllers/'.$Controller.'.js"></script>';
     }
+
+    public static function ImportChartHelpers($Controller){
+        print 
+        '<script src="../Helpers/'.$Controller.'.js"></script>';
+    }
+
     public static function ImportRoutesJs(){
         print 
         '<script src="../Helpers/router.js"></script>';
@@ -119,6 +126,7 @@ class ImportGlobal{
         print 
         '<script src="Imports/resources/js/global/jquery-3.2.1.min.js"></script>';
     }
+    
     //To import the Global Materialize Js
     public static function ImportPublicMaterializeJS(){
         print 
@@ -134,6 +142,7 @@ class ImportGlobal{
         print 
         '<script src="Http/Public/'.$Controller.'.js"></script>';
     }
+    
     public static function ImportPublicPlugin(){
         print 
         '<script src="Imports/resources/js/global/plugin.js"></script>';

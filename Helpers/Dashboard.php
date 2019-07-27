@@ -31,7 +31,7 @@ class AdminSideNav {
                         <li><a href="/Illusion/private/employees.php"><i class="material-icons">account_circle</i>Administradores</a></li>
                         <li><a href="/Illusion/private/products.php"><i class="material-icons">local_mall</i>Productos</a></li>
                         <li><a href="/Illusion/private/requests.php"><i class="material-icons">inbox</i>Solicitudes</a></li>
-                        <li><a href="/Illusion/private/charts.php"><i class="material-icons">insert_drive_file</i>Estadísticas</a></li>
+                        <li><a href="/Illusion/private/charts.php"><i class="material-icons">assessment</i>Estadísticas</a></li>
                         <li><div class="divider"></div></li>
                         <li><a href="#ModalCloseSession" class="modal-trigger"><i class="material-icons">exit_to_app</i>Cerrar Sesión</a></li>
                         </div>

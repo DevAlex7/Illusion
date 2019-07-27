@@ -72,6 +72,20 @@
                             $result['exception']='Nombre de evento invalido';
                         }
                     break;
+                    case 'requestPerDate':
+                        $date1 = $_POST['date1'];
+                        $date2 = $_POST['date2'];
+
+                        $recipe1 = str_replace('/', '-', $date1);
+                        $recipe2 = str_replace('/', '-', $date2);
+
+                        if($result['dataset']=Request::requestPerDay( date('Y-m-d', strtotime($recipe1)) , date('Y-m-d', strtotime($recipe2)) )){
+                            $result['status']=1;                            
+                        }
+                        else{
+                            $result['exception']='No hay información';
+                        }
+                    break;
                     default: 
                     exit('acción no disponible');
                 }

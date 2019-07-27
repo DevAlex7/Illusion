@@ -30,15 +30,37 @@
         </nav>
        <div class="row">
            <div class="col s12 m12">
-            <div class="card">
+                <div class="card">
                     <div class="card-content">
-                        <div class="row" id="RequestsList">
-                           
+                        <div class="row" id="RequestsList">           
                         </div> 
                     </div>
                 </div>
            </div>
-       </div>
+           <div class="col s12 m6">
+               <div class="card">
+                   <div class="card-content">
+                        <span class="card-title">N° de solicitudes por fechas</span>
+                        <form method="POST" id="Datesform">
+                            <div class="row">
+                                <div class="center">
+                                    <div class="col s12 m6">
+                                        <input class="center" type="date" name="date1" id="date1" required/>   
+                                    </div>
+                                    <div class="col s12 m6">
+                                        <input class="center" type="date" name="date2" id="date2" required/>   
+                                    </div>
+                                    <button class="btn">Buscar</button>
+                                </div>
+                            </div>
+                        </form>     
+                        <div class="card-panel" id="cardChart">
+                        <canvas id="requestsDay"></canvas>
+                        </div>
+                   </div>
+               </div>
+           </div>
+        </div>
     </main>
     <footer class="red">
         <?php ImportGlobal::ImportFooter(); ?>
@@ -48,7 +70,8 @@
     ImportGlobal::ImportMaterializeJS();
     ImportGlobal::ImportJSFunctions();
     ImportGlobal::ImportMomentJS();
-    ImportGlobal::ImportRoutesJs();
+    ImportGlobal::ImportChart();
+    ImportGlobal::ImportChartHelpers('HelperChart');
     ImportGlobal::ImportControllerJs('RequestController');
 ?>
 </body>

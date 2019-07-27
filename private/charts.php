@@ -27,7 +27,7 @@
             <nav class="" id="Bar">
                 <div class="nav-wrapper">
                     <ul class="left hide-on-med-and-down">
-                        <li><a class=""> <i class="material-icons left">timeline</i> Gráficos y estadísticas del sistema</a></li>
+                        <li><a class=""> <i class="material-icons left">timeline</i> Gráficos y estadísticas </a></li>
                     </ul>
                 </div>
             </nav>
@@ -36,12 +36,12 @@
         <div class="row">
             <div class="col s12 m6">
                 <div id="Form">
-                    <div class=" z-depth-4 card-panel border-radius-6 Card">
+                    <div class=" z-depth-4 card-panel">
                         <form>
-                            <div class="row margin">
+                            <div class="row">
                                 <div class="input-field col s12">
                                     <div class="center-align">
-                                        <span class="card-title"> <i class="material-icons blue-text">filter_vintage</i> </span>
+                                        <span class="card-title"> <i class="material-icons blue-text">filter_vintage</i></span>
                                     </div>
                                     <div class="divider"></div>
                                     <div class="center-align" id="DetailsEmployee">
@@ -56,9 +56,9 @@
             </div>
             <div class="col s12 m6">
                 <div id="Form">
-                    <div class=" z-depth-4 card-panel border-radius-6 Card">
+                    <div class="z-depth-4 card-panel">
                         <form>
-                            <div class="row margin">
+                            <div class="row">
                                 <div class="input-field col s12">
                                     <div class="center-align">
                                         <span class="card-title"> <i class="material-icons blue-text">filter_vintage</i> </span>

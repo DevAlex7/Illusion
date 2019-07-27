@@ -23,6 +23,16 @@
         <?php AdminSideNav::SideNav(); ?> 
     </header>
     <main>
+        <div class="navbar-fixed">
+            <nav class="" id="Bar">
+                <div class="nav-wrapper">
+                    <ul class="left hide-on-med-and-down">
+                        <li><a href="/Illusion/private/products_in_event.php"> <i class="material-icons left">share</i>Productos por evento</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>            
+
             <div class="fixed-action-btn">
                 <a class="btn-floating modal-trigger tooltipped btn-large white " data-position="left" data-tooltip="Agregar producto" href="#AddProductModal">
                     <i class="large material-icons red-text">add</i>

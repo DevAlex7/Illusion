@@ -2,7 +2,7 @@ $(document).ready(function () {
     chartType();
 });
 // Constante para establecer la ruta y parámetros de comunicación con la API
-const api = '/Illusion/Api/events.php?request=GET&action=';
+const api = '../Api/events.php?request=GET&action=';
 
 // Función para graficar la cantidad de productos por categoría
 function chartType()

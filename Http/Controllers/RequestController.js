@@ -192,5 +192,34 @@ function updateStatus(id, status){
     })
     
 }
+$('#Datesform').submit(function(){
+    event.preventDefault();
+    $.ajax({
+        url:requestPOST('Request','requestPerDate'),
+        type:'POST',
+        data:$('#Datesform').serialize(),
+        datatype:'JSON'
+    })
+    .done(function(response){
+        if(isJSONString(response)){
+            const result = JSON.parse(response);
+            if(result.status){
+                var count = [];
+                count.push(result.dataset.count);
+                console.log(count);
+                requestsPerDays('requestsDay',count);
+            }
+            else{
+                ToastError(result.exception);
+            }
+        }
+        else{
+            console.log(response)
+        }
+    })
+    .fail(function(jqXHR){
+        catchError(jqXHR);
+    })
+})
 
 
