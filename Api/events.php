@@ -199,6 +199,14 @@
                             $result['exception']='No hay información del evento';
                         }
                     break;
+                    case 'eventsbyState':
+                        if($result['dataset']=$event->eventsByStates()){
+                            $result['status']=1;
+                        }
+                        else{
+                            $result['exception']='No hay datos preliminares';
+                        }
+                    break;
                     default:
                     exit('acción no disponible');
                 }

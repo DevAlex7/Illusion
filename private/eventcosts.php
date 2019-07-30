@@ -24,7 +24,6 @@
         <?php AdminSideNav::SideNav(); ?>
     </header>
     <main>
-            
             <!-- NavBar -->
             <div class="navbar-fixed">
                 <nav id="Bar">
@@ -53,11 +52,13 @@
                                     <div class="row" id="ReadPay">
                                     </div>
                                 </div>
-                        </div>
+                    <span class="card-title">Eventos por estado de paga</span>          
+                    <div class="divider"></div>
+                        <canvas id="eventsbyStates" style="width:50px"></canvas>
+                    </div>
                     </div>
                 </div>
             </div>
-            
     </main>
     <footer>
 
@@ -66,7 +67,8 @@
     ImportGlobal::ImportJQuery();
     ImportGlobal::ImportMaterializeJS();
     ImportGlobal::ImportJSFunctions();
-    ImportGlobal::ImportRoutesJs();
+    ImportGlobal::ImportChart();
+    ImportGlobal::ImportChartHelpers('HelperChart');
     ImportGlobal::ImportControllerJs('CostsController');
 ?>
 </body>

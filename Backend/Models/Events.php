@@ -161,11 +161,11 @@ class Events extends Validator{
         return Database::getRow($sql,$params);
     }
     public function getEventsCosts(){
-        $sql='  SELECT events.name_event, events.pay_status, products.price * list_products_event.count AS Cost FROM 
+        $sql='  SELECT events.name_event, events.pay_status, SUM(products.price * list_products_event.count) AS Cost FROM 
                 ((events 
                 INNER JOIN list_products_event ON list_products_event.id_event=events.id) 
                 INNER JOIN products ON list_products_event.id_product=products.id 
-                INNER JOIN payment_event_status ON events.pay_status=payment_event_status.id)
+                INNER JOIN payment_event_status ON events.pay_status=payment_event_status.id)  GROUP BY events.name_event
             ';
         $params=array(null);
         return Database::getRows($sql,$params);
@@ -310,6 +310,12 @@ class Events extends Validator{
         $sql = 'SELECT COUNT(events.id)  AS counting, event_types.type FROM ((events INNER JOIN event_types ON events.type_event=event_types.id))';
         $params = array(null);
         return Database::getRows($sql, $params);
+    }
+
+    public function eventsByStates(){
+        $sql='SELECT COUNT(*) AS eventsCount, payment_event_status.status FROM ((events INNER JOIN payment_event_status ON payment_event_status.id = events.pay_status)) GROUP BY events.id';
+        $params = array(null);
+        return Database::getRows($sql,$params);
     }
 
 }

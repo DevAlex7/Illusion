@@ -36,8 +36,8 @@
                         </div> 
                     </div>
                 </div>
-           </div>
-           <div class="col s12 m6">
+            </div>
+            <div class="col s12 m6">
                <div class="card">
                    <div class="card-content">
                         <span class="card-title">N° de solicitudes por fechas</span>
@@ -55,11 +55,32 @@
                             </div>
                         </form>     
                         <div class="card-panel" id="cardChart">
-                        <canvas id="requestsDay"></canvas>
+                            <canvas id="requestsDay"></canvas>
+                            <a class="modal-trigger" onclick="viewDetails()" href="#viewDates" id="moredetails"></a>
                         </div>
                    </div>
                </div>
-           </div>
+            </div>
+            <div class="col s12 m6">
+               <div class="card">
+                   <div class="card-content">
+                        <span class="card-title">Solicitudes por estados</span>
+                        <div class="card-panel" id="cardChart">
+                            <canvas id="requestsStates"></canvas>
+                        </div>
+                   </div>
+               </div>
+            </div>
+        </div>
+        <div class="modal" id="viewDates">
+            <div class="modal-content">
+                <div class="card" style="border-radius:1vh">
+                    <div class="card-content">
+                        <span class="card-title">Solicitudes por rango de fechas </span>
+                        <canvas id="datesDetails"></canvas>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
     <footer class="red">

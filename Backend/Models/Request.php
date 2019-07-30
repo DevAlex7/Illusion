@@ -1,4 +1,5 @@
-<?php 
+<?php
+date_default_timezone_set("America/El_Salvador"); 
 class Request{
 
     private static $id;
@@ -79,6 +80,16 @@ class Request{
         $sql='SELECT COUNT(*) AS count FROM requests WHERE date_request BETWEEN ? AND ?';
         $params=array($date1,$date2);
         return Database::getRow($sql,$params);
+    }
+    public static function requestByStates(){
+        $sql = 'SELECT status_requests.status, COUNT(requests.id) AS requestsCount FROM (status_requests INNER JOIN requests ON status_requests.id=requests.status) GROUP BY status_requests.status';
+        $params = array(null);
+        return Database::getRows($sql,$params);
+    }
+    public static function moreDetailsDate($date1,$date2){
+        $sql='SELECT requests.date_request, COUNT(*) AS countperday FROM requests WHERE requests.date_request BETWEEN ? AND ? GROUP BY requests.date_request';
+        $params = array($date1,$date2);
+        return Database::getRows($sql,$params);
     }
 }
 ?>
