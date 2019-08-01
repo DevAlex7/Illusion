@@ -3,7 +3,7 @@ $(document).ready(function () {
 });
 function testNodeJs(){
     $.ajax({
-        url:'http://localhost:3000/requests/delete/25',
+        url:'http://localhost:3000/requests/delete/23',
         type:'DELETE',
         data:null,
         datatype:'JSON'
