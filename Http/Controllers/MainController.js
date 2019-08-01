@@ -1,5 +1,5 @@
 $(document).ready(function () {
-   testNodeJs();
+   //testNodeJs();
 });
 function testNodeJs(){
     $.ajax({
