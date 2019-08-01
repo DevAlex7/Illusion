@@ -66,7 +66,47 @@
                                     <div class="divider"></div>
                                     <div class="center-align" id="DetailsEmployee">
                                         <span class="grey-text card-title">Acciones realizadas por fecha.</span>
-                                        <canvas id="chart"></canvas>
+                                        <canvas id="line"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m6">
+                <div id="Form">
+                    <div class=" z-depth-4 card-panel border-radius-6 Card">
+                        <form>
+                            <div class="row margin">
+                                <div class="input-field col s12">
+                                    <div class="center-align">
+                                        <span class="card-title"> <i class="material-icons blue-text">filter_vintage</i> </span>
+                                    </div>
+                                    <div class="divider"></div>
+                                    <div class="center-align" id="DetailsEmployee">
+                                        <span class="grey-text card-title">Cantidad de productos registrados en eventos.</span>
+                                        <canvas id="line"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m6">
+                <div id="Form">
+                    <div class=" z-depth-4 card-panel border-radius-6 Card">
+                        <form>
+                            <div class="row margin">
+                                <div class="input-field col s12">
+                                    <div class="center-align">
+                                        <span class="card-title"> <i class="material-icons blue-text">filter_vintage</i> </span>
+                                    </div>
+                                    <div class="divider"></div>
+                                    <div class="center-align" id="DetailsEmployee">
+                                        <span class="grey-text card-title">Eventos agrupados por fecha.</span>
+                                        <canvas id="donut"></canvas>
                                     </div>
                                 </div>
                             </div>

@@ -7,6 +7,7 @@ if( isset($_GET['request']) && isset($_GET['action']) ){
     
     session_start();
     $result = array('status'=>0, 'exception'=>'');
+    $bin = new Binnacle();
 
         switch($_GET['request'])
         {
@@ -19,6 +20,13 @@ if( isset($_GET['request']) && isset($_GET['action']) ){
                         else{
                             $result['exception']='No hay acciones';
                         }
+                    break;
+                    case 'chartBinnacle':
+                    if ($result['dataset'] = $bin->chartBinnacle()) {
+                        $result['status'] = 1;
+                    } else {
+                        $result['exception'] = 'No hay datos disponibles';
+                    }
                     break;
                 default:
                 exit('acción no disponible');

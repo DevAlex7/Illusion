@@ -7,7 +7,7 @@ require_once('../Imports/Global/Global.php')?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>DashBoard | Inicio </title>
+    <title>Dashboard | Inicio </title>
     <?php 
      ImportGlobal::ImportMaterializeCss();
      ImportGlobal::ImportMaterialIcons(); 
@@ -26,7 +26,7 @@ require_once('../Imports/Global/Global.php')?>
            <div class="card col s12 m5 offset-m3">
                 <div class="card-content">
                     <span class="card-title center">¡Bienvenido!</span>
-                    <span class="card-title center"> <?php print $_SESSION['idUser'].' '.$_SESSION['LastnameUser']   ?> </span>
+                    <span class="card-title center"> <?php print $_SESSION['UsernameActive']. ': ' .$_SESSION['NameUser']. ' '.$_SESSION['LastnameUser']   ?> </span>
                 </div>
            </div>
         </div>
