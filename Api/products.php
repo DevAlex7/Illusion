@@ -80,23 +80,39 @@
                 switch($_GET['action']){
                     case 'SaveProduct':
                         if($product->nameProduct($_POST['NameProduct'])){
-                            if($product->count($_POST['CountStock'])){
-                                if($product->id_employee($_SESSION['idUser'])){
-                                    if($product->price($_POST['PriceProduct'])){
-                                        $product->save();
-                                        Binnacle::set()->action("Se ha insertado un nuevo producto: ".$product->getNameProduct())->user($_SESSION['idUser'])->insert();
-                                        $result['status']=1;
+                            if(is_uploaded_file($_FILES['ProductImage']['tmp_name'])){
+                                if($product->image_product($_FILES['ProductImage'],null)){
+                                    if($product->saveFile($_FILES['ProductImage'], $product->getRoot(), $product->getImage())){
+                                        if($product->count($_POST['CountStock'])){
+                                            if($product->id_employee($_SESSION['idUser'])){
+                                                if($product->price($_POST['PriceProduct'])){
+                                                    $product->save();
+                                                    Binnacle::set()->action("Se ha insertado un nuevo producto: ".$product->getNameProduct())->user($_SESSION['idUser'])->insert();
+                                                    $result['status']=1;
+                                                }
+                                                else{
+                                                    $result['exception']='Dato de precio invalido';
+                                                }
+                                            }
+                                            else{
+                                                $result['exception']='Empleado no definido';
+                                            }
+                                        }
+                                        else{
+                                            $result['exception']='Cantidad invalida';
+                                        }
                                     }
                                     else{
-                                        $result['exception']='Dato de precio invalido';
+                                        $result['status'] = 2;
+                                        $result['exception'] = 'No se guardó el archivo';
                                     }
                                 }
                                 else{
-                                    $result['exception']='Empleado no definido';
+                                    $result['exception']=$gender->getImageError();                                
                                 }
                             }
                             else{
-                                $result['exception']='Cantidad invalida';
+                                $result['exception'] = 'Seleccione una imagen';
                             }
                         }
                         else{
@@ -114,9 +130,21 @@
                             if($product->nameProduct($_POST['EditNameProduct'])){
                                 if($product->count($_POST['EditCountProduct'])){
                                     if($product->price($_POST['EditPriceProduct'])){
-                                        
-                                        $product->edit();
-                                        $result['status']=1;
+                                        if (is_uploaded_file($_FILES['FileEditCover']['tmp_name'])) {
+                                            if ($product->image_product($_FILES['FileEditCover'], $_POST['ImageEditProduct'])) {
+                                                $file = true;       
+                                            } else {
+                                                $result['exception'] = $product->getImageError();
+                                                $file = false;
+                                            }
+                                        } else {
+                                            if ($product->image_product(null, $_POST['ImageEditProduct'])) {
+                                                $result['exception'] = 'No se subió ningún archivo';
+                                            } else {
+                                                $result['exception'] = $product->getImageError();
+                                            }
+                                            $file = false;
+                                        }
                                     }
                                     else{
                                         $result['exception']='Precio invalido';
@@ -129,6 +157,20 @@
                             else{
                                 $result['exception']='Nombre de producto incorrecto';
                             }
+                            if ($product->edit()) {
+                                if ($file) {
+                                    if ($product->saveFile($_FILES['FileEditCover'], $product->getRoot(), $product->getImage())) {
+                                        $result['status'] = 1;
+                                    } else {
+                                        $result['status'] = 2;
+                                        $result['exception'] = 'No se guardó el archivo';
+                                    }
+                                } else {
+                                    $result['status'] = 3;
+                                }
+                            } else {
+                                $result['exception'] = 'Operación fallida';
+                            }
                         }
                         else{
                             $result['exception']='No hay información del producto';
@@ -140,8 +182,16 @@
                 switch($_GET['action']){
                     case 'deleteProduct':
                         if($product->id($_POST['idProduct'])){
-                            $product->delete();
-                            $result['status']=1;
+                            if ($product->delete()){
+                                if ($product->deleteFile($product->getRoot(), $_POST['imageFile'])) {
+                                    $result['status'] = 1;
+                                } else {
+                                    $result['status'] = 2;
+                                    $result['exception'] = 'No se borró el archivo';
+                                }
+                            } else {
+                                $result['exception'] = 'Operación fallida';
+                            }
                         }
                         else{
                             $result['exception']='No hay información del producto';

@@ -1,10 +1,10 @@
 $(document).ready(function () {
-    
     CallCostsInEventsPending();
     CallCostsInEventsPay();
     CallLost(); 
     CallWin();
     modalInit();
+    getEventsbyStates();
 });
 //Función para maquetar la información 
 function setCostsDontPay(costs){
@@ -181,4 +181,37 @@ function CallWin(){
     .fail(function(jqXHR){
         console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
     });
+}
+function getEventsbyStates(){
+    $.ajax(
+        {
+            url:requestGET('events','eventsbyState'),
+            type:'POST',
+            data:null,
+            datatype:'JSON'
+        }
+    )
+    .done(function(response)
+        {
+            if(isJSONString(response)){
+                const result = JSON.parse(response);
+                if(result.status){
+                    var count = [];
+                    var states = [];
+
+                    for(i in result.dataset){
+                        count.push(result.dataset[i].eventsCount);
+                        states.push(result.dataset[i].status);
+                    }
+
+                    EventsbyStates('eventsbyStates',states,count);
+                }
+                else{
+                    ToastError(result.exception);
+                }
+            }else{
+                console.log(response);
+            }
+        }
+    )
 }

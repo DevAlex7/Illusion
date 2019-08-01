@@ -5,6 +5,7 @@ body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
+    font-family: 'Sarabun', sans-serif;
 }
 main {
     flex: 1 0 auto;
@@ -20,4 +21,9 @@ header, main, footer {
   }
 #Description{
   margin-top: 2rem;
+}
+#viewDates{
+  background-color: #b8c6db;
+background-image: linear-gradient(315deg, #b8c6db 0%, #f5f7fa 74%);
+
 }

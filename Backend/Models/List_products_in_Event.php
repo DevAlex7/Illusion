@@ -77,6 +77,19 @@ class List_products_in_Event extends Validator{
         $params=array($this->id);
         return Database::executeRow($sql,$params);
     }
+    public function getProductsPerEvent(){
+        $sql='SELECT events.id, products.nameProduct, events.name_event, list_products_event.count 
+        FROM ((list_products_event 
+        INNER JOIN products ON list_products_event.id_product=products.id) 
+        INNER JOIN events ON list_products_event.id_event=events.id AND events.id=?)';
+        $params=array($this->id_product);
+        return Database::getRows($sql,$params);
+    }
+    public function eventHasProducts(){
+        $sql='SELECT events.id, events.name_event, COUNT(list_products_event.count) AS count FROM ((list_products_event INNER JOIN events ON list_products_event.id_event=events.id)) WHERE count > 0 GROUP BY events.name_event';
+        $params=array(null);
+        return Database::getRows($sql,$params);
+    }
     
 }
 ?>

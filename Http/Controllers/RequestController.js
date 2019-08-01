@@ -1,8 +1,11 @@
 $(document).ready(function () {
-  
+    $('.modal').modal();    
     $('.collapsible').collapsible();
     CallRequests();
+    RequestsbyStates();
 });
+var date1;
+var date2;
 function setRequests(requests){
     let content ='';
     if(requests.length>0){
@@ -172,10 +175,12 @@ function updateStatus(id, status){
                     if(idStatus==1){
                         ToastSucces('¡Petición aceptada correctamente');
                         CallRequests();
+                        RequestsbyStates();
                     }
                     else{
                         ToastSucces('¡Petición rechazada correctamente');
                         CallRequests();
+                        RequestsbyStates();
                     }
                 }   
                 else{
@@ -192,5 +197,107 @@ function updateStatus(id, status){
     })
     
 }
+$('#Datesform').submit(function(){
+    date1 = $('#date1').val();
+    date2 = $('#date2').val();
+    event.preventDefault();
+    $.ajax({
+        url:requestPOST('Request','requestPerDate'),
+        type:'POST',
+        data:$('#Datesform').serialize(),
+        datatype:'JSON'
+    })
+    .done(function(response){
+        if(isJSONString(response)){
+            const result = JSON.parse(response);
+            if(result.status){
+                var count = [];
+                count.push(result.dataset.count);
+                console.log(count);
+                requestsPerDays('requestsDay',count);
+                $('#moredetails').text("ver más detalles");
+            }
+            else{
+                ToastError(result.exception);
+            }
+        }
+        else{
+            console.log(response)
+        }
+    })
+    .fail(function(jqXHR){
+        catchError(jqXHR);
+    })
+})
+function RequestsbyStates(){
+    $.ajax(
+        {
+            url:requestGET('Request','requestsPerState'),
+            type:'POST',
+            data:null,
+            datatype:'JSON'
+        }
+    )
+    .done(function(response)
+        {
+            if(isJSONString(response)){
+                const result = JSON.parse(response);
+                if(result.status){
+                    var count = [];
+                    var states = [];
+                    for(i in result.dataset){
+                        count.push(result.dataset[i].requestsCount);
+                        states.push(result.dataset[i].status);
+                    }
+                    requestbyStates('requestsStates',states, count);
+                }
+                else{
+                    ToastError(result.exception);
+                }
+            }
+            else{
+                console.log(response);
+            }   
+        }
+    )   
+}
+function viewDetails(){
+    $.ajax(
+        {
+            url:requestPOST('Request','requestsInformation'),
+            type:'POST',
+            data:{
+                date1:date1,
+                date2:date2
+            },
+            datatype:'JSON'
+        }
+    )
+    .done(function(response)
+        {
+            if(isJSONString(response)){
+                const result = JSON.parse(response);
+                if(result.status){
+                    var dates = [];
+                    var count = [];
 
+                    for(i in result.dataset){
+                        dates.push(result.dataset[i].date_request);
+                        count.push(result.dataset[i].countperday);
+                    }
+
+                    requestsInformation('datesDetails',dates,count);
+                    
+                }
+                else{
+                    ToastError(result.exception);
+                }
+            }
+            else{
+                console.log(response);
+            }
+        }
+    )
+
+}
 
