@@ -39,7 +39,6 @@ require_once('../Imports/Global/Global.php')?>
     ImportGlobal::ImportJQuery();
     ImportGlobal::ImportMaterializeJS();
     ImportGlobal::ImportJSFunctions();
-    ImportGlobal::ImportRoutesJs();
     ImportGlobal::ImportControllerJs('MainController')
 
 ?>
