@@ -32,5 +32,10 @@
             $params = array(static::$action, static::$user_id, $today = date('Y-m-d'));
             return Database::executeRow($sql,$params);
         }
+        public function chartBinnacle(){
+            $sql = 'SELECT COUNT(binnacle.id) AS counting, binnacle.date FROM binnacle GROUP BY binnacle.date';
+            $params = array(null);
+            return Database::getRows($sql, $params);
+        }
     }
 ?>

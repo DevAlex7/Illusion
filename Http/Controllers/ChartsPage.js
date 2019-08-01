@@ -1,10 +1,16 @@
 $(document).ready(function () {
     chartType();
+    chartBinnacle();
 });
 // Constante para establecer la ruta y parámetros de comunicación con la API
+<<<<<<< HEAD
+const api = '/Illusion/Api/events.php?request=GET&action=';
+const apiBin = '/Illusion/Api/Binnacle.php?request=GET&action=';
+=======
 const api = '../Api/events.php?request=GET&action=';
+>>>>>>> 9b9fc61aa0ab04d20248ed56578fc0dcb8c068e0
 
-// Función para graficar la cantidad de productos por categoría
+// Función para graficar la cantidad de eventos por categoría
 function chartType()
 {
     $.ajax({
@@ -28,6 +34,41 @@ function chartType()
                 barGraph('chart', type, counting, 'Cantidad de eventos', '')
             } else {
                 $('#chart').remove();
+            }
+        } else {
+            console.log(response);
+        }
+    })
+    .fail(function(jqXHR){
+        // Se muestran en consola los posibles errores de la solicitud AJAX
+        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+    });
+}
+
+// Función para graficar la bitácora
+function chartBinnacle()
+{
+    $.ajax({
+        url: apiBin + 'chartBinnacle',
+        type: 'post',
+        data: null,
+        datatype: 'json'
+    })
+    .done(function(response){
+        // Se verifica si la respuesta de la API es una cadena JSON, sino se muestra el resultado en consola
+        if (isJSONString(response)) {
+            const result = JSON.parse(response);
+            // Se comprueba si el resultado es satisfactorio, sino se remueve la etiqueta canvas
+            if (result.status) {
+                let date = [];
+                let counting = [];
+                result.dataset.forEach(function(row){
+                    date.push(row.date);
+                    counting.push(row.counting);
+                });
+                lineGraph('line', date, counting, 'Acciones realizadas', '')
+            } else {
+                $('#line').remove();
             }
         } else {
             console.log(response);
