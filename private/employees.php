@@ -95,24 +95,26 @@
                 <div class="modal-content">
                     <div class="row">
                         <div class="col s12 m12">
-                        <div class="card z-depth-3" id="eventsDates">
-                            <div class="card-content" id="information">
-                                <span class="card-title">Actividad en creación de eventos</span>
-                                <canvas id="eventsinActivity"></canvas>
+                            <div class="card z-depth-3" id="eventsDates">
+                                <div class="card-content" id="information">
+                                    <span class="card-title">Actividad en creación de eventos</span>
+                                    <canvas id="eventsinActivity"></canvas>
+                                </div>
                             </div>
-                        </div>
                         </div>
                         <div class="col s12 m6">
                             <div class="card z-depth-3" id="productsActivity">
                                 <div class="card-content" id="EventsProducts">
-                                    
+                                    <span class="card-title">N° de productos en eventos</span>
+                                    <canvas id="listProduct"></canvas>
                                 </div>
                             </div>
                         </div>
                         <div class="col s12 m6">
                             <div class="card z-depth-3" id="typeEventsActivity">
                                 <div class="card-content">
-                                    
+                                    <span class="card-title">Tipos de eventos</span>
+                                    <canvas id="canvasTypeEvents"></canvas>
                                 </div>
                             </div>
                         </div>

@@ -167,6 +167,11 @@ class Employee extends Validator{
         $params=array($this->id);
         return Database::getRows($sql,$params);
     }
+    public function getTypeEventUser(){
+        $sql='SELECT COUNT(events.id) AS countType, event_types.type FROM ((event_types INNER JOIN events ON event_types.id=events.type_event) INNER JOIN employees ON events.id_employee=employees.id AND employees.id=8) GROUP BY event_types.type';
+        $params=array($this->id);
+        return Database::getRows($sql,$params);
+    }
     public function LogOff(){
 		if(isset($_SESSION['idUser'])){
 			unset($_SESSION['idUser']);

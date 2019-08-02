@@ -233,34 +233,6 @@ function CallEmployees() {
       catchError(jqXHR);
     });
 }
-function StadisticsProducts(id, count){
-  console.log(id);
-  console.log(count);
-  var canvas = [];
-  canvas.push(id);
-  var products =[];
-  products.push(count);
-  console.log(products);
-  productsEvents(id,products);
-}
-function setProducts(rows){
-  let content ='';
-  var count =[];
-  if(rows.length>0){
-      rows.forEach(function(row){
-        content+=`
-          <div class="card">
-            <div class="card-content">
-                <span>${row.name_event}</span>
-                <canvas id="canvas"></canvas>
-            </div>
-        </div>
-        `;
-        StadisticsProducts('canvas-'+row.id, row.numberCount);
-      })
-  }
-  $('#EventsProducts').html(content);
-}
 
 function viewProductsActivity(id){
   var idEmployee = id;
@@ -280,7 +252,13 @@ function viewProductsActivity(id){
       if(isJSONString(response)){
         const result = JSON.parse(response);
         if(result.status){
-          setProducts(result.dataset);         
+          var events =[];
+          var count = [];
+          for(i in result.dataset){
+            events.push(result.dataset[i].name_event);
+            count.push(result.dataset[i].numberCount);
+            productsEvents('listProduct', events,count);
+          }
         }
         else{
         }
@@ -293,6 +271,49 @@ function viewProductsActivity(id){
   .fail(function(jqXHR) {
     catchError(jqXHR);
   });
+}
+function eventTypes(id){
+  var idEmployee = id;
+  $.ajax(
+    {
+      url:requestPOST('userEmployees','typeEventsActivity'),
+      type:'POST',
+      data:{
+        idEmployee  
+      },
+      datatype:'JSON',
+      cache:false
+    }
+  )
+  .done(function(response)
+    {
+      if(isJSONString(response)){
+        const result = JSON.parse(response);
+        if(result.status){
+            console.log(result.dataset);
+            var types =[];
+            var count =[];
+            for(i in result.dataset){
+              types.push(result.dataset[i].type);
+              count.push(result.dataset[i].countType);
+              typeEventsUser('canvasTypeEvents',count, types);
+            }
+            console.log(types);
+            console.log(count);
+        }
+        else{
+        }
+      }
+      else{
+        console.log(response);
+      }
+
+    }
+  )
+  .fail(function(jqXHR) {
+    catchError(jqXHR);
+  });
+
 }
 function viewStadistics(id)
 {
@@ -323,6 +344,7 @@ function viewStadistics(id)
             }
             eventsActivityUser('eventsinActivity',dates, count);
             viewProductsActivity(idEmployee);
+            eventTypes(idEmployee);
           }
           else{
             eventsActivityUser('eventsinActivity',[0], [0]);   

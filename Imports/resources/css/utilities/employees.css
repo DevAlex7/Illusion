@@ -73,3 +73,6 @@ header, main, footer {
 #typeEventsActivity{
     border-radius: 1vh;
 }
+#canvasTypeEvents{
+    margin-top:2.5rem;
+}

@@ -341,26 +341,90 @@ function eventsActivityUser(id, datesCreated, count){
     }
 }
 //Horizontal bar
-function productsEvents(canvasId, count){
-    
-    new Chart( $('#canvas'), {
+function productsEvents(canvasId, events ,count){
+    var coloR3 = [];
+
+    for(i in events){
+        coloR3.push('#'+(Math.random()*0xFFFFFF<<0).toString(16));
+    }
+
+    var ctx = $("#"+canvasId);
+
+    new Chart(ctx, {
         type: 'horizontalBar',
         data: {
-          labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
+          labels: events,
           datasets: [
             {
-              label: "Population (millions)",
-              backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
-              data: [2478,5267,734,784,433]
+              label: '',
+              backgroundColor: coloR3,
+              data: count
             }
           ]
         },
         options: {
-          legend: { display: false },
-          title: {
-            display: true,
-            text: 'Predicted world population (millions) in 2050'
-          }
+        legend: {
+            labels: {
+                    generateLabels: function(chart) {
+                        labels = Chart.defaults.global.defaultFontColor = 'black';
+                    return labels
+                    }
+            },
+            display: false,
+        },
+        scales: {
+            xAxes: [{
+                ticks: {
+                    min: 1 // Edit the value according to what you need
+                }
+            }],
+            yAxes: [{
+                stacked: true
+            }]
         }
+    }
     });
+}
+function typeEventsUser(idCanvas, count, types){
+    var coloR =[];
+
+    for(var x in types){
+        coloR.push('#'+(Math.random()*0xFFFFFF<<0).toString(16));
+    }
+
+
+    var ctx1 = $("#"+idCanvas);
+    
+    var data1 = {
+        labels:types,
+        datasets : [
+            {
+                data : count,
+                backgroundColor: coloR,
+                borderColor : [
+                    'white',
+                ],
+                borderWidth : [1, 1, 1, 1, 1]
+            }
+        ],
+        
+    };
+
+    var options = {
+        legend : {
+            display : true,
+            position : "bottom",
+        },
+        labels: {
+            boxWidth: 80,
+            fontColor: 'black'
+        },
+    };
+
+    var chart1 = new Chart( ctx1, {
+        type : "doughnut",
+        data : data1,
+        options : options
+    });
+ 
 }

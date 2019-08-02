@@ -193,6 +193,19 @@
                             $result['exception']='No se ha enviado información del usuario seleccionado';
                         }
                     break;
+                    case 'typeEventsActivity':
+                        if($employe->id($_POST['idEmployee'])){
+                            if($result['dataset']=$employe->getTypeEventUser()){
+                                $result['status']=1;
+                            }
+                            else{
+                                $result['exception']='No hay actividad de este usuario en eventos';
+                            }
+                        }
+                        else{
+                            $result['exception']='No se ha enviado información del usuario seleccionado';
+                        }
+                    break;
                     case 'LogoffPublic':
                         if($employe->LogOffPublic()){
                                 header('location: /Illusion/');
