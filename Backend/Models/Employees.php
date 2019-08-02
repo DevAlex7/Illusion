@@ -148,7 +148,7 @@ class Employee extends Validator{
         return Database::getRows($sql,$params);
     }
     public function ListPersons(){
-        $sql='SELECT employees.*, roles.role FROM ((employees INNER JOIN roles ON employees.role=roles.id)) WHERE employees.id NOT IN (?)';
+        $sql='SELECT employees.*, roles.role AS nameRole FROM ((employees INNER JOIN roles ON employees.role=roles.id)) WHERE employees.id NOT IN (?)';
         $params=array($this->id);
         return Database::getRows($sql,$params);
     }
@@ -157,7 +157,16 @@ class Employee extends Validator{
         $params=array($this->password,$this->id);
         return Database::getRows($sql,$params);
     }
-
+    public function eventsActivity(){
+        $sql='SELECT events.date_created AS eventCreated, COUNT(events.id) AS countActivity FROM (events INNER JOIN employees ON employees.id=events.id_employee AND employees.id=?) GROUP BY events.date_created';
+        $params=array($this->id);
+        return Database::getRows($sql,$params);
+    }
+    public function productsEventActivity(){
+        $sql='SELECT events.id, events.name_event, SUM(list_products_event.count) AS numberCount FROM ((list_products_event INNER JOIN products ON products.id=list_products_event.id_product) INNER JOIN events ON events.id=list_products_event.id_event INNER JOIN employees ON employees.id=events.id_employee AND employees.id=8) GROUP BY events.name_event';
+        $params=array($this->id);
+        return Database::getRows($sql,$params);
+    }
     public function LogOff(){
 		if(isset($_SESSION['idUser'])){
 			unset($_SESSION['idUser']);

@@ -167,6 +167,32 @@
                             
                         }
                     break;
+                    case 'eventsActivity':
+                        if($employe->id($_POST['idEmployee'])){
+                            if($result['dataset']=$employe->eventsActivity()){
+                                $result['status']=1;
+                            }
+                            else{
+                                $result['exception']='No hay actividad de este usuario en eventos';
+                            }
+                        }
+                        else{
+                            $result['exception']='No se ha enviado información del usuario seleccionado';
+                        }
+                    break;
+                    case 'productsActivity':
+                        if($employe->id($_POST['idEmployee'])){
+                            if($result['dataset']=$employe->productsEventActivity()){
+                                $result['status']=1;
+                            }
+                            else{
+                                $result['exception']='No hay actividad de este usuario en eventos';
+                            }
+                        }
+                        else{
+                            $result['exception']='No se ha enviado información del usuario seleccionado';
+                        }
+                    break;
                     case 'LogoffPublic':
                         if($employe->LogOffPublic()){
                                 header('location: /Illusion/');

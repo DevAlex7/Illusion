@@ -11,6 +11,7 @@ class Events extends Validator{
     private $type_event;
     private $place;
     private $search;
+    private $date_created;
 
     public function id($value){
         if($this->ValidateInt($value)){
@@ -113,8 +114,8 @@ class Events extends Validator{
         return Database::getRows($sql,$params);
     }
     public function save(){
-        $sql='INSERT INTO events (name_event, date, client_name, id_employee, price, pay_status, type_event, place) VALUES (?,?,?,?,?,?,?,?)';
-        $params = array($this->nameEvent, $this->date, $this->clientName, $this->id_employee, $this->price, $this->pay_status, $this->type_event, $this->place);
+        $sql='INSERT INTO events (name_event, date, client_name, id_employee, price, pay_status, type_event, place, date_created) VALUES (?,?,?,?,?,?,?,?,?)';
+        $params = array($this->nameEvent, $this->date, $this->clientName, $this->id_employee, $this->price, $this->pay_status, $this->type_event, $this->place,$today=date('Y-m-d'))    ;
         return Database::executeRow($sql,$params);
     }
     public function getInformation(){

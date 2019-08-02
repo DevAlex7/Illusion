@@ -90,48 +90,47 @@
                 </div>
             </div>
 
-            <!--modal Editar Administradores -->
-            <div class="modal" id="alterAdmins">
+            <!--modal ver estadisticas Administradores -->
+            <div class="modal" id="viewStadistics">
                 <div class="modal-content">
-                    <div class="card">
-                        <div class="card-content">
-                            <div class="input-field col s6">
-                                <input id="name" type="text">
-                                <label for="name">nombres</label>
+                    <div class="row">
+                        <div class="col s12 m12">
+                        <div class="card z-depth-3" id="eventsDates">
+                            <div class="card-content" id="information">
+                                <span class="card-title">Actividad en creación de eventos</span>
+                                <canvas id="eventsinActivity"></canvas>
                             </div>
-                            <div class="input-field col s6">
-                                <input id="last_name" type="text">
-                                <label for="last_name">Apellidos</label>
+                        </div>
+                        </div>
+                        <div class="col s12 m6">
+                            <div class="card z-depth-3" id="productsActivity">
+                                <div class="card-content" id="EventsProducts">
+                                    
+                                </div>
                             </div>
-                            <div class="input-field col s6">
-                                <input id="email" type="email">
-                                <label for="email">Correo Electronico</label>
+                        </div>
+                        <div class="col s12 m6">
+                            <div class="card z-depth-3" id="typeEventsActivity">
+                                <div class="card-content">
+                                    
+                                </div>
                             </div>
-                            <div class="input-field col s12">
-                                <select class="browser-default">
-                                    <option value="" disabled selected>Selecione el tipo de usuario</option>
-                                    <option value="0">Administrador</option>
-                                    <option value="1">Empleado</option>
-                                </select>                                
-                            </div>
-                            <a class="waves-effect waves-light btn"><i class="material-icons left"></i>Modificar</a>
                         </div>
                     </div>
-
                 </div>
             </div>
 
         <!--modal eliminar Administrador -->
         <div class="modal" id="deleteAdmins">
-                <div class="modal-content">
-                    <div class="card">
-                        <div class="card-content">
-                           <span class="card-title">Estas seguro que deseas eliminar?</span> 
-                            <a class="waves-effect red btn"><i class="material-icons left"></i>eliminar</a>
-                        </div>
+            <div class="modal-content">
+                <div class="card">
+                    <div class="card-content">
+                        <span class="card-title">Estas seguro que deseas eliminar?</span> 
+                        <a class="waves-effect red btn"><i class="material-icons left"></i>eliminar</a>
                     </div>
                 </div>
             </div>
+        </div>
 
     </main>
     <footer class="red">
@@ -141,7 +140,8 @@
     ImportGlobal::ImportJQuery();
     ImportGlobal::ImportMaterializeJS();
     ImportGlobal::ImportJSFunctions();
-    ImportGlobal::ImportRoutesJs();
+    ImportGlobal::ImportChart();
+    ImportGlobal::ImportChartHelpers('HelperChart');
     ImportGlobal::ImportControllerJs('EmployeesController');
 ?>
 </body>

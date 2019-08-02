@@ -3,12 +3,8 @@ $(document).ready(function () {
     chartBinnacle();
 });
 // Constante para establecer la ruta y parámetros de comunicación con la API
-<<<<<<< HEAD
-const api = '/Illusion/Api/events.php?request=GET&action=';
-const apiBin = '/Illusion/Api/Binnacle.php?request=GET&action=';
-=======
 const api = '../Api/events.php?request=GET&action=';
->>>>>>> 9b9fc61aa0ab04d20248ed56578fc0dcb8c068e0
+const apiBin = '../Api/Binnacle.php?request=GET&action=';
 
 // Función para graficar la cantidad de eventos por categoría
 function chartType()

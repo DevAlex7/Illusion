@@ -64,3 +64,12 @@ header, main, footer {
       padding-left: 0;
     }
   }
+#eventsDates{
+    border-radius: 1vh;
+}
+#productsActivity{
+    border-radius: 1vh;
+}
+#typeEventsActivity{
+    border-radius: 1vh;
+}

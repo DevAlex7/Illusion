@@ -148,7 +148,6 @@ function requestbyStates(id, states , count){
             data: count,
             text: "ff",
             backgroundColor: [
-                
                 'green',
                 'grey',
                 'red'
@@ -165,6 +164,7 @@ function requestbyStates(id, states , count){
     }
   });
 }
+
 function EventsbyStates(id, states , count){
   var ctx = $('#'+id);
   var myChart = new Chart(ctx, {
@@ -194,9 +194,7 @@ function EventsbyStates(id, states , count){
 }
 
 function requestsInformation(id, requestsDates, count){
-  console.log(requestsDates);
-  console.log(count);
-  console.log(id);
+  
   if(count.length>0){
       var chartdata = {
           labels: requestsDates,
@@ -270,4 +268,99 @@ function requestsInformation(id, requestsDates, count){
       $('#Card-'+id).remove();
   }   
   
+}
+function eventsActivityUser(id, datesCreated, count){
+    if(count.length>0){
+        var chartdata = {
+            labels: datesCreated,
+            datasets : [
+                {
+                    backgroundColor: 'transparent',
+                    borderColor:'blue',
+                    pointBorderColor: "blue",
+                    hoverBackgroundColor: 'black',
+                    hoverBorderColor: 'rgba(200, 200, 200, 1)',
+                    data: count
+                },
+            ]
+        };
+    
+        var idDeCanvas = $("#"+id);
+          
+        var barGraph = new Chart(idDeCanvas , {
+                type: 'line',
+                data: chartdata,
+                options: {
+                    legend: {
+                        labels: {
+                                generateLabels: function(chart) {
+                                    labels = Chart.defaults.global.defaultFontColor = 'black';
+                                return labels
+                                }
+                        },
+                        display: false,
+                    },
+                    scales:{
+                        yAxes: [{
+                            ticks: {
+                                fontColor: "black",
+                                fontStyle: "bold",
+                                beginAtZero: true,
+                                padding: 20,
+                                stepSize: 1
+                            },
+                            gridLines: {
+                                drawTicks: false,
+                                display: false
+                            }
+                        }],
+                        xAxes: [{
+                            gridLines: {
+                                zeroLineColor: "transparent"
+                            },
+                            ticks: {
+                                padding: 20,
+                                fontColor: "black",
+                                fontStyle: "bold"
+                            }
+                        }]
+                    },
+                    gridLines: {
+                        display: true,
+                        color: "black",
+                    },
+                    tooltips: {
+                        callbacks: {
+                            label: tooltipItem => `${tooltipItem.yLabel}: ${tooltipItem.xLabel}`, 
+                            title: () => null,
+                        }
+                    },
+                },
+            },
+        );   
+    }
+}
+//Horizontal bar
+function productsEvents(canvasId, count){
+    
+    new Chart( $('#canvas'), {
+        type: 'horizontalBar',
+        data: {
+          labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
+          datasets: [
+            {
+              label: "Population (millions)",
+              backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+              data: [2478,5267,734,784,433]
+            }
+          ]
+        },
+        options: {
+          legend: { display: false },
+          title: {
+            display: true,
+            text: 'Predicted world population (millions) in 2050'
+          }
+        }
+    });
 }
