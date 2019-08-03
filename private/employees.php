@@ -121,6 +121,19 @@
                     </div>
                 </div>
             </div>
+            <div class="modal" id="viewStadisticsPublicU">
+                <div class="modal-content">
+                    <div class="row">
+                        <div class="col s12 m12">
+                            <div class="card z-depth-3" id="cardRequests">
+                                <div class="card-content">
+                                <canvas id="requestsUser"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         <!--modal eliminar Administrador -->
         <div class="modal" id="deleteAdmins">

@@ -91,5 +91,10 @@ class Request{
         $params = array($date1,$date2);
         return Database::getRows($sql,$params);
     }
+    public static function requestsByUser(){
+        $sql='SELECT requests.date_request, COUNT(requests.id) AS countRequest FROM (requests INNER JOIN employees ON employees.id=requests.public_user_id AND employees.id=?) GROUP BY requests.date_request';
+        $params=array(static::$user_id);
+        return Database::getRows($sql,$params);
+    }
 }
 ?>

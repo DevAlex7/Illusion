@@ -108,6 +108,19 @@
                             $result['exception']='No hay información';
                         }
                     break;
+                    case 'requestsByUser':
+                        if(Validate::Integer($_POST['idEmployee'])->Id()){
+                            Request::user_id($_POST['idEmployee']);
+                            if($result['dataset']=Request::requestsByUser()){
+                                $result['status']=1;
+                            }else{
+                                $result['exception']='No hay solicitudes de este usuario';
+                            }
+                        }
+                        else{
+                            $result['exception']='No se ha identificado al usuario';
+                        }
+                    break;
                     default: 
                     exit('acción no disponible');
                 }

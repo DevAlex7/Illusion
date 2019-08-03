@@ -67,6 +67,9 @@ header, main, footer {
 #eventsDates{
     border-radius: 1vh;
 }
+#cardRequests{
+    border-radius: 1vh;
+  }
 #productsActivity{
     border-radius: 1vh;
 }

@@ -194,6 +194,7 @@ function setEmployees(employees) {
                                         <div class="card-content">
                                             <div id="ActionsIcons">
                                                 <div class="row">
+                                                <a href="#viewStadisticsPublicU" class="modal-trigger" onClick="viewRequests(${employe.id})"> <i class="material-icons blue-text">ballot</i> </a>
                                                 </div>
                                             </div>
                                         </div>
@@ -348,6 +349,46 @@ function viewStadistics(id)
           }
           else{
             eventsActivityUser('eventsinActivity',[0], [0]);   
+          }
+        }
+        else{
+          console.log(response);
+        }
+      }
+    )
+    .fail(function(jqXHR) {
+      catchError(jqXHR);
+    });
+}
+function viewRequests(id){
+    var idEmployee = id;
+    $.ajax(
+      {
+        url:requestPOST('Request','requestsByUser'),
+        type:'POST',
+        data:{
+          idEmployee  
+        },
+        datatype:'JSON',
+        cache:false
+      }
+    )
+    .done(function(response)
+      {
+        if(isJSONString(response)){
+          const result = JSON.parse(response);
+          if(result.status){
+            var dates =[];
+            var count =[];     
+
+            for(i in result.dataset){
+              dates.push(result.dataset[i].date_request);
+              count.push(result.dataset[i].countRequest);
+            }
+            eventsActivityUser('requestsUser',dates, count);
+          }
+          else{
+            eventsActivityUser('requestsUser',[0], [0]);   
           }
         }
         else{
