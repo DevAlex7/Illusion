@@ -253,13 +253,16 @@ function viewProductsActivity(id){
       if(isJSONString(response)){
         const result = JSON.parse(response);
         if(result.status){
+
           var events =[];
           var count = [];
+
           for(i in result.dataset){
             events.push(result.dataset[i].name_event);
             count.push(result.dataset[i].numberCount);
             productsEvents('listProduct', events,count);
           }
+
         }
         else{
         }
@@ -291,16 +294,15 @@ function eventTypes(id){
       if(isJSONString(response)){
         const result = JSON.parse(response);
         if(result.status){
-            console.log(result.dataset);
             var types =[];
             var count =[];
+            
             for(i in result.dataset){
               types.push(result.dataset[i].type);
               count.push(result.dataset[i].countType);
               typeEventsUser('canvasTypeEvents',count, types);
             }
-            console.log(types);
-            console.log(count);
+
         }
         else{
         }

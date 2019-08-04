@@ -6,6 +6,10 @@
  */
 function productPerEvent(id, products, count){
     if(count.length>0){
+    
+        var idDeCanvas = $("#Canvas-"+id);
+
+
         var chartdata = {
             labels: products,
             datasets : [
@@ -19,8 +23,6 @@ function productPerEvent(id, products, count){
                 },
             ]
         };
-    
-        var idDeCanvas = $("#Canvas-"+id);
           
         var barGraph = new Chart(idDeCanvas , {
                 type: 'line',
@@ -82,11 +84,14 @@ function productPerEvent(id, products, count){
 
 //Bar Chart
 function requestsPerDays(id, count){
+    var ctx = $("#"+id);
+
+
     var coloR3 = [];
 
     coloR3.push('#'+(Math.random()*0xFFFFFF<<0).toString(16));
 
-    var ctx = $("#"+id);
+
 
     //bar chart data
     var data = {
@@ -139,6 +144,8 @@ function requestsPerDays(id, count){
 }
 function requestbyStates(id, states , count){
   var ctx = $('#'+id);
+  
+  
   var myChart = new Chart(ctx, {
     type: 'doughnut',
     data: {
@@ -166,8 +173,11 @@ function requestbyStates(id, states , count){
 }
 
 function EventsbyStates(id, states , count){
-  var ctx = $('#'+id);
-  var myChart = new Chart(ctx, {
+  
+    var ctx = $('#'+id);
+
+
+    var myChart = new Chart(ctx, {
     type: 'doughnut',
     data: {
         labels: states,
@@ -196,22 +206,24 @@ function EventsbyStates(id, states , count){
 function requestsInformation(id, requestsDates, count){
   
   if(count.length>0){
-      var chartdata = {
-          labels: requestsDates,
-          datasets : [
-              {
-                  backgroundColor: 'transparent',
-                  borderColor:'grey',
-                  pointBorderColor: "blue",
-                  hoverBackgroundColor: 'black',
-                  hoverBorderColor: 'rgba(200, 200, 200, 1)',
-                  data: count
-              },
-          ]
-      };
-  
+
       var idDeCanvas = $("#"+id);
-        
+    
+
+      var chartdata = {
+        labels: requestsDates,
+        datasets : [
+            {
+                backgroundColor: 'transparent',
+                borderColor:'grey',
+                pointBorderColor: "blue",
+                hoverBackgroundColor: 'black',
+                hoverBorderColor: 'rgba(200, 200, 200, 1)',
+                data: count
+            },
+        ]
+    };
+
       var barGraph = new Chart(idDeCanvas , {
               type: 'line',
               data: chartdata,
@@ -271,6 +283,10 @@ function requestsInformation(id, requestsDates, count){
 }
 function eventsActivityUser(id, datesCreated, count){
     if(count.length>0){
+        
+        var idDeCanvas = $("#"+id);
+
+
         var chartdata = {
             labels: datesCreated,
             datasets : [
@@ -284,10 +300,8 @@ function eventsActivityUser(id, datesCreated, count){
                 },
             ]
         };
-    
-        var idDeCanvas = $("#"+id);
           
-        var barGraph = new Chart(idDeCanvas , {
+        window.bar = new Chart(idDeCanvas , {
                 type: 'line',
                 data: chartdata,
                 options: {
@@ -342,13 +356,17 @@ function eventsActivityUser(id, datesCreated, count){
 }
 //Horizontal bar
 function productsEvents(canvasId, events ,count){
+
+    var ctx = $("#"+canvasId);
+
+
     var coloR3 = [];
 
     for(i in events){
         coloR3.push('#'+(Math.random()*0xFFFFFF<<0).toString(16));
     }
 
-    var ctx = $("#"+canvasId);
+    
 
     new Chart(ctx, {
         type: 'horizontalBar',
@@ -386,14 +404,15 @@ function productsEvents(canvasId, events ,count){
     });
 }
 function typeEventsUser(idCanvas, count, types){
+    
+
+    var ctx1 = $("#"+idCanvas);
+    
     var coloR =[];
 
     for(var x in types){
         coloR.push('#'+(Math.random()*0xFFFFFF<<0).toString(16));
     }
-
-
-    var ctx1 = $("#"+idCanvas);
     
     var data1 = {
         labels:types,
@@ -426,5 +445,5 @@ function typeEventsUser(idCanvas, count, types){
         data : data1,
         options : options
     });
- 
+
 }

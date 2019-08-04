@@ -13,15 +13,15 @@ class Database
 
         //databases
         'localdatabase' => 'illusion',
-        'externaldatabase' => '6G12K9Ie3I',
+        'externaldatabase' => '1ry69512YL',
 
         //usernames
         'localuser' => 'root',
-        'externalusername' => '6G12K9Ie3I',
+        'externalusername' => '1ry69512YL',
 
         //passwords
         'localpassword' => '',
-        'externalpassword' => '9rffHKbMCr'
+        'externalpassword' => 'jnPAaL3djy'
 
     );
 
@@ -29,10 +29,10 @@ class Database
 
     private function connect()
     {
-        $server = static::$config['localserver'];
-        $database = static::$config['localdatabase'];
-        $username = static::$config['localuser'];
-        $password = static::$config['localpassword'];
+        $server = static::$config['externalserver'];
+        $database = static::$config['externaldatabase'];
+        $username = static::$config['externalusername'];
+        $password = static::$config['externalpassword'];
         try {
             @self::$connection = new PDO('mysql:host='.$server.'; dbname='.$database.'; charset=utf8', $username, $password);
         } catch(PDOException $error) {

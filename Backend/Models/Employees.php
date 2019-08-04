@@ -163,12 +163,12 @@ class Employee extends Validator{
         return Database::getRows($sql,$params);
     }
     public function productsEventActivity(){
-        $sql='SELECT events.id, events.name_event, SUM(list_products_event.count) AS numberCount FROM ((list_products_event INNER JOIN products ON products.id=list_products_event.id_product) INNER JOIN events ON events.id=list_products_event.id_event INNER JOIN employees ON employees.id=events.id_employee AND employees.id=8) GROUP BY events.name_event';
+        $sql='SELECT events.id, events.name_event, SUM(list_products_event.count) AS numberCount FROM ((list_products_event INNER JOIN products ON products.id=list_products_event.id_product) INNER JOIN events ON events.id=list_products_event.id_event INNER JOIN employees ON employees.id=events.id_employee AND employees.id=?) GROUP BY events.name_event';
         $params=array($this->id);
         return Database::getRows($sql,$params);
     }
     public function getTypeEventUser(){
-        $sql='SELECT COUNT(events.id) AS countType, event_types.type FROM ((event_types INNER JOIN events ON event_types.id=events.type_event) INNER JOIN employees ON events.id_employee=employees.id AND employees.id=8) GROUP BY event_types.type';
+        $sql='SELECT COUNT(events.id) AS countType, event_types.type FROM ((event_types INNER JOIN events ON event_types.id=events.type_event) INNER JOIN employees ON events.id_employee=employees.id AND employees.id=?) GROUP BY event_types.type';
         $params=array($this->id);
         return Database::getRows($sql,$params);
     }
