@@ -119,6 +119,19 @@
                             $result['exception']='Nombre de producto incorrecto';
                         }
                     break;
+                    case 'likeStates':
+                        if($product->id($_POST['id'])){
+                            if($result['dataset']=$product->likesInformation()){
+                                $result['status']=1;
+                            }
+                            else{
+                                $result['exception']='No hay acciones sobre este producto';
+                            }
+                        }
+                        else{
+                            $result['exception']='No se ha identificado el producto';
+                        }
+                    break;
                     default: 
                     exit('acción no disponible');
                 }

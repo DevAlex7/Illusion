@@ -184,6 +184,16 @@
                     </div>
                 </div>
             </div>
+            <div class="modal" id="likesProducts">
+                <div class="modal-content">
+                    <div class="card">
+                        <div class="card-content">
+                            <span class="card-title">Preferencias de los usuarios</span>
+                            <canvas id="likesInformation"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
     </main>
     <footer class="red">
         <?php ImportGlobal::ImportFooter(); ?>
@@ -193,7 +203,8 @@
     ImportGlobal::ImportMaterializeJS();
     ImportGlobal::ImportMomentJS();
     ImportGlobal::ImportJSFunctions();
-    ImportGlobal::ImportRoutesJs();
+    ImportGlobal::ImportChart();
+    ImportGlobal::ImportChartHelpers('HelperChart');
     ImportGlobal::ImportControllerJs('ProductsController');
 ?>
 </body>

@@ -172,10 +172,8 @@ function requestbyStates(id, states , count){
   });
 }
 
-function EventsbyStates(id, states , count){
-  
+function EventsbyStates(id, states , count){  
     var ctx = $('#'+id);
-
 
     var myChart = new Chart(ctx, {
     type: 'doughnut',
@@ -186,7 +184,6 @@ function EventsbyStates(id, states , count){
             data: count,
             text: "ff",
             backgroundColor: [
-            
             'green',
             'grey',
 
@@ -204,14 +201,13 @@ function EventsbyStates(id, states , count){
   });
 }
 
-function requestsInformation(id, requestsDates, count){
-  
+function requestsInformation(id, requestsDates, count){  
   if(count.length>0){
 
       var idDeCanvas = $("#"+id);
     
 
-      var chartdata = {
+        var chartdata = {
         labels: requestsDates,
         datasets : [
             {
@@ -223,7 +219,7 @@ function requestsInformation(id, requestsDates, count){
                 data: count
             },
         ]
-    };
+        };
 
       var barGraph = new Chart(idDeCanvas , {
               type: 'line',
@@ -354,97 +350,179 @@ function eventsActivityUser(id, datesCreated, count){
             },
         );   
     }
+
+}
+
+function typeEventsUser(idCanvas, count, types){
+    if(count.length>0){
+        var ctx = $("#"+idCanvas);
+
+        var coloR3 = [];
+    
+        for(i in types){
+            coloR3.push('#'+(Math.random()*0xFFFFFF<<0).toString(16));
+        }
+    
+        new Chart(ctx, {
+            type: 'horizontalBar',
+            data: {
+              labels: types,
+              datasets: [
+                {
+                  label: '',
+                  backgroundColor: coloR3,
+                  data: count
+                }
+              ]
+            },
+            options: {
+            legend: {
+                labels: {
+                        generateLabels: function(chart) {
+                            labels = Chart.defaults.global.defaultFontColor = 'black';
+                        return labels
+                        }
+                },
+                display: false,
+            },
+            scales: {
+                xAxes: [{
+                    ticks: {
+                        min: 0 // Edit the value according to what you need
+                    }
+                }],
+                yAxes: [{
+                    stacked: true
+                }]
+            }
+        }
+        });
+    }
+    else{
+        $('#'+idCanvas).destroy();
+    }   
 }
 //Horizontal bar
 function productsEvents(canvasId, events ,count){
-
     var ctx = $("#"+canvasId);
+    if(events.length>0){
+        
+        var coloR3 = [];
 
-
-    var coloR3 = [];
-
-    for(i in events){
-        coloR3.push('#'+(Math.random()*0xFFFFFF<<0).toString(16));
-    }
-
-    
-
-    new Chart(ctx, {
-        type: 'horizontalBar',
-        data: {
-          labels: events,
-          datasets: [
-            {
-              label: '',
-              backgroundColor: coloR3,
-              data: count
-            }
-          ]
-        },
-        options: {
-        legend: {
-            labels: {
-                    generateLabels: function(chart) {
-                        labels = Chart.defaults.global.defaultFontColor = 'black';
-                    return labels
-                    }
-            },
-            display: false,
-        },
-        scales: {
-            xAxes: [{
-                ticks: {
-                    min: 1 // Edit the value according to what you need
-                }
-            }],
-            yAxes: [{
-                stacked: true
-            }]
+        for(i in events){
+            coloR3.push('#'+(Math.random()*0xFFFFFF<<0).toString(16));
         }
+
+
+        new Chart(ctx, {
+            type: 'horizontalBar',
+            data: {
+            labels: events,
+            datasets: [
+                {
+                label: '',
+                backgroundColor: coloR3,
+                data: count
+                }
+            ]
+            },
+            options: {
+            legend: {
+                labels: {
+                        generateLabels: function(chart) {
+                            labels = Chart.defaults.global.defaultFontColor = 'black';
+                        return labels
+                        }
+                },
+                display: false,
+            },
+            scales: {
+                xAxes: [{
+                    ticks: {
+                        min: 1 // Edit the value according to what you need
+                    }
+                }],
+                yAxes: [{
+                    stacked: true
+                }]
+            }
+        }
+        });
     }
-    });
+    else{
+        ctx.destroy();
+    }
 }
-function typeEventsUser(idCanvas, count, types){
-    var ctx = $("#"+idCanvas);
+function likesStates(idCanvas, likes, action){
+    if(likes.length>0){
 
-    var coloR3 = [];
-
-    for(i in types){
-        coloR3.push('#'+(Math.random()*0xFFFFFF<<0).toString(16));
-    }
-
-    new Chart(ctx, {
-        type: 'horizontalBar',
-        data: {
-          labels: types,
-          datasets: [
-            {
-              label: '',
-              backgroundColor: coloR3,
-              data: count
-            }
+        var idDeCanvas = $("#"+idCanvas);
+      
+  
+          var chartdata = {
+          labels: action,
+          datasets : [
+              {
+                  backgroundColor: 'transparent',
+                  borderColor:'grey',
+                  pointBorderColor: "blue",
+                  hoverBackgroundColor: 'black',
+                  hoverBorderColor: 'rgba(200, 200, 200, 1)',
+                  data: likes
+              },
           ]
-        },
-        options: {
-        legend: {
-            labels: {
-                    generateLabels: function(chart) {
-                        labels = Chart.defaults.global.defaultFontColor = 'black';
-                    return labels
-                    }
+          };
+  
+        var barGraph = new Chart(idDeCanvas , {
+                type: 'line',
+                data: chartdata,
+                options: {
+                    legend: {
+                        labels: {
+                                generateLabels: function(chart) {
+                                    labels = Chart.defaults.global.defaultFontColor = 'black';
+                                return labels
+                                }
+                        },
+                        display: false,
+                    },
+                    scales:{
+                        yAxes: [{
+                            ticks: {
+                                fontColor: "black",
+                                fontStyle: "bold",
+                                beginAtZero: true,
+                                padding: 20,
+                                stepSize: 1
+                            },
+                            gridLines: {
+                                drawTicks: false,
+                                display: false
+                            }
+                        }],
+                        xAxes: [{
+                            gridLines: {
+                                zeroLineColor: "transparent"
+                            },
+                            ticks: {
+                                padding: 20,
+                                fontColor: "black",
+                                fontStyle: "bold"
+                            }
+                        }]
+                    },
+                    gridLines: {
+                        display: true,
+                        color: "black",
+                    },
+                    tooltips: {
+                        callbacks: {
+                            label: tooltipItem => `${tooltipItem.yLabel}: ${tooltipItem.xLabel}`, 
+                            title: () => null,
+                        }
+                    },
+                },
             },
-            display: false,
-        },
-        scales: {
-            xAxes: [{
-                ticks: {
-                    min: 0 // Edit the value according to what you need
-                }
-            }],
-            yAxes: [{
-                stacked: true
-            }]
-        }
+        );   
     }
-    });
 }

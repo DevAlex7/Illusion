@@ -32,7 +32,9 @@ function setProducts(products){
                                 <a onClick="deleteProduct(${product.id},'${product.image_product}')" class="left tooltipped modal-trigger" href="#DeleteProduct" data-position="bottom" data-tooltip="Eliminar" id="InfoProduct"> <i class="material-icons">delete</i> </a>
                             </div>
                             <span class="card-title">${product.nameProduct}</span>
-                            <span class="grey-text">Cantidad: <span class="card-title">${product.count}</span>  </span>
+                            <p><a onClick="viewVotes(${product.id})" class="left tooltipped modal-trigger" href="#likesProducts" data-position="bottom" data-tooltip="Eliminar" id="InfoProduct"> Estadísticas </a></p>
+                            <span class="grey-text">Cantidad: <span class="card-title"> ${product.count} </span>  </span>
+                            
                         </div>
                     </div>
                 </div>
@@ -275,4 +277,35 @@ $('#SearchForm').submit(function(){
         console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
     });
 })
+function viewVotes(id){
+    $.ajax(
+        {
+            url:requestPOST('products','likeStates'),
+            type:'POST',
+            data:{
+                id
+            },
+            datatype:'JSON'
+        }
+    )
+    .done(function(response){
+        if(isJSONString(response)){
+            const result = JSON.parse(response);
+            if(result.status){
+                const states = [];
+                const likes =[];
+                for(i in result.dataset){
+                    states.push(result.dataset[i].action);
+                    likes.push(result.dataset[i].likes);
+                }
+                likesStates('likesInformation',likes, states);
+            }
+            else{
+                likesStates('likesInformation',[0], [0]);
+            }
+        }
+        else{
 
+        }
+    })
+}

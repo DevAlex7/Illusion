@@ -1,6 +1,7 @@
 $(document).ready(function() {
   CallEmployees();
   $(".modal").modal();
+  
 });
 
 function setEmployees(employees) {
@@ -253,7 +254,6 @@ function viewProductsActivity(id){
       if(isJSONString(response)){
         const result = JSON.parse(response);
         if(result.status){
-
           var events =[];
           var count = [];
 
@@ -262,7 +262,6 @@ function viewProductsActivity(id){
             count.push(result.dataset[i].numberCount);
             productsEvents('listProduct', events,count);
           }
-
         }
         else{
           productsEvents('listProduct', [0], [0]);
@@ -301,8 +300,9 @@ function eventTypes(id){
             for(i in result.dataset){
               types.push(result.dataset[i].type);
               count.push(result.dataset[i].countType);
-              typeEventsUser('canvasTypeEvents',count, types);
             }
+            
+            typeEventsUser('canvasTypeEvents',count, types);
         }
         else{
           typeEventsUser('canvasTypeEvents',[0], [0]);

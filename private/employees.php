@@ -102,7 +102,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col s12 m6">
+                        <div class="col s12 m12">
                             <div class="card z-depth-3" id="productsActivity">
                                 <div class="card-content" id="EventsProducts">
                                     <span class="card-title">N° de productos en eventos</span>
@@ -110,7 +110,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col s12 m6">
+                        <div class="col s12 m12">
                             <div class="card z-depth-3" id="typeEventsActivity">
                                 <div class="card-content">
                                     <span class="card-title">Tipos de eventos</span>

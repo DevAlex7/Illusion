@@ -134,6 +134,11 @@ class Product extends Validator{
         $params=array("%$this->search%","%$this->search% ","%$this->search%","%$this->search%","%$this->search%","%$this->search%");
         return Database::getRows($sql,$params);
     }
+    public function likesInformation(){
+        $sql='SELECT COUNT(*) AS likes, like_states.action FROM ((votes_products INNER JOIN products ON votes_products.id_product=products.id) INNER JOIN like_states ON votes_products.id_vote=like_states.id AND products.id=?) GROUP BY like_states.action';
+        $params=array($this->id);
+        return Database::getRows($sql,$params);
+    }
 
 }
 
