@@ -186,8 +186,9 @@ function EventsbyStates(id, states , count){
             data: count,
             text: "ff",
             backgroundColor: [
-              'grey',
-                'green',
+            
+            'green',
+            'grey',
 
             ],
             borderColor: [
@@ -404,46 +405,46 @@ function productsEvents(canvasId, events ,count){
     });
 }
 function typeEventsUser(idCanvas, count, types){
-    
+    var ctx = $("#"+idCanvas);
 
-    var ctx1 = $("#"+idCanvas);
-    
-    var coloR =[];
+    var coloR3 = [];
 
-    for(var x in types){
-        coloR.push('#'+(Math.random()*0xFFFFFF<<0).toString(16));
+    for(i in types){
+        coloR3.push('#'+(Math.random()*0xFFFFFF<<0).toString(16));
     }
-    
-    var data1 = {
-        labels:types,
-        datasets : [
+
+    new Chart(ctx, {
+        type: 'horizontalBar',
+        data: {
+          labels: types,
+          datasets: [
             {
-                data : count,
-                backgroundColor: coloR,
-                borderColor : [
-                    'white',
-                ],
-                borderWidth : [1, 1, 1, 1, 1]
+              label: '',
+              backgroundColor: coloR3,
+              data: count
             }
-        ],
-        
-    };
-
-    var options = {
-        legend : {
-            display : true,
-            position : "bottom",
+          ]
         },
-        labels: {
-            boxWidth: 80,
-            fontColor: 'black'
+        options: {
+        legend: {
+            labels: {
+                    generateLabels: function(chart) {
+                        labels = Chart.defaults.global.defaultFontColor = 'black';
+                    return labels
+                    }
+            },
+            display: false,
         },
-    };
-
-    var chart1 = new Chart( ctx1, {
-        type : "doughnut",
-        data : data1,
-        options : options
+        scales: {
+            xAxes: [{
+                ticks: {
+                    min: 0 // Edit the value according to what you need
+                }
+            }],
+            yAxes: [{
+                stacked: true
+            }]
+        }
+    }
     });
-
 }

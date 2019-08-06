@@ -312,7 +312,7 @@ class Events extends Validator{
     }
 
     public function eventsByStates(){
-        $sql='SELECT COUNT(*) AS eventsCount, payment_event_status.status FROM ((events INNER JOIN payment_event_status ON payment_event_status.id = events.pay_status)) GROUP BY events.id';
+        $sql='SELECT COUNT(payment_event_status.id) AS eventsCount, payment_event_status.status FROM ((events INNER JOIN payment_event_status ON payment_event_status.id=events.pay_status)) GROUP BY payment_event_status.status';
         $params = array(null);
         return Database::getRows($sql,$params);
     }

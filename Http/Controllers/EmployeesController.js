@@ -265,6 +265,7 @@ function viewProductsActivity(id){
 
         }
         else{
+          productsEvents('listProduct', [0], [0]);
         }
       }
       else{
@@ -302,9 +303,9 @@ function eventTypes(id){
               count.push(result.dataset[i].countType);
               typeEventsUser('canvasTypeEvents',count, types);
             }
-
         }
         else{
+          typeEventsUser('canvasTypeEvents',[0], [0]);
         }
       }
       else{

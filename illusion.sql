@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-08-2019 a las 21:59:01
+-- Tiempo de generación: 06-08-2019 a las 19:45:29
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.2
 
@@ -89,7 +89,8 @@ INSERT INTO `employees` (`id`, `name`, `lastname`, `email`, `username`, `passwor
 (10, 'Alejandro', 'Gonzalez', 'alexgve7sv@gmail.com', 'Alexgve7', '$2y$10$F0oQIOxd4yj9UVB5V148CuDXM2qhFseWJ0lZESCGJalOP64/06myS', 2),
 (13, 'Gabriela ', 'Ramos', 'gabyramos@gmail.com', 'GabyRamos7', '$2y$10$I/hsY0q.Q480ZaM56J2Vnu4zhjT3uaDgqtukLGNKlfWdY.o0EwBd.', 2),
 (22, 'Herbert', 'Maldonado', 'herbert@gmail.com', 'Cornejo04', '$2y$10$w1i6PcCfkEARS8K04mQlLOJTIsJjgzKU6St8elkB54JCUOgbmtovq', 2),
-(23, 'Benjamin', 'Flores', 'stevenbdf@gmail.com', 'stevenbdf2019', '$2y$10$EcIpeGnCghNLjnfJKkWHO.Z/TqXA9EMGjPeozviCl5yCLsOJz5efe', 2);
+(23, 'Benjamin', 'Flores', 'stevenbdf@gmail.com', 'stevenbdf2019', '$2y$10$EcIpeGnCghNLjnfJKkWHO.Z/TqXA9EMGjPeozviCl5yCLsOJz5efe', 2),
+(24, 'Gaby', 'Ramos', 'aki@gmail.com', 'Diastro', '$2y$10$sJtU8fBCJrR.i1x9jKJbLucKkWg4jRF/jAtQQvsKf7xrS6sE.yXDC', 0);
 
 -- --------------------------------------------------------
 
@@ -118,7 +119,22 @@ INSERT INTO `events` (`id`, `name_event`, `date`, `client_name`, `id_employee`, 
 (8, 'Toy story thematic', '2019-07-14', 'Alejandro Gonzalez', 8, NULL, 2, 7, NULL, '2019-07-03'),
 (9, 'Marvel comics chicago', '2019-07-15', 'Alejandro Gonzalez', 8, NULL, 1, 10, NULL, '2019-07-01'),
 (11, 'Tomorrowland Belgium\r\n', '2019-07-31', 'Alejandro Gonzalez', 8, NULL, 2, 19, NULL, '2019-07-16'),
-(12, 'Tomorrowland', '2019-07-31', 'Alejandro Gonzalez', 8, NULL, 2, 19, NULL, '2019-07-16');
+(12, 'Tomorrowland', '2019-07-31', 'Alejandro Gonzalez', 8, NULL, 2, 19, NULL, '2019-07-16'),
+(73, 'Cumpleaños de Shrek', '2019-09-01', 'Ciel Romanov', 9, 0.00, 2, 7, '<header></header>', '0000-00-00'),
+(74, 'Kermit y plaza sésamo.', '2020-02-02', 'Alejandro Manuel', 9, 0.00, 2, 10, '<frame></frame>', '2019-07-10'),
+(75, 'My Little Pony', '2019-12-12', 'André Candray', 9, 0.00, 2, 5, '<frame></frame>', '2019-07-28'),
+(76, 'Cumpleaños de Fabi', '2019-10-15', 'Allison Cartagena', 9, 0.00, 2, 18, '<frame></frame>', '2019-07-10'),
+(77, 'Boda de Marcela', '2021-05-05', 'Marcela Girón', 9, 0.00, 2, 11, '<frame></frame>', '2019-07-31'),
+(78, 'Boda de Alfaro', '2025-12-23', 'Daniel Alfaro', 9, 0.00, 2, 11, '<frame></frame>', '2019-07-23'),
+(79, 'Boda de Katherina', '2020-01-02', 'América Ivanov', 9, 0.00, 2, 11, '<frame></frame>', '2019-07-30'),
+(80, 'Cumpleaños de Bad Bunny', '2019-11-11', 'Benito Antonio', 9, 0.00, 2, 7, '<frame></frame>', '2019-07-23'),
+(81, 'Fiesta de Diastro y Castiel', '2019-09-01', 'Gabriela Ramos', 9, 0.00, 2, 18, '<frame></frame>', '2019-07-25'),
+(82, 'Aquafest', '2019-12-31', 'Fátima Minco', 9, 0.00, 2, 22, '<frame></frame>', '2019-07-25'),
+(83, 'Fiesta de Hackers', '2019-09-01', 'Anonym Zweig', 9, 0.00, 2, 10, '<frame></frame>', '2019-07-26'),
+(84, 'Graduación de la hija de Meme', '2019-11-11', 'Alejandro Manuel', 9, 0.00, 2, 8, '<frame></frame>', '2019-07-21'),
+(85, 'Experimento 626', '2019-09-01', 'Silvia Prado', 9, 0.00, 2, 22, '<frame></frame>', '2019-08-22'),
+(86, 'Degustaciones La parca', '2020-12-31', 'María Encarnación', 9, 0.00, 2, 17, '<frame></frame>', '2019-07-23'),
+(87, 'Inauguración del nuevo spa', '2019-09-01', 'Diastro Addict', 9, 0.00, 2, 5, '<frame></frame>', '2019-07-26');
 
 -- --------------------------------------------------------
 
@@ -179,14 +195,16 @@ INSERT INTO `event_types` (`id`, `type`) VALUES
 (11, 'Bodas'),
 (12, 'Baby shower'),
 (13, 'Primera Confirma'),
-(14, 'lghytf'),
-(15, 'Hol'),
-(16, 'Alejandro'),
-(17, 'Alejandro'),
+(17, 'Convenciones'),
 (18, 'Celebridad'),
 (19, 'Conciertos'),
 (20, 'FIesta'),
-(21, 'Tomorrowland');
+(21, 'Tomorrowland'),
+(22, 'Marcha'),
+(23, 'Convenciones'),
+(24, 'Celebridad'),
+(25, 'Club Party'),
+(26, 'Pool Party');
 
 -- --------------------------------------------------------
 
@@ -583,13 +601,13 @@ ALTER TABLE `comments_in_event`
 -- AUTO_INCREMENT de la tabla `employees`
 --
 ALTER TABLE `employees`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT de la tabla `events`
 --
 ALTER TABLE `events`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
 
 --
 -- AUTO_INCREMENT de la tabla `event_assignments`
@@ -607,7 +625,7 @@ ALTER TABLE `event_requests`
 -- AUTO_INCREMENT de la tabla `event_types`
 --
 ALTER TABLE `event_types`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT de la tabla `like_states`
