@@ -55,7 +55,9 @@
                             </div>
                         </form>     
                         <div class="card-panel" id="cardChart">
-                            <canvas id="requestsDay"></canvas>
+                            <div id="chartsRequest">
+
+                            </div>
                             <a class="modal-trigger" onclick="viewDetails()" href="#viewDates" id="moredetails"></a>
                         </div>
                    </div>

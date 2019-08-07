@@ -198,6 +198,7 @@ function updateStatus(id, status){
     
 }
 $('#Datesform').submit(function(){
+    $('#chartsRequest').html('');
     date1 = $('#date1').val();
     date2 = $('#date2').val();
     event.preventDefault();
@@ -214,6 +215,7 @@ $('#Datesform').submit(function(){
                 var count = [];
                 count.push(result.dataset.count);
                 console.log(count);
+                $('#chartsRequest').html(`<canvas id="requestsDay"></canvas>	`);
                 requestsPerDays('requestsDay',count);
                 $('#moredetails').text("ver más detalles");
             }
@@ -262,6 +264,7 @@ function RequestsbyStates(){
     )   
 }
 function viewDetails(){
+
     $.ajax(
         {
             url:requestPOST('Request','requestsInformation'),

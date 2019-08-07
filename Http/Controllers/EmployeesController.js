@@ -256,12 +256,19 @@ function viewProductsActivity(id){
         if(result.status){
           var events =[];
           var count = [];
-
           for(i in result.dataset){
             events.push(result.dataset[i].name_event);
             count.push(result.dataset[i].numberCount);
-            productsEvents('listProduct', events,count);
           }
+
+          if(events.length>0){
+            $('#productsChart').html(`<canvas id="listProduct"></canvas>`);
+            productsEvents('listProduct', events, count);
+          }
+          else{
+            $('#producsChart').html('');
+          }
+          
         }
         else{
           productsEvents('listProduct', [0], [0]);
@@ -277,6 +284,7 @@ function viewProductsActivity(id){
   });
 }
 function eventTypes(id){
+  $('#typeEventsChart').html('');
   var idEmployee = id;
   $.ajax(
     {
@@ -301,7 +309,7 @@ function eventTypes(id){
               types.push(result.dataset[i].type);
               count.push(result.dataset[i].countType);
             }
-            
+            $('#typeEventsChart').html(`<canvas id="canvasTypeEvents"></canvas>`);
             typeEventsUser('canvasTypeEvents',count, types);
         }
         else{
@@ -321,8 +329,8 @@ function eventTypes(id){
 }
 function viewStadistics(id)
 {
+    $('#productsChart').html('');
     var idEmployee = id;
-    let content ='';
     $.ajax(
       {
         url:requestPOST('userEmployees','eventsActivity'),

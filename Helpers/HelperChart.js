@@ -404,7 +404,9 @@ function typeEventsUser(idCanvas, count, types){
 }
 //Horizontal bar
 function productsEvents(canvasId, events ,count){
-    var ctx = $("#"+canvasId);
+    
+    var ctx = $('#'+canvasId);
+    
     if(events.length>0){
         
         var coloR3 = [];
