@@ -47,6 +47,14 @@
             
             case 'POST':
                 switch($_GET['action']){
+                    case 'searchEmployee':
+                        if($result['dataset']=$employe->search($_POST['search'])){
+                            $result['status']=1;
+                        }
+                        else{
+                            $result['exception']='No se encontraron resultados';
+                        }
+                    break;
                     case 'CreateUser':
                         if($employe->name($_POST['NameUser'])){
                             if($employe->lastname($_POST['LastName'])){

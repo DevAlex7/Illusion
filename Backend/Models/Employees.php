@@ -200,7 +200,23 @@ class Employee extends Validator{
 		{
 			return false;
 		}	
-	}
+    }
+    public function search($value){
+        $sql='
+        SELECT employees.id, employees.name, employees.lastname, employees.username , roles.id AS role_id , roles.role 
+        FROM (employees INNER JOIN roles ON roles.id=employees.role) 
+        WHERE 
+        employees.name LIKE ? OR 
+        employees.lastname LIKE ? OR 
+        employees.username LIKE ?';
+        $params=array("%$value%","%$value%","%$value%");
+        return Database::getRows($sql,$params);
+    }
+    public function eventsPerUser(){
+        $sql='SELECT events.date_created AS eventCreated, events.name_event FROM (events INNER JOIN employees ON employees.id=events.id_employee AND employees.id=?)';
+        $params=array($this->id);
+        return Database::getRows($sql,$params);
+    }
     
     
 }

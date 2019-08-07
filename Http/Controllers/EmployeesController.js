@@ -1,7 +1,7 @@
 $(document).ready(function() {
   CallEmployees();
   $(".modal").modal();
-  
+  $('.dropdown-trigger').dropdown();
 });
 
 function setEmployees(employees) {
@@ -402,4 +402,85 @@ function viewRequests(id){
     .fail(function(jqXHR) {
       catchError(jqXHR);
     });
+}
+function setSearching(rows){
+    let content ='';
+    if(rows.length>0){
+        rows.forEach(function(row){
+          if(parseInt(row.role_id) == parseInt(0)){
+            content+=`
+            <div class="card z-depth-2" style="border-radius:1vh">              
+              <div class="card-content">
+                  <span class="black-text" id="resultName">${row.name +" "+row.lastname}</span>
+                  <span class="black-text" id="usernameSub">${row.username}</span>
+                  <span id="roleSubAdmin">${row.role}</span>
+                  <a id="moreOptions" class="red-text" href="" onClick="viewReport(${row.id})"> PDF </a>
+              </div>
+            </div>
+            `;
+          }
+          else if(parseInt(row.role_id) == parseInt(1)){
+            content+=`
+            <div class="card z-depth-2" style="border-radius:1vh">              
+              <div class="card-content">
+                  <span class="black-text" id="resultName">${row.name +" "+row.lastname}</span>
+                  <span class="black-text" id="usernameSub">${row.username}</span>
+                  <span class="grey-text" id="roleSub">${row.role}</span>
+              </div>
+            </div>
+          `;
+          }
+          else{
+            content+=`
+            <div class="card z-depth-2" style="border-radius:1vh">              
+              <div class="card-content">
+                  <span class="black-text" id="resultName">${row.name +" "+row.lastname}</span>
+                  <span class="black-text" id="usernameSub">${row.username}</span>
+                  <span class="green-text accent-4" id="roleSub">${row.role}</span>
+              </div>
+            </div>
+          `;
+          }
+        })
+    }
+    else{
+        content+=`
+        <div class="card z-depth-2 red" style="border-radius:1vh">              
+          <div class="card-content">
+              <span class="white-text">No hay coincidencias</span>
+          </div>
+        </div>
+        `;
+    }
+    $('#result').html(content);
+}
+$('#searching').submit(function(){
+    event.preventDefault();
+    $.ajax(
+      {
+        url:requestPOST('userEmployees','searchEmployee'),
+        type:'POST',
+        data:$('#searching').serialize(),
+        datatype:'JSON'
+      }
+    )
+    .done(function(response){
+        if(isJSONString(response)){
+          const result = JSON.parse(response);
+          if(!result.status){
+            
+          }
+          setSearching(result.dataset);
+        }
+        else{
+          console.log(response);
+        } 
+    })
+    .fail(function(jqXHR) {
+      catchError(jqXHR);
+    });
+
+})
+function viewReport(id){
+  window.open('private_reports/eventPerUser.php?idUser='+id);
 }

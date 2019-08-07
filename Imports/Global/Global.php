@@ -7,6 +7,7 @@ class ImportGlobal{
         print 
         '<link rel="stylesheet" href="../Imports/resources/css/global/materialize.min.css">';
     }
+
     //To import the file to put style page
     public static function ImportFileCss($fileCss){
         print
@@ -34,6 +35,14 @@ class ImportGlobal{
     public static function ImportJQuery(){
         print 
         '<script src="../Imports/resources/js/global/jquery-3.2.1.min.js"></script>';
+    }
+    public static function ImportSaveFile(){
+        print 
+        '<script src="../Imports/resources/js/global/FileSaver.min.js"></script>';
+    }
+    public static function ImportBlob(){
+        print 
+        '<script src="../Imports/resources/js/global/canvas-to-blob.js"></script>';
     }
     //To import the Global Materialize Js
     public static function ImportMaterializeJS(){

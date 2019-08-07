@@ -34,6 +34,9 @@
                 <a class="btn-floating btn-large red modal-trigger" href="#insertAdmins">
                     <i class="large material-icons">add</i>
                 </a>
+                <a class="btn-floating btn-large orange modal-trigger" href="#searchEmployee">
+                    <i class="large material-icons">search</i>
+                </a>
             </div>
             <!--modal insertar Administradores -->
             <div class="modal" id="insertAdmins">
@@ -59,7 +62,6 @@
                             </form>
                         </div>
                     </div>  
-
                             <span class="card-title">Agrega nuevos Administradores</span>
                             <div class="input-field col s6">
                                 <input id="name" type="text">
@@ -142,6 +144,29 @@
                     <div class="card-content">
                         <span class="card-title">Estas seguro que deseas eliminar?</span> 
                         <a class="waves-effect red btn"><i class="material-icons left"></i>eliminar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal" id="searchEmployee">
+            <div class="modal-content">
+                <div class="row" id="SearchBar">
+                    <div class="col s12 m12">
+                        <nav class="white">
+                            <div class="nav-wrapper">
+                            <form id="searching" method="POST">
+                                <div class="input-field">
+                                    <input id="search" name="search" type="search" placeholder="Busca alguna información">
+                                    <label class="label-icon" for="search"><i class="material-icons black-text">search</i></label>
+                                    <i class="material-icons">close</i>
+                                </div>
+                            </form>
+                            </div>
+                        </nav>
+                    </div>
+                    <div class="col s12 m12">
+                        <div id="result" style="margin-top:1rem">
+                        </div>
                     </div>
                 </div>
             </div>

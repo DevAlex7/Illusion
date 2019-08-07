@@ -1,53 +1,77 @@
 html{
     background-color: rgb(32, 68, 90)  ;
-  }
- #CardDetail{
+}
+#CardDetail{
     border-radius: 10px;
- }
- #DetailsEmployee{
+}
+#DetailsEmployee{
      margin-top: 1rem;
- }
- #MoreDetails{
+}
+#MoreDetails{
      margin-top: 2rem;
- }
- #chipColor{
+}
+#chipColor{
      background-color: blue;
- }
- #OtherDetails{
+}
+#OtherDetails{
      margin-top:1rem;
- }
- #divider1{
+}
+#divider1{
      margin-top: 0.5rem;
- }
- #UsernameTitle{
+}
+#UsernameTitle{
      margin-top: 1rem;
- }
- #UsernamePart{
+}
+#UsernamePart{
      margin-top: 1rem;
- }
- #chipColor{
+}
+#chipColor{
     margin-top: 0.5rem;
     border-radius: 20px;
     padding-top: 5px;
     padding-left: 10px;
     padding-right: 10px;
     padding-bottom: 5px;
- }
- #Desplegable{
+}
+#Desplegable{
      margin-top: 1rem;
- }
- #Actions{
+}
+#Actions{
      margin-top: 1rem;
- }
- #ActionsCard{
+}
+#ActionsCard{
     border-radius: 10px;
     height: 3rem;
     margin-top: 4rem;
- }
- #ActionsIcons{
+}
+#ActionsIcons{
      margin-top: -0.8rem;
- }
- body {
+}    
+#resultName, #usernameSub{
+    font-weight:bold;
+}
+#moreOptions{
+    position: relative;
+    margin-left: 20rem;
+}
+.modal-content{
+    background:white;
+}
+
+#usernameSub{
+    position: relative;
+    margin-left: 2rem;
+}
+#roleSub{
+    position: relative;
+    margin-left: 2rem;
+}
+#roleSubAdmin{
+    position: relative;
+    margin-left: 2rem;
+    color: blue;
+}
+body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;

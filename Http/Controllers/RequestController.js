@@ -300,4 +300,14 @@ function viewDetails(){
     )
 
 }
+$('#saveChart').click(function(){
+    
+    event.preventDefault();
+    var canvas = $('#datesDetails');
 
+    canvas.fillStyle = "white";
+
+    canvas.get(0).toBlob(function(blob){
+        saveAs(blob,'imagen.jpeg');
+    });
+})
