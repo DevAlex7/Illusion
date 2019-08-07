@@ -414,7 +414,7 @@ function setSearching(rows){
                   <span class="black-text" id="resultName">${row.name +" "+row.lastname}</span>
                   <span class="black-text" id="usernameSub">${row.username}</span>
                   <span id="roleSubAdmin">${row.role}</span>
-                  <a id="moreOptions" class="red-text" href="" onClick="viewReport(${row.id})"> PDF </a>
+                  <a id="moreOptions" class="red-text" onClick="viewReport(${row.id})"> PDF </a>
               </div>
             </div>
             `;

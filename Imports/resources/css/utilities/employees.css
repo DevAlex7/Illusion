@@ -52,7 +52,8 @@ html{
 }
 #moreOptions{
     position: relative;
-    margin-left: 20rem;
+    margin-left: 30vh;
+    margin-top:0.5rem;  
 }
 .modal-content{
     background:white;
