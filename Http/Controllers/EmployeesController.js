@@ -418,11 +418,19 @@ function setSearching(rows){
           if(parseInt(row.role_id) == parseInt(0)){
             content+=`
             <div class="card z-depth-2" style="border-radius:1vh">              
-              <div class="card-content">
-                  <span class="black-text" id="resultName">${row.name +" "+row.lastname}</span>
-                  <span class="black-text" id="usernameSub">${row.username}</span>
-                  <span id="roleSubAdmin">${row.role}</span>
-                  <a id="moreOptions" class="red-text" onClick="viewReport(${row.id})"> PDF </a>
+              <div class="card-content row">
+                  <div class="col s3">
+                    <span class="black-text" id="resultName">${row.name +" "+row.lastname}</span>
+                  </div>
+                  <div class="col s3">
+                    <span class="black-text" id="usernameSub">${row.username}</span>
+                  </div>
+                  <div class="col s2">
+                    <span id="roleSubAdmin">${row.role}</span>
+                  </div>
+                  <div class="col s1">
+                    <a id="moreOptions" href="javascript:viewReport(${row.id})" class="red-text"> PDF </a>
+                  </div>
               </div>
             </div>
             `;
@@ -430,10 +438,19 @@ function setSearching(rows){
           else if(parseInt(row.role_id) == parseInt(1)){
             content+=`
             <div class="card z-depth-2" style="border-radius:1vh">              
-              <div class="card-content">
+              <div class="card-content row">
+                <div class="col s3">
                   <span class="black-text" id="resultName">${row.name +" "+row.lastname}</span>
+                </div>
+                <div class="col s3">
                   <span class="black-text" id="usernameSub">${row.username}</span>
-                  <span class="grey-text" id="roleSub">${row.role}</span>
+                </div>
+                <div class="col s2">
+                  <span id="roleSubAdmin">${row.role}</span>
+                </div>
+                <div class="col s1">
+                  <a id="moreOptions" href="javascript:viewReport(${row.id})" class="red-text"> PDF </a>
+                </div>
               </div>
             </div>
           `;
@@ -441,10 +458,16 @@ function setSearching(rows){
           else{
             content+=`
             <div class="card z-depth-2" style="border-radius:1vh">              
-              <div class="card-content">
+              <div class="card-content row">
+                <div class="col s3">
                   <span class="black-text" id="resultName">${row.name +" "+row.lastname}</span>
+                </div>
+                <div class="col s3">
                   <span class="black-text" id="usernameSub">${row.username}</span>
-                  <span class="green-text accent-4" id="roleSub">${row.role}</span>
+                </div>
+                <div class="col s3">
+                  <span class="green-text accent-4">${row.role}</span>
+                </div>
               </div>
             </div>
           `;

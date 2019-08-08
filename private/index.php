@@ -19,66 +19,34 @@ require_once('../Helpers/Roles.php');
 </head>
 <body>
 <main>
-    
-    <!-- BEGIN: Navbar -->
-    <header>
-            <nav class="grey darken-4">
-                <div class="brand-sidebar black">
-                    <a class="brand-logo center">
-                        <img src="/Illusion/Imports/resources/pics/utilities/ico.png" alt="ico-illusion" height="25">
-                        <span class="white-text">Illussion Party Supplies</span>
-                    </a>
-                </div>
-            </nav>
-        </header>
-    <!-- END: Navbar -->
-<!-- SideNav -->
-<ul class="sidenav" id="mobile-demo">
-    <li><a>Salir</a></li>
-</ul>
-
 <div class="row">
     <div class="card col s12 m4 offset-m4" id="LoginCard">
         <div class="card-content">
             <div class="row">
-                <form class="col s12" method="POST" id="FormLogin">
-                    <div class="row">
-                        <div class="input-field col s12 m10 offset-m1">
-                            <i class="material-icons prefix">account_circle</i>
-                            <input id="Nickname" name="Nickname" type="text">
-                            <label for="Nickname">Usuario</label>
+                <div class="col s12 m12">
+                    <span class="card-title" id="saludate">Bienvenido a Party Supplies.</span>
+                    <span class="grey-text" id="descriptionSaludate">Nos alegra verte, ingresa tus datos.</span>
+                </div>
+                <div class="col s12 m12">
+                    <form class="col s12 m12" method="POST" id="FormLogin">
+                        <div class="row">
+                            <div class="input-field col s12 m12">
+                                <i class="material-icons prefix">account_circle</i>
+                                <input id="Nickname" name="Nickname" type="text" placeholder="Usuario">
+                            </div>
+                            <div class="input-field col s12 m12">
+                                <i class="material-icons prefix">vpn_key</i>
+                                <input id="pass" autocomplete="off" name="pass" type="password" placeholder="Contraseña">
+                            </div>
                         </div>
-                        <div class="input-field col s12 m10 offset-m1">
-                            <i class="material-icons prefix">vpn_key</i>
-                            <input id="pass" autocomplete="off" name="pass" type="password">
-                            <label for="pass">Contraseña</label>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn col s12 m6 offset-m3 red">Entrar</button>
-                </form>
+                        <button type="submit" class="btn col s12 m12 red"> <i class="material-icons right">arrow_forward</i> <span id="buttonTitle">Entrar</span> </button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
 </div>
 </main>
-        <!-- BEGIN: Footer -->
-        <footer class="page-footer grey darken-4">
-                <div class="container">
-                    <div class="row">
-                        <div class="col 16 s12">
-                            <h5 class="white-text">Distribuidora Illussion</h5>
-                            <p class="grey-text text-lighten-4">Todo tipo de decoración y accesorios para fiestas y eventos.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="footer-copyright black">
-                    <div class="container">
-                    © 2019 Copyright Illussion Party Supplies
-                    <a class="grey-text text-lighten-4 right">Todos los derechos reservados</a>
-                    </div>
-                </div>
-            </footer>
-        <!-- END: Footer -->
 <?php 
     ImportGlobal::ImportJQuery();
     ImportGlobal::ImportMaterializeJS();
