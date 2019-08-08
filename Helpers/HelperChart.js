@@ -43,8 +43,7 @@ function productPerEvent(id, products, count){
                                 fontColor: "white",
                                 fontStyle: "bold",
                                 beginAtZero: true,
-                                padding: 20,
-                                stepSize: 1
+                                padding: 20
                             },
                             gridLines: {
                                 drawTicks: false,
@@ -58,7 +57,8 @@ function productPerEvent(id, products, count){
                             ticks: {
                                 padding: 20,
                                 fontColor: "white",
-                                fontStyle: "bold"
+                                fontStyle: "bold",
+                                stepSize: 1
                             }
                         }]
                     },
@@ -388,7 +388,8 @@ function typeEventsUser(idCanvas, count, types){
             scales: {
                 xAxes: [{
                     ticks: {
-                        min: 0 // Edit the value according to what you need
+                        min: 0,
+                        stepSize:1 // Edit the value according to what you need
                     }
                 }],
                 yAxes: [{
@@ -441,7 +442,8 @@ function productsEvents(canvasId, events ,count){
             scales: {
                 xAxes: [{
                     ticks: {
-                        min: 1 // Edit the value according to what you need
+                        min: 0,
+                        stepSize: 1 // Edit the value according to what you need
                     }
                 }],
                 yAxes: [{
