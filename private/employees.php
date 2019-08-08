@@ -150,6 +150,7 @@
                 </div>
             </div>
         </div>
+        
         <div class="modal" id="searchEmployee">
             <div class="modal-content">
                 <div class="row" id="SearchBar">
@@ -165,6 +166,18 @@
                             </form>
                             </div>
                         </nav>
+                    </div>
+                    <div class="col s12 m1 offset-m1" id="titlesResultName">
+                        <span class="grey-text">Nombre</span>
+                    </div>
+                    <div class="col s12 m1 offset-m2" id="titlesResultUsername">
+                        <span class="grey-text">Usuario</span>
+                    </div>
+                    <div class="col s12 m1 offset-m1" id="titlesResultPosition">
+                        <span class="grey-text">Cargo</span>
+                    </div>
+                    <div class="col s12 m1 offset-m4" id="titlesResultAction">
+                        <span class="grey-text">Acción</span>
                     </div>
                     <div class="col s12 m12">
                         <div id="result" style="margin-top:1rem">

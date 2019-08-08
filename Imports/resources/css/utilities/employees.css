@@ -51,25 +51,39 @@ html{
     font-weight:bold;
 }
 #moreOptions{
-    position: relative;
-    margin-left: 30vh;
+    margin-left: 20vh;
     margin-top:0.5rem;  
+}
+#titlesResultName{
+    position: relative;
+    margin-left: 1.5rem;
+    margin-top: 1rem;
+    font-weight: bold;
+}
+#titlesResultUsername{
+    position: relative;
+    right: 0.5rem;
+    margin-top: 1rem;
+    font-weight: bold;
+}
+#titlesResultPosition{
+    position: relative;
+    left: 2.5rem;
+    margin-top: 1rem;
+    font-weight: bold;
+
+}
+#titlesResultAction{
+    position: relative;
+    right: 5px;
+    margin-top: 1rem;
+    font-weight: bold;
 }
 .modal-content{
     background:white;
 }
 
-#usernameSub{
-    position: relative;
-    margin-left: 2rem;
-}
-#roleSub{
-    position: relative;
-    margin-left: 2rem;
-}
 #roleSubAdmin{
-    position: relative;
-    margin-left: 2rem;
     color: blue;
 }
 body {

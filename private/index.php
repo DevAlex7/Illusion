@@ -24,7 +24,7 @@ require_once('../Helpers/Roles.php');
         <div class="card-content">
             <div class="row">
                 <div class="col s12 m12">
-                    <span class="card-title" id="saludate">Bienvenido a Party supplies.</span>
+                    <span class="card-title" id="saludate">Bienvenido a Party Supplies.</span>
                     <span class="grey-text" id="descriptionSaludate">Nos alegra verte, ingresa tus datos.</span>
                 </div>
                 <div class="col s12 m12">
