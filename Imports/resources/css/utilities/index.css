@@ -1,8 +1,27 @@
 html{
     background-image: url(../../pics/utilities/Party.jpg);
+    background-repeat: no-repeat;
+    background-size: 100%;
 }
 #LoginCard{
     margin-top: 7rem;
+    border-radius: 1vh;
+}
+#buttonTitle{
+    position: relative;
+    left: 1.5rem;
+}
+#saludate{
+    position: relative;
+    left: 0.8rem;
+    font-weight: bold;
+}
+::placeholder { /* Firefox, Chrome, Opera */ 
+    color: black; 
+} 
+#descriptionSaludate{
+    position: relative;
+    left: 0.8rem;
 }
 body {
     display: flex;
