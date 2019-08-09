@@ -10,7 +10,7 @@ class myPDF extends PDF {
         $this->Ln(1);
         $this->SetTextColor(255,255,255);
         $this->SetFont('Arial','B',14);
-        $this->Cell(65, 5, 'Lista de invitados del evento',0,0,'C');
+        $this->Cell(65, 5, 'Solicitudes por rango de fechas',0,0,'C');
         $this->Ln();
         $this->SetFont('Times','',12);
         $this->Ln(10);
