@@ -86,7 +86,7 @@
                                     <div class="divider"></div>
                                     <div class="center-align" id="DetailsEmployee">
                                         <span class="grey-text card-title">Cantidad de productos registrados en eventos.</span>
-                                        <canvas id="line"></canvas>
+                                        <canvas id="polar"></canvas>
                                     </div>
                                 </div>
                             </div>
