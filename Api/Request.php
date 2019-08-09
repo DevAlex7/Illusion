@@ -143,7 +143,7 @@
                                     {
                                         $event->save();
                                         $event_id = Database::getLastRowId();
-                                        Events_assignments::set()->event_id($event_id)->request_id($_POST['id'])->client_id($_SESSION['idPublicUser'])->save();
+                                        Events_assignments::set()->event_id($event_id)->request_id($_POST['id'])->client_id($_POST['user_id'])->save();
                                         $result['status']=1;
                                     }
                                     else{
@@ -168,7 +168,6 @@
             break;
             case 'DELETE':
                 switch($_GET['action']){
-                   
                     default:
                     exit('Acción no disponible');
                 }

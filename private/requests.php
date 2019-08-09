@@ -56,7 +56,6 @@
                         </form>     
                         <div class="card-panel" id="cardChart">
                             <div id="chartsRequest">
-
                             </div>
                             <a class="modal-trigger" onclick="viewDetails()" href="#viewDates" id="moredetails"></a>
                         </div>
@@ -80,6 +79,7 @@
                     <div class="card-content">
                         <span class="card-title">Solicitudes por rango de fechas </span>
                         <canvas id="datesDetails"></canvas>
+                        <a href="javascript:viewReport()" class="btn red">Ver reporte</a>
                     </div>
                 </div>
             </div>

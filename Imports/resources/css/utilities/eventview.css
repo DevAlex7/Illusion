@@ -28,7 +28,9 @@ iframe{
 #contributors{
   margin-top: 1rem;
 }
-
+#buttonPDF{
+  margin-top:1rem;
+}
 .disabled {
   pointer-events: none;
   cursor: default;

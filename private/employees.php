@@ -131,6 +131,7 @@
                         <div class="col s12 m12">
                             <div class="card z-depth-3" id="cardRequests">
                                 <div class="card-content">
+                                <span class="card-title">N° de Solicitudes en rango de fechas</span>
                                 <canvas id="requestsUser"></canvas>
                                 </div>
                             </div>

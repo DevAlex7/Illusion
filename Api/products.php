@@ -86,9 +86,13 @@
                                         if($product->count($_POST['CountStock'])){
                                             if($product->id_employee($_SESSION['idUser'])){
                                                 if($product->price($_POST['PriceProduct'])){
-                                                    $product->save();
-                                                    Binnacle::set()->action("Se ha insertado un nuevo producto: ".$product->getNameProduct())->user($_SESSION['idUser'])->insert();
-                                                    $result['status']=1;
+                                                    if($product->save()){
+                                                        Binnacle::set()->action("Se ha insertado un nuevo producto: ".$product->getNameProduct())->user($_SESSION['idUser'])->insert();
+                                                        $result['status']=1;
+                                                    }   
+                                                    else{
+                                                        $result['exception']='No se inserto el producto';
+                                                    }
                                                 }
                                                 else{
                                                     $result['exception']='Dato de precio invalido';
@@ -146,6 +150,7 @@
                                         if (is_uploaded_file($_FILES['FileEditCover']['tmp_name'])) {
                                             if ($product->image_product($_FILES['FileEditCover'], $_POST['ImageEditProduct'])) {
                                                 $file = true;       
+                                         
                                             } else {
                                                 $result['exception'] = $product->getImageError();
                                                 $file = false;
@@ -173,7 +178,13 @@
                             if ($product->edit()) {
                                 if ($file) {
                                     if ($product->saveFile($_FILES['FileEditCover'], $product->getRoot(), $product->getImage())) {
-                                        $result['status'] = 1;
+                                        if($product->deleteFile($product->getRoot(), $_POST['ImageEditProduct'])){
+                                            $result['status'] = 1;
+                                        }
+                                        else{
+                                            $result['status']=0;
+                                            $result['exception']='No se borro la imagen, al cambiar';
+                                        }
                                     } else {
                                         $result['status'] = 2;
                                         $result['exception'] = 'No se guardó el archivo';

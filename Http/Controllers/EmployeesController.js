@@ -449,7 +449,7 @@ function setSearching(rows){
                   <span id="roleSubAdmin">${row.role}</span>
                 </div>
                 <div class="col s1">
-                  <a id="moreOptions" href="javascript:viewReport(${row.id})" class="red-text"> PDF </a>
+                  <a id="moreOptions" href="javascript:viewReport(${row.id})" class="red-text"  > PDF </a>
                 </div>
               </div>
             </div>

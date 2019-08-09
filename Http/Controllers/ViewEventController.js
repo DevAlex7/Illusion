@@ -682,6 +682,9 @@ $('#MapEditForm').submit(function(){
         catchError(jqXHR); 
     });
 })
+function viewReportInvites(){
+    window.open('private_reports/invitesEvent.php?idEvent='+idEvent);
+}
 function setInvites(invites,role){
     let content='';
     if(invites.length>0){
@@ -706,7 +709,9 @@ function setInvites(invites,role){
                 `;
             }
         })
+        $('#buttonPDF').html(`<a class="btn red" href="javascript:viewReportInvites()">Reporte PDF</a>`);
     }
+    
     $('#InvitesRead').html(content);
 }
 function GetPersonsList(){

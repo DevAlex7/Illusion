@@ -132,6 +132,7 @@
                                                             <tbody id="InvitesRead">
                                                             </tbody>
                                                         </table>
+                                                        <div id="buttonPDF"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -148,8 +149,7 @@
                             <div class="card-content">
                                 <div class="row">
                                     <span class="card-title">Comentarios</span>
-                                    <div class="row" id="CommentsPart" style="height:330px; overflow-y:scroll;">
-                                        
+                                    <div class="row" id="CommentsPart" style="height:330px; overflow-y:scroll;">          
                                     </div>
                                     <div class="row">
                                         <form class="col s12" id="FormCommentUser">

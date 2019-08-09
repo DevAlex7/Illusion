@@ -57,7 +57,7 @@ class Request{
         return Database::executeRow($sql,$params);
     }
     public static function GetRequest(){
-        $sql='  SELECT requests.*, employees.name, employees.lastname, employees.email, status_requests.status AS status_event, event_types.type AS type_event
+        $sql='  SELECT requests.*, employees.id AS idUser, employees.name, employees.lastname, employees.email, status_requests.status AS status_event, event_types.type AS type_event
                 FROM ((requests 
                 INNER JOIN employees ON requests.public_user_id=employees.id
                 INNER JOIN status_requests ON requests.status=status_requests.id) 
@@ -94,6 +94,11 @@ class Request{
     public static function requestsByUser(){
         $sql='SELECT requests.date_request, COUNT(requests.id) AS countRequest FROM (requests INNER JOIN employees ON employees.id=requests.public_user_id AND employees.id=?) GROUP BY requests.date_request';
         $params=array(static::$user_id);
+        return Database::getRows($sql,$params);
+    }
+    public static function requestsDates($date1, $date2){
+        $sql='SELECT requests.date_request, requests.name_event FROM requests WHERE requests.date_request BETWEEN ? AND ? ORDER BY requests.date_request ASC';
+        $params=array($date1,$date2);
         return Database::getRows($sql,$params);
     }
 }
