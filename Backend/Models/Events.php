@@ -319,7 +319,7 @@ class Events extends Validator{
 
     public function chartByProducts()
     {
-        # code...
+        # code... ...
     }
 }
 ?>
