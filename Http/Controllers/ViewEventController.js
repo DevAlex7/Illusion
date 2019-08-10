@@ -682,6 +682,9 @@ $('#MapEditForm').submit(function(){
         catchError(jqXHR); 
     });
 })
+function viewReportEvent(){
+    window.open('private_reports/eventReport.php?idEvent='+idEvent);
+}
 function viewReportInvites(){
     window.open('private_reports/invitesEvent.php?idEvent='+idEvent);
 }

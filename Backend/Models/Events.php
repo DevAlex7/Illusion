@@ -119,7 +119,7 @@ class Events extends Validator{
         return Database::executeRow($sql,$params);
     }
     public function getInformation(){
-                $sql='  SELECT events.id, events.name_event, events.date, events.id_employee, events.type_event ,  events.client_name, employees.name, employees.lastname, events.price, payment_event_status.status, event_types.type, events.place 
+                $sql='  SELECT events.id, events.name_event, events.date, events.id_employee, events.date_created , events.type_event ,  events.client_name, employees.name, employees.lastname, events.price, payment_event_status.status, event_types.type, events.place 
                         FROM ((employees 
                         INNER JOIN events ON events.id_employee=employees.id) 
                         INNER JOIN payment_event_status ON events.pay_status=payment_event_status.id 
@@ -302,7 +302,6 @@ class Events extends Validator{
                 AND share_events.id_event=?)';
         $params=array($this->id);
         return Database::getRows($sql,$params);
-        
     }
     
     public function chartEvent(){
