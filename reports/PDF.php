@@ -1,10 +1,13 @@
 <?php 
     require_once('../../libraries/fpdf.php');
     require_once('../../Helpers/validator.php');
+    require_once('../../Helpers/select.php');
     require_once('../../Backend/Models/Employees.php');
     require_once('../../Backend/Models/List_invites_in_Event.php');
     require_once('../../Backend/Models/Events.php');
     require_once('../../Backend/Models/Share_events.php');
+    require_once('../../Backend/Models/TypeEvents.php');
+    require_once('../../Backend/Models/Products.php');
     require_once('../../Backend/Models/Request.php');
     require_once('../../Backend/Instance/instance.php');
 
@@ -37,10 +40,10 @@
             $shares::id_event($id);
             $event->id($id);
              
-            //Static information
+            //Static information for the event
             $data_event = $event->getInformation();
             
-            //colaborators
+            //colaborators in event
             $colaborators_event = $shares->ListShares();
 
             //products in event
@@ -56,5 +59,26 @@
                'cost' => $cost
             );
         }
+        public function RequestsbyStates(){
+            $data = Request::GetRequest();
+            return $data;
+        }
+        public function productsList(){
+            $products = new Product();
+            $data = $products->all();
+            return $data;
+        }
+        public function eventTypes(){
+            $type = new eventTypes();
+            $data = $type->type_events_in_Events();
+            return $data;
+        }
+        public function getEventperType($id){
+            $type = new eventTypes();
+            $type->id($id);
+            $data = $type->getEventperType();
+            return $data;
+        }
+    
     }
 ?>

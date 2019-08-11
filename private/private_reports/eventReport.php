@@ -67,12 +67,14 @@ class myPDF extends PDF {
         $this->Cell(200,5, utf8_decode('Encargado: '.$event['data_event']['name'].' '.$event['data_event']['lastname'] ),0,1,'L');
         $this->Ln();
         $this->Cell(200,5, utf8_decode('Estado del evento: '.$event['data_event']['status']),0,1,'L');
+        $this->Ln(4);
+        $this->Cell(200,5, utf8_decode('Personas estimadas: '.$event['data_event']['persons']." personas"),0,1,'L');
         $this->Ln(6);
         $this->SetFont('Times','B',12);
         $this->SetTextColor(0,0,0);
         $this->Cell(200,5,'Lista de productos solicitados.',0,1,'L');
         $this->Ln(2);
-        $this->Line(10,117,200,117);
+        $this->Line(10,127,200,127);
         $this->Ln(2);
 
         foreach($event['products_event'] as $row){
@@ -83,6 +85,16 @@ class myPDF extends PDF {
         }
         
         $this->Cell(150,10,'Total: '.$event['cost']['Cost'],0,1,'T');
+
+        $this->Ln(2);
+        $this->Cell(200,5,'Colaboradores del evento.',0,1,'L');
+        $this->Line(10,187,200,187);
+        $this->Ln(2);
+
+        foreach($event['collaborators_event'] as $row){
+            $this->Cell(40, 10, $row['name']." ".$row['lastname'],0 ,'L',false);
+            $this->Ln();
+        }
     }
 }
 

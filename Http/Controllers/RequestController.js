@@ -16,7 +16,7 @@ function setRequests(requests){
                     <div class="col s12 m12">
                         <ul class="collapsible">
                             <li>
-                                <div class="collapsible-header red white-text"><i class="material-icons">archive</i>Petición de : ${request.name+" "+request.lastname+" - "+request.name_event }</div>
+                                <div class="collapsible-header red white-text"><i class="material-icons">archive</i>Petición de : ${request.name+" "+request.lastname+" - "+request.name_event+" - "+request.persons+" personas" }</div>
                                 <div class="collapsible-body">
                                     <table class="responsive-table">
                                         <thead>
@@ -54,7 +54,7 @@ function setRequests(requests){
                     <div class="col s12 m12">
                         <ul class="collapsible">
                             <li>
-                                <div class="collapsible-header green accent-4 white-text"><i class="material-icons">archive</i>Petición de : ${request.name+" "+request.lastname +" - "+request.name_event}</div>
+                                <div class="collapsible-header green accent-4 white-text"><i class="material-icons">archive</i>Petición de : ${request.name+" "+request.lastname +" - "+request.name_event+" - "+request.persons+" personas"}</div>
                                 <div class="collapsible-body">
                                     <table class="responsive-table">
                                         <thead>
@@ -91,7 +91,7 @@ function setRequests(requests){
             <div class="col s12 m12">
                 <ul class="collapsible">
                     <li>
-                        <div class="collapsible-header"><i class="material-icons">archive</i>Petición de : ${request.name+" "+request.lastname +" - "+request.name_event}</div>
+                        <div class="collapsible-header"><i class="material-icons">archive</i>Petición de : ${request.name+" "+request.lastname +" - "+request.name_event+" - "+request.persons+" personas"}</div>
                         <div class="collapsible-body">
                             <table class="responsive-table">
                                 <thead>

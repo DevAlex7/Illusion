@@ -24,7 +24,6 @@ function setProducts(products){
                     <div class="card z-depth-4" id="Card">
                         <div class="card-image">
                             <img src="../Imports/resources/pics/products/${product.image_product}">
-                            <span class="card-title">Card Title</span>
                         </div>
                         <div class="card-content">
                             <div class="row">
