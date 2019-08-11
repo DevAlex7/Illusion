@@ -191,6 +191,7 @@
                         if($event->id($_POST['idEvent'])){
                                 if($result['dataset']=$event->ListAdministrators()){
                                     $result['status']=1;
+                                    $result['idActive'] = $_SESSION['idUser'];
                                 }   
                                 else{
                                     $result['exception']='Ya no hay administradores para agregar';

@@ -139,7 +139,9 @@
                                         $event->clientName($fullname) &&
                                         $event->id_employee($_SESSION['idUser']) && 
                                         $event->pay_status(2) &&
-                                        $event->type_event($request['type_event']) )
+                                        $event->type_event($request['type_event']) &&
+                                        $event->persons($request['persons']) 
+                                    )
                                     {
                                         $event->save();
                                         $event_id = Database::getLastRowId();

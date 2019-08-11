@@ -10,12 +10,13 @@ function setRequests(requests){
     let content ='';
     if(requests.length>0){
         requests.forEach(function(request){
+            //Rechazed
             if(request.status==2){
                 content +=`
                     <div class="col s12 m12">
                         <ul class="collapsible">
                             <li>
-                                <div class="collapsible-header"><i class="material-icons">archive</i>Petición de : ${request.name+" "+request.lastname}</div>
+                                <div class="collapsible-header red white-text"><i class="material-icons">archive</i>Petición de : ${request.name+" "+request.lastname+" - "+request.name_event }</div>
                                 <div class="collapsible-body">
                                     <table class="responsive-table">
                                         <thead>
@@ -48,11 +49,12 @@ function setRequests(requests){
             `;
             }
             else if(request.status==1){
+                //Aceppted
                 content +=`
                     <div class="col s12 m12">
                         <ul class="collapsible">
                             <li>
-                                <div class="collapsible-header"><i class="material-icons">archive</i>Petición de : ${request.name+" "+request.lastname}</div>
+                                <div class="collapsible-header green accent-4 white-text"><i class="material-icons">archive</i>Petición de : ${request.name+" "+request.lastname +" - "+request.name_event}</div>
                                 <div class="collapsible-body">
                                     <table class="responsive-table">
                                         <thead>
@@ -85,11 +87,11 @@ function setRequests(requests){
             `;
             }
             else{
-                content +=`
+            content +=`
             <div class="col s12 m12">
                 <ul class="collapsible">
                     <li>
-                        <div class="collapsible-header"><i class="material-icons">archive</i>Petición de : ${request.name+" "+request.lastname}</div>
+                        <div class="collapsible-header"><i class="material-icons">archive</i>Petición de : ${request.name+" "+request.lastname +" - "+request.name_event}</div>
                         <div class="collapsible-body">
                             <table class="responsive-table">
                                 <thead>

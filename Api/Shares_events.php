@@ -15,6 +15,7 @@
                         if(Validate::Integer($_POST['idEvent'])->Id()){
                             if($result['dataset']=ShareEvents::id_event($_POST['idEvent'])->ListShares()){
                                 $result['status']=1;
+                                $result['idActive'] = $_SESSION['idUser'];
                             }
                             else{
                                 $result['exception']='No hay administradores en este evento';

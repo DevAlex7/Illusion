@@ -66,7 +66,7 @@ class myPDF extends PDF {
         $this->Ln();
         $this->Cell(200,5, utf8_decode('Encargado: '.$event['data_event']['name'].' '.$event['data_event']['lastname'] ),0,1,'L');
         $this->Ln();
-        $this->Cell(200,5, utf8_decode('Estado del evento: '.$evegitnt['data_event']['status']),0,1,'L');
+        $this->Cell(200,5, utf8_decode('Estado del evento: '.$event['data_event']['status']),0,1,'L');
         $this->Ln(6);
         $this->SetFont('Times','B',12);
         $this->SetTextColor(0,0,0);

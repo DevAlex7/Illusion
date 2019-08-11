@@ -898,10 +898,20 @@ function getCountCollaborators(){
         catchError(jqXHR);   
     })
 }
-function setCollaborators(colaborators){
+function setCollaborators(colaborators, id){
     let content ='';
     if(colaborators.length>0){
         colaborators.forEach(function(colaborator){
+            if(colaborator.idUser == id){
+                
+                content+=`
+                <tr>
+                    <td>${colaborator.name}</td>
+                    <td>${colaborator.lastname}</td>
+                </tr>
+                `;
+            }
+            else{
             content+=`
             <tr>
                 <td>${colaborator.name}</td>
@@ -911,6 +921,7 @@ function setCollaborators(colaborators){
                 </td>
             </tr>
             `;
+            }
         })
     }
     $('#ReadCollaborators').html(content);
@@ -933,7 +944,7 @@ function CallColaborators(){
                 if(!result.status){
                     ToastError(result.exception);
                 }
-                setCollaborators(result.dataset);
+                setCollaborators(result.dataset, result.idActive);
                 
             }
             else{
@@ -945,7 +956,7 @@ function CallColaborators(){
         catchError(jqXHR);
     })
 }
-function setUsers(users){
+function setUsers(users, id){
     let content='';
     if(users.length>0){
         users.forEach(function(user){
@@ -979,7 +990,7 @@ function loadUsers(){
                 if(!result.status){
                     ToastError(result.exception);
                 }
-                setUsers(result.dataset);
+                setUsers(result.dataset, result.idActive);
                 CallColaborators();
             }
             else{
@@ -1007,7 +1018,6 @@ function addCollaborator(id_employee){
             if(isJSONString(response)){
                 const result = JSON.parse(response);
                 if(result.status){
-                    
                     loadUsers();
                     getCountCollaborators();
                     ToastSucces('¡Administrador agregado al evento satisfactoriamente!');

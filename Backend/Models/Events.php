@@ -10,6 +10,7 @@ class Events extends Validator{
     private $pay_status;
     private $type_event;
     private $place;
+    private $persons;
     private $search;
     private $date_created;
 
@@ -98,6 +99,15 @@ class Events extends Validator{
             return false;
         }
     }
+    public function persons($value){
+        if($this->ValidateInt($value)){
+            $this->persons=$value;
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
     public function searchbyUser($value){
         if($this->validateAlphanumeric($value,1,70)){
             $this->search=$value;
@@ -114,8 +124,8 @@ class Events extends Validator{
         return Database::getRows($sql,$params);
     }
     public function save(){
-        $sql='INSERT INTO events (name_event, date, client_name, id_employee, price, pay_status, type_event, place, date_created) VALUES (?,?,?,?,?,?,?,?,?)';
-        $params = array($this->nameEvent, $this->date, $this->clientName, $this->id_employee, $this->price, $this->pay_status, $this->type_event, $this->place,$today=date('Y-m-d'))    ;
+        $sql='INSERT INTO events (name_event, date, client_name, id_employee, price, pay_status, type_event, place, persons ,date_created) VALUES (?,?,?,?,?,?,?,?,?,?)';
+        $params = array($this->nameEvent, $this->date, $this->clientName, $this->id_employee, $this->price, $this->pay_status, $this->type_event, $this->place, $this->persons,$today=date('Y-m-d'));
         return Database::executeRow($sql,$params);
     }
     public function getInformation(){
