@@ -52,7 +52,7 @@ class myPDF extends PDF {
                 $this->Ln();
             }
         }else{
-
+            $this->Cell(30, 10, utf8_decode('No hay cantidad de productos'), 0 ,'L',false);
         }
     }
 }
