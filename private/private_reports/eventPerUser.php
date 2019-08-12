@@ -30,8 +30,11 @@ class myPDF extends PDF {
         $this->Cell(54, 10, 'Nombre: '.$_SESSION['NameUser']." ".$_SESSION['LastnameUser'],0,0,'C');
         $this->Ln(20);
         $this->SetFont('Times','B',12);
-        $this->Cell(25,10,'Fecha',1,0,'C');
-        $this->Cell(60,10,'Evento',1,0,'C');
+        $result = $this->EventsperUser($_GET['idUser']);
+        if(count($result) > 0){
+            $this->Cell(25,10,'Fecha',1,0,'C');
+            $this->Cell(60,10,'Evento',1,0,'C');
+        }
         $this->Ln();
     }
 
@@ -40,20 +43,28 @@ class myPDF extends PDF {
         $this->SetFont('Times','',12);
         
         $result = $this->EventsperUser($_GET['idUser']);
-
-        foreach($result as $row){
-            $this->Cell(25, 10, $row['eventCreated'], 0 ,'L',false);
-            $this->Cell(60, 10, utf8_decode($row['name_event']), 0 ,'L',false);
-            $this->Ln();
+        if(count($result)>0){
+            foreach($result as $row){
+                $this->Cell(25, 10, $row['eventCreated'], 0 ,'L',false);
+                $this->Cell(60, 10, utf8_decode($row['name_event']), 0 ,'L',false);
+                $this->Ln();
+            }
         }
-
+        else{
+            $this->Cell(200, -20, utf8_decode('No hay información de eventos creados.'),0,0,'L');
+        }
     }
 }
 
+if(isset($_GET['idUser'])){
     $pdf = new myPDF('p','mm','Letter');
     $pdf->AliasNbPages();
     $pdf->AddPage();
     $pdf->headerTable();
     $pdf->viewTable();
     $pdf->Output();
+}
+else{
+
+}
 ?>

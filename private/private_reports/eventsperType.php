@@ -15,9 +15,12 @@ class myPDF extends PDF {
     }
 
     function footer(){
-        $this->SetY(-15);
-        $this->SetFont('Times','B',8);
-        $this->Cell(0,10,'page'.$this->PageNo().'/{nb}',0,0,'C');
+        if($this->PageNo() !== 1){
+            $this->SetY(-15);
+            $this->SetFont('Times','B',8);
+            $this->Cell(0,10,'page'.$this->PageNo().'/{nb}',0,0,'C');
+        }
+
     }
 
     function headerTable(){

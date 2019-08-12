@@ -49,11 +49,16 @@ class myPDF extends PDF {
         }
     }
 }
-
+$today = date('Y-m-d');
+if($_GET['date1'] < $today && $_GET['date2'] < $today && $_GET['date1'] < $_GET['date2'] ){
     $pdf = new myPDF('p','mm','Letter');
     $pdf->AliasNbPages();
     $pdf->AddPage();
     $pdf->headerTable();
     $pdf->viewTable();
     $pdf->Output();
+}
+else{
+    print 'fechas invalidas';
+}
 ?>

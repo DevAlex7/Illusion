@@ -41,18 +41,28 @@ class myPDF extends PDF {
 
         $this->SetFont('Times','',12);
         $result = $this->InvitesperEvent($_GET['idEvent']);
-        foreach($result as $row){
-            $this->Cell(70, 10, utf8_decode($row['namePerson']), 0 ,'L',false);
-            $this->Cell(60, 10, utf8_decode($row['lastnamePerson']), 0 ,'L',false);
-            $this->Ln();
+        if(count($result) > 0){
+            foreach($result as $row){
+                $this->Cell(70, 10, utf8_decode($row['namePerson']), 0 ,'L',false);
+                $this->Cell(60, 10, utf8_decode($row['lastnamePerson']), 0 ,'L',false);
+                $this->Ln();
+            }
+        }
+        else{
+            $this->Cell(200,10,' No hay lista de invitados ',0,0,'L');
         }
     }
 }
 
+if(!empty($_GET['idEvent'])){
     $pdf = new myPDF('p','mm','Letter');
     $pdf->AliasNbPages();
     $pdf->AddPage();
     $pdf->headerTable();
     $pdf->viewTable();
     $pdf->Output();
+}
+else{
+    header('location:../../redirects/404.html');
+}
 ?>

@@ -43,12 +43,16 @@ class myPDF extends PDF {
 
         $this->SetFont('Times','',12);
         $result = $this->productsList();
-        foreach($result as $row){
-            $this->Cell(70, 10, utf8_decode($row['nameProduct']), 0 ,'L',false);
-            $this->Cell(30, 10, utf8_decode($row['price']), 0 ,'L',false);
-            $this->Cell(30, 10, utf8_decode($row['count']), 0 ,'L',false);
-            $this->Cell(25,25, $this->Image("../../Imports/resources/pics/products/".$row['image_product'], $this->GetX(), $this->GetY(),25,25),0);
-            $this->Ln();
+        if(count($result) > 0){
+            foreach($result as $row){
+                $this->Cell(70, 10, utf8_decode($row['nameProduct']), 0 ,'L',false);
+                $this->Cell(30, 10, utf8_decode($row['price']), 0 ,'L',false);
+                $this->Cell(30, 10, utf8_decode($row['count']), 0 ,'L',false);
+                $this->Cell(25,25, $this->Image("../../Imports/resources/pics/products/".$row['image_product'], $this->GetX(), $this->GetY(),25,25),0);
+                $this->Ln();
+            }
+        }else{
+
         }
     }
 }
