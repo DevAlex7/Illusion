@@ -44,7 +44,7 @@
                                         <span class="card-title"> <i class="material-icons blue-text">filter_vintage</i></span>
                                     </div>
                                     <div class="divider"></div>
-                                    <div class="center-align" id="DetailsEmployee">
+                                    <div class="center-align">
                                         <span class="grey-text card-title">Eventos agrupados por tipo.</span>
                                         <canvas id="chart"></canvas>
                                     </div>
