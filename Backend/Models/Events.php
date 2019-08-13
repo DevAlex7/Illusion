@@ -319,7 +319,9 @@ class Events extends Validator{
 
     public function chartByProducts()
     {
-        # code...
+        $sql = '';
+        $params = array(null);
+        return Database::getRows($sql, $params);
     }
 }
 ?>
