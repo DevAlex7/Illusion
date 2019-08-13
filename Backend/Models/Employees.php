@@ -133,6 +133,12 @@ class Employee extends Validator{
         $params = array($this->name, $this->lastname, $this->email, $this->username, $hash, $this->role);
         return Database::executeRow($sql,$params);
     }
+    
+    public function findbyId(){
+        $sql ='SELECT * FROM employees WHERE id=?';   
+        $params=array($this->id);
+        return Database::getRow($sql,$params);
+    }
     public function verifyRole(){
         $sql='
             SELECT roles.id, employees.id AS User, roles.role, employees.name, employees.lastname 

@@ -16,6 +16,19 @@
             
             case 'GET':
                 switch($_GET['action']){
+                    case 'getmyProfile':
+                        if($employe->id($_SESSION['idUser'])){
+                            if($result['dataset'] = $employe->findbyId()){
+                                $result['status']=1;
+                            }
+                            else{
+                                $result['exception']='No se ha encontrado información';
+                            }
+                        }
+                        else{
+                            $result['exception']='No se ha identificado al usuario logueado';
+                        }
+                    break;
                     case 'allEmployees':
                        if($employe->id($_SESSION['idUser'])){
                             if($result['dataset']=$employe->all()){
