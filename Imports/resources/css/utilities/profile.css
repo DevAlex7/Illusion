@@ -1,0 +1,23 @@
+#card-informationProfile{
+    border-radius: 10px;
+}
+#card-statidisticsProfile{
+    border-radius: 10px;
+}
+#divider{
+    position: relative;
+    top:2px;
+}
+#informationProfile{
+    position: relative;
+    top:1rem;
+}
+#titlepersonal{
+    font-weight: bold;
+}
+#name-div-info, #lastname-div-info, #email-div-info, #username-div-info{
+    margin-top: 1rem;
+}
+#userpart{
+    margin-top:1rem;
+}

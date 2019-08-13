@@ -163,7 +163,7 @@
                                         $result['status']=1;
                                     }
                                     else{
-                                        $result['Datos erroneos'];
+                                        $result['exception']='Datos erroneos';
                                     }
                                 }
                                 else{
