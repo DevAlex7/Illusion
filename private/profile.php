@@ -35,7 +35,6 @@
                                     <div id="userpart">
                                         <i class="material-icons left">person</i>
                                         <div id="user-div-name">
-                                            <span id="name-user">Usuario</span>
                                         </div>
                                     </div>
                                 </div>
@@ -44,7 +43,6 @@
                                     <div id="userpart">
                                         <i class="material-icons left">person</i>
                                         <div id="user-div-lastname">
-                                            <span id="lastname-user">Usuario</span>
                                         </div>
                                     </div>
                                 </div>  
