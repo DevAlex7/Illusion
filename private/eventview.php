@@ -379,6 +379,24 @@
                     </div>
                 </div>
             </div>
+            <div class="modal" id="modalRequest">
+                <div class="modal-content"> 
+                    <div class="row">
+                        <div class="col s12 m12">   
+                            <div class="card" id="card-product-title">
+                                <div class="card-content white-text">
+                                    <span class="card-title">Productos solicitados</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col s12 m12">
+                            <div id="readProductsRequest">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </main>
         <footer>
 

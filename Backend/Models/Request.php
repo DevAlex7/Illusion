@@ -101,5 +101,10 @@ class Request{
         $params=array($date1,$date2);
         return Database::getRows($sql,$params);
     }
+    public static function productsInRequest(){
+        $sql='SELECT products.nameProduct, list_product_request.count FROM ((list_product_request INNER JOIN products ON list_product_request.id_product=products.id) INNER JOIN requests ON list_product_request.id_request=requests.id AND requests.id=?)';
+        $params=array(static::$id);
+        return Database::getRows($sql,$params);
+    }
 }
 ?>

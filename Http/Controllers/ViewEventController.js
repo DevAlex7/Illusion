@@ -1280,6 +1280,7 @@ $('#FormReplytUser').submit(function(){
     })
 
 })
+
 function verifyAssigmentevent(){
     $.ajax(
         {
@@ -1295,13 +1296,11 @@ function verifyAssigmentevent(){
         if(isJSONString(response)){
             const result = JSON.parse(response);
             if(result.status){
-                idRequest = result.dataset.id_request;
-                
-                $('#request').html(`<a>Este evento contiene una solicitud</a>`);
+                idRequest = result.dataset.id_request;            
+                $('#request').html(`<a class="modal-trigger" href="#modalRequest" onClick="loadRequest(${result.dataset.id_request})">Este evento contiene una solicitud</a>`);
             }
             else{
-                alert(result.exception);
-                $('#request').html(`<a>Este evento no contiene una solicitud</a>`);
+                $('#request').html(`<p>Este evento no contiene una solicitud proveniente</p>`);
             }
         }
         else{
@@ -1311,5 +1310,68 @@ function verifyAssigmentevent(){
     .fail(function(jqXHR){
         catchError(jqXHR);
     })
-
 }
+function setProductsRequest(rows){
+    let content='';
+    if(rows.length > 0){
+        rows.forEach(function(row){
+            content = `
+                <div class="row">
+                    <div class="col s12 m4">   
+                        <div class="card" id="card-product-request">
+                            <div class="card-content">
+                                <p class="flow-text">${row.nameProduct}</p>
+                                <span class="grey-text">Cantidad : <span class="card-title">${row.count}</span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `; 
+        })
+    }
+    else{
+        content = `
+        <div class="row">
+            <div class="col s12 m12">   
+                <div class="card" id="card-product-request">
+                    <div class="card-content">
+                        <p class="flow-text">Esta solicitud no tiene productos en lista.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `; 
+    }
+    $('#readProductsRequest').html(content);
+}
+function loadRequest(id){
+    $.ajax(
+        {
+            url:requestPOST('Request','listProducts'),
+            type:'POST',
+            data:{
+                idRequest
+            },
+            datatype:'JSON'
+        }
+    )
+    .done(function(response)
+        {
+            if(isJSONString(response)){
+                const result = JSON.parse(response);
+                if(!result.status){
+
+                }
+                setProductsRequest(result.dataset);
+                
+            }
+            else{
+                console.log(response);
+            }
+        }
+    )
+    .fail(function(jqXHR){
+        catchError(jqXHR);
+    })
+}
+

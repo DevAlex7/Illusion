@@ -31,6 +31,15 @@ iframe{
 #request{
   margin-top: 1rem;
 }
+#card-product-request
+{
+  border-radius: 10px;
+  height: auto;
+}
+#card-product-title
+{
+  background-color: blue;
+}
 #buttonPDF{
   margin-top:1rem;
 }

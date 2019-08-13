@@ -121,6 +121,20 @@
                             $result['exception']='No se ha identificado al usuario';
                         }
                     break;
+                    case 'listProducts':
+                        if( Validate::Integer($_POST['idRequest'])->Id() ){
+                            Request::id($_POST['idRequest']);
+                            if($result['dataset'] = Request::productsInRequest()){
+                                $result['status']=1;
+                            }
+                            else{
+                                $result['exception']='Esta solicitud no cuenta con productos';
+                            }
+                        }
+                        else{
+                            $result['exception']='No se ha obtenido la solicitud';
+                        }
+                    break;
                     default: 
                     exit('acción no disponible');
                 }
