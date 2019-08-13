@@ -43,6 +43,8 @@
                                                     <div id="contributors">
                                                         <a onclick="loadUsers()" id="collaboratorLink" href="#CollaboratosModal" class="modal-trigger"></a>
                                                     </div>
+                                                    <div id="request">
+                                                    </div>
                                                     <div class="divider" id="Divider"></div>
                                                     <a href="javascript:viewReportEvent()" class="btn red" style="margin-top:1rem">Reporte PDF</a>
                                                 </div>
@@ -54,10 +56,23 @@
                                                 <div class="right">
                                                     <a id="EditInformationBtn" href="#EditInformationEvent" onclick="InfoEvent()" class="modal-trigger"> <i class="material-icons left">edit</i> </a>
                                                 </div>
-                                                <p id="ClientName"></p>   
-                                                <p id="DateEvent"></p>
-                                                <p id="NameCreator"></p> 
-                                                <p id="StatusEvent"></p> 
+                                                <div class="row">
+                                                <div class="left col s12 m12" id="divClient">
+                                                        <i class="material-icons left"> face </i> <p id="ClientName"></p>   
+                                                    </div>
+                                                    <div class="left col s12 m12" id="divDateEvent">
+                                                        <i class="material-icons left"> event </i> <p id="DateEvent"></p>   
+                                                    </div>
+                                                    <div class="left col s12 m12" id="divNameCreator">
+                                                        <i class="material-icons left"> assignment_ind </i> <p id="NameCreator"></p>    
+                                                    </div>
+                                                    <div class="left col s12 m12" id="divStatusEvent">
+                                                        <i class="material-icons left"> chrome_reader_mode </i> <p id="StatusEvent"></p> 	    
+                                                    </div>
+                                                    <div class="left col s12 m12" id="divPersonsEvent">
+                                                        <i class="material-icons left"> accessibility_new </i> <p id="personsTotal"></p> 	    
+                                                    </div>
+                                                </div>
                                             </div>  
                                         </div> 
                                     </div>

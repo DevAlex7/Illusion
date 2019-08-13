@@ -149,6 +149,7 @@ class Events extends Validator{
         $params=array($this->id);
         return Database::getRows($sql,$params);
     }
+    
     public function allProductsinNotList(){
         $sql='  SELECT products.id, products.nameProduct 
                 FROM products

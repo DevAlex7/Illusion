@@ -11,6 +11,7 @@ $(document).ready(function () {
     $('.fixed-action-btn').floatingActionButton();
     verifyActions();
     ShowComments();
+    verifyAssigmentevent();
 });
 //To get the id List of product
 var idList;
@@ -20,6 +21,8 @@ var idEvent;
 var idProduct;
 //Id de la lista de invitados
 var idlistInvite;
+//Id request if the event was requested
+var idRequest;
 
 //Validate variable in the URL
 function getQueryVariable(variable)
@@ -84,7 +87,9 @@ function getInformation(){
                 $('#DateEvent').text("Fecha: "+result.dataset.date);
                 $('#NameCreator').text("Encargado: "+result.dataset.name +' '+result.dataset.lastname);
                 $('#StatusEvent').text("Estado del evento: "+result.dataset.status);
+                $('#personsTotal').text(result.dataset.persons +" personas estimadas");
                 $('#mapEvent').html(result.dataset.place);
+                
             }
             else{
                 M.toast({html:result.exception});
@@ -913,13 +918,13 @@ function setCollaborators(colaborators, id){
             }
             else{
             content+=`
-            <tr>
-                <td>${colaborator.name}</td>
-                <td>${colaborator.lastname}</td>
-                <td>
-                    <a onClick="deleteAdmin(${colaborator.id})" class="btn red tooltipped" data-position="right" data-tooltip="Eliminar"> <i class="material-icons"> delete </i></a>
-                </td>
-            </tr>
+                <tr>
+                    <td>${colaborator.name}</td>
+                    <td>${colaborator.lastname}</td>
+                    <td>
+                        <a onClick="deleteAdmin(${colaborator.id})" class="btn red tooltipped" data-position="right" data-tooltip="Eliminar"> <i class="material-icons"> delete </i></a>
+                    </td>
+                </tr>
             `;
             }
         })
@@ -1275,3 +1280,36 @@ $('#FormReplytUser').submit(function(){
     })
 
 })
+function verifyAssigmentevent(){
+    $.ajax(
+        {
+            url:requestPOST('Events','AssignmentRequest'),
+            type:'POST',
+            data:{
+                idEvent
+            },
+            datatype:'JSON'
+        }
+    )
+    .done(function(response){
+        if(isJSONString(response)){
+            const result = JSON.parse(response);
+            if(result.status){
+                idRequest = result.dataset.id_request;
+                
+                $('#request').html(`<a>Este evento contiene una solicitud</a>`);
+            }
+            else{
+                alert(result.exception);
+                $('#request').html(`<a>Este evento no contiene una solicitud</a>`);
+            }
+        }
+        else{
+            console.log(response);
+        }
+    })
+    .fail(function(jqXHR){
+        catchError(jqXHR);
+    })
+
+}
