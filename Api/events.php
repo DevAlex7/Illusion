@@ -5,6 +5,7 @@
     require_once('../Helpers/select.php');
     require_once('../Helpers/update.php');
     require_once('../Backend/Models/Events.php');
+    require_once('../Backend/Models/Events_assignments.php');
     require_once('../Helpers/validates.php');  
     require_once('../Backend/Models/Binnacle.php');
     require_once('../Backend/Models/Employees.php');
@@ -191,6 +192,7 @@
                         if($event->id($_POST['idEvent'])){
                                 if($result['dataset']=$event->ListAdministrators()){
                                     $result['status']=1;
+                                    $result['idActive'] = $_SESSION['idUser'];
                                 }   
                                 else{
                                     $result['exception']='Ya no hay administradores para agregar';
@@ -309,6 +311,20 @@
                                 $result['exception']='Busqueda invalida';
                             }
                     break;  
+                    case 'AssignmentRequest':
+                        if( Validate::Integer($_POST['idEvent'])->Id() ){
+                            Events_assignments::set()->event_id($_POST['idEvent']);
+                            if($result['dataset'] = Events_assignments::findAssignment()){
+                                $result['status']=1;
+                            }
+                            else{
+                                $result['exception']='Este evento no tiene una solicitud proveniente';
+                            }
+                        }
+                        else{
+                            $result['exception']='No se ha identificado el evento';
+                        }
+                    break;
                     default: 
                     exit('acción no disponible');
                 }

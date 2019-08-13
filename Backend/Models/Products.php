@@ -117,6 +117,11 @@ class Product extends Validator{
         $params=array($this->count,$this->id);
         return Database::executeRow($sql,$params);
     }
+    public function all(){
+        $sql='SELECT * FROM products';
+        $params=array(null);
+        return Database::getRows($sql,$params);
+    }
     public function search(){
         $sql='
                 SELECT products.*, 

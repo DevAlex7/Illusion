@@ -28,13 +28,30 @@ iframe{
 #contributors{
   margin-top: 1rem;
 }
-
+#request{
+  margin-top: 1rem;
+}
+#card-product-request
+{
+  border-radius: 10px;
+  height: auto;
+}
+#card-product-title
+{
+  background-color: blue;
+}
+#buttonPDF{
+  margin-top:1rem;
+}
 .disabled {
   pointer-events: none;
   cursor: default;
   color:rgba(158, 155, 155, 0.822);
 
 }  
+#divDateEvent, #divNameCreator, #divStatusEvent, #divPersonsEvent{
+  margin-top: 1rem;
+}
 .disabled {
   pointer-events: none;
   cursor: default;

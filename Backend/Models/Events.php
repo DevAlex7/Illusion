@@ -10,6 +10,7 @@ class Events extends Validator{
     private $pay_status;
     private $type_event;
     private $place;
+    private $persons;
     private $search;
     private $date_created;
 
@@ -98,6 +99,15 @@ class Events extends Validator{
             return false;
         }
     }
+    public function persons($value){
+        if($this->ValidateInt($value)){
+            $this->persons=$value;
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
     public function searchbyUser($value){
         if($this->validateAlphanumeric($value,1,70)){
             $this->search=$value;
@@ -114,12 +124,12 @@ class Events extends Validator{
         return Database::getRows($sql,$params);
     }
     public function save(){
-        $sql='INSERT INTO events (name_event, date, client_name, id_employee, price, pay_status, type_event, place, date_created) VALUES (?,?,?,?,?,?,?,?,?)';
-        $params = array($this->nameEvent, $this->date, $this->clientName, $this->id_employee, $this->price, $this->pay_status, $this->type_event, $this->place,$today=date('Y-m-d'))    ;
+        $sql='INSERT INTO events (name_event, date, client_name, id_employee, price, pay_status, type_event, place, persons ,date_created) VALUES (?,?,?,?,?,?,?,?,?,?)';
+        $params = array($this->nameEvent, $this->date, $this->clientName, $this->id_employee, $this->price, $this->pay_status, $this->type_event, $this->place, $this->persons,$today=date('Y-m-d'));
         return Database::executeRow($sql,$params);
     }
     public function getInformation(){
-                $sql='  SELECT events.id, events.name_event, events.date, events.id_employee, events.type_event ,  events.client_name, employees.name, employees.lastname, events.price, payment_event_status.status, event_types.type, events.place 
+                $sql='  SELECT events.id, events.persons, events.name_event, events.date, events.id_employee, events.date_created , events.type_event ,  events.client_name, employees.name, employees.lastname, events.price, payment_event_status.status, event_types.type, events.place 
                         FROM ((employees 
                         INNER JOIN events ON events.id_employee=employees.id) 
                         INNER JOIN payment_event_status ON events.pay_status=payment_event_status.id 
@@ -139,6 +149,7 @@ class Events extends Validator{
         $params=array($this->id);
         return Database::getRows($sql,$params);
     }
+    
     public function allProductsinNotList(){
         $sql='  SELECT products.id, products.nameProduct 
                 FROM products
@@ -302,7 +313,6 @@ class Events extends Validator{
                 AND share_events.id_event=?)';
         $params=array($this->id);
         return Database::getRows($sql,$params);
-        
     }
     
     public function chartEvent(){
@@ -319,9 +329,13 @@ class Events extends Validator{
 
     public function chartByProducts()
     {
+<<<<<<< HEAD
         $sql = '';
         $params = array(null);
         return Database::getRows($sql, $params);
+=======
+        # code... ...
+>>>>>>> ad0742eaf42f2e27a34cb6866dc257c73a3d3a41
     }
 }
 ?>

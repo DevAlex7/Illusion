@@ -43,7 +43,10 @@
                                                     <div id="contributors">
                                                         <a onclick="loadUsers()" id="collaboratorLink" href="#CollaboratosModal" class="modal-trigger"></a>
                                                     </div>
+                                                    <div id="request">
+                                                    </div>
                                                     <div class="divider" id="Divider"></div>
+                                                    <a href="javascript:viewReportEvent()" class="btn red" style="margin-top:1rem">Reporte PDF</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -53,10 +56,23 @@
                                                 <div class="right">
                                                     <a id="EditInformationBtn" href="#EditInformationEvent" onclick="InfoEvent()" class="modal-trigger"> <i class="material-icons left">edit</i> </a>
                                                 </div>
-                                                <p id="ClientName"></p>   
-                                                <p id="DateEvent"></p>
-                                                <p id="NameCreator"></p> 
-                                                <p id="StatusEvent"></p> 
+                                                <div class="row">
+                                                <div class="left col s12 m12" id="divClient">
+                                                        <i class="material-icons left"> face </i> <p id="ClientName"></p>   
+                                                    </div>
+                                                    <div class="left col s12 m12" id="divDateEvent">
+                                                        <i class="material-icons left"> event </i> <p id="DateEvent"></p>   
+                                                    </div>
+                                                    <div class="left col s12 m12" id="divNameCreator">
+                                                        <i class="material-icons left"> assignment_ind </i> <p id="NameCreator"></p>    
+                                                    </div>
+                                                    <div class="left col s12 m12" id="divStatusEvent">
+                                                        <i class="material-icons left"> chrome_reader_mode </i> <p id="StatusEvent"></p> 	    
+                                                    </div>
+                                                    <div class="left col s12 m12" id="divPersonsEvent">
+                                                        <i class="material-icons left"> accessibility_new </i> <p id="personsTotal"></p> 	    
+                                                    </div>
+                                                </div>
                                             </div>  
                                         </div> 
                                     </div>
@@ -132,6 +148,7 @@
                                                             <tbody id="InvitesRead">
                                                             </tbody>
                                                         </table>
+                                                        <div id="buttonPDF"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -148,8 +165,7 @@
                             <div class="card-content">
                                 <div class="row">
                                     <span class="card-title">Comentarios</span>
-                                    <div class="row" id="CommentsPart" style="height:330px; overflow-y:scroll;">
-                                        
+                                    <div class="row" id="CommentsPart" style="height:330px; overflow-y:scroll;">          
                                     </div>
                                     <div class="row">
                                         <form class="col s12" id="FormCommentUser">
@@ -358,6 +374,24 @@
                                         <button type="submit" class="btn blue">Comentar</button>
                                     </form>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal" id="modalRequest">
+                <div class="modal-content"> 
+                    <div class="row">
+                        <div class="col s12 m12">   
+                            <div class="card" id="card-product-title">
+                                <div class="card-content white-text">
+                                    <span class="card-title">Productos solicitados</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col s12 m12">
+                            <div id="readProductsRequest">
+                                
                             </div>
                         </div>
                     </div>

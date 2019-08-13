@@ -11,6 +11,7 @@ $(document).ready(function () {
     $('.fixed-action-btn').floatingActionButton();
     verifyActions();
     ShowComments();
+    verifyAssigmentevent();
 });
 //To get the id List of product
 var idList;
@@ -20,6 +21,8 @@ var idEvent;
 var idProduct;
 //Id de la lista de invitados
 var idlistInvite;
+//Id request if the event was requested
+var idRequest;
 
 //Validate variable in the URL
 function getQueryVariable(variable)
@@ -84,7 +87,9 @@ function getInformation(){
                 $('#DateEvent').text("Fecha: "+result.dataset.date);
                 $('#NameCreator').text("Encargado: "+result.dataset.name +' '+result.dataset.lastname);
                 $('#StatusEvent').text("Estado del evento: "+result.dataset.status);
+                $('#personsTotal').text(result.dataset.persons +" personas estimadas");
                 $('#mapEvent').html(result.dataset.place);
+                
             }
             else{
                 M.toast({html:result.exception});
@@ -682,6 +687,12 @@ $('#MapEditForm').submit(function(){
         catchError(jqXHR); 
     });
 })
+function viewReportEvent(){
+    window.open('private_reports/eventReport.php?idEvent='+idEvent);
+}
+function viewReportInvites(){
+    window.open('private_reports/invitesEvent.php?idEvent='+idEvent);
+}
 function setInvites(invites,role){
     let content='';
     if(invites.length>0){
@@ -706,7 +717,9 @@ function setInvites(invites,role){
                 `;
             }
         })
+        $('#buttonPDF').html(`<a class="btn red" href="javascript:viewReportInvites()">Reporte PDF</a>`);
     }
+    
     $('#InvitesRead').html(content);
 }
 function GetPersonsList(){
@@ -890,19 +903,30 @@ function getCountCollaborators(){
         catchError(jqXHR);   
     })
 }
-function setCollaborators(colaborators){
+function setCollaborators(colaborators, id){
     let content ='';
     if(colaborators.length>0){
         colaborators.forEach(function(colaborator){
+            if(colaborator.idUser == id){
+                
+                content+=`
+                <tr>
+                    <td>${colaborator.name}</td>
+                    <td>${colaborator.lastname}</td>
+                </tr>
+                `;
+            }
+            else{
             content+=`
-            <tr>
-                <td>${colaborator.name}</td>
-                <td>${colaborator.lastname}</td>
-                <td>
-                    <a onClick="deleteAdmin(${colaborator.id})" class="btn red tooltipped" data-position="right" data-tooltip="Eliminar"> <i class="material-icons"> delete </i></a>
-                </td>
-            </tr>
+                <tr>
+                    <td>${colaborator.name}</td>
+                    <td>${colaborator.lastname}</td>
+                    <td>
+                        <a onClick="deleteAdmin(${colaborator.id})" class="btn red tooltipped" data-position="right" data-tooltip="Eliminar"> <i class="material-icons"> delete </i></a>
+                    </td>
+                </tr>
             `;
+            }
         })
     }
     $('#ReadCollaborators').html(content);
@@ -925,7 +949,7 @@ function CallColaborators(){
                 if(!result.status){
                     ToastError(result.exception);
                 }
-                setCollaborators(result.dataset);
+                setCollaborators(result.dataset, result.idActive);
                 
             }
             else{
@@ -937,7 +961,7 @@ function CallColaborators(){
         catchError(jqXHR);
     })
 }
-function setUsers(users){
+function setUsers(users, id){
     let content='';
     if(users.length>0){
         users.forEach(function(user){
@@ -971,7 +995,7 @@ function loadUsers(){
                 if(!result.status){
                     ToastError(result.exception);
                 }
-                setUsers(result.dataset);
+                setUsers(result.dataset, result.idActive);
                 CallColaborators();
             }
             else{
@@ -999,7 +1023,6 @@ function addCollaborator(id_employee){
             if(isJSONString(response)){
                 const result = JSON.parse(response);
                 if(result.status){
-                    
                     loadUsers();
                     getCountCollaborators();
                     ToastSucces('¡Administrador agregado al evento satisfactoriamente!');
@@ -1257,3 +1280,98 @@ $('#FormReplytUser').submit(function(){
     })
 
 })
+
+function verifyAssigmentevent(){
+    $.ajax(
+        {
+            url:requestPOST('Events','AssignmentRequest'),
+            type:'POST',
+            data:{
+                idEvent
+            },
+            datatype:'JSON'
+        }
+    )
+    .done(function(response){
+        if(isJSONString(response)){
+            const result = JSON.parse(response);
+            if(result.status){
+                idRequest = result.dataset.id_request;            
+                $('#request').html(`<a class="modal-trigger" href="#modalRequest" onClick="loadRequest(${result.dataset.id_request})">Este evento contiene una solicitud</a>`);
+            }
+            else{
+                $('#request').html(`<p>Este evento no contiene una solicitud proveniente</p>`);
+            }
+        }
+        else{
+            console.log(response);
+        }
+    })
+    .fail(function(jqXHR){
+        catchError(jqXHR);
+    })
+}
+function setProductsRequest(rows){
+    let content='';
+    if(rows.length > 0){
+        rows.forEach(function(row){
+            content = `
+                <div class="row">
+                    <div class="col s12 m4">   
+                        <div class="card" id="card-product-request">
+                            <div class="card-content">
+                                <p class="flow-text">${row.nameProduct}</p>
+                                <span class="grey-text">Cantidad : <span class="card-title">${row.count}</span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `; 
+        })
+    }
+    else{
+        content = `
+        <div class="row">
+            <div class="col s12 m12">   
+                <div class="card" id="card-product-request">
+                    <div class="card-content">
+                        <p class="flow-text">Esta solicitud no tiene productos en lista.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `; 
+    }
+    $('#readProductsRequest').html(content);
+}
+function loadRequest(id){
+    $.ajax(
+        {
+            url:requestPOST('Request','listProducts'),
+            type:'POST',
+            data:{
+                idRequest
+            },
+            datatype:'JSON'
+        }
+    )
+    .done(function(response)
+        {
+            if(isJSONString(response)){
+                const result = JSON.parse(response);
+                if(!result.status){
+
+                }
+                setProductsRequest(result.dataset);
+                
+            }
+            else{
+                console.log(response);
+            }
+        }
+    )
+    .fail(function(jqXHR){
+        catchError(jqXHR);
+    })
+}
+

@@ -10,12 +10,13 @@ function setRequests(requests){
     let content ='';
     if(requests.length>0){
         requests.forEach(function(request){
+            //Rechazed
             if(request.status==2){
                 content +=`
                     <div class="col s12 m12">
                         <ul class="collapsible">
                             <li>
-                                <div class="collapsible-header"><i class="material-icons">archive</i>Petición de : ${request.name+" "+request.lastname}</div>
+                                <div class="collapsible-header red white-text"><i class="material-icons">archive</i>Petición de : ${request.name+" "+request.lastname+" - "+request.name_event+" - "+request.persons+" personas" }</div>
                                 <div class="collapsible-body">
                                     <table class="responsive-table">
                                         <thead>
@@ -34,7 +35,7 @@ function setRequests(requests){
                                                 <td>${request.date_event}</td>
                                                 <td>${request.type_event}</td>
                                                 <td> <div class="chip red white-text"> <span> ${request.status_event} </span> </div> </td>
-                                                <td> <a class="btn green accent-4" onClick="updateStatus(${request.id},${1})">Aceptar</a></td>
+                                                <td> <a class="btn green accent-4" onClick="updateStatus(${request.id},${1}, ${request.idUser})">Aceptar</a></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -48,11 +49,12 @@ function setRequests(requests){
             `;
             }
             else if(request.status==1){
+                //Aceppted
                 content +=`
                     <div class="col s12 m12">
                         <ul class="collapsible">
                             <li>
-                                <div class="collapsible-header"><i class="material-icons">archive</i>Petición de : ${request.name+" "+request.lastname}</div>
+                                <div class="collapsible-header green accent-4 white-text"><i class="material-icons">archive</i>Petición de : ${request.name+" "+request.lastname +" - "+request.name_event+" - "+request.persons+" personas"}</div>
                                 <div class="collapsible-body">
                                     <table class="responsive-table">
                                         <thead>
@@ -85,11 +87,11 @@ function setRequests(requests){
             `;
             }
             else{
-                content +=`
+            content +=`
             <div class="col s12 m12">
                 <ul class="collapsible">
                     <li>
-                        <div class="collapsible-header"><i class="material-icons">archive</i>Petición de : ${request.name+" "+request.lastname}</div>
+                        <div class="collapsible-header"><i class="material-icons">archive</i>Petición de : ${request.name+" "+request.lastname +" - "+request.name_event+" - "+request.persons+" personas"}</div>
                         <div class="collapsible-body">
                             <table class="responsive-table">
                                 <thead>
@@ -108,8 +110,8 @@ function setRequests(requests){
                                         <td>${request.date_event}</td>
                                         <td>${request.type_event}</td>
                                         <td> <div class="chip grey white-text"> <span> ${request.status_event} </span> </div> </td>
-                                        <td> <a class="btn green accent-4" onClick="updateStatus(${request.id},${1})">Aceptar</a></td>
-                                        <td> <a class="btn red" onClick="updateStatus(${request.id},${2})">Rechazar</a></td>
+                                        <td> <a class="btn green accent-4" onClick="updateStatus(${request.id},${1},${request.idUser})">Aceptar</a></td>
+                                        <td> <a class="btn red" onClick="updateStatus(${request.id},${2},${request.idUser})">Rechazar</a></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -155,14 +157,16 @@ function CallRequests(){
         catchError(jqXHR);
     })
 }
-function updateStatus(id, status){
+function updateStatus(id, status, id_user){
+
     var idStatus=status;
-   $.ajax(
+    var user_id = id_user; 
+    $.ajax(
         {
             url:requestPUT('Request','updateRequest'),
             type:'POST',
             data:{
-                id, status
+                id, status,user_id
             },
             datatype:'JSON'
         }
@@ -195,7 +199,6 @@ function updateStatus(id, status){
     .fail(function(jqXHR){
         catchError(jqXHR);
     })
-    
 }
 $('#Datesform').submit(function(){
     $('#chartsRequest').html('');
@@ -301,16 +304,7 @@ function viewDetails(){
             }
         }
     )
-
 }
-$('#saveChart').click(function(){
-    
-    event.preventDefault();
-    var canvas = $('#datesDetails');
-
-    canvas.fillStyle = "white";
-
-    canvas.get(0).toBlob(function(blob){
-        saveAs(blob,'imagen.jpeg');
-    });
-})
+function viewReport(){
+    window.open('private_reports/requestsDates.php?date1='+date1+'&date2='+date2);
+}

@@ -41,6 +41,11 @@ class eventTypes extends Validator{
         $params=array("%$this->search%");
         return Database::getRows($sql,$params);
     }
+    public function type_events_in_Events(){
+        $sql='SELECT COUNT(events.id) AS counting, event_types.type, event_types.id FROM ((events INNER JOIN event_types ON events.type_event=event_types.id)) GROUP BY event_types.type';
+        $params=array(null);
+        return Database::getRows($sql,$params);
+    }
     public function edit(){
         $sql='UPDATE event_types SET type=? WHERE id=?';
         $params = array($this->type,$this->id);
@@ -50,6 +55,11 @@ class eventTypes extends Validator{
         $sql='DELETE FROM event_types WHERE id=?';
         $params=array($this->id);
         return Database::executeRow($sql,$params);
+    }
+    public function getEventperType(){
+        $sql='SELECT events.name_event, event_types.type FROM (events INNER JOIN event_types ON event_types.id=events.type_event) WHERE event_types.id=?';
+        $params = array($this->id);
+        return Database::getRows($sql,$params);
     }
 }
 

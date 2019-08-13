@@ -24,7 +24,6 @@ function setProducts(products){
                     <div class="card z-depth-4" id="Card">
                         <div class="card-image">
                             <img src="../Imports/resources/pics/products/${product.image_product}">
-                            <span class="card-title">Card Title</span>
                         </div>
                         <div class="card-content">
                             <div class="row">
@@ -106,10 +105,6 @@ $('#FormAddProduct').submit(function(){
                     M.toast({html:result.exception});
                 }
                 else{
-                    M.toast({html:'¡Agregado correctamente!'});
-                    callProducts();
-                    $('#AddProductModal').modal('close');
-                    $('#FormAddProduct')[0].reset();
                     M.toast({html:result.exception});
                 }
             }
@@ -180,12 +175,13 @@ $('#FormEditProduct').submit(function(){
                 const result = JSON.parse(response);
                 if(result.status==1){
                     ToastSucces('Actualizado Correctamente');
+                    callProducts();
                     ClearForm('FormEditProduct');
                     closeModal('EditModalProduct');
-                    callProducts();
                 }
                 else if(result.status==2){
                     ToastError(result.exception);
+                    callProducts();
                 }
                 else if(result.status==3){
                     ToastError("Actulizado sin subir algun archivo");

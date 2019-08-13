@@ -45,7 +45,8 @@ class ShareEvents{
         
     }
     public static function ListShares(){
-        $sql='SELECT share_events.id, employees.name, employees.lastname FROM ((share_events INNER JOIN events ON events.id=share_events.id_event) INNER JOIN employees
+        $sql='SELECT employees.id AS idUser, share_events.id, employees.name, employees.lastname 
+        FROM ((share_events INNER JOIN events ON events.id=share_events.id_event) INNER JOIN employees
         ON employees.id=share_events.id_employee AND events.id=?)';
         $params=array(static::$id_event);
         return Database::getRows($sql,$params);

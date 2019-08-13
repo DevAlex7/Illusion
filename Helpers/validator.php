@@ -69,7 +69,8 @@ class Validator{
 					if ($type == 1 || $type == 2 || $type == 3) {
 						if ($name) {
 							if (file_exists($path.$name)) {
-								$this->imageName = $name;
+								$extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+								$this->imageName = uniqid().'.'.$extension;
 								return true;
 							} else {
 								$this->imageError = 4;

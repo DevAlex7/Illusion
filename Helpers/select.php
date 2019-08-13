@@ -26,6 +26,7 @@
             static::$all;
             return new static;
         }
+        
         public static function from($Model){
             static::$model_name = $Model;
             return new static;

@@ -82,7 +82,7 @@ function productPerEvent(id, products, count){
     
 }
 
-//Bar Chart
+//Bar Chart 
 function requestsPerDays(id, count){
     var ctx = $("#"+id);
 
@@ -144,7 +144,6 @@ function requestsPerDays(id, count){
 }
 function requestbyStates(id, states , count){
   var ctx = $('#'+id);
-  
   
   var myChart = new Chart(ctx, {
     type: 'doughnut',

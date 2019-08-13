@@ -121,6 +121,20 @@
                             $result['exception']='No se ha identificado al usuario';
                         }
                     break;
+                    case 'listProducts':
+                        if( Validate::Integer($_POST['idRequest'])->Id() ){
+                            Request::id($_POST['idRequest']);
+                            if($result['dataset'] = Request::productsInRequest()){
+                                $result['status']=1;
+                            }
+                            else{
+                                $result['exception']='Esta solicitud no cuenta con productos';
+                            }
+                        }
+                        else{
+                            $result['exception']='No se ha obtenido la solicitud';
+                        }
+                    break;
                     default: 
                     exit('acción no disponible');
                 }
@@ -139,11 +153,13 @@
                                         $event->clientName($fullname) &&
                                         $event->id_employee($_SESSION['idUser']) && 
                                         $event->pay_status(2) &&
-                                        $event->type_event($request['type_event']) )
+                                        $event->type_event($request['type_event']) &&
+                                        $event->persons($request['persons']) 
+                                    )
                                     {
                                         $event->save();
                                         $event_id = Database::getLastRowId();
-                                        Events_assignments::set()->event_id($event_id)->request_id($_POST['id'])->client_id($_SESSION['idPublicUser'])->save();
+                                        Events_assignments::set()->event_id($event_id)->request_id($_POST['id'])->client_id($_POST['user_id'])->save();
                                         $result['status']=1;
                                     }
                                     else{
@@ -168,7 +184,6 @@
             break;
             case 'DELETE':
                 switch($_GET['action']){
-                   
                     default:
                     exit('Acción no disponible');
                 }
