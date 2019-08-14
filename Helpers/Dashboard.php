@@ -17,7 +17,7 @@ class AdminSideNav {
                                     <span class="card-title">Illussion</span>
                                 </div>
                                 <a href="#name"><span class="black-text name">'. $_SESSION['UsernameActive'].'</span></a>
-                                <a href="#email"><span class="black-text email">'. $_SESSION['NameUser'].' '.$_SESSION['LastnameUser'] .'</span></a>
+                                <a href="#email"><span class="black-text email" id="Name-sidenav">'. $_SESSION['NameUser'].' '.$_SESSION['LastnameUser'] .'</span></a>
                             </div>
                         </li>
                         <div id="OptionsBar">
@@ -47,8 +47,8 @@ class AdminSideNav {
                             <div class="card center white-text" id="TitleSidenav">
                                     <span class="card-title">Illussion</span>
                                 </div>
-                                <a href="#name"><span class="black-text name">'. $_SESSION['UsernameActive'].'</span></a>
-                                <a href="#email"><span class="black-text email">'. $_SESSION['NameUser'].' '.$_SESSION['LastnameUser'] .'</span></a>
+                                <a href="#name"><span class="black-text name" id="Username-sidenav">'. $_SESSION['UsernameActive'].'</span></a>
+                                <a href="#email"><span class="black-text email" id="Name-sidenav">'. $_SESSION['NameUser'].' '.$_SESSION['LastnameUser'] .'</span></a>
                             </div>
                         </li>
                         <div id="OptionsBar">

@@ -288,8 +288,43 @@
             
             case 'PUT':
                 switch($_GET['action']){
-                    case 'updatePassword':
-
+                    case 'updateProfile':
+                        if($employe->id($_POST['information']['id'])){
+                            if($employe->name($_POST['information']['name'])){
+                                if($employe->lastname($_POST['information']['lastname'])){
+                                    if($employe->email($_POST['information']['email'])){
+                                        if($employe->username($_POST['information']['username'])){
+                                            if($employe->editProfile()){
+                                                $_SESSION['idUser']=$employe->getId();
+                                                $_SESSION['NameUser']=$employe->getName();
+                                                $_SESSION['LastnameUser']=$employe->getLastname();
+                                                $_SESSION['UsernameActive']=$employe->getUsername();
+                                                $result['status']=1;
+                                                $result['dataset'] = $employe->findbyId();
+                                            }
+                                            else{
+                                                $result['exception']='No se actualizó';
+                                            }
+                                        }   
+                                        else{
+                                            $result['exception']='Campo vacio o usuario con datos erroneos';
+                                        }
+                                    }
+                                    else{
+                                        $result['exception']='Campo vacio o dato con mal formato';
+                                    }
+                                }
+                                else{
+                                    $result['exception']='Campo vacio o apellido mal ingresados';
+                                }
+                            }
+                            else{
+                                $result['exception']='Campo vacio o nombre mal ingresados';
+                            }
+                        }
+                        else{
+                            $result['exception']='No se ha logrado identificar el usuario';
+                        }
                     break;
                 }
             break;

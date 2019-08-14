@@ -42,7 +42,7 @@
                                     <p class="grey-text">Apellido</p>
                                     <div id="userpart">
                                         <i class="material-icons left">person</i>
-                                        <div id="user-div-lastname">
+                                        <div id="user-div-lastname">    
                                         </div>
                                     </div>
                                 </div>  
@@ -66,8 +66,7 @@
                                 </div>    
                             </div>
                             <div class="row">
-                                <div class="center">
-                                    <a class="btn orange" id="editProfile"> <i class="material-icons left">edit</i> Editar </a>
+                                <div class="center" id="buttonsControl">
                                 </div>
                             </div>
                         </div>
