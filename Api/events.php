@@ -38,6 +38,13 @@
                         $result['exception'] = 'No hay datos disponibles';
                     }
                     break;
+                    case 'chartByProducts':
+                    if ($result['dataset'] = $event->chartByProducts($_POST['count'])) {
+                        $result['status'] = 1;
+                    } else {
+                        $result['exception'] = 'No hay datos disponibles';
+                    }
+                    break;
                     case 'getId':
                         if(Select::in('events','id')->where('id',$_POST['idEvent'])->getOne()){
                             $result['status']=1;

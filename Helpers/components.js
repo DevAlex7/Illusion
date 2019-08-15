@@ -83,3 +83,55 @@ function lineGraph(canvas, xAxis, yAxis, legend, title)
     });
 }
 
+function polarChart(canvas, products, count)
+{
+    if(count.length>0){
+        var ctx = $("#"+canvas);
+
+        var coloR3 = [];
+    
+        for(i in products){
+            coloR3.push('#'+(Math.random()*0xFFFFFF<<0).toString(16));
+        }
+    
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+              labels: products,
+              datasets: [   
+                {
+                  label: '',
+                  backgroundColor: coloR3,
+                  data: count
+                }
+              ]
+            },
+            options: {
+            legend: {
+                labels: {
+                        generateLabels: function(chart) {
+                            labels = Chart.defaults.global.defaultFontColor = 'black';
+                        return labels
+                        }
+                },
+                display: false,
+            },
+            scales: {
+                xAxes: [{
+                    ticks: {
+                        min: 0,
+                        stepSize:1 // Edit the value according to what you need
+                    }
+                }],
+                yAxes: [{
+                    stacked: true
+                }]
+            }
+        }
+        });
+    }
+    else{
+        $('#'+idCanvas).destroy();
+    }   
+    
+}
