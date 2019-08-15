@@ -1,6 +1,6 @@
 <?php
-    require('../Imports/Global/Global.php');
-    require('../Helpers/Dashboard.php');
+require('../Imports/Global/Global.php');
+require('../Helpers/Dashboard.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -9,13 +9,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Dashboard | Estadísticas </title>
-    <?php 
-        ImportGlobal::ImportMaterializeCss();
-        ImportGlobal::ImportMaterialIcons(); 
-        ImportGlobal::ImportIco();
-        ImportGlobal::ImportFont();
-        ImportGlobal::ImportFileCss('employees');
-        ImportGlobal::ImportSidenavCss('sidenav');   
+    <?php
+    ImportGlobal::ImportMaterializeCss();
+    ImportGlobal::ImportMaterialIcons();
+    ImportGlobal::ImportIco();
+    ImportGlobal::ImportFont();
+    ImportGlobal::ImportFileCss('employees');
+    ImportGlobal::ImportSidenavCss('sidenav');
     ?>
 </head>
 <body>
@@ -32,7 +32,6 @@
                 </div>
             </nav>
         </div>
-
         <div class="row">
             <div class="col s12 m6">
                 <div id="Form">
@@ -85,8 +84,14 @@
                                     </div>
                                     <div class="divider"></div>
                                     <div class="center-align" id="DetailsEmployee">
-                                        <span class="grey-text card-title">Cantidad de productos registrados en eventos.</span>
-                                        <canvas id="polar"></canvas>
+                                        <span class="grey-text card-title">Inventario de productos.</span>
+                                        <div class="center">
+                                            <div class="col s12">
+                                                <input class="center" type="number" name="evento" id="evento" placeholder="Ingrese la cantidad de productos que desea ver" required />
+                                            </div>
+                                            <a class="btn" id="searchingCount" >Buscar</a>
+                                        </div>
+                                        <canvas id="bar"></canvas>
                                     </div>
                                 </div>
                             </div>
@@ -106,6 +111,15 @@
                                     <div class="divider"></div>
                                     <div class="center-align" id="DetailsEmployee">
                                         <span class="grey-text card-title">Eventos agrupados por fecha.</span>
+                                        <div class="center">
+                                            <div class="col s12 m6">
+                                                <input class="center" type="date" name="date1" id="date1" required />
+                                            </div>
+                                            <div class="col s12 m6">
+                                                <input class="center" type="date" name="date2" id="date2" required />
+                                            </div>
+                                            <button class="btn">Buscar</button>
+                                        </div>
                                         <canvas id="donut"></canvas>
                                     </div>
                                 </div>
@@ -117,15 +131,15 @@
         </div>
     </main>
     <footer class="red">
-       <?php ImportGlobal::ImportFooter()?>
+        <?php ImportGlobal::ImportFooter() ?>
     </footer>
     <?php
-        ImportGlobal::ImportJQuery();
-        ImportGlobal::ImportMaterializeJS();
-        ImportGlobal::ImportJSFunctions();
-        ImportGlobal::ImportChart();
-        ImportGlobal::ImportComponentChart();
-        ImportGlobal::ImportControllerJs('ChartsPage');
+    ImportGlobal::ImportJQuery();
+    ImportGlobal::ImportMaterializeJS();
+    ImportGlobal::ImportJSFunctions();
+    ImportGlobal::ImportChart();
+    ImportGlobal::ImportComponentChart();
+    ImportGlobal::ImportControllerJs('ChartsPage');
     ?>
 </body>
 </html>

@@ -327,8 +327,10 @@ class Events extends Validator{
         return Database::getRows($sql,$params);
     }
 
-    public function chartByProducts()
-    {
+    public function chartByProducts($count){
+        $sql = 'SELECT products.count AS counting, nameProduct FROM products WHERE products.count > ? ORDER BY counting ASC limit 10';
+        $params = array($count);
+        return Database::getRows($sql, $params);
     }
 }
 ?>
