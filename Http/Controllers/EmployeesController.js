@@ -515,3 +515,6 @@ $('#searching').submit(function(){
 function viewReport(id){
   window.open('private_reports/eventPerUser.php?idUser='+id);
 }
+$('#reportEmployees').click(function(){
+  window.open('private_reports/usersReports.php');
+})

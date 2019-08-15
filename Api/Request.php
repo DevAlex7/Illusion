@@ -80,6 +80,20 @@
                             $result['exception']='Nombre de evento invalido';
                         }
                     break;
+                    case 'myRequests':
+                        if(Validate::Integer($_POST['id'])->Id()){
+                            Request::set()->user_id($_POST['id']);
+                            if($result['dataset']=Request::getmyRequests()){
+                                $result['status']=1;
+                            }
+                            else{
+                                $result['exception']='No tienes solicitudes todavia';
+                            }
+                        }
+                        else{
+                            $result['exception']='No hay información del usuario';
+                        }
+                    break;
                     case 'requestPerDate':
                         $date1 = $_POST['date1'];
                         $date2 = $_POST['date2'];

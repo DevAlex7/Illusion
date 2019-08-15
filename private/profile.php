@@ -25,13 +25,13 @@
     <main>
         <div class="row">
             <div class="col s12 m6">
-                <div class="card z-depth-1-half" id="card-informationProfile">
+                <div class="card" id="card-informationProfile">
                     <div class="card-content">
                         <span class="card-title" id="titlepersonal">Información personal</span>
                         <div id="informationProfile">
                             <div class="row">
                                 <div class="left col s12 m12" id="name-div-info">
-                                    <p class="grey-text">Nombre</p>
+                                    <p class="white-text">Nombre</p>
                                     <div id="userpart">
                                         <i class="material-icons left">person</i>
                                         <div id="user-div-name">
@@ -39,7 +39,7 @@
                                     </div>
                                 </div>
                                 <div class="left col s12 m12" id="lastname-div-info">
-                                    <p class="grey-text">Apellido</p>
+                                    <p class="white-text">Apellido</p>
                                     <div id="userpart">
                                         <i class="material-icons left">person</i>
                                         <div id="user-div-lastname">    
@@ -47,18 +47,18 @@
                                     </div>
                                 </div>  
                                 <div class="left col s12 m12" id="email-div-info">
-                                    <p class="grey-text">Email</p>
+                                    <p class="white-text">Email</p>
                                     <div id="userpart">
-                                        <i class="material-icons left">person</i>
+                                        <i class="material-icons left">mail</i>
                                         <div id="user-div-email">
                                             <span id="email-user">Usuario</span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="left col s12 m12" id="username-div-info">
-                                    <p class="grey-text">Usuario</p>
+                                    <p class="white-text">Usuario</p>
                                     <div id="userpart">
-                                        <i class="material-icons left">person</i>
+                                        <i class="material-icons left">verified_user</i>
                                         <div id="user-div-username">
                                             <span id="username-user">Usuario</span>
                                         </div>
@@ -78,8 +78,36 @@
                     <div class="card-content">
                         <span class="card-title" id="titlepersonal">Estadística</span>
                         <div id="informationStadistics">
-                            
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 m12 ">
+                <div class="card" id="card-statidisticEvents">
+                    <div class="card-content">
+                        <span class="card-title" id="titlepersonal">Actividad de creación de eventos</span>
+                        <div id="canvasEvent">                        
+                        </div>    
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m6">
+                <div class="card" id="card-statidisticEvents">
+                    <div class="card-content">
+                        <span class="card-title" id="titlepersonal">Productos agregados en eventos</span>
+                        <div id="canvasProducts">                        
+                        </div>    
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m6">
+                <div class="card" id="card-statidisticEvents">
+                    <div class="card-content">
+                        <span class="card-title" id="titlepersonal">Tipos de eventos creados</span>
+                        <div id="canvasTypeEvents">                        
+                        </div>    
                     </div>
                 </div>
             </div>
@@ -94,7 +122,8 @@
     ImportGlobal::ImportMaterializeJS();
     ImportGlobal::ImportJSFunctions();
     ImportGlobal::ImportMomentJS();
-    ImportGlobal::ImportRoutesJs();
+    ImportGlobal::ImportChart();
+    ImportGlobal::ImportChartHelpers('HelperChart');
     ImportGlobal::ImportControllerJs('Profile');
 ?>
 </body>

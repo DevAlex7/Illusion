@@ -21,7 +21,7 @@ class Database
 
         //passwords
         'localpassword' => '',
-        'externalpassword' => 'jnPAaL3djy'
+        'externalpassword' => 'hCKJaewQXE'
 
     );
 

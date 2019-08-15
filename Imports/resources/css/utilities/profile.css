@@ -1,8 +1,12 @@
 #card-informationProfile{
+    background-color: #E71D36;
     border-radius: 10px;
+    color:white;
 }
 #card-statidisticsProfile{
+    background-color: #E71D36;
     border-radius: 10px;
+    color:white;
 }
 #divider{
     position: relative;
@@ -20,4 +24,12 @@
 }
 #userpart{
     margin-top:1rem;
+}
+#canvasEvent{
+    margin-top:1rem;
+}
+#card-statidisticEvents{
+    background-color: #E71D36;
+    border-radius: 10px;
+    color:white;
 }

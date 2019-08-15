@@ -27,6 +27,7 @@ require_once('../Imports/Global/Global.php')?>
                     <div class="card-content">
                         <div class="center">
                             <span class="card-title">Bitacora de actividades</span>
+                            <a class="btn red" id="pdfBinnacle">PDF</a>
                         </div>
                     </div>
                 </div>

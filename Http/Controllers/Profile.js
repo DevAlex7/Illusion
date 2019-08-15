@@ -47,6 +47,8 @@ const showProfile = () => {
                     data.username = result.dataset.username;
 
                     $('#buttonsControl').html(`<a class="btn orange" onclick="edit()"  id="editProfile"> <i class="material-icons left">edit</i> Editar </a>`); 
+
+                    eventsCreated(data.id);
                     
                 }
                 else{
@@ -114,7 +116,6 @@ const editProfile = () => {
                 if(result.status){
                     ToastSucces('¡Perfil actualizado correctamente!');
                     cancelEdit();
-
                     $('#user-div-name').html(`
                         <span id="name-user">${result.dataset.name}</span>
                         <input type="hidden" id="name-input" name="name-input" value="${result.dataset.name}">
@@ -139,7 +140,6 @@ const editProfile = () => {
                     data.email = result.dataset.email,
                     data.username = result.dataset.username;
 
-
                 }
                 else{
                     ToastError(result.exception);
@@ -150,4 +150,151 @@ const editProfile = () => {
             }   
         }
     )
+}
+const eventsCreated = (id) => {
+
+    var idEmployee = id;
+    $.ajax(
+      {
+        url:requestPOST('userEmployees','eventsActivity'),
+        type:'POST',
+        data:{
+          idEmployee  
+        },
+        datatype:'JSON',
+        cache:false
+      }
+    )
+    .done(function(response)
+      {
+        if(isJSONString(response)){
+          const result = JSON.parse(response);
+          if(result.status){
+            console.log(result.dataset);
+            var dates =[];
+            var count =[];     
+
+            for(i in result.dataset){
+              dates.push(result.dataset[i].eventCreated);
+              count.push(result.dataset[i].countActivity);
+            }
+
+            $('#canvasEvent').html(`<canvas id="canvas-createdEvents"> </canvas>`);
+            
+            myEvents('canvas-createdEvents',dates, count);
+
+            viewProductsActivity(data.id);
+
+            typeEvents(data.id);
+          }
+          else{
+            $('#canvasEvent').html(`<canvas id="canvas-createdEvents"> </canvas>`);
+            myEvents('canvas-createdEvents',[0], [0]);   
+          }
+        }
+        else{
+          console.log(response);
+        }
+      }
+    )
+    .fail(function(jqXHR) {
+      catchError(jqXHR);
+    });
+}
+
+const viewProductsActivity = (id) =>{
+    $('#canvasProducts').html('');
+    var idEmployee = id;
+    $.ajax(
+      {
+        url:requestPOST('userEmployees','productsActivity'),
+        type:'POST',
+        data:{
+          idEmployee  
+        },
+        datatype:'JSON',
+        cache:false
+      }
+    )
+    .done(function(response)
+      {
+        if(isJSONString(response)){
+          const result = JSON.parse(response);
+          if(result.status){
+            var events =[];
+            var count = [];
+
+            for(i in result.dataset){
+                events.push(result.dataset[i].name_event);
+                count.push(result.dataset[i].numberCount);
+            }
+            console.log(events);
+                if(events.length>0){
+                    $('#canvasProducts').html(`<canvas id="productsCanvas"></canvas>`);
+                    myProducts('productsCanvas', events, count);
+                }
+                    else{
+                    $('#canvasProducts').html('');
+                }
+                
+            }
+            else{
+                $('#canvasProducts').html(`<canvas id="productsCanvas"></canvas>`);
+                myProducts('productsCanvas', [0], [0]);
+            }
+        }
+        else{
+          console.log(response);
+        }
+      }
+    )
+    .fail(function(jqXHR) {
+      catchError(jqXHR);
+    });
+}
+
+const typeEvents = (id) => {
+    $('#canvasTypeEvents').html('');
+    var idEmployee = id;
+    $.ajax(
+      {
+        url:requestPOST('userEmployees','typeEventsActivity'),
+        type:'POST',
+        data:{
+          idEmployee  
+        },
+        datatype:'JSON',
+        cache:false
+      }
+    )
+    .done(function(response)
+      {
+        if(isJSONString(response)){
+          const result = JSON.parse(response);
+          if(result.status){
+              var types =[];
+              var count =[];
+              
+              for(i in result.dataset){
+                types.push(result.dataset[i].type);
+                count.push(result.dataset[i].countType);
+              }
+              $('#canvasTypeEvents').html(`<canvas id="typeEventscanvas"></canvas>`);
+              myTypesEvents('typeEventscanvas',types, count);
+          }
+          else{
+            $('#canvasTypeEvents').html(`<canvas id="typeEventscanvas"></canvas>`);
+            typeEventsUser('typeEventscanvas',[0], [0]);
+          }
+        }
+        else{
+          console.log(response);
+        }
+  
+      }
+    )
+    .fail(function(jqXHR) {
+      catchError(jqXHR);
+    });
+  
 }
