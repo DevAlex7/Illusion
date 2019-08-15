@@ -9,6 +9,7 @@
     require_once('../../Backend/Models/TypeEvents.php');
     require_once('../../Backend/Models/Products.php');
     require_once('../../Backend/Models/Request.php');
+    require_once('../../Backend/Models/Binnacle.php');
     require_once('../../Backend/Instance/instance.php');
 
     class PDF extends FPDF{
@@ -73,10 +74,27 @@
             $data = $type->type_events_in_Events();
             return $data;
         }
+
         public function getEventperType($id){
             $type = new eventTypes();
             $type->id($id);
             $data = $type->getEventperType();
+            return $data;
+        }
+
+        public function getTypeEvents(){
+            $select = new Select();
+            $data = $select->allFrom('event_types');
+            return $data;
+        }
+        public function binnacleActions(){
+            $data = Binnacle::getBinnacle();
+            return $data;
+        }
+        public function usersEmployee(){
+            $employee = new Employee();
+            $employee->id($_SESSION['idUser']);
+            $data = $employee->ListPersons();
             return $data;
         }
     

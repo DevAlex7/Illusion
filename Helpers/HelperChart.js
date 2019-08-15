@@ -279,10 +279,10 @@ function requestsInformation(id, requestsDates, count){
 }
 function eventsActivityUser(id, datesCreated, count){
     if(count.length>0){
-        
+
         var idDeCanvas = $("#"+id);
 
-
+        
         var chartdata = {
             labels: datesCreated,
             datasets : [
@@ -297,7 +297,7 @@ function eventsActivityUser(id, datesCreated, count){
             ]
         };
           
-        window.bar = new Chart(idDeCanvas , {
+        new Chart(idDeCanvas , {
                 type: 'line',
                 data: chartdata,
                 options: {
@@ -527,5 +527,189 @@ function likesStates(idCanvas, likes, action){
                 },
             },
         );   
+    }
+}
+/* My profile part */
+function myEvents(id, datesCreated, count){
+    if(count.length>0){
+
+        var idDeCanvas = $("#"+id);
+        
+        
+        var chartdata = {
+            labels: datesCreated,
+            datasets : [
+                {
+                    backgroundColor: 'transparent',
+                    borderColor:'white',
+                    pointBorderColor: "white",
+                    hoverBackgroundColor: 'white',
+                    hoverBorderColor: 'rgba(200, 200, 200, 1)',
+                    data: count
+                },
+            ]
+        };
+          
+        new Chart(idDeCanvas , {
+                type: 'line',
+                data: chartdata,
+                options: {
+                    legend: {
+                        labels: {
+                                generateLabels: function(chart) {
+                                    labels = Chart.defaults.global.defaultFontColor = 'white';
+                                return labels
+                                }
+                        },
+                        display: false,
+                    },
+                    scales:{
+                        yAxes: [{
+                            ticks: {
+                                fontColor: "white",
+                                fontStyle: "bold",
+                                beginAtZero: true,
+                                padding: 20,
+                                stepSize: 1
+                            },
+                            gridLines: {
+                                drawTicks: false,
+                                display: false
+                            }
+                        }],
+                        xAxes: [{
+                            gridLines: {
+                                zeroLineColor: "transparent"
+                            },
+                            ticks: {
+                                padding: 20,
+                                fontColor: "white",
+                                fontStyle: "bold"
+                            }
+                        }]
+                    },
+                    gridLines: {
+                        display: true,
+                        color: "black",
+                    },
+                    tooltips: {
+                        callbacks: {
+                            label: tooltipItem => `${tooltipItem.yLabel}: ${tooltipItem.xLabel}`, 
+                            title: () => null,
+                        }
+                    },
+                },
+            },
+        );   
+    }
+}
+function myProducts(canvasId, events ,count){
+    
+    var ctx = $('#'+canvasId);
+    
+    if(events.length>0){
+        
+        var coloR3 = [];
+
+        for(i in events){
+            coloR3.push('rgba(255,255,255)');
+        }
+
+        console.log(coloR3);
+
+        new Chart(ctx, {
+            type: 'horizontalBar',
+            data: {
+            labels: events,
+            datasets: [
+                {
+                label: '',
+                backgroundColor: coloR3,
+                data: count
+                }
+            ]
+            },
+            options: {
+            legend: {
+                labels: {
+                        generateLabels: function(chart) {
+                            labels = Chart.defaults.global.defaultFontColor = 'white';
+                        return labels
+                        }
+                },
+                display: false,
+            },
+            scales: {
+                xAxes: [{
+                    ticks: {
+                        min: 0,
+                        stepSize: 1 // Edit the value according to what you need
+                    }
+                }],
+                yAxes: [{
+                    stacked: true
+                }]
+            }
+        }
+        });
+    }
+    else{
+        ctx.destroy();
+    }
+}
+function myTypesEvents(canvas, types, count ){
+    var ctx = $('#'+canvas);
+    
+    if(types.length>0){
+        
+        var coloR3 = [];
+
+        for(i in types){
+            coloR3.push('rgba(255,255,255)');
+        }
+
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+            labels: types,
+            datasets: [
+                {
+                label: '',
+                backgroundColor: coloR3,
+                data: count
+                }
+            ]
+            },
+            options: {
+            legend: {
+                labels: {
+                        generateLabels: function(chart) {
+                            labels = Chart.defaults.global.defaultFontColor = 'white';
+                        return labels
+                        }
+                },
+                display: false,
+            },
+            scales: {
+                xAxes: [{
+                    ticks: {
+                        min: 0,
+                        stepSize: 1 // Edit the value according to what you need
+                    }
+                }],
+                yAxes: [{
+                    stacked: true,
+                    ticks: {
+                        min: 0,
+                        stepSize: 1 // Edit the value according to what you need
+                    }
+                }]
+            }
+        }
+        });
+    }
+    else{
+        ctx.destroy();
     }
 }

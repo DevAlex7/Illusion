@@ -37,6 +37,9 @@
                 <a class="btn-floating btn-large orange modal-trigger" href="#searchEmployee">
                     <i class="large material-icons">search</i>
                 </a>
+                <a class="btn-floating btn-large red modal-trigger" id="reportEmployees">
+                    <i class="large material-icons">description</i>
+                </a>
             </div>
             <!--modal insertar Administradores -->
             <div class="modal" id="insertAdmins">

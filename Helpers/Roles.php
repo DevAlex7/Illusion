@@ -28,6 +28,7 @@
                                         </div>
                                     </div>
                                 </form>
+                                <a class="btn red" id="openPdf">PDF</a>
                             </div>
                         </div>
                     </div>

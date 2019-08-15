@@ -251,3 +251,6 @@ function confirmDelete(){
         console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
     });
 }
+$('#openPdf').click(function(){
+    window.open('private_reports/typeEvents.php');
+})

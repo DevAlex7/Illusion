@@ -42,7 +42,8 @@
                     <div class="card-content">
                         <div id="ContentTypes">
                             <span class="card-title">Tipos de evento</span>
-                            <div class="row" id="TypesRead">
+                                
+                                <div class="row" id="TypesRead">
                             </div>
                         </div>
                     </div>

@@ -76,6 +76,15 @@ class Request{
         $params=array(static::$status, static::$id);
         return Database::executeRow($sql,$params);
     }
+    public static function getmyRequests(){
+        $sql='SELECT requests.id, requests.date_event, requests.name_event, status_requests.id AS statusId ,status_requests.status,  event_types.type 
+        FROM (( requests 
+        INNER JOIN status_requests ON status_requests.id=requests.status
+        INNER JOIN employees ON requests.public_user_id=employees.id) 
+        INNER JOIN event_types ON requests.type_event=event_types.id AND employees.id=?)';  
+        $params = array(static::$user_id);
+        return Database::getRows($sql,$params);
+    }   
     public static function requestPerDay($date1, $date2){
         $sql='SELECT COUNT(*) AS count FROM requests WHERE date_request BETWEEN ? AND ?';
         $params=array($date1,$date2);

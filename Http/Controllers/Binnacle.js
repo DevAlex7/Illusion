@@ -111,3 +111,6 @@ function CallTimeline(){
         catchError(jqXHR); 
     })
 }
+$('#pdfBinnacle').click(function(){
+    window.open('private_reports/binnacleReport.php');
+})
