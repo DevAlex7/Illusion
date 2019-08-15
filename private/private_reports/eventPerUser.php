@@ -58,7 +58,9 @@ class myPDF extends PDF {
 
 if(isset($_GET['idUser'])){
     $pdf = new myPDF('p','mm','Letter');
+    $pdf->SetMargins(15,15,15);
     $pdf->AliasNbPages();
+
     $pdf->AddPage();
     $pdf->headerTable();
     $pdf->viewTable();

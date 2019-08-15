@@ -44,7 +44,7 @@ class myPDF extends PDF {
             $this->Ln();
             $events = $this->getEventperType($row['id']);
             foreach($events as $result){
-                $this->Cell(40, 10, $result['name_event'],0 ,'L',false);
+                $this->Cell(40, 10, $result ['name_event'],0 ,'L',false);
                 $this->Ln();
             }
             $this->Ln();
@@ -54,6 +54,7 @@ class myPDF extends PDF {
 }
 
     $pdf = new myPDF('p','mm','Letter');
+    $pdf->SetMargins(15,15,15);
     $pdf->AliasNbPages();
     $pdf->AddPage();
     $pdf->headerTable();

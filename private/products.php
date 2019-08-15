@@ -37,6 +37,9 @@
                 <a class="btn-floating modal-trigger tooltipped btn-large white " data-position="left" data-tooltip="Agregar producto" href="#AddProductModal">
                     <i class="large material-icons red-text">add</i>
                 </a>
+                <a class="btn-floating tooltipped btn-large red" id="productsReport" data-position="left" data-tooltip="Reporte">
+                    <i class="large material-icons white-text">description</i>
+                </a>
             </div>
             
             <div class="row" id="SearchBar">

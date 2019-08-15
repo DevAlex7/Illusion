@@ -32,8 +32,8 @@ class myPDF extends PDF {
         $this->SetTextColor(0,0,0);
         $this->Cell(70,10,' Nombre ', 0, 0,'L');
         $this->Cell(60,10,' Apellido ',0,0,'L');
-        $this->Ln(3);
-        $this->Line(10,57,200,57);
+        $this->Ln(1);
+        $this->Line(10,60,200,60);
         $this->Ln();
     }
 
@@ -56,6 +56,7 @@ class myPDF extends PDF {
 
 if(!empty($_GET['idEvent'])){
     $pdf = new myPDF('p','mm','Letter');
+    $pdf->SetMargins(15,15,15);
     $pdf->AliasNbPages();
     $pdf->AddPage();
     $pdf->headerTable();

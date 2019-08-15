@@ -254,3 +254,6 @@ function confirmDelete(){
 $('#openPdf').click(function(){
     window.open('private_reports/typeEvents.php');
 })
+$('#eventsTypePDF').click(function(){
+    window.open('private_reports/eventsperType.php');
+})
