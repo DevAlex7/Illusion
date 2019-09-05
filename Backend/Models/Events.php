@@ -316,7 +316,7 @@ class Events extends Validator{
     }
     
     public function chartEvent(){
-        $sql = 'SELECT COUNT(events.id) AS counting, event_types.type FROM ((events INNER JOIN event_types ON events.type_event=event_types.id)) GROUP BY event_types.type';
+        $sql = 'SELECT COUNT(events.id) AS counting, event_types.type FROM ((events INNER JOIN event_types ON events.type_event=event_types.id)) GROUP BY event_types.type ORDER BY counting DESC';
         $params = array(null);
         return Database::getRows($sql, $params);
     }

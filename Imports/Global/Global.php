@@ -49,6 +49,11 @@ class ImportGlobal{
         print 
         '<script src="../Imports/resources/js/global/materialize.min.js"></script>';
     }
+    //To import inactivy code
+    public static function ImportInactivity(){
+        print 
+        '<script src="../Helpers/Inactivity.js"></script>';
+    }
     //To import the global JS functions
     public static function ImportJSFunctions(){
         print 
@@ -61,6 +66,9 @@ class ImportGlobal{
     public static function ImportComponentChart(){
         print 
         '<script src="../Helpers/components.js"></script>';
+    }
+    public static function ImportInactivityPHP(){
+        require_once('../Helpers/Inactivity.php');
     }
     //To import the Controller that you will use :)
     public static function ImportControllerJs($Controller){

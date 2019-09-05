@@ -59,9 +59,9 @@ class myPDF extends PDF {
                 $fulldate1 = str_replace("/","-",$fulldate1);
                 $newDate1 = date("d-m-Y", strtotime($fulldate1));
                 $created_date = strftime("%A %d %B de %Y", strtotime($newDate1));
-                $this->Cell(200, 5, 'Fecha de evento: '.'Sin información' ,0,1,'L');
+                $this->Cell(200, 5, utf8_decode('Fecha de evento: '.'Sin información') ,0,1,'L');
                 $this->Ln(3);
-                $this->Cell(200, 5, 'Fecha solicitado: '.'Sin información' ,0,1,'L');
+                $this->Cell(200, 5, utf8_decode('Fecha solicitado: '.'Sin información'),0,1,'L');
                 $this->Ln(1);
                 $this->SetFont('Times','',12);
             }   
@@ -77,7 +77,7 @@ class myPDF extends PDF {
             $this->Cell(54, 10, 'Fecha: '.$date = date('m/d/Y h:i:s a', time()),0,0,'L');
             $this->Cell(54, 10, utf8_decode('Usuario: '.$_SESSION['UsernameActive']),0 , 0 ,'C');
             $this->Cell(54, 10, utf8_decode('Nombre: '.$_SESSION['NameUser']." ".$_SESSION['LastnameUser']),0,0,'C');
-            $this->Ln(20);
+            $this->Ln(30);
             $this->SetFont('Times','B',12);
             $this->SetTextColor(0,0,0);
             $this->Cell(200,5,'Detalles del evento.',0,1,'L');
@@ -110,7 +110,7 @@ class myPDF extends PDF {
     
                 if(count( $event['products_event']) > 0){
                     foreach($event['products_event'] as $row){
-                        $this->Cell(40, 10, $row['nameProduct'],0 ,'L',false);
+                        $this->Cell(40, 10,  utf8_decode($row['nameProduct']),0 ,'L',false);
                         $this->Cell(30, 10, $row['count'],0 ,'L',false);
                         $this->Cell(30, 10, $row['price'],0 ,'L',false);
                         $this->Ln();
@@ -132,7 +132,7 @@ class myPDF extends PDF {
                 $this->Ln(2);
                 if(count($event['collaborators_event']) > 0){
                     foreach($event['collaborators_event'] as $row){
-                        $this->Cell(40, 10, $row['name']." ".$row['lastname'],0 ,'L',false);
+                        $this->Cell(40, 10, utf8_decode($row['name']." ".$row['lastname']),0 ,'L',false);
                         $this->Ln();
                     }
                 }
@@ -143,7 +143,7 @@ class myPDF extends PDF {
             }
             else{
                 $this->Ln(2);
-                $this->Cell(200,5,'No hay información',0,1,'L');
+                $this->Cell(200,5,utf8_decode('No hay información'),0,1,'L');
             }
         }
 }

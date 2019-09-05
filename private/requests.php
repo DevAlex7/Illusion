@@ -69,6 +69,7 @@
                         <div class="card-panel" id="cardChart">
                             <canvas id="requestsStates"></canvas>
                         </div>
+                        <a  class="btn" id="requestPDF">Solicitudes por estado</a>
                    </div>
                </div>
             </div>

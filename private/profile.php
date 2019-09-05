@@ -105,7 +105,7 @@
             <div class="col s12 m6">
                 <div class="card" id="card-statidisticEvents">
                     <div class="card-content">
-                        <span class="card-title" id="titlepersonal">Tipos de eventos creados</span>
+                        <span class="card-title" id="titlepersonal">Cantidad de tipos de eventos</span>
                         <div id="canvasTypeEvents">                        
                         </div>    
                     </div>

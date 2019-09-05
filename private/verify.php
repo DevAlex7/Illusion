@@ -1,6 +1,8 @@
+
 <?php 
 require_once('../Imports/Global/Global.php');
 require_once('../Helpers/Roles.php');    
+require_once('../Helpers/AuthenticatorGenerator.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,15 +30,11 @@ require_once('../Helpers/Roles.php');
                     <span class="grey-text" id="descriptionSaludate">Nos alegra verte, ingresa tus datos.</span>
                 </div>
                 <div class="col s12 m12">
-                    <form class="col s12 m12" method="POST" id="FormLogin">
+                    <form class="col s12 m12" method="POST" id="formAuth">
                         <div class="row">
                             <div class="input-field col s12 m12">
-                                <i class="material-icons prefix">account_circle</i>
-                                <input id="Nickname" name="Nickname" type="text" placeholder="Usuario">
-                            </div>
-                            <div class="input-field col s12 m12">
                                 <i class="material-icons prefix">vpn_key</i>
-                                <input id="pass" autocomplete="off" name="pass" type="password" placeholder="Contraseña">
+                                <input id="text" autocomplete="off" name="code_verification" id="code_verification" type="text" placeholder="Codigo de verificación">
                             </div>
                         </div>
                         <button type="submit" class="btn col s12 m12 red" id="buttonLogin"> <i class="material-icons right">arrow_forward</i> <span id="buttonTitle">Entrar</span> </button>
@@ -51,9 +49,7 @@ require_once('../Helpers/Roles.php');
     ImportGlobal::ImportJQuery();
     ImportGlobal::ImportMaterializeJS();
     ImportGlobal::ImportJSFunctions(); 
-    ImportGlobal::ImportRoutesJs();
-    ImportGlobal::ImportControllerJs('LoginController');
-   
+    ImportGlobal::ImportControllerJs('LoginAuth');
 ?>
 </body>
 </html>

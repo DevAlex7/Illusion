@@ -27,7 +27,7 @@ class myPDF extends PDF {
         $this->SetTextColor(255,255,255);
         $this->Cell(54, 10, 'Fecha: '.$date = date('m/d/Y h:i:s a', time()),0,0,'L');
         $this->Cell(54, 10, 'Usuario: '.$_SESSION['UsernameActive'],0 , 0 ,'C');
-        $this->Cell(54, 10, 'Nombre: '.$_SESSION['NameUser']." ".$_SESSION['LastnameUser'],0,0,'C');
+        $this->Cell(54, 10, utf8_decode('Nombre: '.$_SESSION['NameUser']." ".$_SESSION['LastnameUser']),0,0,'C');
         $this->Ln(20);
         $this->SetFont('Times','B',12);
         $this->SetTextColor(0,0,0);
@@ -40,11 +40,11 @@ class myPDF extends PDF {
         $this->SetTextColor(0,0,0);
         $types = $this->eventTypes();
         foreach($types as $row){
-            $this->Cell(40, 10, $row['type'],0 ,'L',false);
+            $this->Cell(40, 10, utf8_decode($row['type']),0 ,'L',false);
             $this->Ln();
             $events = $this->getEventperType($row['id']);
             foreach($events as $result){
-                $this->Cell(40, 10, $result ['name_event'],0 ,'L',false);
+                $this->Cell(40, 10, utf8_decode($result['name_event']),0 ,'L',false);
                 $this->Ln();
             }
             $this->Ln();

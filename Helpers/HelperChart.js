@@ -356,10 +356,10 @@ function typeEventsUser(idCanvas, count, types){
     if(count.length>0){
         var ctx = $("#"+idCanvas);
 
-        var coloR3 = [];
+        var coloR3 = "red";
     
         for(i in types){
-            coloR3.push('#'+(Math.random()*0xFFFFFF<<0).toString(16));
+            //coloR3.push('#'+(Math.random()*0xFFFFFF<<0).toString(16));
         }
     
         new Chart(ctx, {
@@ -409,10 +409,10 @@ function productsEvents(canvasId, events ,count){
     
     if(events.length>0){
         
-        var coloR3 = [];
+        var coloR3 = "red";
 
         for(i in events){
-            coloR3.push('#'+(Math.random()*0xFFFFFF<<0).toString(16));
+           // coloR3.push('#'+(Math.random()*0xFFFFFF<<0).toString(16));
         }
 
 

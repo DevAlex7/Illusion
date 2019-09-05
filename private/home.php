@@ -1,6 +1,7 @@
 <?php 
 require_once('../Helpers/Dashboard.php'); 
-require_once('../Imports/Global/Global.php')?>
+require_once('../Imports/Global/Global.php')
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,15 +10,15 @@ require_once('../Imports/Global/Global.php')?>
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Dashboard | Inicio </title>
     <?php 
-     ImportGlobal::ImportMaterializeCss();
-     ImportGlobal::ImportMaterialIcons(); 
-     ImportGlobal::ImportFileCss('home'); 
-     ImportGlobal::ImportIco();
-     ImportGlobal::ImportFont();
+        ImportGlobal::ImportMaterializeCss();
+        ImportGlobal::ImportMaterialIcons(); 
+        ImportGlobal::ImportFileCss('home'); 
+        ImportGlobal::ImportIco();
+        ImportGlobal::ImportInactivityPHP();
+        ImportGlobal::ImportFont();
     ?>
 </head>
 <body>
-
     <header>
         <?php  AdminSideNav::SideNav(); ?>
     </header>
@@ -39,7 +40,8 @@ require_once('../Imports/Global/Global.php')?>
     ImportGlobal::ImportJQuery();
     ImportGlobal::ImportMaterializeJS();
     ImportGlobal::ImportJSFunctions();
-    ImportGlobal::ImportControllerJs('MainController')
+    //ImportGlobal::ImportInactivity();
+    ImportGlobal::ImportControllerJs('MainController');
 
 ?>
 </body>

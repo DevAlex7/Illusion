@@ -118,13 +118,17 @@
                             if($employe->password($_POST['pass'])){
                                 if($employe->checkPassword()){
                                     if($employe->getRole() == 0){
-                                        $_SESSION['idUser']=$employe->getId();
-                                        $_SESSION['NameUser']=$employe->getName();
-                                        $_SESSION['LastnameUser']=$employe->getLastname();
-                                        $_SESSION['UsernameActive']=$employe->getUsername();
-                                        $_SESSION['Role']=$employe->getRole();
-                                        $result['status']=1;
-                                        $result['site']='../private/home.php';
+                                        if($employe->userHasGoogleKey()){
+                                            $_SESSION['username_key'] = $_POST['Nickname'];
+                                            $_SESSION['keygen'] = $employe->getKey();
+                                            $result['status']=1;
+                                            $result['site']='verify.php';
+                                        }
+                                        else{
+                                            $employe->openSession();
+                                            $result['site']='../private/home.php';
+                                            $result['status']=1;    
+                                        }   
                                     }
                                     else{
                                         $result['exception']='Usted es un usuario publico';
