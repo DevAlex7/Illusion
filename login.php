@@ -40,12 +40,12 @@ require_once('Imports/Global/Global.php');
                     <div class="row">
                         <div class="input-field col s12 m10 offset-m1">
                             <i class="material-icons prefix">account_circle</i>
-                            <input id="Nickname" name="Nickname" type="text">
+                            <input id="Nickname" name="Nickname" type="text" autocomplete="off">
                             <label for="Nickname">Usuario</label>
                         </div>
                         <div class="input-field col s12 m10 offset-m1">
                             <i class="material-icons prefix">vpn_key</i>
-                            <input id="pass" autocomplete="off" name="pass" type="password">
+                            <input id="pass" autocomplete="off" name="pass" type="password" autocomplete="off">
                             <label for="pass">Contraseña</label>
                         </div>
                         <div class="input-field col s12 center">

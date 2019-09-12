@@ -38,12 +38,12 @@ require_once('Imports/Global/Global.php');
                         </div>
                         <div class="input-field col s12 m10 offset-m1">
                             <i class="material-icons prefix">mail</i>
-                            <input id="EmailUser" name="EmailUser" type="text">
+                            <input id="EmailUser" name="EmailUser" type="text" autocomplete="off">
                             <label for="EmailUser">Correo</label>
                         </div>
                         <div class="input-field col s12 m10 offset-m1">
                             <i class="material-icons prefix">account_circle</i>
-                            <input id="Nickname" name="Nickname" type="text">
+                            <input id="Nickname" name="Nickname" type="text" autocomplete="off">
                             <label for="Nickname">Usuario</label>
                         </div>
                         <div class="input-field col s12 m10 offset-m1">

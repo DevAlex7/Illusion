@@ -9,6 +9,7 @@ class Validator{
 	{
 		return $this->imageName;
 	}
+	
 	public function getImageError()
 	{
 		switch ($this->imageError) {
