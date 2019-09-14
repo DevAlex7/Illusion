@@ -31,7 +31,7 @@
                         <div id="informationProfile">
                             <div class="row">
                                 <div class="left col s12 m12" id="name-div-info">
-                                    <p class="white-text">Nombre</p>
+                                    <p class="white-text"><b>Nombre</b></p>
                                     <div id="userpart">
                                         <i class="material-icons left">person</i>
                                         <div id="user-div-name">
@@ -39,7 +39,7 @@
                                     </div>
                                 </div>
                                 <div class="left col s12 m12" id="lastname-div-info">
-                                    <p class="white-text">Apellido</p>
+                                    <p class="white-text"><b>Apellido</b></p>
                                     <div id="userpart">
                                         <i class="material-icons left">person</i>
                                         <div id="user-div-lastname">    
@@ -47,7 +47,7 @@
                                     </div>
                                 </div>  
                                 <div class="left col s12 m12" id="email-div-info">
-                                    <p class="white-text">Email</p>
+                                    <p class="white-text"><b>Email</b></p>
                                     <div id="userpart">
                                         <i class="material-icons left">mail</i>
                                         <div id="user-div-email">
@@ -56,7 +56,7 @@
                                     </div>
                                 </div>
                                 <div class="left col s12 m12" id="username-div-info">
-                                    <p class="white-text">Usuario</p>
+                                    <p class="white-text"><b>Usuario</b></p>
                                     <div id="userpart">
                                         <i class="material-icons left">verified_user</i>
                                         <div id="user-div-username">

@@ -119,6 +119,14 @@
                                 if($employe->checkPassword()){
                                     if($employe->getRole() == 0){
 
+                                        $_SESSION['idUser']=$employe->getId();
+                                        $_SESSION['NameUser']=$employe->getName();
+                                        $_SESSION['LastnameUser']=$employe->getLastname();
+                                        $_SESSION['UsernameActive']=$employe->getUsername();
+                                        $_SESSION['Role']=$employe->getRole();
+                                        $_SESSION['sessionTime'] = time();
+                                        $result['status']=1;
+                                        $result['site']='../private/home.php';
                                         if($employe->userHasGoogleKey()){
                                             $_SESSION['username_key'] = $_POST['Nickname'];
                                             $_SESSION['keygen'] = $employe->getKey();

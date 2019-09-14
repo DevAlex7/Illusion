@@ -14,7 +14,7 @@ class AdminSideNav {
             } else {
                 $_SESSION['tiempo'] = time();
             }
-        
+            
             if($filename != '../private/')
             {
                 if($_SESSION['Role']==0){
@@ -124,7 +124,5 @@ class AdminSideNav {
         </div>
         ');
     }
-        
 }
-
 ?>

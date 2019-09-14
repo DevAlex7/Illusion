@@ -32,7 +32,7 @@ require_once('../Helpers/Roles.php');
                         <div class="row">
                             <div class="input-field col s12 m12">
                                 <i class="material-icons prefix">account_circle</i>
-                                <input id="Nickname" name="Nickname" type="text" placeholder="Usuario">
+                                <input id="Nickname" name="Nickname" type="text" placeholder="Usuario" autocomplete="off">
                             </div>
                             <div class="input-field col s12 m12">
                                 <i class="material-icons prefix">vpn_key</i>
