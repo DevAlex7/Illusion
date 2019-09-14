@@ -1,0 +1,27 @@
+$('#formAuth').submit(function(){
+    event.preventDefault();
+    $.ajax({
+        url:requestPOST('Auth','Login-Authentication'),
+        type:'POST',
+        data:$('#formAuth').serialize(),
+        datatype:'JSON'  
+    })
+    .done(function(response){
+        if(isJSONString(response)){
+            const result = JSON.parse(response);
+            console.log(result);
+            if(result.status){
+                location.href='../private/home.php';
+            }
+            else{
+                ToastError(result.exception);
+            }
+        }
+        else{
+            console.log(response);
+        }
+    })
+    .fail(function(jqXHR){
+        catchError(jqXHR); 
+    })
+})

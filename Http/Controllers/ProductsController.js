@@ -305,3 +305,6 @@ function viewVotes(id){
         }
     })
 }
+$('#productsReport').click(function(){
+    window.open('private_reports/productsReport.php');
+})

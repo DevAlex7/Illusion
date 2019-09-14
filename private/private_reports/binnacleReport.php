@@ -10,10 +10,9 @@ class myPDF extends PDF {
         $this->Ln(1);
         $this->SetTextColor(255,255,255);
         $this->SetFont('Arial','B',14);
-        $this->Cell(65, 5, 'Servicios de eventos',0,0,'L');
+        $this->Cell(200, 5, 'Acciones sobre el sistema',0,0,'L');
         $this->Ln();
         $this->SetFont('Times','',12);
-        $this->Ln(10);
     }
 
     function footer(){
@@ -24,16 +23,14 @@ class myPDF extends PDF {
 
     function headerTable(){
         $this->SetTextColor(255,255,255);
-        $this->Cell(54, 10, 'Fecha: '.$date = date('m/d/Y h:i:s a', time()),0,0,'C');
-        $this->Cell(54, 10, 'Usuario: '.$_SESSION['UsernameActive'],0 , 0 ,'C');
-        $this->Cell(54, 10, 'Nombre: '.$_SESSION['NameUser']." ".$_SESSION['LastnameUser'],0,0,'C');
+        $this->Cell(54, 10, 'Fecha: '.$date = date('m/d/Y h:i:s a', time()),0,0,'L');
+        $this->Cell(54, 10, 'Usuario: '.$_SESSION['UsernameActive'],0 , 0 ,'L');
+        $this->Cell(54, 10, utf8_decode('Nombre: '.$_SESSION['NameUser']." ".$_SESSION['LastnameUser']),0,0,'L');
         $this->Ln(20);
         $this->SetFont('Times','B',12);
         $this->SetTextColor(0,0,0);
         $this->Cell(60,10, utf8_decode('Fecha'), 0, 0,'L');
         $this->Cell(60,10, utf8_decode('Acción'), 0, 0,'L');
-        $this->Ln(3);
-        $this->Line(10,57,200,57);
         $this->Ln();
     }
 
@@ -55,6 +52,7 @@ class myPDF extends PDF {
 
     $pdf = new myPDF('p','mm','Letter');
     $pdf->AliasNbPages();
+    $pdf->SetMargins(15,15,15);
     $pdf->AddPage();
     $pdf->headerTable();
     $pdf->viewTable();

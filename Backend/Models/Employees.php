@@ -7,6 +7,7 @@ class Employee extends Validator{
     private $username;
     private $password;
     private $role;
+    private $google_secret_key;
 
     public function id($value){
         if($this->validateId($value)){
@@ -97,10 +98,21 @@ class Employee extends Validator{
     public function getRole(){
         return $this->role;
     }
+    public function token($token){
+        if($token != ''){
+            $this->google_secret_key = $token;
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public function getKey(){
+        return $this->google_secret_key;
+    }
 
     public function checkUsername()
 	{
-		$sql = 'SELECT id, name, lastname, username, role FROM employees WHERE username = ?';
+		$sql = 'SELECT id, name, lastname, username, role, google_secret_key FROM employees WHERE username = ?';
 		$params = array($this->username);
 		$data = Database::getRow($sql, $params);
 		if ($data) {
@@ -109,12 +121,25 @@ class Employee extends Validator{
             $this->lastname = $data['lastname'];
             $this->username=$data['username'];
             $this->role = $data['role'];
+            $this->google_secret_key = $data['google_secret_key'];
 			return true;
 		} else {
 			return false;
 		}
-	}
-
+    }
+    public function openSession(){
+            $_SESSION['idUser']=$this->getId();
+            $_SESSION['NameUser']=$this->getName();
+            $_SESSION['LastnameUser']=$this->getLastname();
+            $_SESSION['UsernameActive']=$this->getUsername();
+            $_SESSION['Role']=$this->getRole();
+            $_SESSION['tiempo'] = time();
+    }
+    public function userHasGoogleKey(){
+        $sql='SELECT google_secret_key FROM employees WHERE username=?';
+        $params = array($this->username);
+		return Database::getRow($sql, $params);
+    }
 	public function checkPassword()
 	{
 		$sql = 'SELECT password FROM employees WHERE id = ?';
@@ -227,6 +252,11 @@ class Employee extends Validator{
         $sql='SELECT events.date_created AS eventCreated, events.name_event FROM (events INNER JOIN employees ON employees.id=events.id_employee AND employees.id=?)';
         $params=array($this->id);
         return Database::getRows($sql,$params);
+    }
+    public function updateGoogleSecret(){
+        $sql='UPDATE employees SET google_secret_key=? WHERE id=?';
+        $params=array($this->google_secret_key, $this->id);
+        return Database::executeRow($sql,$params);
     }
     
     

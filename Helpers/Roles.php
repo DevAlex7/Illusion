@@ -29,6 +29,7 @@
                                     </div>
                                 </form>
                                 <a class="btn red" id="openPdf">PDF</a>
+                                <a class="btn red" id="eventsTypePDF">Eventos por tipo</a>
                             </div>
                         </div>
                     </div>

@@ -100,6 +100,7 @@
     ImportGlobal::ImportJSFunctions();
     ImportGlobal::ImportMomentJS();
     ImportGlobal::ImportRoutesJs();
+    ImportGlobal::ImportInactivity();
     ImportGlobal::ImportControllerJs('EventsController');
 ?>
 </body>

@@ -1,6 +1,7 @@
 $(document).ready(function () {
   
     exist();
+    
     getInformation();
     $('.tooltipped').tooltip();
     $('.modal').modal();
@@ -37,8 +38,11 @@ function getQueryVariable(variable)
 }
 //Validate if value in the variable exits in DB
 function exist(){
+
     if(getQueryVariable("event")){
-        idEvent=getQueryVariable("event");
+    
+        idEvent = getQueryVariable("event");
+    
         $.ajax({
             url:requestGET('events','getId'),
             type:'POST',
@@ -63,6 +67,7 @@ function exist(){
         .fail(function(jqXHR){
             catchError(jqXHR); 
         });
+
     }
     else{
         $(location).attr('href','events.php');

@@ -3,6 +3,7 @@ class AdminSideNav {
     public static function SideNav(){
         session_start();
         $filename = basename($_SERVER['PHP_SELF']);
+<<<<<<< HEAD
         if(isset($_SESSION['idUser'])){
 			$inactive = 1200; // Fórmula para obtener segundos (min * 60)
 			$life = time() - $_SESSION['sessionTime'];
@@ -13,6 +14,20 @@ class AdminSideNav {
 			} else {  // si no ha caducado la sesion, se actualiza
 				$_SESSION['tiempo'] = time();
 			}
+=======
+        if( isset($_SESSION['idUser']) ){
+           /* $inactivo = 10; //1min en este caso.
+
+            $vida_session = time() - $_SESSION['tiempo'];
+        
+            if($vida_session > $inactivo)
+            {
+                header("Location: index.php");        
+            } else {
+                $_SESSION['tiempo'] = time();
+            }*/
+        
+>>>>>>> 6a521a1f0de375ca5b84b7d4380acdb1fbd1f628
             if($filename != '../private/')
             {
                 if($_SESSION['Role']==0){
@@ -32,6 +47,7 @@ class AdminSideNav {
                         <li><a class="green-text accent-4" href="/Illusion/private/home.php"><i class="material-icons green-text accent-4">dashboard</i>Inicio</a></li>
                         <li><a class="green-text accent-4" href="/Illusion/private/profile.php"><i class="material-icons green-text accent-4">person</i>Mi perfil</a></li>
                         <li><a class="green-text accent-4" href="/Illusion/private/binnacle.php"><i class="material-icons green-text accent-4">drag_indicator</i>Bitácora</a></li>
+                        <li><a class="green-text accent-4" href="/Illusion/private/settings.php"><i class="material-icons green-text accent-4">block</i>Seguridad</a></li>
                         <li><div class="divider"></div></li>
                         <li><a class="subheader grey-text">Menu</a></li>
                         <li><a href="/Illusion/private/events.php"><i class="material-icons">calendar_today</i>Eventos</a></li>
@@ -83,6 +99,7 @@ class AdminSideNav {
         }
         else{
             $filename = basename($_SERVER['PHP_SELF']);
+
             if($filename!= '../private/' && $filename != 'signup.php'){
                 header('location:../private/');
             }
@@ -119,5 +136,11 @@ class AdminSideNav {
             </div>
         </div>
         ');
-        }
     }
+<<<<<<< HEAD
+=======
+        
+}
+
+?>
+>>>>>>> 6a521a1f0de375ca5b84b7d4380acdb1fbd1f628

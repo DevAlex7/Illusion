@@ -7,7 +7,7 @@ class myPDF extends PDF {
             $event = $this->InformationEvent($_GET['idEvent']);
             if(count($event)>0){
                 $this->SetFillColor(235,10,0);
-                $this->Rect(0, 0, 660, 50, 'F');
+                $this->Rect(0, 0, 660, 55, 'F');
                 $this->Ln(1);
                 $this->SetTextColor(255,255,255);
                 $this->SetFont('Arial','B',14);
@@ -59,9 +59,9 @@ class myPDF extends PDF {
                 $fulldate1 = str_replace("/","-",$fulldate1);
                 $newDate1 = date("d-m-Y", strtotime($fulldate1));
                 $created_date = strftime("%A %d %B de %Y", strtotime($newDate1));
-                $this->Cell(200, 5, 'Fecha de evento: '.'Sin información' ,0,1,'L');
+                $this->Cell(200, 5, utf8_decode('Fecha de evento: '.'Sin información') ,0,1,'L');
                 $this->Ln(3);
-                $this->Cell(200, 5, 'Fecha solicitado: '.'Sin información' ,0,1,'L');
+                $this->Cell(200, 5, utf8_decode('Fecha solicitado: '.'Sin información'),0,1,'L');
                 $this->Ln(1);
                 $this->SetFont('Times','',12);
             }   
@@ -75,15 +75,15 @@ class myPDF extends PDF {
         function headerTable(){
             $this->SetTextColor(255,255,255);
             $this->Cell(54, 10, 'Fecha: '.$date = date('m/d/Y h:i:s a', time()),0,0,'L');
-            $this->Cell(54, 10, 'Usuario: '.$_SESSION['UsernameActive'],0 , 0 ,'C');
-            $this->Cell(54, 10, 'Nombre: '.$_SESSION['NameUser']." ".$_SESSION['LastnameUser'],0,0,'C');
-            $this->Ln(20);
+            $this->Cell(54, 10, utf8_decode('Usuario: '.$_SESSION['UsernameActive']),0 , 0 ,'C');
+            $this->Cell(54, 10, utf8_decode('Nombre: '.$_SESSION['NameUser']." ".$_SESSION['LastnameUser']),0,0,'C');
+            $this->Ln(30);
             $this->SetFont('Times','B',12);
             $this->SetTextColor(0,0,0);
             $this->Cell(200,5,'Detalles del evento.',0,1,'L');
             $this->Ln(3);
             $this->Ln();
-            $this->Line(10,65,200,65);
+            $this->Line(10,70,200,70);
         }
 
         function viewTable(){
@@ -105,12 +105,12 @@ class myPDF extends PDF {
                 $this->SetTextColor(0,0,0);
                 $this->Cell(200,5,'Lista de productos solicitados.',0,1,'L');
                 $this->Ln(2);
-                $this->Line(10,127,200,127);
+                $this->Line(10,133,200,133);
                 $this->Ln(2);
     
                 if(count( $event['products_event']) > 0){
                     foreach($event['products_event'] as $row){
-                        $this->Cell(40, 10, $row['nameProduct'],0 ,'L',false);
+                        $this->Cell(40, 10,  utf8_decode($row['nameProduct']),0 ,'L',false);
                         $this->Cell(30, 10, $row['count'],0 ,'L',false);
                         $this->Cell(30, 10, $row['price'],0 ,'L',false);
                         $this->Ln();
@@ -128,28 +128,29 @@ class myPDF extends PDF {
                     $this->Cell(150,10,'Total: '.'0',0,1,'L');
                 }
                 $this->Ln(2);
-                $this->Cell(200,5,'Colaboradores.',0,1,'L');
+                $this->Cell(200,5,'Lista de colaboradores.',0,1,'L');
                 $this->Ln(2);
                 if(count($event['collaborators_event']) > 0){
                     foreach($event['collaborators_event'] as $row){
-                        $this->Cell(40, 10, $row['name']." ".$row['lastname'],0 ,'L',false);
+                        $this->Cell(40, 10, utf8_decode($row['name']." ".$row['lastname']),0 ,'L',false);
                         $this->Ln();
                     }
                 }
                 else{
                     $this->Ln(1);
-                    $this->Cell(200,10,utf8_decode('No hay información'),0,1,'L');    
+                    $this->Cell(200,10,utf8_decode('No hay colaboradores'),0,1,'L');    
                 }
             }
             else{
                 $this->Ln(2);
-                $this->Cell(200,5,'No hay información',0,1,'L');
+                $this->Cell(200,5,utf8_decode('No hay información'),0,1,'L');
             }
         }
 }
 
 if( !empty($_GET['idEvent']) ){
     $pdf = new myPDF('p','mm','Letter');
+    $pdf->SetMargins(15,15,15);
     $pdf->AliasNbPages();
     $pdf->AddPage();
     $pdf->headerTable();

@@ -1,5 +1,6 @@
+var time = 0;
+var tries = 0;
 $(document).ready(function () {
-    
 });
 $('#FormLogin').submit(function(){
     event.preventDefault();
@@ -13,11 +14,21 @@ $('#FormLogin').submit(function(){
         if(isJSONString(response)){
             const result = JSON.parse(response);
             if(result.status){
+
                 M.toast({html:'Logueado correctamente'});
                 $(location).attr('href',result.site);
             }
             else{
-                M.toast({html:result.exception});
+                tries++;
+
+                if(tries < 3 ){
+                    M.toast({html:result.exception});
+                }
+                else{
+                    ToastSucces('Tu acceso ha sido bloqueado, espera 3 minutos');
+                    $('#buttonLogin').addClass('disabled');
+                    setInterval(timewaiting, 60000);
+                }
             }
         }
         else{
@@ -28,3 +39,11 @@ $('#FormLogin').submit(function(){
         console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
     });
 })
+
+const  timewaiting = () => {
+    time++;
+    if(time > 0){
+        $('#buttonLogin').removeClass('disabled');
+    }   
+
+}

@@ -308,3 +308,6 @@ function viewDetails(){
 function viewReport(){
     window.open('private_reports/requestsDates.php?date1='+date1+'&date2='+date2);
 }
+$('#requestPDF').click(function(){
+    window.open('private_reports/requestsbyState.php');
+})
