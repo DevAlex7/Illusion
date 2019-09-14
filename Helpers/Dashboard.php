@@ -3,7 +3,6 @@ class AdminSideNav {
     public static function SideNav(){
         session_start();
         $filename = basename($_SERVER['PHP_SELF']);
-<<<<<<< HEAD
         if(isset($_SESSION['idUser'])){
 			$inactive = 1200; // Fórmula para obtener segundos (min * 60)
 			$life = time() - $_SESSION['sessionTime'];
@@ -14,20 +13,6 @@ class AdminSideNav {
 			} else {  // si no ha caducado la sesion, se actualiza
 				$_SESSION['tiempo'] = time();
 			}
-=======
-        if( isset($_SESSION['idUser']) ){
-           /* $inactivo = 10; //1min en este caso.
-
-            $vida_session = time() - $_SESSION['tiempo'];
-        
-            if($vida_session > $inactivo)
-            {
-                header("Location: index.php");        
-            } else {
-                $_SESSION['tiempo'] = time();
-            }*/
-        
->>>>>>> 6a521a1f0de375ca5b84b7d4380acdb1fbd1f628
             if($filename != '../private/')
             {
                 if($_SESSION['Role']==0){
@@ -137,10 +122,5 @@ class AdminSideNav {
         </div>
         ');
     }
-<<<<<<< HEAD
-=======
-        
 }
-
 ?>
->>>>>>> 6a521a1f0de375ca5b84b7d4380acdb1fbd1f628
