@@ -118,11 +118,13 @@
                             if($employe->password($_POST['pass'])){
                                 if($employe->checkPassword()){
                                     if($employe->getRole() == 0){
+
                                         if($employe->userHasGoogleKey()){
                                             $_SESSION['username_key'] = $_POST['Nickname'];
                                             $_SESSION['keygen'] = $employe->getKey();
                                             $result['status']=1;
                                             $result['site']='verify.php';
+
                                         }
                                         else{
                                             $employe->openSession();

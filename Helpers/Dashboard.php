@@ -4,7 +4,7 @@ class AdminSideNav {
         session_start();
         $filename = basename($_SERVER['PHP_SELF']);
         if( isset($_SESSION['idUser']) ){
-           /* $inactivo = 10; //1min en este caso.
+            $inactivo = 10; //1min en este caso.
 
             $vida_session = time() - $_SESSION['tiempo'];
         
@@ -13,7 +13,7 @@ class AdminSideNav {
                 header("Location: index.php");        
             } else {
                 $_SESSION['tiempo'] = time();
-            }*/
+            }
         
             if($filename != '../private/')
             {

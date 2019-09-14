@@ -138,7 +138,8 @@ class Employee extends Validator{
     public function userHasGoogleKey(){
         $sql='SELECT google_secret_key FROM employees WHERE username=?';
         $params = array($this->username);
-		return Database::getRow($sql, $params);
+        return Database::getRow($sql, $params);
+        
     }
 	public function checkPassword()
 	{
