@@ -123,6 +123,7 @@
                                         $_SESSION['LastnameUser']=$employe->getLastname();
                                         $_SESSION['UsernameActive']=$employe->getUsername();
                                         $_SESSION['Role']=$employe->getRole();
+                                        $_SESSION['sessionTime'] = time();
                                         $result['status']=1;
                                         $result['site']='../private/home.php';
                                     }
