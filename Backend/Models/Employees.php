@@ -8,6 +8,7 @@ class Employee extends Validator{
     private $password;
     private $role;
     private $google_secret_key;
+    private $block = 0;
 
     public function id($value){
         if($this->validateId($value)){
@@ -110,9 +111,24 @@ class Employee extends Validator{
         return $this->google_secret_key;
     }
 
+    public function setBlock($value)
+	{
+		if ($this->validateId($value)) {
+			$this->block = $value;
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public function getBlock()
+	{
+		return $this->block;
+	}
+
     public function checkUsername()
 	{
-		$sql = 'SELECT id, name, lastname, username, role, google_secret_key FROM employees WHERE username = ?';
+		$sql = 'SELECT id, name, lastname, username, role, google_secret_key, block FROM employees WHERE username = ?';
 		$params = array($this->username);
 		$data = Database::getRow($sql, $params);
 		if ($data) {
@@ -122,6 +138,7 @@ class Employee extends Validator{
             $this->username=$data['username'];
             $this->role = $data['role'];
             $this->google_secret_key = $data['google_secret_key'];
+            $this->block = $data['block'];
 			return true;
 		} else {
 			return false;
@@ -260,6 +277,11 @@ class Employee extends Validator{
         return Database::executeRow($sql,$params);
     }
     
-    
+    public function summonBlock()
+	{
+		$sql = 'UPDATE employees SET block = block+1 WHERE id = ?';
+		$params = array($this->id);
+		return Database::executeRow($sql, $params);
+	}
 }
 ?>
