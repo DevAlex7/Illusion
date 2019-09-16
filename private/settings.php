@@ -30,16 +30,8 @@ require_once('../Helpers/AuthenticatorGenerator.php');
                     <div class="card-content">
                         <span class="card-title">Verificación de dos pasos</span>
                         <span class="grey-text">La verificación de dos pasos consistira en darte un codigo por medio de google Authenticator.</span>
-                        <div class="switch">
-                            <label>
-                            On
-                            <input type="checkbox" id="optionUser">
-                            <span class="lever"></span>
-                            Off
-                            </label>
-                        </div>
+                        
                         <div id="Qr" class="center">
-
                             <?php 
                             $qr =  Authenticator::getImageQR(); 
                             print $qr['Qr'];
