@@ -149,13 +149,13 @@
                                     if($product->price($_POST['EditPriceProduct'])){
                                         if (is_uploaded_file($_FILES['FileEditCover']['tmp_name'])) {
                                             if ($product->image_product($_FILES['FileEditCover'], $_POST['ImageEditProduct'])) {
-                                                $file = true;       
-                                         
+                                                $file = true;        
                                             } else {
                                                 $result['exception'] = $product->getImageError();
                                                 $file = false;
                                             }
-                                        } else {
+                                        } 
+                                        else {
                                             if ($product->image_product(null, $_POST['ImageEditProduct'])) {
                                                 $result['exception'] = 'No se subió ningún archivo';
                                             } else {
@@ -175,6 +175,7 @@
                             else{
                                 $result['exception']='Nombre de producto incorrecto';
                             }
+
                             if ($product->edit()) {
                                 if ($file) {
                                     if ($product->saveFile($_FILES['FileEditCover'], $product->getRoot(), $product->getImage())) {

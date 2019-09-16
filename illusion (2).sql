@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-08-2019 a las 19:07:20
+-- Tiempo de generación: 14-09-2019 a las 15:55:44
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.2
 
@@ -51,7 +51,8 @@ INSERT INTO `binnacle` (`id`, `action_performed`, `id_user`, `date`) VALUES
 (13, 'Se ha insertado un nuevo producto: Wonkas caja', 7, '2019-08-09'),
 (14, 'Se ha insertado un nuevo producto: Bolsa wonka', 7, '2019-08-09'),
 (15, 'Se ha insertado un nuevo producto: Globos', 7, '2019-08-09'),
-(16, 'ha agregado un nuevo tipo de evento: Reunion Corporativa', 7, '2019-08-12');
+(16, 'ha agregado un nuevo tipo de evento: Reunion Corporativa', 7, '2019-08-12'),
+(17, 'Se ha insertado un nuevo producto: Wonka', 7, '2019-08-14');
 
 -- --------------------------------------------------------
 
@@ -72,7 +73,9 @@ CREATE TABLE `comments_in_event` (
 --
 
 INSERT INTO `comments_in_event` (`id`, `id_event`, `id_employee`, `message`, `date`) VALUES
-(1, 88, 7, 'Hola chicos\r\n', '2019-08-14');
+(1, 88, 7, 'Hola chicos\r\n', '2019-08-14'),
+(2, 92, 7, 'Hola compadres', '2019-08-16'),
+(3, 92, 9, 'Holaaaaaaaaaa :3', '2019-08-16');
 
 -- --------------------------------------------------------
 
@@ -87,23 +90,24 @@ CREATE TABLE `employees` (
   `email` varchar(200) NOT NULL,
   `username` varchar(150) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `role` int(11) NOT NULL
+  `role` int(11) NOT NULL,
+  `status` int(11) NOT NULL,
+  `google_secret_key` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `employees`
 --
 
-INSERT INTO `employees` (`id`, `name`, `lastname`, `email`, `username`, `password`, `role`) VALUES
-(4, 'Alejandro', 'Gonzalez', 'alexgve7@gmail.com', 'Ale12345', '$2y$10$ztUHP8ADQWauh401IejY3OjdX07W0aFeZTv80muGW6QmGkGNXcoLy', 0),
-(7, 'Marvin ', 'González Ventura', 'alexgve7sss@gmail.com', 'Ale123458', '$2y$10$aV.JaxcfdoRDIJ1CZ8v/4OyZuMZUJcPQqA0mBA4g6q6OuPnfm0ymy', 0),
-(8, 'Steven', 'Diaz', 'Steven@gmail.com', 'StevenDF', '$2y$10$zlRonj/bg.hzPXu5XB2URe2Pm7dYEqZZO/NgGUE2UC96F.PDB3lyG', 1),
-(9, 'Gabriela ', 'Ramos', 'Akatgaby@gmail.com', 'Akatgaby', '$2y$10$ZbZqeTyn0d/JRUJD/L17TOLcVMud/88mIcrtGIADx0Az79.Inzh66', 0),
-(10, 'Alejandro', 'Gonzalez', 'alexgve7sv@gmail.com', 'Alexgve7', '$2y$10$F0oQIOxd4yj9UVB5V148CuDXM2qhFseWJ0lZESCGJalOP64/06myS', 2),
-(13, 'Gabriela ', 'Ramos', 'gabyramos@gmail.com', 'GabyRamos7', '$2y$10$I/hsY0q.Q480ZaM56J2Vnu4zhjT3uaDgqtukLGNKlfWdY.o0EwBd.', 2),
-(22, 'Herbert', 'Maldonado', 'herbert@gmail.com', 'Cornejo04', '$2y$10$w1i6PcCfkEARS8K04mQlLOJTIsJjgzKU6St8elkB54JCUOgbmtovq', 2),
-(23, 'Benjamin', 'Flores', 'stevenbdf@gmail.com', 'stevenbdf2019', '$2y$10$EcIpeGnCghNLjnfJKkWHO.Z/TqXA9EMGjPeozviCl5yCLsOJz5efe', 2),
-(24, 'Gaby', 'Ramos', 'aki@gmail.com', 'Diastro', '$2y$10$sJtU8fBCJrR.i1x9jKJbLucKkWg4jRF/jAtQQvsKf7xrS6sE.yXDC', 0);
+INSERT INTO `employees` (`id`, `name`, `lastname`, `email`, `username`, `password`, `role`, `status`, `google_secret_key`) VALUES
+(4, 'Alejandro', 'Gonzalez', 'alexgve7@gmail.com', 'Ale12345', '$2y$10$aV.JaxcfdoRDIJ1CZ8v/4OyZuMZUJcPQqA0mBA4g6q6OuPnfm0ymy', 0, 0, 'GHMXLPO6ZIKSXST2'),
+(7, 'Alejandro', 'González Ventura', 'alexgve7sss@gmail.com', 'Ale123458', '$2y$10$aV.JaxcfdoRDIJ1CZ8v/4OyZuMZUJcPQqA0mBA4g6q6OuPnfm0ymy', 0, 0, ''),
+(8, 'Steven', 'Diaz', 'Steven@gmail.com', 'StevenDF', '$2y$10$zlRonj/bg.hzPXu5XB2URe2Pm7dYEqZZO/NgGUE2UC96F.PDB3lyG', 1, 0, ''),
+(9, 'Wendy', 'Ramos', 'Akat@gmail.com', 'Diastro', '$2y$10$sJtU8fBCJrR.i1x9jKJbLucKkWg4jRF/jAtQQvsKf7xrS6sE.yXDC', 0, 0, ''),
+(10, 'Alejandro', 'Gonzalez', 'alexgve7sv@gmail.com', 'Alexgve7', '$2y$10$F0oQIOxd4yj9UVB5V148CuDXM2qhFseWJ0lZESCGJalOP64/06myS', 2, 0, ''),
+(13, 'Gabriela ', 'Ramos', 'gabyramos@gmail.com', 'GabyRamos7', '$2y$10$I/hsY0q.Q480ZaM56J2Vnu4zhjT3uaDgqtukLGNKlfWdY.o0EwBd.', 2, 0, ''),
+(22, 'Herbert', 'Maldonado', 'herbert@gmail.com', 'Cornejo04', '$2y$10$w1i6PcCfkEARS8K04mQlLOJTIsJjgzKU6St8elkB54JCUOgbmtovq', 2, 0, ''),
+(23, 'Benjamin', 'Flores', 'stevenbdf@gmail.com', 'stevenbdf2019', '$2y$10$EcIpeGnCghNLjnfJKkWHO.Z/TqXA9EMGjPeozviCl5yCLsOJz5efe', 2, 0, '');
 
 -- --------------------------------------------------------
 
@@ -130,16 +134,10 @@ CREATE TABLE `events` (
 --
 
 INSERT INTO `events` (`id`, `name_event`, `date`, `client_name`, `id_employee`, `price`, `pay_status`, `type_event`, `place`, `persons`, `date_created`) VALUES
-(8, 'Toy story thematic', '2019-07-14', 'Alejandro Gonzalez', 8, NULL, 2, 7, NULL, 100, '2019-07-03'),
+(8, 'Toy story thematic', '2019-07-14', 'Alejandro Gonzalez', 10, NULL, 2, 7, NULL, 100, '2019-07-03'),
 (9, 'Marvel comics chicago', '2019-07-15', 'Alejandro Gonzalez', 8, NULL, 1, 10, NULL, 200, '2019-07-01'),
 (11, 'Tomorrowland Belgium\r\n', '2019-07-31', 'Alejandro Gonzalez', 4, NULL, 2, 19, NULL, 400, '2019-07-16'),
 (12, 'Tomorrowland', '2019-07-31', 'Alejandro Gonzalez', 8, NULL, 2, 19, NULL, 123, '2019-07-16'),
-(73, 'Cumpleaños de Shrek', '2019-09-01', 'Ciel Romanov', 24, 0.00, 2, 7, '<header></header>', 50, '2019-08-01'),
-(74, 'Kermit y plaza sésamo.', '2020-02-02', 'Alejandro Manuel', 24, 0.00, 2, 10, '<frame></frame>', 10, '2019-07-10'),
-(75, 'My Little Pony', '2019-12-12', 'André Candray', 24, 0.00, 2, 5, '<frame></frame>', 20, '2019-07-28'),
-(76, 'Cumpleaños de Fabi', '2019-10-15', 'Allison Cartagena', 24, 0.00, 2, 18, '<frame></frame>', 40, '2019-07-10'),
-(77, 'Boda de Marcela', '2021-05-05', 'Marcela Girón', 24, 0.00, 2, 11, '<frame></frame>', 70, '2019-07-31'),
-(78, 'Boda de Alfaro', '2025-12-23', 'Daniel Alfaro', 24, 0.00, 2, 11, '<frame></frame>', 60, '2019-07-23'),
 (79, 'Boda de Katherina', '2020-01-02', 'América Ivanov', 9, 0.00, 2, 11, '<frame></frame>', 30, '2019-07-30'),
 (80, 'Cumpleaños de Bad Bunny', '2019-11-11', 'Benito Antonio', 9, 0.00, 2, 7, '<frame></frame>', 90, '2019-07-23'),
 (81, 'Fiesta de Diastro y Castiel', '2019-09-01', 'Gabriela Ramos', 9, 0.00, 2, 18, '<frame></frame>', 125, '2019-07-25'),
@@ -270,7 +268,8 @@ CREATE TABLE `list_invitations_event` (
 INSERT INTO `list_invitations_event` (`id`, `namePerson`, `lastnamePerson`, `id_event`, `date`) VALUES
 (1, 'Fernando André', 'Candray Castillo', 11, '2019-08-08'),
 (2, 'Alejandro  Manuel ', 'Gonzalez', 88, '2019-08-08'),
-(7, 'Gaby', 'asda', 91, '2019-08-12');
+(7, 'Gaby', 'asda', 91, '2019-08-12'),
+(8, 'Sebastian ', 'Artiga', 92, '2019-08-15');
 
 -- --------------------------------------------------------
 
@@ -286,6 +285,15 @@ CREATE TABLE `list_products_event` (
   `date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `list_products_event`
+--
+
+INSERT INTO `list_products_event` (`id`, `id_product`, `count`, `id_event`, `date`) VALUES
+(1, 75, 1, 88, '2019-08-14'),
+(2, 72, 1, 89, '2019-08-14'),
+(3, 71, 1, 90, '2019-08-14');
+
 -- --------------------------------------------------------
 
 --
@@ -298,6 +306,14 @@ CREATE TABLE `list_product_request` (
   `id_request` int(11) NOT NULL,
   `count` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `list_product_request`
+--
+
+INSERT INTO `list_product_request` (`id`, `id_product`, `id_request`, `count`) VALUES
+(1, 75, 25, 2),
+(2, 72, 25, 4);
 
 -- --------------------------------------------------------
 
@@ -339,24 +355,25 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `nameProduct`, `image_product`, `count`, `date`, `id_employee`, `price`) VALUES
-(67, 'Bolsa de dulces', '5d5327a968704.jpg', 50, '2019-08-13', 24, 2.00),
-(68, 'Centros de mesa', '5d5327e81eb4a.jpg', 20, '2019-08-13', 24, 5.00),
-(69, 'Vasos rosas', '5d5328031c01c.jpg', 70, '2019-08-13', 24, 1.00),
-(70, 'Bolsas de pastelitos', '5d53281f3ac02.jpg', 50, '2019-08-13', 24, 2.50),
-(71, 'Bola disco', '5d53284b396b4.jpg', 25, '2019-08-13', 24, 10.00),
-(72, 'Helados', '5d53286f355a3.jpg', 50, '2019-08-13', 24, 3.00),
-(73, 'Serpentinas', '5d53289a3341f.jpg', 100, '2019-08-13', 24, 0.50),
-(74, 'Manteles para ocasiones', '5d5328c3e537c.jpg', 90, '2019-08-13', 24, 4.00),
-(75, 'Coca colas pack', '5d5328eec57e9.jpg', 180, '2019-08-13', 24, 8.00),
-(76, 'Letras banderines', '5d5329244a66f.jpg', 500, '2019-08-13', 24, 2.00),
-(77, 'L?mparas de papel', '5d53294e1c80f.jpg', 60, '2019-08-13', 24, 5.00),
-(78, 'Flotadores para ni?os', '5d53297e05c79.jpg', 50, '2019-08-13', 24, 8.00),
-(79, 'Pi?ata', '5d5329de55143.png', 200, '2019-08-13', 24, 12.00),
-(80, 'Platos desechables', '5d532a657d142.jpg', 200, '2019-08-13', 24, 6.00),
-(81, 'Regalos baby shower', '5d532ad10e6c3.jpg', 60, '2019-08-13', 24, 10.00),
-(82, 'Ramos', '5d532afe7a00e.jpg', 90, '2019-08-13', 24, 20.00),
-(83, 'Sillas alquiladas', '5d532b66f3eeb.jpg', 500, '2019-08-13', 24, 25.00),
-(84, 'Servilletas', '5d532b9a586b3.jpeg', 500, '2019-08-13', 24, 15.00);
+(67, 'Bolsa de dulces', '5d5327a968704.jpg', 50, '2019-08-13', 9, 2.00),
+(68, 'Centros de mesa', '5d5327e81eb4a.jpg', 20, '2019-08-13', 9, 5.00),
+(69, 'Vasos rosas', '5d5328031c01c.jpg', 70, '2019-08-13', 9, 1.00),
+(70, 'Bolsas de pastelitos', '5d53281f3ac02.jpg', 50, '2019-08-13', 9, 2.50),
+(71, 'Bola disco', '5d53284b396b4.jpg', 24, '2019-08-13', 9, 10.00),
+(72, 'Helados', '5d53286f355a3.jpg', 49, '2019-08-13', 9, 3.00),
+(73, 'Serpentinas', '5d53289a3341f.jpg', 100, '2019-08-13', 9, 0.50),
+(74, 'Manteles para ocasiones', '5d5328c3e537c.jpg', 90, '2019-08-13', 9, 4.00),
+(75, 'Coca colas pack', '5d5328eec57e9.jpg', 179, '2019-08-13', 9, 8.00),
+(76, 'Letras banderines', '5d5329244a66f.jpg', 500, '2019-08-13', 9, 2.00),
+(77, 'Lamparas de papel', '5d53294e1c80f.jpg', 60, '2019-08-13', 9, 5.00),
+(78, 'Flotadores para ni?os', '5d53297e05c79.jpg', 50, '2019-08-13', 9, 8.00),
+(79, 'Piñata', '5d5329de55143.png', 200, '2019-08-13', 9, 12.00),
+(80, 'Platos desechables', '5d532a657d142.jpg', 200, '2019-08-13', 9, 6.00),
+(81, 'Regalos baby shower', '5d532ad10e6c3.jpg', 60, '2019-08-13', 9, 10.00),
+(82, 'Ramos', '5d532afe7a00e.jpg', 90, '2019-08-13', 9, 20.00),
+(83, 'Sillas alquiladas', '5d532b66f3eeb.jpg', 500, '2019-08-13', 9, 25.00),
+(84, 'Servilletas', '5d532b9a586b3.jpeg', 500, '2019-08-13', 9, 15.00),
+(85, 'Wonka', '5d5449267c7d7.png', 10, '2019-08-14', 7, 3.50);
 
 -- --------------------------------------------------------
 
@@ -379,7 +396,9 @@ CREATE TABLE `replies_comments` (
 INSERT INTO `replies_comments` (`id`, `id_message`, `id_employee`, `message`, `date`) VALUES
 (1, 1, 7, 'que pedo maje', '2019-08-14'),
 (2, 1, 7, 'Que contas?', '2019-08-14'),
-(3, 1, 7, 'Que contas?', '2019-08-14');
+(3, 1, 7, 'Que contas?', '2019-08-14'),
+(4, 2, 7, 'Que pedo maje', '2019-08-16'),
+(5, 2, 7, 'Les comento que evento es una mierda\r\n', '2019-08-16');
 
 -- --------------------------------------------------------
 
@@ -453,7 +472,8 @@ INSERT INTO `share_events` (`id`, `id_event`, `id_employee`) VALUES
 (1, 88, 7),
 (2, 11, 7),
 (3, 88, 9),
-(4, 91, 4);
+(4, 91, 4),
+(5, 92, 9);
 
 -- --------------------------------------------------------
 
@@ -474,6 +494,25 @@ INSERT INTO `status_requests` (`id`, `status`) VALUES
 (1, 'Aceptado'),
 (2, 'Rechazado'),
 (3, 'Pendiente');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `user_states`
+--
+
+CREATE TABLE `user_states` (
+  `id` int(11) NOT NULL,
+  `status` varchar(15) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `user_states`
+--
+
+INSERT INTO `user_states` (`id`, `status`) VALUES
+(0, 'activo'),
+(1, 'Inactivo');
 
 -- --------------------------------------------------------
 
@@ -512,7 +551,8 @@ ALTER TABLE `comments_in_event`
 --
 ALTER TABLE `employees`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `role` (`role`);
+  ADD KEY `role` (`role`),
+  ADD KEY `status` (`status`);
 
 --
 -- Indices de la tabla `events`
@@ -630,6 +670,12 @@ ALTER TABLE `status_requests`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `user_states`
+--
+ALTER TABLE `user_states`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `votes_products`
 --
 ALTER TABLE `votes_products`
@@ -646,19 +692,19 @@ ALTER TABLE `votes_products`
 -- AUTO_INCREMENT de la tabla `binnacle`
 --
 ALTER TABLE `binnacle`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `comments_in_event`
 --
 ALTER TABLE `comments_in_event`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `employees`
 --
 ALTER TABLE `employees`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT de la tabla `events`
@@ -694,13 +740,13 @@ ALTER TABLE `like_states`
 -- AUTO_INCREMENT de la tabla `list_invitations_event`
 --
 ALTER TABLE `list_invitations_event`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `list_products_event`
 --
 ALTER TABLE `list_products_event`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `list_product_request`
@@ -718,13 +764,13 @@ ALTER TABLE `payment_event_status`
 -- AUTO_INCREMENT de la tabla `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
 
 --
 -- AUTO_INCREMENT de la tabla `replies_comments`
 --
 ALTER TABLE `replies_comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `requests`
@@ -742,7 +788,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT de la tabla `share_events`
 --
 ALTER TABLE `share_events`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `status_requests`
@@ -771,7 +817,8 @@ ALTER TABLE `comments_in_event`
 -- Filtros para la tabla `employees`
 --
 ALTER TABLE `employees`
-  ADD CONSTRAINT `employees_ibfk_1` FOREIGN KEY (`role`) REFERENCES `roles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `employees_ibfk_1` FOREIGN KEY (`role`) REFERENCES `roles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `employees_ibfk_2` FOREIGN KEY (`status`) REFERENCES `user_states` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `events`
