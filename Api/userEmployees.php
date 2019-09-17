@@ -133,8 +133,7 @@ if (isset($_GET['request']) && isset($_GET['action'])) {
                     }
                     else{
                         $result['exception']='Campo vacio o nombre de usuario invalido';
-                    }
-                                    
+                    }               
                 break;
                 case 'Loginpublic':
                     if ($employe->username($_POST['Nickname'])) {

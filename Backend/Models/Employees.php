@@ -211,6 +211,11 @@ class Employee extends Validator{
         $params=array($this->id);
         return Database::getRows($sql,$params);
     }
+    public function verifyGoogleSecret(){
+        $sql='SELECT google_secret_key FROM employees WHERE id=?';
+        $params = array($this->id);
+        return Database::getRow($sql,$params);
+    }
     public function Authenticate(){
         $sql='UPDATE employees SET status=? WHERE id=?';
         $params=array(1, $this->id);

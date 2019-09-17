@@ -70,8 +70,18 @@ if( isset($_GET['request']) && isset($_GET['action']) ){
                                         if($_POST['user_verification'] != $_SESSION['authUser']){
                                             if(!$user->checkPassword()){
                                                 if($user->resetPassword()){
-                                                    $result['status'] = 1;
-                                                    $result['site'] ='../private/verification-twosteps.php';
+                                                    if($user->token(Authenticator::createSecret())){
+                                                        if($user->updateGoogleSecret()){
+                                                            $result['status'] = 1;
+                                                            $result['site'] ='../private/verification-twosteps.php';
+                                                        }
+                                                        else{
+                                                            $result['exception']='Fallo al asignar token de usuario';
+                                                        }
+                                                    }
+                                                    else{
+                                                        $result['exception']='No se pudo autenticar el usuario';
+                                                    }
                                                 }
                                                 else{
                                                     $result['exception']='No se pudo restablecer su contraseña';    

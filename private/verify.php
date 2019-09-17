@@ -27,7 +27,10 @@ require_once('../Helpers/AuthenticatorGenerator.php');
             <div class="row">
                 <div class="col s12 m12">
                     <span class="card-title" id="saludate">Bienvenido a Party Supplies.</span>
-                    <span class="grey-text" id="descriptionSaludate">Nos alegra verte, ingresa tus datos.</span>
+                    <div id="divImage" class="center">
+                        <img src="../Imports/resources/pics/utilities/autenticator.png" id="imageAutenticator">
+                    </div>
+                    <span class="grey-text" id="descriptionSaludate">Ingresa el codigo que aparece en tu aplicación de Google Authenticator.</span>
                 </div>
                 <div class="col s12 m12">
                     <form class="col s12 m12" method="POST" id="formAuth">

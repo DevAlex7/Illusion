@@ -21,18 +21,22 @@
             );
             
         }
-
+        public static function createSecret(){
+            $authenticator = new PHPGangsta_GoogleAuthenticator();
+            $code_secret = $authenticator->createSecret();
+            return $code_secret;
+        }
         public static function generateQR(){
-                        
+            
+            $authenticator = new PHPGangsta_GoogleAuthenticator();            
             $user = new Employee;
+
             $user->username($_SESSION['authUser']);
             
             $user->checkUsername();
 
-            $authenticator = new PHPGangsta_GoogleAuthenticator();
-
             $code_secret = $user->getKey();
-
+    
             $titulo = $user->getEmail(); 
 
             $url_qr_code = $authenticator->getQRCodeGoogleUrl($titulo, $code_secret);

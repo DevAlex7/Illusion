@@ -37,11 +37,11 @@ AdminSideNav::verifySession();
                         <div class="row">
                             <div class="input-field col s12 m12">
                                 <i class="material-icons prefix">vpn_key</i>
-                                <input id="text" autocomplete="off" name="user_verification" id="user_verification" type="text" placeholder="Contraseña">
+                                <input id="hidden" autocomplete="off" name="user_verification" id="user_verification" type="text" placeholder="Contraseña">
                             </div>
                             <div class="input-field col s12 m12">
                                 <i class="material-icons prefix">vpn_key</i>
-                                <input id="text" autocomplete="off" name="cfuser_verification" id="cfuser_verification" type="text" placeholder="Confirmar contraseña">
+                                <input id="hidden" autocomplete="off" name="cfuser_verification" id="cfuser_verification" type="text" placeholder="Confirmar contraseña">
                             </div>
                         </div>
                         <button type="submit" class="btn col s12 m12 red" id="buttonLogin"> <i class="material-icons right">arrow_forward</i> <span id="buttonTitle">Entrar</span> </button>

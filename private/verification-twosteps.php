@@ -22,12 +22,13 @@ require_once('../Helpers/AuthenticatorGenerator.php');
 <div class="row">
     <div class="card col s12 m4 offset-m4" id="Card-Authenticator">
         <div class="card-content">            
+        <span class="card-title" id="saludate">Paso 2: protege tu cuenta</span>
             <div id="divImage" class="center">
                 <img src="../Imports/resources/pics/utilities/autenticator.png" id="imageAutenticator">
             </div>
             <div class="row">
                 <div class="col s12 m12">
-                    <span class="card-title" id="saludate">Paso 2: protege tu cuenta</span>
+                    
                     <span class="grey-text" id="descriptionSaludate">Con la aplicación de google Authenticator puedes escanear el codigo QR.</span>
                     
                     <div id="qr" class="center">
@@ -38,7 +39,7 @@ require_once('../Helpers/AuthenticatorGenerator.php');
             <form method="POST" id="verifyForm">
                 <div class="row">
                     <div class="col s12 m8 offset-m2">
-                        <input type="text" name="secret" value="<?php print Authenticator::generateQR()['key'] ?>">
+                        <input type="hidden" name="secret" value="<?php print Authenticator::generateQR()['secret'] ?>">
                         <input type="text" class="center" name="code_verification" id="code_verification" placeholder="Ingresa el codigo">      
                     </div>
                 </div>
