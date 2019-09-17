@@ -97,85 +97,45 @@ if (isset($_GET['request']) && isset($_GET['action'])) {
                         $result['exception'] = 'Nombre incorrecto debe llevar al menos 5 carácteres';
                     }
                     break;
-<<<<<<< HEAD
                 case 'Login':
                     if ($employe->username($_POST['Nickname'])) {
-                        if ($employe->checkUsername()) {
-                            if ($employe->password($_POST['pass'])) {
-                                if ($usuario->getBlock() < 3) {
-                                    if ($employe->checkPassword()) {
-                                        if ($employe->getRole() == 0) {
-                                            $_SESSION['idUser'] = $employe->getId();
-                                            $_SESSION['NameUser'] = $employe->getName();
-                                            $_SESSION['LastnameUser'] = $employe->getLastname();
-                                            $_SESSION['UsernameActive'] = $employe->getUsername();
-                                            $_SESSION['Role'] = $employe->getRole();
-                                            $_SESSION['sessionTime'] = time();
-                                            $result['status'] = 1;
-                                            $result['site'] = '../private/home.php';
-                                            if ($employe->userHasGoogleKey()) {
-                                                $_SESSION['username_key'] = $_POST['Nickname'];
-                                                $_SESSION['keygen'] = $employe->getKey();
-                                                $result['status'] = 1;
-                                                $result['site'] = 'verify.php';
-                                            } else {
-                                                $employe->openSession();
-                                                $result['site'] = '../private/home.php';
-                                                $result['status'] = 1;
-                                            }
-                                        } else {
-                                            $result['exception'] = 'Usted es un usuario publico';
-                                        }
-                                    } else {
-                                        if ($usuario->summonBlock()) {
-                                            $result['exception'] = 'Contraseña o usuario incorrecto';
-                                        }
-=======
-                    case 'Login':
-                    if($employe->username($_POST['Nickname'])){
                         if($employe->checkUsername()){
                             if($employe->password($_POST['pass'])){
-                                if($employe->checkPassword()){
-                                    if($employe->getRole() == 0){
-
-                                        $_SESSION['idUser']=$employe->getId();
-                                        $_SESSION['NameUser']=$employe->getName();
-                                        $_SESSION['LastnameUser']=$employe->getLastname();
-                                        $_SESSION['UsernameActive']=$employe->getUsername();
-                                        $_SESSION['Role']=$employe->getRole();
-                                        $_SESSION['sessionTime'] = time();
-                                        $result['status']=1;
-                                        $result['site']='../private/home.php';
-                                        if($employe->userHasGoogleKey()){
+                                if ($employe->checkPassword()) {
+                                    if($employe->getStatus() == 1){
+                                        if($employe->getRole() == 0) {
                                             $_SESSION['username_key'] = $_POST['Nickname'];
                                             $_SESSION['keygen'] = $employe->getKey();
-                                            $result['status']=1;
-                                            $result['site']='verify.php';
-
-                                        }
+                                            $result['status'] = 1;
+                                            $result['site'] = '../private/verify.php';
+                                        } 
                                         else{
-                                            $employe->openSession();
-                                            $result['site']='../private/home.php';
-                                            $result['status']=1;    
-                                        }   
+                                            $result['exception'] = 'Usted es un usuario publico';
+                                        }
                                     }
                                     else{
-                                        $result['exception']='Usted es un usuario publico';
->>>>>>> 0eb25b7fa1c2be39a086c7c9bc1684e2453f19ca
+                                        $_SESSION['authUser']=$employe->getUsername();
+                                        $result['status'] = 2;
+                                        $result['site'] ='../private/authenticate.php';
                                     }
-                                } else {
-                                    $result['exception'] = 'Su usuario está bloqueado';
-                                }
-                            } else {
-                                $result['exception'] = 'Ingrese la contraseña porfavor, minimo 8 carácteres';
+                                } 
+                                else {
+                                    $result['exception'] = 'Contraseña o usuario incorrecto';
+                                }   
                             }
-                        } else {
+                            else{
+                                $result['exception'] = 'Campo vacio o contraseña invalida';
+                            }
+                        }
+                        else{
                             $result['exception'] = 'Usuario inexistente';
                         }
-                    } else {
-                        $result['exception'] = 'El usuario debe contar con 7 carácteres';
                     }
-                    break;
+                    else{
+                        $result['exception']='Campo vacio o nombre de usuario invalido';
+                    }
+                                    
+                break;
                 case 'Loginpublic':
                     if ($employe->username($_POST['Nickname'])) {
                         if ($employe->checkUsername()) {

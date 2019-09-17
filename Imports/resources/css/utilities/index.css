@@ -19,6 +19,13 @@ html{
 ::placeholder { /* Firefox, Chrome, Opera */ 
     color: black; 
 } 
+#imageAutenticator{
+    width: 30vh;
+    height: 25vh;
+}
+#qr{
+    margin-top:1rem;
+}
 #descriptionSaludate{
     position: relative;
     left: 0.8rem;

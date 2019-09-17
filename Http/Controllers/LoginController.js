@@ -13,22 +13,15 @@ $('#FormLogin').submit(function(){
     .done(function(response){
         if(isJSONString(response)){
             const result = JSON.parse(response);
-            if(result.status){
-
+            if(result.status == 1){
                 M.toast({html:'Logueado correctamente'});
                 $(location).attr('href',result.site);
             }
+            else if(result.status ==2){
+                $(location).attr('href',result.site);
+            }
             else{
-                tries++;
-
-                if(tries < 3 ){
-                    M.toast({html:result.exception});
-                }
-                else{
-                    ToastSucces('Tu acceso ha sido bloqueado, espera 3 minutos');
-                    $('#buttonLogin').addClass('disabled');
-                    setInterval(timewaiting, 60000);
-                }
+                M.toast({html:result.exception});
             }
         }
         else{

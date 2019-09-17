@@ -1,15 +1,16 @@
 <?php 
-
+    
     require_once('../Backend/Instance/instance.php');   
     require_once('../Helpers/validator.php');
     require_once('../Backend/Models/Employees.php');
     require_once('../Helpers/validates.php');
     require_once('../Helpers/GoogleAuthenticator.php');
+    require_once('../Helpers/AuthenticatorGenerator.php');
+
 if( isset($_GET['request']) && isset($_GET['action']) ){
     $user = new Employee();
-    session_start();
+    
     $result = array('status'=>0, 'exception'=>'', 'role'=>0, 'id'=>0, 'username'=>'');
-
         switch($_GET['request'])
         {
             case 'POST':
@@ -33,7 +34,6 @@ if( isset($_GET['request']) && isset($_GET['action']) ){
                         }
                     break;
                     case 'Login-Authentication':
-                    
                         if($user->token($_POST['code_verification'])){
                             $auth = new PHPGangsta_GoogleAuthenticator();
                             $code = $auth->getCode($_SESSION['keygen']);
@@ -44,6 +44,77 @@ if( isset($_GET['request']) && isset($_GET['action']) ){
                                         $user->openSession();
                                         $result['status']=1;
                                         $result['site']='../private/home.php';                                       
+                                    }
+                                    else{
+                                        $result['exception']='No se ha obtenido información';
+                                    }
+                                }
+                                else{
+                                    $result['exception']='No se ha identificado al usuario';
+                                }
+                                $result['status']=1;
+                            }
+                            else{
+                                $result['exception']='Codigo no valido';
+                            }
+                        }   
+                        else{
+                            $result['exception']='Codigo no asignado';
+                        }
+                    break;
+                    case 'User-Authentication':
+                        if($user->username($_SESSION['authUser'])){ 
+                            if($user->checkUsername()){
+                                if( $_POST['user_verification'] == $_POST['cfuser_verification']){
+                                    if($user->password($_POST['user_verification'])){
+                                        if($_POST['user_verification'] != $_SESSION['authUser']){
+                                            if(!$user->checkPassword()){
+                                                if($user->resetPassword()){
+                                                    $result['status'] = 1;
+                                                    $result['site'] ='../private/verification-twosteps.php';
+                                                }
+                                                else{
+                                                    $result['exception']='No se pudo restablecer su contraseña';    
+                                                }
+                                            }
+                                            else{
+                                                $result['exception']='La contraseña tiene que ser diferente a la actual';
+                                            }
+                                        }
+                                        else{
+                                            $result['exception']='La contraseña no puede ser igual que el usuario';
+                                        }
+                                    }
+                                    else{
+                                        $result['exception']='La contraseña no cumple las expectativas';
+                                    }
+                                }
+                                else{
+                                    $result['exception']='Las contraseñas son diferentes';
+                                }
+                            }
+                            else{
+                                $result['exception']='Usuario invalido';
+                            }
+                        }
+                        else{
+                            $result['exception']='No se ha encontrado un usuario para autenticar';
+                        }
+                    break;
+                    case 'First-Authentication':
+                        if($user->token($_POST['code_verification'])){
+                            $auth = new PHPGangsta_GoogleAuthenticator();
+                            $code = $auth->getCode($_POST['secret']);
+                            $check = $auth->verifyCode($_POST['secret'], $_POST['code_verification'] );
+                            if($check){
+                                if($user->username($_SESSION['authUser'])){
+                                    if($user->checkUsername()){
+                                        if($user->Authenticate()){
+                                            $result['status']=1;
+                                        }
+                                        else{
+                                            $result['exception']='No se pudo autenticar el usuario';
+                                        }    
                                     }
                                     else{
                                         $result['exception']='No se ha obtenido información';

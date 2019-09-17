@@ -7,6 +7,7 @@ class Employee extends Validator{
     private $username;
     private $password;
     private $role;
+    private $status;
     private $google_secret_key;
     private $block = 0;
 
@@ -62,6 +63,9 @@ class Employee extends Validator{
         else{
             return false;
         }
+    }
+    public function getEmail(){
+        return $this->email;
     }
 
     public function username($value){
@@ -119,7 +123,11 @@ class Employee extends Validator{
 		} else {
 			return false;
 		}
-	}
+    }
+    
+    public function getStatus(){
+        return $this->status;
+    }
 
 	public function getBlock()
 	{
@@ -128,7 +136,7 @@ class Employee extends Validator{
 
     public function checkUsername()
 	{
-		$sql = 'SELECT id, name, lastname, username, role, google_secret_key, block FROM employees WHERE username = ?';
+		$sql = 'SELECT id, name, lastname, username, role, email ,status, google_secret_key FROM employees WHERE username = ?';
 		$params = array($this->username);
 		$data = Database::getRow($sql, $params);
 		if ($data) {
@@ -137,8 +145,9 @@ class Employee extends Validator{
             $this->lastname = $data['lastname'];
             $this->username=$data['username'];
             $this->role = $data['role'];
+            $this->email = $data['email'];
+            $this->status = $data['status'];
             $this->google_secret_key = $data['google_secret_key'];
-            $this->block = $data['block'];
 			return true;
 		} else {
 			return false;
@@ -172,8 +181,8 @@ class Employee extends Validator{
     
     public function save(){
         $hash = password_hash($this->password, PASSWORD_DEFAULT);
-        $sql='INSERT INTO employees (name, lastname, email, username, password, role) VALUES (?,?,?,?,?,?)';
-        $params = array($this->name, $this->lastname, $this->email, $this->username, $hash, $this->role);
+        $sql='INSERT INTO employees (name, lastname, email, username, password, role, status) VALUES (?,?,?,?,?,?,?)';
+        $params = array($this->name, $this->lastname, $this->email, $this->username, $hash, $this->role, 2);
         return Database::executeRow($sql,$params);
     }
     
@@ -187,6 +196,7 @@ class Employee extends Validator{
         $params=array($this->name, $this->lastname, $this->email, $this->username, $this->id);
         return Database::executeRow($sql,$params);
     }
+    
     public function verifyRole(){
         $sql='
             SELECT roles.id, employees.id AS User, roles.role, employees.name, employees.lastname 
@@ -200,6 +210,17 @@ class Employee extends Validator{
         $sql='SELECT * FROM employees WHERE employees.id NOT IN (?)';
         $params=array($this->id);
         return Database::getRows($sql,$params);
+    }
+    public function Authenticate(){
+        $sql='UPDATE employees SET status=? WHERE id=?';
+        $params=array(1, $this->id);
+        return Database::executeRow($sql,$params);
+    }
+    public function resetPassword(){
+        $hash = password_hash($this->password, PASSWORD_DEFAULT);
+        $sql='UPDATE employees SET password=? WHERE id=?';
+        $params=array($hash, $this->id);
+        return Database::executeRow($sql,$params);
     }
     public function ListPersons(){
         $sql='SELECT employees.*, roles.role AS nameRole FROM ((employees INNER JOIN roles ON employees.role=roles.id)) WHERE employees.id NOT IN (?)';

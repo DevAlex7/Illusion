@@ -4,7 +4,7 @@ class AdminSideNav {
         session_start();
         $filename = basename($_SERVER['PHP_SELF']);
         if( isset($_SESSION['idUser']) ){
-            $inactivo = 10; //1min en este caso.
+            $inactivo = 100; //1min en este caso.
 
             $vida_session = time() - $_SESSION['tiempo'];
         
@@ -85,9 +85,9 @@ class AdminSideNav {
             }
         }
         else{
+            
             $filename = basename($_SERVER['PHP_SELF']);
-
-            if($filename!= '../private/' && $filename != 'signup.php'){
+            if($filename != '../private/' && $filename != 'signup.php'){
                 header('location:../private/');
             }
             else{
@@ -123,6 +123,9 @@ class AdminSideNav {
             </div>
         </div>
         ');
+    }
+    public static function verifySession(){
+        
     }
 }
 ?>
