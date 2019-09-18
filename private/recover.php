@@ -8,7 +8,7 @@ require_once('../Helpers/Roles.php');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Login</title>
+    <title>Recuperar contraseña</title>
     <?php 
         ImportGlobal::ImportMaterializeCss();
         ImportGlobal::ImportMaterialIcons(); 
@@ -21,34 +21,22 @@ require_once('../Helpers/Roles.php');
 <main>
 <div class="row">
     <div class="card col s12 m4 offset-m4" id="LoginCard">
-        <div class="card-content">
+        <div class="card-content" id="content">
             <div class="row">
                 <div class="col s12 m12">
-                    <span class="card-title" id="saludate">Bienvenido a Party Supplies.</span>
-                    <span class="grey-text" id="descriptionSaludate">Nos alegra verte, ingresa tus datos.</span>
+                    <span class="card-title" id="saludate">Recuperar contraseña.</span>
+                    <span class="grey-text" id="descriptionSaludate">Con la aplicación de authenticator puedes verificar la cuenta.</span>
                 </div>
                 <div class="col s12 m12">
-                    <form class="col s12 m12" method="POST" id="FormLogin">
+                    <form class="col s12 m12" method="POST" id="recoverPass">
                         <div class="row">
                             <div class="input-field col s12 m12">
-                                <i class="material-icons prefix">account_circle</i>
-                                <input id="Nickname" name="Nickname" type="text" placeholder="Usuario" autocomplete="off">
-                            </div>
-                            <div class="input-field col s12 m12">
                                 <i class="material-icons prefix">vpn_key</i>
-                                <input id="pass" autocomplete="off" name="pass" type="password" placeholder="Contraseña">
+                                <input id="code_verification" name="code_verification" type="text" placeholder="Codigo" autocomplete="off">
                             </div>
                         </div>
-                        <button type="submit" class="btn col s12 m12 red" id="buttonLogin"> <i class="material-icons right">arrow_forward</i> <span id="buttonTitle">Entrar</span> </button>
+                        <button type="submit" class="btn col s12 m12 red" id="buttonLogin"> <i class="material-icons right">arrow_forward</i> <span id="buttonTitle">Verificar</span> </button>
                     </form>
-                </div>
-            </div>
-            <div id="recover">
-                <div class="card">
-                    <div class="card-content">
-                        <span class="grey-text">Olvide mi contraseña</span>
-                        <a href="" class="btn right" id="buttonR">recuperar</a>
-                    </div>
                 </div>
             </div>
         </div>

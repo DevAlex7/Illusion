@@ -18,8 +18,9 @@ header, main, footer {
   #TitleSidenav{
     background-color: rgb(245, 29, 47);
   }
+  
   #authButton{
-      border-radius: 10px;
+      border-radius: 20px;
       background-color: blue;
       margin-top:1rem;
   }

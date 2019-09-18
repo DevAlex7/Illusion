@@ -100,31 +100,55 @@ if (isset($_GET['request']) && isset($_GET['action'])) {
                 case 'Login':
                     if ($employe->username($_POST['Nickname'])) {
                         if($employe->checkUsername()){
-                            if($employe->password($_POST['pass'])){
-                                if ($employe->checkPassword()) {
-                                    if($employe->getStatus() == 1){
-                                        if($employe->getRole() == 0) {
-                                            $_SESSION['username_key'] = $_POST['Nickname'];
-                                            $_SESSION['keygen'] = $employe->getKey();
-                                            $result['status'] = 1;
-                                            $result['site'] = '../private/verify.php';
-                                        } 
-                                        else{
-                                            $result['exception'] = 'Usted es un usuario publico';
+                            if($employe->getStatus() != 3){
+                                if($employe->password($_POST['pass'])){
+                                    if ($employe->checkPassword()) {
+                                        if($employe->getStatus() == 1){
+                                            if($employe->getRole() == 0) {
+                                                if($employe->verifySetting()){
+                                                    $_SESSION['username_key'] = $_POST['Nickname'];
+                                                    $_SESSION['keygen'] = $employe->getKey();
+                                                    $result['status'] = 1;
+                                                    $result['site'] = '../private/verify.php';
+                                                }
+                                                else{
+                                                    $employe->openSession();
+                                                    $result['status'] = 1;
+                                                    $result['site'] = '../private/home.php';
+                                                }
+                                                
+                                            } 
+                                            else{
+                                                $result['exception'] = 'Usted es un usuario publico';
+                                            }
                                         }
-                                    }
-                                    else{
-                                        $_SESSION['authUser']=$employe->getUsername();
-                                        $result['status'] = 2;
-                                        $result['site'] ='../private/authenticate.php';
-                                    }
-                                } 
-                                else {
-                                    $result['exception'] = 'Contraseña o usuario incorrecto';
-                                }   
+                                        else{
+                                            $_SESSION['authUser']=$employe->getUsername();
+                                            $result['status'] = 2;
+                                            $result['site'] ='../private/authenticate.php';
+                                        }
+                                    } 
+                                    else {
+                                        $tries = $employe->getTries();
+                                        $trie = $tries-1;
+                                        $employe->updateTries($trie);
+                                        
+                                        if($trie == 0 ){
+                                            $employe->blockUser();  
+                                            $result['exception'] = 'Se ha bloqueado el acceso';
+                                        }
+                                        else{    
+                                            $result['exception'] = 'Contraseña o usuario incorrecto';
+                                        }
+                                    }   
+                                }
+                                else{
+                                    $result['exception'] = 'Campo vacio o contraseña invalida';
+                                }
                             }
                             else{
-                                $result['exception'] = 'Campo vacio o contraseña invalida';
+                                $result['status'] = 3;
+                                $result['exception']='Esta cuenta esta suspendida';
                             }
                         }
                         else{
@@ -246,7 +270,22 @@ if (isset($_GET['request']) && isset($_GET['action'])) {
                     } else {
                         $result['exception'] = 'Nombre incorrecto debe llevar al menos 5 carácteres';
                     }
-                    break;
+                break;
+                case 'valid-recover':
+                    if($employe->username($_POST['username'])){
+                        if($employe->checkUsername()){
+                            $_SESSION['username_recover']=$_POST['username'];
+                            $result['status']=1;
+                            $result['site']='../private/recover.php';
+                        }
+                        else{
+                            $result['exception']='Información erronea';
+                        }
+                    }
+                    else{
+                        $result['exception']='Nombre de usuario invalido';
+                    }
+                break;
                 default:
                     exit('Acción no disponible');
             }

@@ -9,7 +9,7 @@ class Employee extends Validator{
     private $role;
     private $status;
     private $google_secret_key;
-    private $block = 0;
+    private $tries = 0;
 
     public function id($value){
         if($this->validateId($value)){
@@ -129,14 +129,14 @@ class Employee extends Validator{
         return $this->status;
     }
 
-	public function getBlock()
+	public function getTries()
 	{
-		return $this->block;
+		return $this->tries;
 	}
 
     public function checkUsername()
 	{
-		$sql = 'SELECT id, name, lastname, username, role, email ,status, google_secret_key FROM employees WHERE username = ?';
+		$sql = 'SELECT id, name, lastname, username, role, email ,status, google_secret_key,tries FROM employees WHERE username = ?';
 		$params = array($this->username);
 		$data = Database::getRow($sql, $params);
 		if ($data) {
@@ -148,15 +148,22 @@ class Employee extends Validator{
             $this->email = $data['email'];
             $this->status = $data['status'];
             $this->google_secret_key = $data['google_secret_key'];
+            $this->tries = $data['tries'];
 			return true;
 		} else {
 			return false;
 		}
     }
+    public function verifyTries(){
+        $sql='SELECT tries FROM employees WHERE id=?';
+        $params = array($this->id);
+        return Database::getRow($sql,$params);
+    }
     public function openSession(){
             $_SESSION['idUser']=$this->getId();
             $_SESSION['NameUser']=$this->getName();
             $_SESSION['LastnameUser']=$this->getLastname();
+            $_SESSION['emailUser'] = $this->getEmail();
             $_SESSION['UsernameActive']=$this->getUsername();
             $_SESSION['Role']=$this->getRole();
             $_SESSION['tiempo'] = time();
@@ -181,11 +188,15 @@ class Employee extends Validator{
     
     public function save(){
         $hash = password_hash($this->password, PASSWORD_DEFAULT);
-        $sql='INSERT INTO employees (name, lastname, email, username, password, role, status) VALUES (?,?,?,?,?,?,?)';
-        $params = array($this->name, $this->lastname, $this->email, $this->username, $hash, $this->role, 2);
+        $sql='INSERT INTO employees (name, lastname, email, username, password, role, status,setting_status) VALUES (?,?,?,?,?,?,?,?)';
+        $params = array($this->name, $this->lastname, $this->email, $this->username, $hash, $this->role, 2,2);
         return Database::executeRow($sql,$params);
     }
-    
+    public function blockUser(){
+        $sql='UPDATE employees SET status=? WHERE id=?';
+        $params=array(3, $this->id);
+        return Database::executeRow($sql,$params);
+    }
     public function findbyId(){
         $sql ='SELECT * FROM employees WHERE id=?';   
         $params=array($this->id);
@@ -217,8 +228,8 @@ class Employee extends Validator{
         return Database::getRow($sql,$params);
     }
     public function Authenticate(){
-        $sql='UPDATE employees SET status=? WHERE id=?';
-        $params=array(1, $this->id);
+        $sql='UPDATE employees SET status=?, setting_status WHERE id=?';
+        $params=array(1, 1, $this->id);
         return Database::executeRow($sql,$params);
     }
     public function resetPassword(){
@@ -232,11 +243,7 @@ class Employee extends Validator{
         $params=array($this->id);
         return Database::getRows($sql,$params);
     }
-    public function updatePassword(){
-        $sql='UPDATE employees SET password =? WHERE id=?';
-        $params=array($this->password,$this->id);
-        return Database::getRows($sql,$params);
-    }
+    
     public function eventsActivity(){
         $sql='SELECT events.date_created AS eventCreated, COUNT(events.id) AS countActivity FROM (events INNER JOIN employees ON employees.id=events.id_employee AND employees.id=?) GROUP BY events.date_created';
         $params=array($this->id);
@@ -251,6 +258,36 @@ class Employee extends Validator{
         $sql='SELECT COUNT(events.id) AS countType, event_types.type FROM ((event_types INNER JOIN events ON event_types.id=events.type_event) INNER JOIN employees ON events.id_employee=employees.id AND employees.id=?) GROUP BY event_types.type';
         $params=array($this->id);
         return Database::getRows($sql,$params);
+    }
+    public function verifySetting(){
+        $sql='SELECT setting_status FROM employees WHERE id=?';
+        $params = array($this->id);
+        $ver = Database::getRow($sql,$params);
+        if($ver['setting_status'] == 1){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public function updateTries($number){
+        $sql='UPDATE employees SET tries=? WHERE id=?';
+        $params = array($number, $this->id);
+        return Database::executeRow($sql,$params);
+    }
+
+    public function configureTwoSteps($configCode){
+        if(!$configCode == 1 || 2){
+            $sql='UPDATE employees SET setting_status=? WHERE id=?';
+        
+            $params = array($configCode, $this->id);
+
+            return Database::executeRow($sql,$params);
+        }
+        else{
+            return false;
+        }
     }
     public function LogOff(){
 		if(isset($_SESSION['idUser'])){

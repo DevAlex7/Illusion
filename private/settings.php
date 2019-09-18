@@ -2,7 +2,6 @@
 <?php 
 require_once('../Imports/Global/Global.php');
 require_once('../Helpers/Dashboard.php'); 
-require_once('../Helpers/AuthenticatorGenerator.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,16 +29,18 @@ require_once('../Helpers/AuthenticatorGenerator.php');
                     <div class="card-content">
                         <span class="card-title">Verificación de dos pasos</span>
                         <span class="grey-text">La verificación de dos pasos consistira en darte un codigo por medio de google Authenticator.</span>
-                        
-                        <div id="Qr" class="center">
-                            <?php 
-                            $qr =  Authenticator::getImageQR(); 
-                            print $qr['Qr'];
-                            ?>
+                        <div class="row">
+                            <div class="switch">
+                                <label>
+                                Off
+                                <input type="checkbox" id="switch">
+                                <span class="lever"></span>
+                                On
+                                </label>
+                            </div>         
                         </div>
-                        <div class="center">
-                            <input type="text" name="secretKey" value="<?php print $qr['secret'] ?>" id="secretKey">
-                            <a href="" class="btn" id="authButton">Continuar</a>
+                        <div class="row">
+                            <a id="authButton" href="javascript:configure()" class="btn">Configurar</a>
                         </div>
                     </div>
                 </div>

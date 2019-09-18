@@ -20,7 +20,7 @@ html{
     color: black; 
 } 
 #imageAutenticator{
-    width: 24vh;
+    width: 28vh;
     height: 20vh;
 }
 #divImage{
@@ -28,6 +28,11 @@ html{
 }
 #qr{
     margin-top:1rem;
+}
+#buttonR{
+    border-radius: 20px;
+    margin-top:-6px;
+    background-color: crimson;
 }
 #descriptionSaludate{
     position: relative;
