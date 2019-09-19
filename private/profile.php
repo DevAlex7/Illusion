@@ -81,41 +81,41 @@ require_once('../Helpers/Dashboard.php');
                         <span class="card-title" id="titlepersonal">Cambiar mi contraseña</span>
                         <div id="informationProfile">
                             <div class="row">
-                                <div class="left col s12 m12" id="name-div-info">
+                                <div class="left col s12 m12" id="actpass-div-info">
                                     <p class="white-text"><b>Contraseña actual</b></p>
                                     <div id="userpart">
                                         <i class="material-icons left">lock</i>
-                                        <div id="user-div-name">
+                                        <div id="user-div-actpass">
                                         </div>
                                     </div>
                                 </div>
-                                <div class="left col s12 m12" id="lastname-div-info">
+                                <div class="left col s12 m12" id="repeatone-div-info">
                                     <p class="white-text"><b>Repetir la contraseña actual</b></p>
                                     <div id="userpart">
                                         <i class="material-icons left">refresh</i>
-                                        <div id="user-div-lastname">
+                                        <div id="user-div-repeatone">
                                         </div>
                                     </div>
                                 </div>
-                                <div class="left col s12 m12" id="email-div-info">
+                                <div class="left col s12 m12" id="newpass-div-info">
                                     <p class="white-text"><b>Nueva contraseña</b></p>
                                     <div id="userpart">
                                         <i class="material-icons left">lock_outline</i>
-                                        <div id="user-div-email">
+                                        <div id="user-div-newpass">
                                         </div>
                                     </div>
                                 </div>
-                                <div class="left col s12 m12" id="username-div-info">
+                                <div class="left col s12 m12" id="repeattwo-div-info">
                                     <p class="white-text"><b>Repetir la nueva contraseña</b></p>
                                     <div id="userpart">
                                         <i class="material-icons left">done</i>
-                                        <div id="user-div-username">
+                                        <div id="user-div-repeattwo">
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="center" id="buttonsControl">
+                                <div class="center" id="btns">
                                 </div>
                             </div>
                         </div>
@@ -123,7 +123,6 @@ require_once('../Helpers/Dashboard.php');
                 </div>
             </div>
         </div>
-
         <div class="row">
             <div class="col s12 m6">
                 <div class="card" id="card-statidisticsProfile">

@@ -52,17 +52,6 @@ if (isset($_GET['request']) && isset($_GET['action'])) {
                         $result['exception'] = 'No hay información';
                     }
                     break;
-                case 'readPass':
-                    if ($employe->id($_SESSION['idUser'])) {
-                        if ($result['dataset'] = $employe->findbyId()) {
-                            $result['status'] = 1;
-                        } else {
-                            $result['exception'] = 'No se ha encontrado información';
-                        }
-                    } else {
-                        $result['exception'] = 'No se ha identificado al usuario logueado';
-                    }
-                    break;
             }
             break;
 
@@ -126,6 +115,7 @@ if (isset($_GET['request']) && isset($_GET['action'])) {
                                                 if ($employe->verifySetting()) {
                                                     $_SESSION['username_key'] = $_POST['Nickname'];
                                                     $_SESSION['keygen'] = $employe->getKey();
+                                                    //$_SESSION['time'] = time();
                                                     $result['status'] = 1;
                                                     $result['site'] = '../private/verify.php';
                                                 } else {
@@ -340,31 +330,33 @@ if (isset($_GET['request']) && isset($_GET['action'])) {
                     break;
                 case 'updatePassword':
                     if ($employe->id($_POST['information']['id'])) {
-                        if ($employe->name($_POST['information']['name'])) {
-                            if ($employe->lastname($_POST['information']['lastname'])) {
-                                if ($employe->email($_POST['information']['email'])) {
-                                    if ($employe->username($_POST['information']['username'])) {
-                                        if ($employe->editProfile()) {
-                                            $_SESSION['idUser'] = $employe->getId();
-                                            $_SESSION['NameUser'] = $employe->getName();
-                                            $_SESSION['LastnameUser'] = $employe->getLastname();
-                                            $_SESSION['UsernameActive'] = $employe->getUsername();
-                                            $result['status'] = 1;
-                                            $result['dataset'] = $employe->findbyId();
+                        if ($_POST['information']['actpass'] == $_POST['information']['repeatone']) {
+                            if ($employe->password($_POST['information']['actpass'])) {
+                                if ($employe->checkPassword()) {
+                                    if (($_POST['information']['newpass'] == $_POST['information']['repeattwo'])) {
+                                        if ($employe->password($_POST['information']['newpass'])) {
+                                            if ($employe->resetPassword()) {
+                                                $_SESSION['idUser'] = $employe->getId();
+                                                $_SESSION['NameUser'] = $employe->getName();
+                                                $result['status'] = 1;
+                                                $result['dataset'] = $employe->findbyId();
+                                            } else {
+                                                $result['exception'] = 'No se actualizó';
+                                            }
                                         } else {
-                                            $result['exception'] = 'No se actualizó';
+                                            $result['exception'] = 'Campos vacíos o usuario con datos erroneos';
                                         }
                                     } else {
-                                        $result['exception'] = 'Campo vacio o usuario con datos erroneos';
+                                        $result['exception'] = 'Campos vacíos o contraseña actual incorrecta';
                                     }
                                 } else {
-                                    $result['exception'] = 'Contraseña ';
+                                    $result['exception'] = 'Las contraseñas no coinciden';
                                 }
                             } else {
-                                $result['exception'] = 'Campo vacío o contraseña actual incorrecta';
+                                $result['exception'] = 'Campos vacíos o contraseña actual incorrecta';
                             }
                         } else {
-                            $result['exception'] = 'Campo vacío o contraseña actual incorrecta';
+                            $result['exception'] = 'Las contraseñas no coinciden';
                         }
                     } else {
                         $result['exception'] = 'No se ha logrado identificar el usuario';
