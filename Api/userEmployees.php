@@ -29,7 +29,15 @@ if (isset($_GET['request']) && isset($_GET['action'])) {
                     } else {
                         $result['exception'] = 'No se ha identificado al usuario logueado';
                     }
-                    break;
+                break;
+                case 'countUsers':
+                if($employe->countUsers()){
+                    $result['status']=1;
+                }
+                else{
+                    $result['exception'] = '../private/signup.php';
+                }
+                break;
                 case 'allEmployees':
                     if ($employe->id($_SESSION['idUser'])) {
                         if ($result['dataset'] = $employe->all()) {
@@ -65,44 +73,49 @@ if (isset($_GET['request']) && isset($_GET['action'])) {
                     }
                     break;
                 case 'CreateUser':
-                    if ($employe->name($_POST['NameUser'])) {
-                        if ($employe->lastname($_POST['LastName'])) {
-                            if ($employe->email($_POST['EmailUser'])) {
-                                if ($employe->username($_POST['Nickname'])) {
-                                    if ($_POST['pass'] == $_POST['pass2']) {
-                                        if ($_POST['Nickname'] != $_POST['pass']) {
-                                            if ($employe->password($_POST['pass'])) {
-                                                if ($employe->role(0)) {
-                                                    if (!$select->emailWhere("employees", $_POST['EmailUser'])) {
-                                                        $employe->save();
-                                                        $result['status'] = 1;
+                    if(!$employe->countUsers()){
+                        if ($employe->name($_POST['NameUser'])) {
+                            if ($employe->lastname($_POST['LastName'])) {
+                                if ($employe->email($_POST['EmailUser'])) {
+                                    if ($employe->username($_POST['Nickname'])) {
+                                        if ($_POST['pass'] == $_POST['pass2']) {
+                                            if ($_POST['Nickname'] != $_POST['pass']) {
+                                                if ($employe->password($_POST['pass'])) {
+                                                    if ($employe->role(0)) {
+                                                        if (!$select->emailWhere("employees", $_POST['EmailUser'])) {
+                                                            $employe->save();
+                                                            $result['status'] = 1;
+                                                        } else {
+                                                            $result['exception'] = 'Correo existente';
+                                                        }
                                                     } else {
-                                                        $result['exception'] = 'Correo existente';
+                                                        $result['exception'] = 'Cargo invalido';
                                                     }
                                                 } else {
-                                                    $result['exception'] = 'Cargo invalido';
+                                                    $result['exception'] = 'La contraseña debe constar al menos de 8 carácteres';
                                                 }
                                             } else {
-                                                $result['exception'] = 'La contraseña debe constar al menos de 8 carácteres';
+                                                $result['exception'] = 'La contraseña es igual al nombre de usuario';
                                             }
                                         } else {
-                                            $result['exception'] = 'La contraseña es igual al nombre de usuario';
+                                            $result['exception'] = 'Las contraseñas ingresadas son iguales';
                                         }
                                     } else {
-                                        $result['exception'] = 'Las contraseñas ingresadas son iguales';
+                                        $result['exception'] = 'El nombre de usuario debe constar de 7 carácteres';
                                     }
                                 } else {
-                                    $result['exception'] = 'El nombre de usuario debe constar de 7 carácteres';
+                                    $result['exception'] = 'Correo invalido';
                                 }
                             } else {
-                                $result['exception'] = 'Correo invalido';
+                                $result['exception'] = 'Apellido incorrecto debe llevar al menos 5 carácteres';
                             }
                         } else {
-                            $result['exception'] = 'Apellido incorrecto debe llevar al menos 5 carácteres';
+                            $result['exception'] = 'Nombre incorrecto debe llevar al menos 5 carácteres';
                         }
-                    } else {
-                        $result['exception'] = 'Nombre incorrecto debe llevar al menos 5 carácteres';
                     }
+                    else{
+                        $result['exception']='Ya hay usuarios en el sistema';
+                    }   
                     break;
                 case 'Login':
                     if ($employe->username($_POST['Nickname'])) {
@@ -112,16 +125,20 @@ if (isset($_GET['request']) && isset($_GET['action'])) {
                                     if ($employe->checkPassword()) {
                                         if ($employe->getStatus() == 1) {
                                             if ($employe->getRole() == 0) {
-                                                if ($employe->verifySetting()) {
-                                                    $_SESSION['username_key'] = $_POST['Nickname'];
-                                                    $_SESSION['keygen'] = $employe->getKey();
-                                                    //$_SESSION['time'] = time();
-                                                    $result['status'] = 1;
-                                                    $result['site'] = '../private/verify.php';
-                                                } else {
-                                                    $employe->openSession();
-                                                    $result['status'] = 1;
-                                                    $result['site'] = '../private/home.php';
+                                                if($employe->getStatus() == 4){
+                                                    $result['exception']='Este usuario esta logueado';
+                                                }
+                                                else{
+                                                    if ($employe->verifySetting()) {
+                                                        $_SESSION['username_key'] = $_POST['Nickname'];
+                                                        $_SESSION['keygen'] = $employe->getKey();
+                                                        $result['status'] = 1;
+                                                        $result['site'] = '../private/verify.php';
+                                                    } else {
+                                                        $employe->openSession();
+                                                        $result['status'] = 1;
+                                                        $result['site'] = '../private/home.php';
+                                                    }
                                                 }
                                             } else {
                                                 $result['exception'] = 'Usted es un usuario publico';

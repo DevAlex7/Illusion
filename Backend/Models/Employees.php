@@ -92,13 +92,8 @@ class Employee extends Validator{
         }
     }
     public function role($value){
-        if($this->validateId($value)){
             $this->role=$value;
             return true;
-        }
-        else{
-            return false;
-        }
     }
     public function getRole(){
         return $this->role;
@@ -207,6 +202,12 @@ class Employee extends Validator{
         $params=array($this->name, $this->lastname, $this->email, $this->username, $this->id);
         return Database::executeRow($sql,$params);
     }
+
+    public function updateState($status){
+        $sql='UPDATE employees SET status=? WHERE id=?';
+        $params = array($status, $this->id);
+        return Database::executeRow($sql,$params);
+    }
     
     public function verifyRole(){
         $sql='
@@ -264,6 +265,17 @@ class Employee extends Validator{
             return false;
         }
     }
+    public function countUsers(){
+        $sql='SELECT COUNT(*) as countU FROM employees LIMIT 1';
+        $params = array(null);
+        $data = Database::getRow($sql,$params);
+        if(!$data['countU'] > 0){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
     public function restoreUser(){
         $sql='UPDATE employees SET tries=?, status=? WHERE id=?';
         $params = array(3,1,$this->id);
@@ -275,7 +287,7 @@ class Employee extends Validator{
         return Database::executeRow($sql,$params);
     }
     public function configureTwoSteps($configCode){
-        if(!$configCode == 1 || 2){
+        if(!$configCode == 1 || !$configCode==2){
             $sql='UPDATE employees SET setting_status=? WHERE id=?';
         
             $params = array($configCode, $this->id);

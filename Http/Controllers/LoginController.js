@@ -1,6 +1,5 @@
-var time = 0;
-var tries = 0;
 $(document).ready(function () {
+    countUsers();
 });
 $('#FormLogin').submit(function(){
     event.preventDefault();
@@ -37,6 +36,29 @@ $('#FormLogin').submit(function(){
         console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
     });
 })
+const countUsers = () => {
+    $.ajax(
+        {
+            url:requestGET('userEmployees','countUsers'),
+            type:'GET',
+            data:null,
+            datatype:'JSON'
+        }
+    )
+    .done((response)=>{
+        if(isJSONString(response)){
+            const result = JSON.parse(response);
+            if(result.status){
+            }
+            else{
+                //location.href ='../private/signup.php'
+            }   
+        }
+        else{
+            console.log(response);
+        }
+    })
+}
 $('#buttonR').click(()=>{
     event.preventDefault();
     var username = $('#Nickname').val();

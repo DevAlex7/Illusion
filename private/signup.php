@@ -68,7 +68,7 @@
                             <label for="pass2">Repita su contraseña</label>
                         </div>
                     </div>
-                    <button type="submit" class="btn col s12 m6 offset-m3 green accent-4">Registrarme</button>
+                    <button type="submit" id="btnSignUp" class="btn col s12 m6 offset-m3 green accent-4">Registrarme</button>
                 </form>
             </div>
         </div>
