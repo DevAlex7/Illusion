@@ -27,15 +27,8 @@ require_once('../Imports/Global/Global.php')?>
             <span id="titleNotification" class="indigo-text">Bloqueos</span>
         </div>
     </div>
-    <div class="row">
-        <div class="col s12 m9">
-            <div class="card" id="notificationCard">
-                <div class="card-content">
-                    <p class="" id="notification"></p>
-                    <button class="btn-small" id="unlock">Desbloquear</button>
-                </div>
-            </div>
-        </div>
+    <div class="row" id="results">
+        
     </div>
 </main>
 <?php
