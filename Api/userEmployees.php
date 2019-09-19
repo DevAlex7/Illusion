@@ -342,11 +342,11 @@ if (isset($_GET['request']) && isset($_GET['action'])) {
                     break;
                 case 'updatePassword':
                     if ($employe->id($_POST['information']['id'])) {
-                        if ($_POST['pass1'] = !$_POST['information']['username']) {
-                            if ($employe->password($_POST['pass1'])) {
+                        if ($_POST['information']['pass1'] != $_POST['information']['username']) {
+                            if ($employe->password($_POST['information']['pass1'])) {
                                 if ($employe->checkPassword()) {
-                                    if (($_POST['pass2'] == $_POST['pass3'])) {
-                                        if ($employe->password($_POST['pass2'])) {
+                                    if (($_POST['information']['pass2'] == $_POST['information']['pass3'])) {
+                                        if ($employe->password($_POST['information']['pass2'])) {
                                             if ($employe->resetPassword()) {
                                                 $_SESSION['idUser'] = $employe->getId();
                                                 $_SESSION['NameUser'] = $employe->getName();

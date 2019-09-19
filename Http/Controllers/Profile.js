@@ -66,30 +66,7 @@ const showProfile = () => {
     });
 }
 
-const setPassword = ()  => {
-    event.prevensetPasswordtDefault();
-    $.ajax({
-        url: requestGET('userEmployees','updatePassword'),
-        type: 'POST',
-        data: null,
-        datatype: 'JSON'
-    })
-    .done(function(response){
-        if (isJSONString(response)) {
-            const result = JSON.parse(response);
-            if (result.status) {
-                ToastSucces('¡Perfil actualizado correctamente!');
-            } else {
-              ToastError(result.exception);
-            }
-        } else {
-            console.log(response);
-        }
-    })
-    .fail(function(jqXHR){
-        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
-    });
-}
+
 
 function edit(){
     $('#name-user, #lastname-user, #email-user, #username-user').hide();
@@ -116,6 +93,38 @@ function cancelEdit(){
     
     $('#buttonsControl').html('');
     $('#buttonsControl').html(`<a class="btn orange" onclick="edit()"  id="editProfile"> <i class="material-icons left">edit</i> Editar </a>`);
+}
+
+const editPass = () =>{
+  //event.prevensetPasswordtDefault();
+  const information={
+    id : $('#id-input').val(),
+    pass1 : $('#pass1').val(),
+    pass2 : $('#pass2').val(),
+    pass3 : $('#pass3').val(),
+    username : $('#username-input').val()
+  }
+  $.ajax({
+      url: requestPUT('userEmployees','updatePassword'),
+      type: 'POST',
+      data: {information},
+      datatype: 'JSON'
+  })
+  .done(function(response){
+      if (isJSONString(response)) {
+          const result = JSON.parse(response);
+          if (result.status) {
+              ToastSucces('¡Contraseña actualizada correctamente!');
+          } else {
+            ToastError(result.exception);
+          }
+      } else {
+          console.log(response);
+      }
+  })
+  .fail(function(jqXHR){
+      console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+  });
 }
 
 const editProfile = () => {

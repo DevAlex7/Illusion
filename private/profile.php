@@ -81,31 +81,33 @@ require_once('../Helpers/Dashboard.php');
                         <span class="card-title" id="titlepersonal">Cambiar mi contraseña</span>
                         <div id="informationProfile">
                             <div class="row">
-                                <div class="left col s12 m12" id="actpass-div-info">
-                                    <p class="white-text"><b>Contraseña actual</b></p>
-                                    <div id="userpart" class="input-field col s12 m10 offset-m1">
-                                        <i class="material-icons prefix">lock</i>
-                                        <input id="pass1" autocomplete="off" name="pass1" type="password">
+                                <form id="edit  " action="" method="post">
+                                        <div class="left col s12 m12" id="actpass-div-info">
+                                            <p class="white-text"><b>Contraseña actual</b></p>
+                                            <div id="userpart" class="input-field col s12 m10 offset-m1">
+                                                <i class="material-icons prefix">lock</i>
+                                                <input id="pass1" autocomplete="off" name="pass1" type="password">
+                                            </div>
+                                        </div>
+                                        <div class="left col s12 m12" id="newpass-div-info">
+                                            <p class="white-text"><b>Nueva contraseña</b></p>
+                                            <div id="userpart" class="input-field col s12 m10 offset-m1">
+                                                <i class="material-icons prefix">lock_outline</i>
+                                                <input id="pass2" autocomplete="off" name="pass2" type="password">
+                                            </div>
+                                        </div>
+                                        <div class="left col s12 m12" id="repeattwo-div-info">
+                                            <p class="white-text"><b>Repetir la nueva contraseña</b></p>
+                                            <div id="userpart" class="input-field col s12 m10 offset-m1">
+                                                <i class="material-icons prefix">loop</i>
+                                                <input id="pass3" autocomplete="off" name="pass3" type="password">
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="left col s12 m12" id="newpass-div-info">
-                                    <p class="white-text"><b>Nueva contraseña</b></p>
-                                    <div id="userpart" class="input-field col s12 m10 offset-m1">
-                                        <i class="material-icons prefix">lock_outline</i>
-                                        <input id="pass2" autocomplete="off" name="pass2" type="password">
+                                    <div class="row center">
+                                    <a class="btn orange" onclick="editPass()"  id="editPass"> <i class="material-icons left">edit</i> Editar </a>
                                     </div>
-                                </div>
-                                <div class="left col s12 m12" id="repeattwo-div-info">
-                                    <p class="white-text"><b>Repetir la nueva contraseña</b></p>
-                                    <div id="userpart" class="input-field col s12 m10 offset-m1">
-                                        <i class="material-icons prefix">loop</i>
-                                        <input id="pass3" autocomplete="off" name="pass3" type="password">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row center">
-                            <a class="btn orange" onclick="editPass()"  id="editPass"> <i class="material-icons left">edit</i> Editar </a>
-                            </div>
+                                </form>
                         </div>
                     </div>
                 </div>
