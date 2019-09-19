@@ -66,38 +66,30 @@ const showProfile = () => {
     });
 }
 
-/*const showPassword = () => {
-  $.ajax(
-      {
-          url:requestGET('userEmployees','getmyProfile'),
-          type:'POST',
-          data:null,
-          datatype:'JSON'
-      }
-  )
-  .done(function(response)
-      {
-          if(isJSONString(response)){
-              const result = JSON.parse(response);
-
-                  $('#btn').html(`<a class="btn orange" onclick="edit()"  id="editProfile"> <i class="material-icons left">edit</i> Editar </a>`); 
-
-                  eventsCreated(data.id);
-                  
-              }
-              else{
-                  ToastError(result.exception);
-              }
-          }
-      }
-  )
-  .fail(function(jqXHR){
-      console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
-  });
-}*/
-// No man, no sé qué es, si pongo estos códigos desaparecen los de editar perfil, y si no los pongo no se puede
-// No quiero que se muestren, solo que me los cambie pero ya no sé nada
-// Ya está en la api el caso para hacer esto y el card pero el controlador me mató, cjau
+const setPassword = ()  => {
+    event.prevensetPasswordtDefault();
+    $.ajax({
+        url: requestGET('userEmployees','updatePassword'),
+        type: 'POST',
+        data: null,
+        datatype: 'JSON'
+    })
+    .done(function(response){
+        if (isJSONString(response)) {
+            const result = JSON.parse(response);
+            if (result.status) {
+                ToastSucces('¡Perfil actualizado correctamente!');
+            } else {
+              ToastError(result.exception);
+            }
+        } else {
+            console.log(response);
+        }
+    })
+    .fail(function(jqXHR){
+        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+    });
+}
 
 function edit(){
     $('#name-user, #lastname-user, #email-user, #username-user').hide();

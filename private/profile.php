@@ -83,40 +83,28 @@ require_once('../Helpers/Dashboard.php');
                             <div class="row">
                                 <div class="left col s12 m12" id="actpass-div-info">
                                     <p class="white-text"><b>Contraseña actual</b></p>
-                                    <div id="userpart">
-                                        <i class="material-icons left">lock</i>
-                                        <div id="user-div-actpass">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="left col s12 m12" id="repeatone-div-info">
-                                    <p class="white-text"><b>Repetir la contraseña actual</b></p>
-                                    <div id="userpart">
-                                        <i class="material-icons left">refresh</i>
-                                        <div id="user-div-repeatone">
-                                        </div>
+                                    <div id="userpart" class="input-field col s12 m10 offset-m1">
+                                        <i class="material-icons prefix">lock</i>
+                                        <input id="pass1" autocomplete="off" name="pass1" type="password">
                                     </div>
                                 </div>
                                 <div class="left col s12 m12" id="newpass-div-info">
                                     <p class="white-text"><b>Nueva contraseña</b></p>
-                                    <div id="userpart">
-                                        <i class="material-icons left">lock_outline</i>
-                                        <div id="user-div-newpass">
-                                        </div>
+                                    <div id="userpart" class="input-field col s12 m10 offset-m1">
+                                        <i class="material-icons prefix">lock_outline</i>
+                                        <input id="pass2" autocomplete="off" name="pass2" type="password">
                                     </div>
                                 </div>
                                 <div class="left col s12 m12" id="repeattwo-div-info">
                                     <p class="white-text"><b>Repetir la nueva contraseña</b></p>
-                                    <div id="userpart">
-                                        <i class="material-icons left">done</i>
-                                        <div id="user-div-repeattwo">
-                                        </div>
+                                    <div id="userpart" class="input-field col s12 m10 offset-m1">
+                                        <i class="material-icons prefix">loop</i>
+                                        <input id="pass3" autocomplete="off" name="pass3" type="password">
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="center" id="btns">
-                                </div>
+                            <div class="row center">
+                            <a class="btn orange" onclick="editPass()"  id="editPass"> <i class="material-icons left">edit</i> Editar </a>
                             </div>
                         </div>
                     </div>

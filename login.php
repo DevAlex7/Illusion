@@ -45,7 +45,7 @@ require_once('Imports/Global/Global.php');
                         </div>
                         <div class="input-field col s12 m10 offset-m1">
                             <i class="material-icons prefix">vpn_key</i>
-                            <input id="pass" autocomplete="off" name="pass" type="password" autocomplete="off">
+                            <input id="pass" autocomplete="off" name="pass" type="password">
                             <label for="pass">Contraseña</label>
                         </div>
                         <div class="input-field col s12 center">
