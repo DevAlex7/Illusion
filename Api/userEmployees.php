@@ -81,22 +81,26 @@ if (isset($_GET['request']) && isset($_GET['action'])) {
                             if ($employe->email($_POST['EmailUser'])) {
                                 if ($employe->username($_POST['Nickname'])) {
                                     if ($_POST['pass'] == $_POST['pass2']) {
-                                        if ($employe->password($_POST['pass'])) {
-                                            if ($employe->role(0)) {
-                                                if (!$select->emailWhere("employees", $_POST['EmailUser'])) {
-                                                    $employe->save();
-                                                    $result['status'] = 1;
+                                        if ($_POST['Nickname'] != $_POST['pass']) {
+                                            if ($employe->password($_POST['pass'])) {
+                                                if ($employe->role(0)) {
+                                                    if (!$select->emailWhere("employees", $_POST['EmailUser'])) {
+                                                        $employe->save();
+                                                        $result['status'] = 1;
+                                                    } else {
+                                                        $result['exception'] = 'Correo existente';
+                                                    }
                                                 } else {
-                                                    $result['exception'] = 'Correo existente';
+                                                    $result['exception'] = 'Cargo invalido';
                                                 }
                                             } else {
-                                                $result['exception'] = 'Cargo invalido';
+                                                $result['exception'] = 'La contraseña debe constar al menos de 8 carácteres';
                                             }
                                         } else {
-                                            $result['exception'] = 'La contraseña debe constar al menos de 8 carácteres';
+                                            $result['exception'] = 'La contraseña es igual al nombre de usuario';
                                         }
                                     } else {
-                                        $result['exception'] = 'Las contraseñas ingresadas no son iguales';
+                                        $result['exception'] = 'Las contraseñas ingresadas son iguales';
                                     }
                                 } else {
                                     $result['exception'] = 'El nombre de usuario debe constar de 7 carácteres';
@@ -244,20 +248,24 @@ if (isset($_GET['request']) && isset($_GET['action'])) {
                             if ($employe->email($_POST['EmailUser'])) {
                                 if ($employe->username($_POST['Nickname'])) {
                                     if ($_POST['pass'] == $_POST['pass2']) {
-                                        if ($employe->password($_POST['pass'])) {
-                                            if ($employe->role(2)) {
-                                                if (!$select->emailWhere("employees", $_POST['EmailUser'])) {
-                                                    $employe->save();
-                                                    $result['status'] = 1;
-                                                    $result['userInformation'] = $_SESSION;
+                                        if ($_POST['Nickname'] != $_POST['pass']) {
+                                            if ($employe->password($_POST['pass'])) {
+                                                if ($employe->role(2)) {
+                                                    if (!$select->emailWhere("employees", $_POST['EmailUser'])) {
+                                                        $employe->save();
+                                                        $result['status'] = 1;
+                                                        $result['userInformation'] = $_SESSION;
+                                                    } else {
+                                                        $result['exception'] = 'Correo existente';
+                                                    }
                                                 } else {
-                                                    $result['exception'] = 'Correo existente';
+                                                    $result['exception'] = 'Cargo invalido';
                                                 }
                                             } else {
-                                                $result['exception'] = 'Cargo invalido';
+                                                $result['exception'] = 'La contraseña debe constar al menos de 8 carácteres';
                                             }
                                         } else {
-                                            $result['exception'] = 'La contraseña debe constar al menos de 8 carácteres';
+                                            $result['exception'] = 'La contraseña es igual al nombre de usuario';
                                         }
                                     } else {
                                         $result['exception'] = 'Las contraseñas ingresadas no son iguales';
@@ -330,7 +338,7 @@ if (isset($_GET['request']) && isset($_GET['action'])) {
                         $result['exception'] = 'No se ha logrado identificar el usuario';
                     }
                     break;
-                    case 'updatePassword':
+                case 'updatePassword':
                     if ($employe->id($_POST['information']['id'])) {
                         if ($employe->name($_POST['information']['name'])) {
                             if ($employe->lastname($_POST['information']['lastname'])) {
