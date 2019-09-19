@@ -71,7 +71,7 @@ if (isset($_GET['request']) && isset($_GET['action'])) {
                                 if ($employe->username($_POST['Nickname'])) {
                                     if ($_POST['pass'] == $_POST['pass2']) {
                                         if ($employe->password($_POST['pass'])) {
-                                            if ($employe->role(1)) {
+                                            if ($employe->role(0)) {
                                                 if (!$select->emailWhere("employees", $_POST['EmailUser'])) {
                                                     $employe->save();
                                                     $result['status'] = 1;
