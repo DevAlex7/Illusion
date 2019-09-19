@@ -52,6 +52,17 @@ if (isset($_GET['request']) && isset($_GET['action'])) {
                         $result['exception'] = 'No hay información';
                     }
                     break;
+                case 'readPass':
+                    if ($employe->id($_SESSION['idUser'])) {
+                        if ($result['dataset'] = $employe->findbyId()) {
+                            $result['status'] = 1;
+                        } else {
+                            $result['exception'] = 'No se ha encontrado información';
+                        }
+                    } else {
+                        $result['exception'] = 'No se ha identificado al usuario logueado';
+                    }
+                    break;
             }
             break;
 
@@ -70,22 +81,26 @@ if (isset($_GET['request']) && isset($_GET['action'])) {
                             if ($employe->email($_POST['EmailUser'])) {
                                 if ($employe->username($_POST['Nickname'])) {
                                     if ($_POST['pass'] == $_POST['pass2']) {
-                                        if ($employe->password($_POST['pass'])) {
-                                            if ($employe->role(0)) {
-                                                if (!$select->emailWhere("employees", $_POST['EmailUser'])) {
-                                                    $employe->save();
-                                                    $result['status'] = 1;
+                                        if ($_POST['Nickname'] != $_POST['pass']) {
+                                            if ($employe->password($_POST['pass'])) {
+                                                if ($employe->role(0)) {
+                                                    if (!$select->emailWhere("employees", $_POST['EmailUser'])) {
+                                                        $employe->save();
+                                                        $result['status'] = 1;
+                                                    } else {
+                                                        $result['exception'] = 'Correo existente';
+                                                    }
                                                 } else {
-                                                    $result['exception'] = 'Correo existente';
+                                                    $result['exception'] = 'Cargo invalido';
                                                 }
                                             } else {
-                                                $result['exception'] = 'Cargo invalido';
+                                                $result['exception'] = 'La contraseña debe constar al menos de 8 carácteres';
                                             }
                                         } else {
-                                            $result['exception'] = 'La contraseña debe constar al menos de 8 carácteres';
+                                            $result['exception'] = 'La contraseña es igual al nombre de usuario';
                                         }
                                     } else {
-                                        $result['exception'] = 'Las contraseñas ingresadas no son iguales';
+                                        $result['exception'] = 'Las contraseñas ingresadas son iguales';
                                     }
                                 } else {
                                     $result['exception'] = 'El nombre de usuario debe constar de 7 carácteres';
@@ -102,65 +117,56 @@ if (isset($_GET['request']) && isset($_GET['action'])) {
                     break;
                 case 'Login':
                     if ($employe->username($_POST['Nickname'])) {
-                        if($employe->checkUsername()){
-                            if($employe->getStatus() != 3){
-                                if($employe->password($_POST['pass'])){
+                        if ($employe->checkUsername()) {
+                            if ($employe->getStatus() != 3) {
+                                if ($employe->password($_POST['pass'])) {
                                     if ($employe->checkPassword()) {
-                                        if($employe->getStatus() == 1){
-                                            if($employe->getRole() == 0) {
-                                                if($employe->verifySetting()){
+                                        if ($employe->getStatus() == 1) {
+                                            if ($employe->getRole() == 0) {
+                                                if ($employe->verifySetting()) {
                                                     $_SESSION['username_key'] = $_POST['Nickname'];
                                                     $_SESSION['keygen'] = $employe->getKey();
                                                     $result['status'] = 1;
                                                     $result['site'] = '../private/verify.php';
-                                                }
-                                                else{
+                                                } else {
                                                     $employe->openSession();
                                                     $result['status'] = 1;
                                                     $result['site'] = '../private/home.php';
-                                                }         
-                                            } 
-                                            else{
+                                                }
+                                            } else {
                                                 $result['exception'] = 'Usted es un usuario publico';
                                             }
-                                        }
-                                        else{
-                                            $_SESSION['authUser']=$employe->getUsername();
+                                        } else {
+                                            $_SESSION['authUser'] = $employe->getUsername();
                                             $result['status'] = 2;
-                                            $result['site'] ='../private/authenticate.php';
+                                            $result['site'] = '../private/authenticate.php';
                                         }
-                                    } 
-                                    else {
+                                    } else {
                                         $tries = $employe->getTries();
-                                        $trie = $tries-1;
+                                        $trie = $tries - 1;
                                         $employe->updateTries($trie);
-                                        if($trie == 0 ){
-                                            $employe->blockUser();  
+                                        if ($trie == 0) {
+                                            $employe->blockUser();
                                             $notification->sendHelpBlock($_POST['Nickname'], $employe->getId());
-                                            $result['exception'] = 'Se ha bloqueado el acceso';   
-                                        }
-                                        else{    
+                                            $result['exception'] = 'Se ha bloqueado el acceso';
+                                        } else {
                                             $result['exception'] = 'Contraseña o usuario incorrecto';
                                         }
-                                    }   
-                                }
-                                else{
+                                    }
+                                } else {
                                     $result['exception'] = 'Campo vacio o contraseña invalida';
                                 }
-                            }
-                            else{
+                            } else {
                                 $result['status'] = 3;
-                                $result['exception']='Esta cuenta esta suspendida, contacte con el administrador';
+                                $result['exception'] = 'Esta cuenta esta suspendida, contacte con el administrador';
                             }
-                        }
-                        else{
+                        } else {
                             $result['exception'] = 'Usuario inexistente';
                         }
+                    } else {
+                        $result['exception'] = 'Campo vacio o nombre de usuario invalido';
                     }
-                    else{
-                        $result['exception']='Campo vacio o nombre de usuario invalido';
-                    }               
-                break;
+                    break;
                 case 'Loginpublic':
                     if ($employe->username($_POST['Nickname'])) {
                         if ($employe->checkUsername()) {
@@ -242,20 +248,24 @@ if (isset($_GET['request']) && isset($_GET['action'])) {
                             if ($employe->email($_POST['EmailUser'])) {
                                 if ($employe->username($_POST['Nickname'])) {
                                     if ($_POST['pass'] == $_POST['pass2']) {
-                                        if ($employe->password($_POST['pass'])) {
-                                            if ($employe->role(2)) {
-                                                if (!$select->emailWhere("employees", $_POST['EmailUser'])) {
-                                                    $employe->save();
-                                                    $result['status'] = 1;
-                                                    $result['userInformation'] = $_SESSION;
+                                        if ($_POST['Nickname'] != $_POST['pass']) {
+                                            if ($employe->password($_POST['pass'])) {
+                                                if ($employe->role(2)) {
+                                                    if (!$select->emailWhere("employees", $_POST['EmailUser'])) {
+                                                        $employe->save();
+                                                        $result['status'] = 1;
+                                                        $result['userInformation'] = $_SESSION;
+                                                    } else {
+                                                        $result['exception'] = 'Correo existente';
+                                                    }
                                                 } else {
-                                                    $result['exception'] = 'Correo existente';
+                                                    $result['exception'] = 'Cargo invalido';
                                                 }
                                             } else {
-                                                $result['exception'] = 'Cargo invalido';
+                                                $result['exception'] = 'La contraseña debe constar al menos de 8 carácteres';
                                             }
                                         } else {
-                                            $result['exception'] = 'La contraseña debe constar al menos de 8 carácteres';
+                                            $result['exception'] = 'La contraseña es igual al nombre de usuario';
                                         }
                                     } else {
                                         $result['exception'] = 'Las contraseñas ingresadas no son iguales';
@@ -272,25 +282,23 @@ if (isset($_GET['request']) && isset($_GET['action'])) {
                     } else {
                         $result['exception'] = 'Nombre incorrecto debe llevar al menos 5 carácteres';
                     }
-                break;
+                    break;
                 case 'valid-recover':
-                    if($employe->username($_POST['username'])){
-                        if($employe->checkUsername()){
+                    if ($employe->username($_POST['username'])) {
+                        if ($employe->checkUsername()) {
                             $code = rand(1, 1000000);
-                            $mail->sendCodeVerification( $employe->getEmail(),'Tu codigo de verificación es: '.$code );
-                            $_SESSION['username_recover']=$_POST['username'];
+                            $mail->sendCodeVerification($employe->getEmail(), 'Tu codigo de verificación es: ' . $code);
+                            $_SESSION['username_recover'] = $_POST['username'];
                             $_SESSION['code'] = $code;
-                            $result['status']=1;
-                            $result['site']='../private/recover.php';
+                            $result['status'] = 1;
+                            $result['site'] = '../private/recover.php';
+                        } else {
+                            $result['exception'] = 'Información erronea';
                         }
-                        else{
-                            $result['exception']='Información erronea';
-                        }
+                    } else {
+                        $result['exception'] = 'Nombre de usuario invalido';
                     }
-                    else{
-                        $result['exception']='Nombre de usuario invalido';
-                    }
-                break;
+                    break;
                 default:
                     exit('Acción no disponible');
             }
@@ -343,7 +351,39 @@ if (isset($_GET['request']) && isset($_GET['action'])) {
                         $result['exception']='Fallo al restablecer al usuario';
                     }
                 break;
-
+                break;
+                case 'updatePassword':
+                    if ($employe->id($_POST['information']['id'])) {
+                        if ($employe->name($_POST['information']['name'])) {
+                            if ($employe->lastname($_POST['information']['lastname'])) {
+                                if ($employe->email($_POST['information']['email'])) {
+                                    if ($employe->username($_POST['information']['username'])) {
+                                        if ($employe->editProfile()) {
+                                            $_SESSION['idUser'] = $employe->getId();
+                                            $_SESSION['NameUser'] = $employe->getName();
+                                            $_SESSION['LastnameUser'] = $employe->getLastname();
+                                            $_SESSION['UsernameActive'] = $employe->getUsername();
+                                            $result['status'] = 1;
+                                            $result['dataset'] = $employe->findbyId();
+                                        } else {
+                                            $result['exception'] = 'No se actualizó';
+                                        }
+                                    } else {
+                                        $result['exception'] = 'Campo vacio o usuario con datos erroneos';
+                                    }
+                                } else {
+                                    $result['exception'] = 'Contraseña ';
+                                }
+                            } else {
+                                $result['exception'] = 'Campo vacío o contraseña actual incorrecta';
+                            }
+                        } else {
+                            $result['exception'] = 'Campo vacío o contraseña actual incorrecta';
+                        }
+                    } else {
+                        $result['exception'] = 'No se ha logrado identificar el usuario';
+                    }
+                    break;
             }
             break;
 
