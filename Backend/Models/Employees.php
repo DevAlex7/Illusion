@@ -232,12 +232,6 @@ class Employee extends Validator{
         $params=array(1, 1, $this->id);
         return Database::executeRow($sql,$params);
     }
-    public function resetPassword(){
-        $hash = password_hash($this->password, PASSWORD_DEFAULT);
-        $sql='UPDATE employees SET password=? WHERE id=?';
-        $params=array($hash, $this->id);
-        return Database::executeRow($sql,$params);
-    }
     public function ListPersons(){
         $sql='SELECT employees.*, roles.role AS nameRole FROM ((employees INNER JOIN roles ON employees.role=roles.id)) WHERE employees.id NOT IN (?)';
         $params=array($this->id);
@@ -270,13 +264,11 @@ class Employee extends Validator{
             return false;
         }
     }
-
     public function updateTries($number){
         $sql='UPDATE employees SET tries=? WHERE id=?';
         $params = array($number, $this->id);
         return Database::executeRow($sql,$params);
     }
-
     public function configureTwoSteps($configCode){
         if(!$configCode == 1 || 2){
             $sql='UPDATE employees SET setting_status=? WHERE id=?';
@@ -303,7 +295,7 @@ class Employee extends Validator{
 			return false;
 		}	
 	}
-    
+
     public function LogOffPublic(){
 		if(isset($_SESSION['idPublicUser'])){
 			unset($_SESSION['idPublicUser']);
@@ -339,12 +331,17 @@ class Employee extends Validator{
         $params=array($this->google_secret_key, $this->id);
         return Database::executeRow($sql,$params);
     }
-    
     public function summonBlock()
 	{
 		$sql = 'UPDATE employees SET block = block+1 WHERE id = ?';
 		$params = array($this->id);
 		return Database::executeRow($sql, $params);
-	}
+    }
+    public function resetPassword(){
+        $hash = password_hash($this->password, PASSWORD_DEFAULT);
+        $sql='UPDATE employees SET password=? WHERE id=?';
+        $params=array($hash, $this->id);
+        return Database::executeRow($sql,$params);
+    }
 }
 ?>
