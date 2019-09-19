@@ -228,7 +228,7 @@ class Employee extends Validator{
         return Database::getRow($sql,$params);
     }
     public function Authenticate(){
-        $sql='UPDATE employees SET status=?, setting_status WHERE id=?';
+        $sql='UPDATE employees SET status=?, setting_status=? WHERE id=?';
         $params=array(1, 1, $this->id);
         return Database::executeRow($sql,$params);
     }

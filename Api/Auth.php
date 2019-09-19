@@ -7,9 +7,11 @@
     require_once('../Helpers/GoogleAuthenticator.php');
     require_once('../Helpers/AuthenticatorGenerator.php');
     require_once('../Helpers/Mails/mail.php');
+    require_once('../Backend/Models/notifications.php');
 if( isset($_GET['request']) && isset($_GET['action']) ){
     $user = new Employee();
     $mail =  new Mail();
+    $notification  = new Notification();
     $result = array('status'=>0, 'exception'=>'', 'role'=>0, 'id'=>0, 'username'=>'');
         switch($_GET['request'])
         {
@@ -42,7 +44,7 @@ if( isset($_GET['request']) && isset($_GET['action']) ){
                                 if($user->username($_SESSION['username_key'])){
                                     if($user->checkUsername()){
                                         $user->openSession();
-                                        $mail->sendEmail( $_SESSION['emailUser'], $_SESSION['UsernameActive'], 'Has iniciado sesión');
+                                        //$mail->sendEmail( $_SESSION['emailUser'], $_SESSION['UsernameActive'], 'Has iniciado sesión');
                                         $result['status']=1;
                                         $result['site']='../private/home.php';                                        
                                     }
@@ -66,7 +68,7 @@ if( isset($_GET['request']) && isset($_GET['action']) ){
                     case 'User-Authentication':
                         if($user->username($_SESSION['authUser'])){ 
                             if($user->checkUsername()){
-                                if($user->getStatus() == 1){
+                                if($user->getStatus() == 1 || $user->getStatus() == 2){
                                     if( $_POST['user_verification'] == $_POST['cfuser_verification']){
                                         if($user->password($_POST['user_verification'])){
                                             if($_POST['user_verification'] != $_SESSION['authUser']){
@@ -106,7 +108,7 @@ if( isset($_GET['request']) && isset($_GET['action']) ){
                                     }
                                 }
                                 else{
-                                    $result['status'] = 'El usuario esta autenticado o desactivado';
+                                    $result['exception'] = 'El usuario esta autenticado o desactivado';
                                 }
                             }
                             else{
@@ -119,25 +121,13 @@ if( isset($_GET['request']) && isset($_GET['action']) ){
                     break;
                     case 'recover-auth':
                         if($user->token($_POST['code_verification'])){
-                            if($user->username($_SESSION['username_recover'])){
-                                if($user->checkUsername()){
-                                    $auth = new PHPGangsta_GoogleAuthenticator();
-                                    $code = $auth->getCode( $user->getKey() );
-                                    $check = $auth->verifyCode( $user->getKey() , $_POST['code_verification'] );
-                                    if($check){
-                                        $result['status']=1;
-                                    }
-                                    else{
-                                        $result['exception']='Codigo no valido';
-                                    }           
-                                }
-                                else{
-                                    $result['exception']='No se ha obtenido información';
-                                }
+                            if( $_POST['code_verification'] == $_SESSION['code'] ){
+                                $_SESSION['code']='';
+                                $result['status']=1;
                             }
                             else{
-                                $result['exception']='Nombre de usuario invalido';
-                            }
+                                $result['exception']='La verificación es invalido';
+                            }   
                         }   
                         else{
                             $result['exception']='Codigo no asignado';
@@ -188,6 +178,7 @@ if( isset($_GET['request']) && isset($_GET['action']) ){
                                         if($user->Authenticate()){
                                             $_SESSION['authUser'] ='';
                                             $result['status']=1;
+                                            $result['site']='../private/';
                                         }
                                         else{
                                             $result['exception']='No se pudo autenticar el usuario';
@@ -234,6 +225,14 @@ if( isset($_GET['request']) && isset($_GET['action']) ){
                         }
                         else{
                             $result['exception']='Fallo al identificar la configuración';
+                        }
+                    break;
+                    case 'notifications-block':
+                        if($result['dataset'] = $notification->getBlocks()){
+                            $result['status']  = 1;
+                        }
+                        else{
+                            $result['exception']='No hay usuarios bloqueados';
                         }
                     break;
                     default:

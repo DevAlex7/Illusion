@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-09-2019 a las 05:09:29
+-- Tiempo de generación: 19-09-2019 a las 03:18:47
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.2
 
@@ -83,15 +83,19 @@ CREATE TABLE `employees` (
   `password` varchar(255) NOT NULL,
   `role` int(11) NOT NULL,
   `status` int(11) NOT NULL,
-  `google_secret_key` varchar(100) NOT NULL
+  `google_secret_key` varchar(100) NOT NULL,
+  `setting_status` int(11) NOT NULL,
+  `tries` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `employees`
 --
 
-INSERT INTO `employees` (`id`, `name`, `lastname`, `email`, `username`, `password`, `role`, `status`, `google_secret_key`) VALUES
-(24, 'Alejandro', 'Gonzalez', 'alexgve7@gmail.com', 'Alexgve7', '$2y$10$Kgd6758WYrethZ5/6FBPa.8ePUB8BlC2YngTO4p0HYhLT4LSE2A4y', 0, 1, 'LFIES7OR23O4SSXI');
+INSERT INTO `employees` (`id`, `name`, `lastname`, `email`, `username`, `password`, `role`, `status`, `google_secret_key`, `setting_status`, `tries`) VALUES
+(24, 'Alejandro', 'Gonzalez', 'alexgve7@gmail.com', 'Alexgve7', '$2y$10$dfOJAXdp1BLGsGtDw09Nrujy9ubPLRlft2A8y38khXlmzeFZPxd0O', 0, 1, 'LFIES7OR23O4SSXI', 1, 0),
+(25, 'Manuel', 'Gonzalez', 'alexgve7sv@gmail.com', 'ManuelGon77', '$2y$10$SI8GSvLvgtmuvFP5Rj4mme2.TPtWiGBy613KsBdE07jlrYYZhR0B6', 0, 1, 'RGXX27U353WUKJRJ', 1, 3),
+(27, 'Steven', 'Diaz', 'stevenbdf@gmail.com', 'stevenbdf', '$2y$10$GKuLIo9HG.7aMaNhEc4lEeyfN33ipgSo/7TRBhhKe85slbZvP1Sx2', 0, 1, 'ZKBNOY2IAAC7LN3O', 1, -1);
 
 -- --------------------------------------------------------
 
@@ -239,6 +243,25 @@ CREATE TABLE `list_product_request` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `notifications`
+--
+
+CREATE TABLE `notifications` (
+  `id` int(11) NOT NULL,
+  `notification` varchar(70) NOT NULL,
+  `id_user` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `notifications`
+--
+
+INSERT INTO `notifications` (`id`, `notification`, `id_user`) VALUES
+(2, 'Alexgve7 tiene la cuenta suspendida debido a varios intentos de bloque', 24);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `payment_event_status`
 --
 
@@ -326,6 +349,25 @@ INSERT INTO `roles` (`id`, `role`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `setting_status`
+--
+
+CREATE TABLE `setting_status` (
+  `id` int(11) NOT NULL,
+  `status` varchar(15) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `setting_status`
+--
+
+INSERT INTO `setting_status` (`id`, `status`) VALUES
+(1, 'habilitado'),
+(2, 'deshabilitado');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `share_events`
 --
 
@@ -372,7 +414,8 @@ CREATE TABLE `user_states` (
 
 INSERT INTO `user_states` (`id`, `status`) VALUES
 (1, 'activo'),
-(2, 'Inactivo');
+(2, 'Inactivo'),
+(3, 'desactivado');
 
 -- --------------------------------------------------------
 
@@ -412,7 +455,8 @@ ALTER TABLE `comments_in_event`
 ALTER TABLE `employees`
   ADD PRIMARY KEY (`id`),
   ADD KEY `role` (`role`),
-  ADD KEY `status` (`status`);
+  ADD KEY `status` (`status`),
+  ADD KEY `setting_status` (`setting_status`);
 
 --
 -- Indices de la tabla `events`
@@ -479,6 +523,13 @@ ALTER TABLE `list_product_request`
   ADD KEY `id_request` (`id_request`);
 
 --
+-- Indices de la tabla `notifications`
+--
+ALTER TABLE `notifications`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_user` (`id_user`);
+
+--
 -- Indices de la tabla `payment_event_status`
 --
 ALTER TABLE `payment_event_status`
@@ -513,6 +564,12 @@ ALTER TABLE `requests`
 -- Indices de la tabla `roles`
 --
 ALTER TABLE `roles`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `setting_status`
+--
+ALTER TABLE `setting_status`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -558,25 +615,25 @@ ALTER TABLE `binnacle`
 -- AUTO_INCREMENT de la tabla `comments_in_event`
 --
 ALTER TABLE `comments_in_event`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `employees`
 --
 ALTER TABLE `employees`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT de la tabla `events`
 --
 ALTER TABLE `events`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `event_assignments`
 --
 ALTER TABLE `event_assignments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `event_requests`
@@ -600,18 +657,24 @@ ALTER TABLE `like_states`
 -- AUTO_INCREMENT de la tabla `list_invitations_event`
 --
 ALTER TABLE `list_invitations_event`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `list_products_event`
 --
 ALTER TABLE `list_products_event`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `list_product_request`
 --
 ALTER TABLE `list_product_request`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `notifications`
+--
+ALTER TABLE `notifications`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
@@ -624,19 +687,19 @@ ALTER TABLE `payment_event_status`
 -- AUTO_INCREMENT de la tabla `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `replies_comments`
 --
 ALTER TABLE `replies_comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `requests`
 --
 ALTER TABLE `requests`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
@@ -645,10 +708,16 @@ ALTER TABLE `roles`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT de la tabla `setting_status`
+--
+ALTER TABLE `setting_status`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT de la tabla `share_events`
 --
 ALTER TABLE `share_events`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `status_requests`
@@ -678,7 +747,8 @@ ALTER TABLE `comments_in_event`
 --
 ALTER TABLE `employees`
   ADD CONSTRAINT `employees_ibfk_1` FOREIGN KEY (`role`) REFERENCES `roles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `employees_ibfk_2` FOREIGN KEY (`status`) REFERENCES `user_states` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `employees_ibfk_2` FOREIGN KEY (`status`) REFERENCES `user_states` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `employees_ibfk_3` FOREIGN KEY (`setting_status`) REFERENCES `setting_status` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `events`
@@ -722,6 +792,12 @@ ALTER TABLE `list_products_event`
 ALTER TABLE `list_product_request`
   ADD CONSTRAINT `list_product_request_ibfk_1` FOREIGN KEY (`id_product`) REFERENCES `products` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `list_product_request_ibfk_2` FOREIGN KEY (`id_request`) REFERENCES `requests` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `notifications`
+--
+ALTER TABLE `notifications`
+  ADD CONSTRAINT `notifications_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `employees` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `products`

@@ -21,7 +21,9 @@ $('#FormLogin').submit(function(){
                 $(location).attr('href',result.site);
             }
             else if(result.status == 3){
-                M.toast({html:result.exception});
+                M.toast({
+                    html:result.exception
+                });
             }
             else{
                 M.toast({html:result.exception});

@@ -37,7 +37,7 @@ $('#AuthUser').submit(function(){
         if(isJSONString(response)){
             const result = JSON.parse(response);
             if(result.status){
-                location.href =result.site;
+                location.href = result.site;
             }   
             else{
                 ToastError(result.exception);
@@ -64,7 +64,7 @@ $('#verifyForm').submit(function(){
         if(isJSONString(response)){
             const result = JSON.parse(response);
             if(result.status){
-                console.log('exito');
+                location.href=result.site;
             }   
             else{
                 ToastError(result.exception);

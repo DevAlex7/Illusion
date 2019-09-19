@@ -25,7 +25,7 @@ require_once('../Helpers/Roles.php');
             <div class="row">
                 <div class="col s12 m12">
                     <span class="card-title" id="saludate">Recuperar contraseña.</span>
-                    <span class="grey-text" id="descriptionSaludate">Con la aplicación de authenticator puedes verificar la cuenta.</span>
+                    <span class="grey-text" id="descriptionSaludate">Hemos enviado un codigo de verificación a tu correo para restablecer tu contraseña.</span>
                 </div>
                 <div class="col s12 m12">
                     <form class="col s12 m12" method="POST" id="recoverPass">

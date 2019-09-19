@@ -35,6 +35,7 @@ class AdminSideNav {
                         <li><a class="green-text accent-4" href="/Illusion/private/profile.php"><i class="material-icons green-text accent-4">person</i>Mi perfil</a></li>
                         <li><a class="green-text accent-4" href="/Illusion/private/binnacle.php"><i class="material-icons green-text accent-4">drag_indicator</i>Bitácora</a></li>
                         <li><a class="green-text accent-4" href="/Illusion/private/settings.php"><i class="material-icons green-text accent-4">block</i>Seguridad</a></li>
+                        <li><a class="green-text accent-4" href="/Illusion/private/notifications.php"><i class="material-icons green-text accent-4">notification_important</i>Notificaciones</a></li>
                         <li><div class="divider"></div></li>
                         <li><a class="subheader grey-text">Menu</a></li>
                         <li><a href="/Illusion/private/events.php"><i class="material-icons">calendar_today</i>Eventos</a></li>

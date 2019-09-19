@@ -4,6 +4,8 @@ require_once('../Backend/Instance/instance.php');
 require_once('../Helpers/validator.php');
 require_once('../Backend/Models/Employees.php');
 require_once('../Helpers/select.php');
+require_once('../Helpers/Mails/mail.php');
+require_once('../Backend/Models/notifications.php');
 
 if (isset($_GET['request']) && isset($_GET['action'])) {
 
@@ -11,7 +13,8 @@ if (isset($_GET['request']) && isset($_GET['action'])) {
     $result = array('status' => 0, 'exception' => '');
     $employe = new Employee();
     $select = new Select();
-
+    $mail = new Mail();
+    $notification = new Notification();
     switch ($_GET['request']) {
 
         case 'GET':
@@ -115,8 +118,7 @@ if (isset($_GET['request']) && isset($_GET['action'])) {
                                                     $employe->openSession();
                                                     $result['status'] = 1;
                                                     $result['site'] = '../private/home.php';
-                                                }
-                                                
+                                                }         
                                             } 
                                             else{
                                                 $result['exception'] = 'Usted es un usuario publico';
@@ -132,10 +134,10 @@ if (isset($_GET['request']) && isset($_GET['action'])) {
                                         $tries = $employe->getTries();
                                         $trie = $tries-1;
                                         $employe->updateTries($trie);
-                                        
                                         if($trie == 0 ){
                                             $employe->blockUser();  
-                                            $result['exception'] = 'Se ha bloqueado el acceso';
+                                            $notification->sendHelpBlock($_POST['Nickname'], $employe->getId());
+                                            $result['exception'] = 'Se ha bloqueado el acceso';   
                                         }
                                         else{    
                                             $result['exception'] = 'Contraseña o usuario incorrecto';
@@ -148,7 +150,7 @@ if (isset($_GET['request']) && isset($_GET['action'])) {
                             }
                             else{
                                 $result['status'] = 3;
-                                $result['exception']='Esta cuenta esta suspendida';
+                                $result['exception']='Esta cuenta esta suspendida, contacte con el administrador';
                             }
                         }
                         else{
@@ -274,7 +276,10 @@ if (isset($_GET['request']) && isset($_GET['action'])) {
                 case 'valid-recover':
                     if($employe->username($_POST['username'])){
                         if($employe->checkUsername()){
+                            $code = rand(1, 1000000);
+                            $mail->sendCodeVerification( $employe->getEmail(),'Tu codigo de verificación es: '.$code );
                             $_SESSION['username_recover']=$_POST['username'];
+                            $_SESSION['code'] = $code;
                             $result['status']=1;
                             $result['site']='../private/recover.php';
                         }
