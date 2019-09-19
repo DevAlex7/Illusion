@@ -188,8 +188,8 @@ class Employee extends Validator{
     
     public function save(){
         $hash = password_hash($this->password, PASSWORD_DEFAULT);
-        $sql='INSERT INTO employees (name, lastname, email, username, password, role, status,setting_status) VALUES (?,?,?,?,?,?,?,?)';
-        $params = array($this->name, $this->lastname, $this->email, $this->username, $hash, $this->role, 2,2);
+        $sql='INSERT INTO employees (name, lastname, email, username, password, role, status, setting_status, tries) VALUES (?,?,?,?,?,?,?,?,?)';
+        $params = array($this->name, $this->lastname, $this->email, $this->username, $hash, $this->role, 2,2,3);
         return Database::executeRow($sql,$params);
     }
     public function blockUser(){
