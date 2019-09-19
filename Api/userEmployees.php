@@ -344,28 +344,26 @@ if (isset($_GET['request']) && isset($_GET['action'])) {
                     } else {
                         $result['exception'] = 'No se ha logrado identificar el usuario';
                     }
-                break;
+                    break;
                 case 'restoreUser':
-                    if($employe->id($_POST['id'])){
-                        if($employe->restoreUser()){
-                            $result['status']=1;
+                    if ($employe->id($_POST['id'])) {
+                        if ($employe->restoreUser()) {
+                            $result['status'] = 1;
+                        } else {
+                            $result['exception'] = 'No se pudo restablecer el usuario';
                         }
-                        else{
-                            $result['exception']='No se pudo restablecer el usuario';
-                        }
+                    } else {
+                        $result['exception'] = 'Fallo al restablecer al usuario';
                     }
-                    else{
-                        $result['exception']='Fallo al restablecer al usuario';
-                    }
-                break;
-                break;
+                    break;
+                    break;
                 case 'updatePassword':
                     if ($employe->id($_POST['information']['id'])) {
-                        if ($_POST['information']['actpass'] == $_POST['information']['repeatone']) {
-                            if ($employe->password($_POST['information']['actpass'])) {
+                        if ($_POST['information']['pass1'] != $_POST['information']['username']) {
+                            if ($employe->password($_POST['information']['pass1'])) {
                                 if ($employe->checkPassword()) {
-                                    if (($_POST['information']['newpass'] == $_POST['information']['repeattwo'])) {
-                                        if ($employe->password($_POST['information']['newpass'])) {
+                                    if (($_POST['information']['pass2'] == $_POST['information']['pass3'])) {
+                                        if ($employe->password($_POST['information']['pass2'])) {
                                             if ($employe->resetPassword()) {
                                                 $_SESSION['idUser'] = $employe->getId();
                                                 $_SESSION['NameUser'] = $employe->getName();
@@ -387,7 +385,7 @@ if (isset($_GET['request']) && isset($_GET['action'])) {
                                 $result['exception'] = 'Campos vacíos o contraseña actual incorrecta';
                             }
                         } else {
-                            $result['exception'] = 'Las contraseñas no coinciden';
+                            $result['exception'] = 'La contraseña es igual al nombre de usuario';
                         }
                     } else {
                         $result['exception'] = 'No se ha logrado identificar el usuario';
