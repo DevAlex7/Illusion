@@ -270,7 +270,11 @@ class Employee extends Validator{
             return false;
         }
     }
-
+    public function restoreUser(){
+        $sql='UPDATE employees SET tries=?, status=? WHERE id=?';
+        $params = array(3,1,$this->id);
+        return Database::executeRow($sql,$params);
+    }
     public function updateTries($number){
         $sql='UPDATE employees SET tries=? WHERE id=?';
         $params = array($number, $this->id);

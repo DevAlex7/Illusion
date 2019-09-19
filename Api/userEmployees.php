@@ -329,7 +329,21 @@ if (isset($_GET['request']) && isset($_GET['action'])) {
                     } else {
                         $result['exception'] = 'No se ha logrado identificar el usuario';
                     }
-                    break;
+                break;
+                case 'restoreUser':
+                    if($employe->id($_POST['id'])){
+                        if($employe->restoreUser()){
+                            $result['status']=1;
+                        }
+                        else{
+                            $result['exception']='No se pudo restablecer el usuario';
+                        }
+                    }
+                    else{
+                        $result['exception']='Fallo al restablecer al usuario';
+                    }
+                break;
+
             }
             break;
 
