@@ -10,7 +10,7 @@ const setBlocks = (usersBlock) => {
                 <div class="card" id="notificationCard">
                     <div class="card-content">
                         <p class="" id="notification">${userNotification.notification}</p>
-                        <a class="btn-small indigo" href="javascript:" id="unlock">Desbloquear</a>
+                        <a class="btn-small indigo" href="javascript:restoreUser(${userNotification.id})" id="unlock">Desbloquear</a>
                     </div>
                 </div>
             </div>
@@ -51,5 +51,29 @@ const readBlock = () => {
     })
 }
 const restoreUser=(id)=>{
-
+    $.ajax(
+        {
+            url:requestPUT('userEmployees','restoreUser'),
+            type:'POST',
+            data:{
+                id
+            },
+            datatype:'JSON'
+        }
+    )
+    .done((response)=>{
+        if(isJSONString(response)){
+            const result = JSON.parse(response);
+            if(result.status){
+                ToastSucces('Usuario restablecido correctamente');
+                readBlock();
+            }
+            else{
+                ToastError(result.exception);
+            }
+        }
+        else{
+            console.log(response);
+        }
+    })
 }
