@@ -97,3 +97,7 @@ function combobox(nameId){
     }
     $('#'+nameId).html(content);
 }
+const setSidenavItem = (item, icon) => {
+    $('#'+item).addClass('sidenav-item no-hover white-text');
+    $('#'+icon).addClass('material-icons white-text');
+}

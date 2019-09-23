@@ -1,5 +1,5 @@
 $(document).ready(function () {
-   
+    setSidenavItem('subject-item','icon-subject');   
     callTypes();
     $('.modal').modal();
 });

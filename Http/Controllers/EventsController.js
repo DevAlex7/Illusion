@@ -1,6 +1,5 @@
 $(document).ready(function () {
- 
-    
+    setSidenavItem('events-item','icon-event');   
     selectTypeEvents('TypeEventSelect',null);
     $('.modal').modal();
     CallEvents();

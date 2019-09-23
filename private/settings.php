@@ -14,6 +14,7 @@ require_once('../Helpers/Dashboard.php');
       ImportGlobal::ImportMaterializeCss();
       ImportGlobal::ImportMaterialIcons(); 
       ImportGlobal::ImportFileCss('settings'); 
+      ImportGlobal::ImportSidenavCss('sidenav');
       ImportGlobal::ImportIco();
       ImportGlobal::ImportFont();   
     ?>

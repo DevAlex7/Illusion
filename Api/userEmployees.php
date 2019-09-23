@@ -125,20 +125,16 @@ if (isset($_GET['request']) && isset($_GET['action'])) {
                                     if ($employe->checkPassword()) {
                                         if ($employe->getStatus() == 1) {
                                             if ($employe->getRole() == 0) {
-                                                if($employe->getStatus() == 4){
-                                                    $result['exception']='Este usuario esta logueado';
-                                                }
-                                                else{
-                                                    if ($employe->verifySetting()) {
-                                                        $_SESSION['username_key'] = $_POST['Nickname'];
-                                                        $_SESSION['keygen'] = $employe->getKey();
-                                                        $result['status'] = 1;
-                                                        $result['site'] = '../private/verify.php';
-                                                    } else {
-                                                        $employe->openSession();
-                                                        $result['status'] = 1;
-                                                        $result['site'] = '../private/home.php';
-                                                    }
+                                                if ($employe->verifySetting()) {
+                                                    $_SESSION['username_key'] = $_POST['Nickname'];
+                                                    $_SESSION['keygen'] = $employe->getKey();
+                                                    //$_SESSION['time'] = time();
+                                                    $result['status'] = 1;
+                                                    $result['site'] = '../private/verify.php';
+                                                } else {
+                                                    $employe->openSession();
+                                                    $result['status'] = 1;
+                                                    $result['site'] = '../private/home.php';
                                                 }
                                             } else {
                                                 $result['exception'] = 'Usted es un usuario publico';
@@ -344,26 +340,28 @@ if (isset($_GET['request']) && isset($_GET['action'])) {
                     } else {
                         $result['exception'] = 'No se ha logrado identificar el usuario';
                     }
-                    break;
+                break;
                 case 'restoreUser':
-                    if ($employe->id($_POST['id'])) {
-                        if ($employe->restoreUser()) {
-                            $result['status'] = 1;
-                        } else {
-                            $result['exception'] = 'No se pudo restablecer el usuario';
+                    if($employe->id($_POST['id'])){
+                        if($employe->restoreUser()){
+                            $result['status']=1;
                         }
-                    } else {
-                        $result['exception'] = 'Fallo al restablecer al usuario';
+                        else{
+                            $result['exception']='No se pudo restablecer el usuario';
+                        }
                     }
-                    break;
-                    break;
+                    else{
+                        $result['exception']='Fallo al restablecer al usuario';
+                    }
+                break;
+                break;
                 case 'updatePassword':
                     if ($employe->id($_POST['information']['id'])) {
-                        if ($_POST['information']['pass1'] != $_POST['information']['username']) {
-                            if ($employe->password($_POST['information']['pass1'])) {
+                        if ($_POST['information']['actpass'] == $_POST['information']['repeatone']) {
+                            if ($employe->password($_POST['information']['actpass'])) {
                                 if ($employe->checkPassword()) {
-                                    if (($_POST['information']['pass2'] == $_POST['information']['pass3'])) {
-                                        if ($employe->password($_POST['information']['pass2'])) {
+                                    if (($_POST['information']['newpass'] == $_POST['information']['repeattwo'])) {
+                                        if ($employe->password($_POST['information']['newpass'])) {
                                             if ($employe->resetPassword()) {
                                                 $_SESSION['idUser'] = $employe->getId();
                                                 $_SESSION['NameUser'] = $employe->getName();
@@ -385,7 +383,7 @@ if (isset($_GET['request']) && isset($_GET['action'])) {
                                 $result['exception'] = 'Campos vacíos o contraseña actual incorrecta';
                             }
                         } else {
-                            $result['exception'] = 'La contraseña es igual al nombre de usuario';
+                            $result['exception'] = 'Las contraseñas no coinciden';
                         }
                     } else {
                         $result['exception'] = 'No se ha logrado identificar el usuario';

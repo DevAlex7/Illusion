@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    setSidenavItem('request-item','icon-request');   
     $('.modal').modal();    
     $('.collapsible').collapsible();
     CallRequests();

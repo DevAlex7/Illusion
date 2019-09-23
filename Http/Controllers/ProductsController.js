@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  
+    setSidenavItem('product-item','icon-product');   
     //Iniciar el boton flotante
     $('.fixed-action-btn').floatingActionButton();
     //Iniciar los tooltips

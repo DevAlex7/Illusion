@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    setSidenavItem('graph-item','icon-graph');   
     chartType();
     chartBinnacle();
 });

@@ -131,7 +131,7 @@ class Employee extends Validator{
 
     public function checkUsername()
 	{
-		$sql = 'SELECT id, name, lastname, username, role, email ,status, google_secret_key,tries FROM employees WHERE username = ?';
+		$sql = 'SELECT id, name, lastname, username, role, email , status, google_secret_key,tries FROM employees WHERE username = ?';
 		$params = array($this->username);
 		$data = Database::getRow($sql, $params);
 		if ($data) {
@@ -287,7 +287,7 @@ class Employee extends Validator{
         return Database::executeRow($sql,$params);
     }
     public function configureTwoSteps($configCode){
-        if(!$configCode == 1 || !$configCode==2){
+        if(!$configCode == 1 || 2){
             $sql='UPDATE employees SET setting_status=? WHERE id=?';
         
             $params = array($configCode, $this->id);

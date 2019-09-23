@@ -1,4 +1,5 @@
 $(document).ready(function() {
+  setSidenavItem('admin-item','icon-admin');   
   CallEmployees();
   $(".modal").modal();
   $('.dropdown-trigger').dropdown();

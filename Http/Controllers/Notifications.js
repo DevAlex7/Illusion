@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    setSidenavItem('notify-item','icon-notify');
     readBlock();
 });
 const setBlocks = (usersBlock) => {

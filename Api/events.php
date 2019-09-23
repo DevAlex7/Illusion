@@ -233,9 +233,13 @@
                                                     if($event->type_event($_POST['TypeEventSelect'])){
                                                         if($event->place($_POST['PlaceEvent']))
                                                         {
-                                                            $event->save();
-                                                            Binnacle::set()->user($_SESSION['idUser'])->action("ha ingresado un evento nuevo: ".$event->getEventName())->insert();
-                                                            $result['status']=1;
+                                                            if($event->persons($_POST['numberPersons'])){
+                                                                $event->save();
+                                                                Binnacle::set()->user($_SESSION['idUser'])->action("ha ingresado un evento nuevo: ".$event->getEventName())->insert();
+                                                                $result['status']=1;
+                                                            }else{
+                                                                $result['exception']='Personas ingresadas invalido';
+                                                            }
                                                         }
                                                         else{
                                                             $result['exception']='Mal formato de HTML';
