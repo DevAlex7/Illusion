@@ -120,11 +120,11 @@ if (isset($_GET['request']) && isset($_GET['action'])) {
                 case 'Login':
                     if ($employe->username($_POST['Nickname'])) {
                         if ($employe->checkUsername()) {
-                            if ($employe->getStatus() != 3) {
+                            if ($employe->getStatus() != 3 ) {
                                 if ($employe->password($_POST['pass'])) {
                                     if ($employe->checkPassword()) {
                                         if ($employe->getStatus() == 1) {
-                                            if ($employe->getRole() == 0) {
+                                            if ($employe->getRole() == 0 || $employe->getRole() == 1) {
                                                 if ($employe->verifySetting()) {
                                                     $_SESSION['username_key'] = $_POST['Nickname'];
                                                     $_SESSION['keygen'] = $employe->getKey();
@@ -250,28 +250,33 @@ if (isset($_GET['request']) && isset($_GET['action'])) {
                         if ($employe->lastname($_POST['LastName'])) {
                             if ($employe->email($_POST['EmailUser'])) {
                                 if ($employe->username($_POST['Nickname'])) {
-                                    if ($_POST['pass'] == $_POST['pass2']) {
-                                        if ($_POST['Nickname'] != $_POST['pass']) {
-                                            if ($employe->password($_POST['pass'])) {
-                                                if ($employe->role(2)) {
-                                                    if (!$select->emailWhere("employees", $_POST['EmailUser'])) {
-                                                        $employe->save();
-                                                        $result['status'] = 1;
-                                                        $result['userInformation'] = $_SESSION;
+                                    if(!$employe->checkUsername()){
+                                        if ($_POST['pass'] == $_POST['pass2']) {
+                                            if ($_POST['Nickname'] != $_POST['pass']) {
+                                                if ($employe->password($_POST['pass'])) {
+                                                    if ($employe->role(2)) {
+                                                        if (!$select->emailWhere("employees", $_POST['EmailUser'])) {
+                                                            $employe->save();
+                                                            $result['status'] = 1;
+                                                            $result['userInformation'] = $_SESSION;
+                                                        } else {
+                                                            $result['exception'] = 'Correo existente';
+                                                        }
                                                     } else {
-                                                        $result['exception'] = 'Correo existente';
+                                                        $result['exception'] = 'Cargo invalido';
                                                     }
                                                 } else {
-                                                    $result['exception'] = 'Cargo invalido';
+                                                    $result['exception'] = 'La contraseña debe constar al menos de 8 carácteres';
                                                 }
                                             } else {
-                                                $result['exception'] = 'La contraseña debe constar al menos de 8 carácteres';
+                                                $result['exception'] = 'La contraseña es igual al nombre de usuario';
                                             }
                                         } else {
-                                            $result['exception'] = 'La contraseña es igual al nombre de usuario';
+                                            $result['exception'] = 'Las contraseñas ingresadas no son iguales';
                                         }
-                                    } else {
-                                        $result['exception'] = 'Las contraseñas ingresadas no son iguales';
+                                    }
+                                    else{
+                                        $result['exception']='Este usuario ya existe.';
                                     }
                                 } else {
                                     $result['exception'] = 'El nombre de usuario debe constar de 7 carácteres';

@@ -149,6 +149,24 @@ class Employee extends Validator{
 			return false;
 		}
     }
+    public function checkEmployee()
+	{
+		$sql = 'SELECT name, lastname, username, role, email , status, google_secret_key FROM employees WHERE id = ?';
+		$params = array($this->id);
+		$data = Database::getRow($sql, $params);
+		if ($data) {
+			$this->name = $data['name'];
+            $this->lastname = $data['lastname'];
+            $this->username=$data['username'];
+            $this->role = $data['role'];
+            $this->email = $data['email'];
+            $this->status = $data['status'];
+            $this->google_secret_key = $data['google_secret_key'];
+			return true;
+		} else {
+			return false;
+		}
+    }
     public function verifyTries(){
         $sql='SELECT tries FROM employees WHERE id=?';
         $params = array($this->id);

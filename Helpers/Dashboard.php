@@ -17,6 +17,7 @@ class AdminSideNav {
             if($filename != '../private/')
             {
                 if($_SESSION['Role']==0){
+                    //Imprime las opciones  
                     self::modals();
                     print('
                     <ul id="slide-out" class="sidenav sidenav-fixed">
@@ -49,7 +50,11 @@ class AdminSideNav {
                     </ul>  
                     ');
                 }
+                else if($filename == 'employees.php' && $_SESSION['Role'] == 1 ){
+                    header('location:home.php');
+                }
                 else if($_SESSION['Role']==1){
+                    //Imprime las opciones del empleado
                     self::modals();
                     print('
                     <ul id="slide-out" class="sidenav sidenav-fixed">
@@ -71,7 +76,7 @@ class AdminSideNav {
                         <li><a href="/Illusion/private/events.php"><i class="material-icons">calendar_today</i>Eventos</a></li>
                         <li><a href="/Illusion/private/typeevents.php"><i class="material-icons">subject</i>Tipos de eventos</a></li>
                         <li><a href="/Illusion/private/products.php"><i class="material-icons">local_mall</i>Productos</a></li>
-                        <li><a href="/PopMovies/feed/account/memberships.php"><i class="material-icons">inbox</i>Solicitudes</a></li>
+                        <li><a href="/Illusion/private/requests.php"><i class="material-icons">inbox</i>Solicitudes</a></li>
                         <li><div class="divider"></div></li>
                         <li><a href="#ModalCloseSession" class="modal-trigger"><i class="material-icons">exit_to_app</i>Cerrar Sesión</a></li>
                         </div>

@@ -4,6 +4,7 @@
     require_once('../Backend/Models/Request.php');
     require_once('../Helpers/validator.php');
     require_once('../Backend/Models/Events.php');
+    require_once('../Backend/Models/Employees.php');
     require_once('../Backend/Models/Events_assignments.php');
     require_once('../Helpers/validates.php');
    
@@ -12,6 +13,7 @@
         
         session_start();
         $event = new Events();
+        $employee = new Employee();
         $result = array('status'=>0, 'exception'=>'');
         switch($_GET['request'])
         {
@@ -156,32 +158,45 @@
             case 'PUT':
                 switch($_GET['action']){
                     case 'updateRequest':
-                        if(Validate::Integer($_POST['id'])->Id()){
-                            if(Validate::Integer($_POST['status'])->Id()){
-                                if(Request::set()->id($_POST['id'])->status($_POST['status'])->updateStatus()){
-                                    $request = Request::all();
-                                    $fullname = $request['name']." ".$request['lastname'];
-                                    if(
-                                        $event->nameEvent($request['name_event']) &&
-                                        $event->date($request['date_event']) && 
-                                        $event->clientName($fullname) &&
-                                        $event->id_employee($_SESSION['idUser']) && 
-                                        $event->pay_status(2) &&
-                                        $event->type_event($request['type_event']) &&
-                                        $event->persons($request['persons']) 
-                                    )
-                                    {
-                                        $event->save();
-                                        $event_id = Database::getLastRowId();
-                                        Events_assignments::set()->event_id($event_id)->request_id($_POST['id'])->client_id($_POST['user_id'])->save();
-                                        $result['status']=1;
-                                    }
-                                    else{
-                                        $result['exception']='Datos erroneos';
+                        if( Validate::Integer($_POST['id'])->Id() ){
+                            if( Validate::Integer($_POST['status'])->Id() ){
+                                if($employee->id($_SESSION['idUser'])){
+                                    if($employee->checkEmployee()){
+                                        if($employee->getRole() == 0 ){
+                                            if( Request::set()->id($_POST['id'])->status($_POST['status'])->updateStatus() ){
+                                                $request = Request::all();
+                                                $fullname = $request['name']." ".$request['lastname'];
+                                                if(
+                                                    $event->nameEvent($request['name_event']) &&
+                                                    $event->date($request['date_event']) && 
+                                                    $event->clientName($fullname) &&
+                                                    $event->id_employee($_SESSION['idUser']) && 
+                                                    $event->pay_status(2) &&
+                                                    $event->type_event($request['type_event']) &&
+                                                    $event->persons($request['persons']) 
+                                                )
+                                                {
+                                                    $event->save();
+                                                    $event_id = Database::getLastRowId();
+                                                    Events_assignments::set()->event_id($event_id)->request_id($_POST['id'])->client_id($_POST['user_id'])->save();
+                                                    $result['status']=1;
+                                                }
+                                                else{
+                                                    $result['exception']='Datos erroneos';
+                                                }
+                                            }
+                                            else{
+                                                $result['exception']='Fallo';
+                                            }
+                                        }else{
+                                            $result['exception']='No tienes permisos para realizar este tipos de acciones';
+                                        }
+                                    }else{
+                                        $result['exception']='No se logro identificar el usuario';
                                     }
                                 }
                                 else{
-                                    $result['exception']='Fallo';
+                                    $result['exception']='No se ha logrado identificar los permisos';
                                 }
                             }
                             else{
