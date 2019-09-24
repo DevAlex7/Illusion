@@ -13,6 +13,7 @@
         ImportGlobal::ImportFont();
         ImportGlobal::ImportPublicMaterializeCss();
         ImportGlobal::ImportPublicMaterialIcons();
+        ImportGlobal::ImportAnimateCSS();
         ImportGlobal::ImportPublicFileCss('public-site');
     ?>
 </head>
@@ -33,44 +34,41 @@
         </div>
     </nav>
     <div class="row" id="image-principal">
-        <div class="col s12 m6 offset-m3">
-            <div class="card">
-                <div class="card-image">
-                    <img src="Imports/resources/pics/carousel/O1.png" alt="" srcset="" class="animated fadeIn">
+        <div class="col s12 m6">
+            <div class="center">
+                <span class="website-title">¡Bienvenido!</span>
+                <p>Estamos para hacer que tus eventos sean los mejores. ¡Unete a nosotros!</p>
+            </div>
+        </div>
+        <div class="col s12 m5">
+            <div class="center">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="Imports/resources/pics/carousel/O1.png" alt="" srcset="" class="animated fadeIn">
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="col s12 m4">
-            <div class="card" id="test">
-                <div class="card-content">
-                    <div class="center">
-                        <span class="card-title">¿Quienes somos?</span>
-                        
-                    </div>
-                </div>
-            </div>
+    <div class="slider">
+    <ul class="slides">
+      <li>
+        <img src="Imports/resources/pics/utilities/ballons3.jpg"> 
+        <div class="caption center-align">
+          <h3 class="black-text">Somos Illusion party</h3>
+          <h5 class="light black-text text-lighten-3"> <div class="chip black-text">Organiza tus eventos con nosotros</div> </h5>
         </div>
-        <div class="col s12 m4">
-            <div class="card" id="test">
-                <div class="card-content">
-                    <div class="center">
-                        <span class="card-title">¿Quienes somos?</span>
-                        
-                    </div>
-                </div>
-            </div>
+      </li>
+      <li>
+        <img src="Imports/resources/pics/utilities/ballons5.jpg"> <!-- random image -->
+        <div class="caption right-align">
+          <h3 class="black-text">Clientes felices</h3>
+          <h5 class="black-text text-lighten-3"> <div class="chip white">Nuestra prioridad es la comodidad de tus invitados</div> </h5>
         </div>
-        <div class="col s12 m4">
-            <div class="card" id="test">
-                <div class="card-content">
-                    <div class="center">
-                        <span class="card-title">¿Quienes somos?</span>
-                    </div>
-                </div>
-            </div>
-        </div>
+      </li>
+    </ul>
+  </div>
     </div>
     <?php
         ImportGlobal::ImportPublicJQuery();

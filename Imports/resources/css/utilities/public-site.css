@@ -67,9 +67,7 @@ to {bottom:0px; opacity: 1}
 from {bottom:0px; opacity: 0;}
 to {bottom:0px; opacity: 1;}
 }
-.card{
-    border-radius: 30px;
-}
-.card .card-content{
-    border-radius: 30px;
+.website-title{
+    font-weight: bold;
+    font-size: 40px;
 }
