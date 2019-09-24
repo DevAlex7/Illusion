@@ -45,21 +45,29 @@
         <div class="col s12 m4">
             <div class="card" id="test">
                 <div class="card-content">
-                    <p>Hola</p>
+                    <div class="center">
+                        <span class="card-title">¿Quienes somos?</span>
+                        
+                    </div>
                 </div>
             </div>
         </div>
         <div class="col s12 m4">
             <div class="card" id="test">
                 <div class="card-content">
-                    <p>Hola</p>
+                    <div class="center">
+                        <span class="card-title">¿Quienes somos?</span>
+                        
+                    </div>
                 </div>
             </div>
         </div>
         <div class="col s12 m4">
             <div class="card" id="test">
                 <div class="card-content">
-                    <p>Hola</p>
+                    <div class="center">
+                        <span class="card-title">¿Quienes somos?</span>
+                    </div>
                 </div>
             </div>
         </div>
