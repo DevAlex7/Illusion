@@ -71,3 +71,16 @@ to {bottom:0px; opacity: 1;}
     font-weight: bold;
     font-size: 40px;
 }
+.website-service{
+    font-weight: 500;
+    font-size: 30px;
+}
+#content-information{
+    margin-top:1rem;
+}
+#chip-slider1{
+    background-color: rgb(223, 148, 69);
+}
+#objectives{
+    margin-top:1rem;
+}
