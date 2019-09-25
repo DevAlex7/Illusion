@@ -1,6 +1,7 @@
 html{
     background-color: rgb(32, 68, 90)  ;
 }
+
 #CardDetail{
     border-radius: 10px;
 }
@@ -80,7 +81,7 @@ html{
     font-weight: bold;
 }
 .modal-content{
-    background:white;
+    background:red;
 }
 
 #roleSubAdmin{

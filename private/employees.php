@@ -24,16 +24,12 @@
         <?php AdminSideNav::SideNav(); ?>
     </header>
     <main>
-            <?php 
-                Permissions::AdminBar();
-            ?>
-            <div class="row" id="GetPersons">
-                
-            </div>
+            
+            <div class="row" id="GetPersons"></div>
             <div class="fixed-action-btn">
-                <a class="btn-floating btn-large red modal-trigger" href="#insertAdmins">
-                    <i class="large material-icons">add</i>
-                </a>
+                <?php 
+                    Permissions::AdminBar();
+                ?>    
                 <a class="btn-floating btn-large orange modal-trigger" href="#searchEmployee">
                     <i class="large material-icons">search</i>
                 </a>
@@ -41,57 +37,62 @@
                     <i class="large material-icons">description</i>
                 </a>
             </div>
-            <!--modal insertar Administradores -->
-            <div class="modal" id="insertAdmins">
-                <div class="modal-content">
-                    <div class="card">
-                        <div class="card-content">
 
-                            <form method="POST">
-                                <div class="row">
-                                    <div class="col s12 m6">
-                                        <input type="text" name="NameAdministrator" id="NameAdministrator">
-                                        <label for="NameAdministrator">Nombre de administrador</label>
+            <!--modal insertar Administradores -->
+            <div class="modal red" id="insertAdmins">
+                <div class="modal-content">
+                    <form method="post" id="form-addEmployee">
+                    <div class="row">
+                        <div class="col s12 m6">
+                            <div class="card">
+                                <div class="card-content">
+                                    <div class="center">
+                                        <span>Datos personales</span>
+                                    </div>                       
+                                    <div class="input-field prefix">
+                                        <input type="text" name="name" id="name">
+                                        <label for="">Nombre</label>
                                     </div>
-                                    <div class="col s12 m6">
-                                        <input type="text" name="LastNameAdministrator" id="LastNameAdministrator">
-                                        <label for="NameAdministrator">Apellido de administrador</label>
+                                    <div class="input-field prefix">
+                                        <input type="text" name="lastname" id="lastname">
+                                        <label for="">Apellido</label>
                                     </div>
-                                    <div class="col s12 m6">
-                                        <input type="text" name="UsernameAdministrator" id="UsernameAdministrator">
-                                        <label for="NameAdministrator">Usuario de administrador</label>
+                                    <div class="input-field prefix">
+                                        <input type="text" name="email" id="email">
+                                        <label for="">Correo electronico</label>
+                                    </div>
+                                    <div class="input-field prefix">
+                                        <input type="text" name="username" id="username">
+                                        <label for="">Usuario</label>
                                     </div>
                                 </div>
-                            </form>
+                            </div>
                         </div>
-                    </div>  
-                            <span class="card-title">Agrega nuevos Administradores</span>
-                            <div class="input-field col s6">
-                                <input id="name" type="text">
-                                <label for="name">nombres</label>
+                        <div class="col s12 m6">
+                            <div class="card">
+                                <div class="card-content">
+                                    <div class="center">
+                                        <span>Datos de sistema</span>
+                                    </div>
+                                    <div class="input-field prefix">
+                                        <a href="javascript:getRan()" class="prefix"><i class="material-icons">face</i></a>
+                                        <input type="text" name="pass1" id="pass1" placeholder="Generar contraseña">
+                                        
+                                    </div>
+                                    <div class="input-field prefix">
+                                        <select name="role" id="role"></select>
+                                        <label for="">Rol de usuario</label>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="input-field col s6">
-                                <input id="last_name" type="text">
-                                <label for="last_name">Apellidos</label>
-                            </div>
-                            <div class="input-field col s6">
-                                <input id="email" type="email">
-                                <label for="email">Correo Electronico</label>
-                            </div>
-                            <div class="input-field col s12">
-                                <select class="browser-default">
-                                    <option value="" disabled selected>Selecione el tipo de usuario</option>
-                                    <option value="0">Administrador</option>
-                                    <option value="1">Empleado</option>
-                                </select>                                
-                            </div>
-                            <div class="input-field col s6">
-                                <input class="Password" type="text">
-                                <label for="Password">Contraseña</label>
-                            </div>
-                            <a class="waves-effect waves-light btn"><i class="material-icons left"></i>Registrar</a>
                         </div>
+                        <div class="row">
+                            <div class="center">
+                                <button type="submit" class="btn">Agregar</button>
+                            </div>
+                        </div>  
                     </div>
+                    </form>
                 </div>
             </div>
 

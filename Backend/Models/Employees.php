@@ -149,6 +149,17 @@ class Employee extends Validator{
 			return false;
 		}
     }
+    public function checkEmail(){
+        $sql = 'SELECT email FROM employees WHERE id = ?';
+		$params = array($this->email);
+		$data = Database::getRow($sql, $params);
+		if ($data) {
+            $this->email = $data['email'];
+			return true;
+		} else {
+			return false;
+		}
+    }
     public function checkEmployee()
 	{
 		$sql = 'SELECT name, lastname, username, role, email , status, google_secret_key FROM employees WHERE id = ?';
@@ -193,7 +204,8 @@ class Employee extends Validator{
 		$params = array($this->id);
 		$data = Database::getRow($sql, $params);
 		if (password_verify($this->password, $data['password'])) {
-			return true;
+            $this->updateTries(3);
+            return true;
 		} else {
 			return false;
 		}
@@ -209,6 +221,11 @@ class Employee extends Validator{
         $sql='UPDATE employees SET status=? WHERE id=?';
         $params=array(3, $this->id);
         return Database::executeRow($sql,$params);
+    }
+    public function getRoles(){
+        $sql='SELECT * FROM roles WHERE roles.id NOT IN (2)';
+        $params = array(null);
+        return Database::getRows($sql,$params);
     }
     public function findbyId(){
         $sql ='SELECT * FROM employees WHERE id=?';   

@@ -126,7 +126,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col s12 m6 hoverable" id="content-information">
+            <div class="col s12 m6" id="content-information">
                 <div class="center">
                 <span> <div class="chip white-text" id="chip-information"> Organizacion </div> </span>
                     <div class="row" id="objectives">

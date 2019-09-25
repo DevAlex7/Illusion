@@ -130,8 +130,5 @@ class AdminSideNav {
         </div>
         ');
     }
-    public static function verifySession(){
-        
-    }
 }
 ?>

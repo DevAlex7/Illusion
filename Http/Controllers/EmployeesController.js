@@ -1,10 +1,46 @@
 $(document).ready(function() {
   setSidenavItem('admin-item','icon-admin');   
+  selectRoles('role',null);
   CallEmployees();
+  $('select').formSelect();
   $(".modal").modal();
   $('.dropdown-trigger').dropdown();
 });
-
+function selectRoles(Select, value){
+  $.ajax({
+      url: requestGET('userEmployees','getRoles'),
+      type: 'POST',
+      data: null,
+      datatype: 'JSON'
+  })
+  .done(function(response){
+      if (isJSONString(response)) {
+          const result = JSON.parse(response);
+          if (result.status) {
+              let content = '';
+              if (!value) {
+                  content += '<option value="" disabled selected>Seleccione un rol de usuario</option>';
+              }
+              result.dataset.forEach(function(row){
+                  if (row.id != value) {
+                      content += `<option value="${row.id}">${row.role}</option>`;
+                  } else {
+                      content += `<option value="${row.id}" selected>${row.role}</option>`;
+                  }
+              });
+              $('#' + Select).html(content);
+          } else {
+              $('#' + Select).html('<option value="">No hay roles</option>');
+          }
+          $('select').formSelect();
+      } else {
+          console.log(response);
+      }
+  })
+  .fail(function(jqXHR){
+      console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+  });
+}
 function setEmployees(employees) {
   let content = "";
   if (employees.length > 0) {
@@ -518,4 +554,36 @@ function viewReport(id){
 }
 $('#reportEmployees').click(function(){
   window.open('private_reports/usersReports.php');
+})
+const getRan = () => {
+  var code = randomStr();
+  $('#pass1').val(code);
+}
+$('#form-addEmployee').submit(function(){
+  event.preventDefault();
+  $.ajax(
+    {
+      url:requestPOST('userEmployees','createEmployee'),
+      type:'POST',
+      data:$(this).serialize(),
+      datatype:'JSON'
+    }
+  )
+  .done(function(response){
+      if(isJSONString(response)){
+        const result = JSON.parse(response);
+        if(result.status){
+
+        }
+        else{
+          ToastError(result.exception);
+        }
+      }
+      else{
+        console.log(response);
+      } 
+  })
+  .fail(function(jqXHR) {
+    catchError(jqXHR);
+  });
 })

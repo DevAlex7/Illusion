@@ -30,6 +30,14 @@ if (isset($_GET['request']) && isset($_GET['action'])) {
                         $result['exception'] = 'No se ha identificado al usuario logueado';
                     }
                 break;
+                case 'getRoles':
+                    if($result['dataset'] = $employe->getRoles()){
+                        $result['status']=1;
+                    }
+                    else{
+                        $result['exception']='No hay roles';
+                    }
+                break;
                 case 'countUsers':
                 if($employe->countUsers()){
                     $result['status']=1;
@@ -169,6 +177,54 @@ if (isset($_GET['request']) && isset($_GET['action'])) {
                     } else {
                         $result['exception'] = 'Campo vacio o nombre de usuario invalido';
                     }
+                    break;
+                    case 'createEmployee':
+                        if($employe->name($_POST['name'])){
+                            if($employe->lastname($_POST['lastname'])){
+                                if($employe->email($_POST['email'])){
+                                    if($employe->username($_POST['username'])){
+                                        if(!$employe->checkEmail()){                                    
+                                            if(!$employe->checkUsername()){
+                                                if(strlen($_POST['pass1'])> 7 ){
+                                                    if($employe->password($_POST['pass1'])){
+                                                        if ($employe->role($_POST['role'])) {
+                                                                $employe->save();
+                                                                $result['status'] = 1;
+                                                        } else {
+                                                            $result['exception'] = 'Cargo invalido';
+                                                        }   
+                                                    }
+                                                    else{
+                                                        $result['exception']='Contraseña ingresada invalido';
+                                                    }
+                                                }
+                                                else{
+                                                    $result['exception']='La contraseña no tiene 8 carácteres';
+                                                }
+                                            }
+                                            else{
+                                                $result['exception']='Nombre de usuario existente';
+                                            }
+                                        }
+                                        else{
+                                            $result['exception']='Email existente';
+                                        }
+                                    }
+                                    else{
+                                        $result['exception']='Nombre de persona invalido';
+                                    }
+                                }
+                                else{
+                                    $result['exception']='Correo electronico invalido';
+                                }
+                            }
+                            else{
+                                $result['exception']='Apellido de persona invalido';
+                            }
+                        }
+                        else{
+                            $result['exception']='Nombre de persona invalido';
+                        }
                     break;
                 case 'Loginpublic':
                     if ($employe->username($_POST['Nickname'])) {
