@@ -79,8 +79,14 @@ to {bottom:0px; opacity: 1;}
     margin-top:1rem;
 }
 #chip-slider1{
-    background-color: rgb(223, 148, 69);
+    background-color:#F9960C;
 }
 #objectives{
     margin-top:1rem;
+}
+.slider .indicators .indicator-item.active {
+    background-color:  rgb(223, 148, 69);
+}
+#chip-information{
+    background-color:#F9960C;
 }

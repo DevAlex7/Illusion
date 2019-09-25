@@ -76,14 +76,17 @@
         </div>
         <div class="row">
             <div class="col s12 m6" id="content-information">
-                <div class="center" id="">
-                    <span>Compromiso</span>
+                <div class="center">
+                    <span> <div class="chip white-text" id="chip-information">Compromiso</div> </span>
                 </div>
                 <div class="row" id="objectives">
                     <div class="col s12 m6 offset-m3">
                         <div class="card">
                             <div class="card-content">
-                                
+                                <div class="center">
+                                    <i class="material-icons">done_all</i>
+                                </div>             
+                                <span class="black-text"> Nuestro equipo es comprometido en tus eventos, bastantes serviciales y puntuales </span>
                             </div>
                         </div>
                     </div>
@@ -91,12 +94,15 @@
             </div>
             <div class="col s12 m6" id="content-information">
                 <div class="center">
-                    <span>Compromiso</span>
+                <span> <div class="chip white-text" id="chip-information">Accesibles</div> </span>
                     <div class="row" id="objectives">
                         <div class="col s12 m6 offset-m3">
                             <div class="card">
                                 <div class="card-content">
-                                    
+                                    <div class="center">
+                                        <i class="material-icons">emoji_people</i>
+                                    </div>
+                                    <span class="black-text">Si tu solicitas un producto, nosotros nos encargaremos de buscarlo por ti y agregarlo a tu evento</span>
                                 </div>
                             </div>
                         </div>
@@ -105,12 +111,15 @@
             </div>
             <div class="col s12 m6" id="content-information">
                 <div class="center">
-                    <span>Compromiso</span>
+                <span> <div class="chip white-text" id="chip-information"> Cercanos </div> </span>
                     <div class="row" id="objectives">
                         <div class="col s12 m6 offset-m3">
                             <div class="card">
                                 <div class="card-content">
-                                    
+                                    <div class="center">
+                                        <i class="material-icons">supervised_user_circle</i>
+                                    </div>
+                                    <span class="black-text">Hemos adquirido la manera de que puedas solicitar tu evento de la manera más facil y sencilla con nuestra plataforma</span>
                                 </div>
                             </div>
                         </div>
@@ -119,12 +128,15 @@
             </div>
             <div class="col s12 m6 hoverable" id="content-information">
                 <div class="center">
-                    <span>Compromiso</span>
+                <span> <div class="chip white-text" id="chip-information"> Organizacion </div> </span>
                     <div class="row" id="objectives">
                         <div class="col s12 m6 offset-m3">
                             <div class="card">
                                 <div class="card-content">
-                                    
+                                    <div class="center">
+                                        <i class="material-icons">post_add</i>
+                                    </div>
+                                    <span>Nosotros como empresa sabemos que los eventos pueden ser grandes y robustos, pero hemos mejorado en ser detallistas con nuestros clientes.</span>
                                 </div>
                             </div>
                         </div>
