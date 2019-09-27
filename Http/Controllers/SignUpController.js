@@ -14,7 +14,8 @@ $('#FormRegistrer').submit(function(){
         if(isJSONString(response)){
             const result = JSON.parse(response);
             if(result.status){
-                M.toast({html:'Añadido correctamente'});
+                M.toast({html:'Añadido correctamente'}, 'index.php');
+
             }
             else{
                 M.toast({html:result.exception});

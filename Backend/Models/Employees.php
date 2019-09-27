@@ -27,7 +27,7 @@ class Employee extends Validator{
     }
     
     public function name($value){
-        if($this->validateAlphabetic($value, 4, 150)){
+        if($this->validateAlphabetic($value, 3, 150)){
             $this->name = $value;
             return true;
         }

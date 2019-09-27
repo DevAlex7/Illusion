@@ -1,6 +1,4 @@
-html{
-    background-image: url(../../pics/utilities/Party.jpg);
-}
+ 
 body {
     display: flex;
     min-height: 100vh;
@@ -10,7 +8,7 @@ main {
     flex: 1 0 auto;
 }
 #FooterPart{
-    background: rgb(77, 51, 172);
+    background: #bf360c;
 }
 #RegistrerCard{
     margin-top:3rem;
