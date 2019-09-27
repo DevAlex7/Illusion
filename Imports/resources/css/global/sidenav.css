@@ -5,12 +5,38 @@
  background-color: rgb(245, 29, 47);
 }
 header, main, footer {
-    padding-left: 300px;
+  padding-left: 300px;
+}
+
+@media only screen and (max-width : 992px) {
+  header, main, footer {
+    padding-left: 0;
   }
- 
-  @media only screen and (max-width : 992px) {
-    header, main, footer {
-      padding-left: 0;
-    }
-  }
-  
+}
+
+.sidenav-item{
+  background-color:rgb(245, 29, 47);  
+  border-bottom-right-radius: 30px;
+  border-top-right-radius: 30px;
+  width: 42vh;
+  color:white;
+}
+.no-hover:hover{
+  background-color: rgb(245, 29, 47) !important;
+  color:white;
+}
+::-webkit-scrollbar {
+  width: 5px;
+  height: 10px; 
+}
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 1px rgba(0,0,0,0.5); 
+}
+
+::-webkit-scrollbar-thumb {
+  -webkit-box-shadow: inset 0 0 1px rgba(0,0,0,0.5); 
+  background-color:rgb(193, 193, 200);
+}
+::-moz-selection { background: #ffa726; color: #fff; }
+::selection { background: #ffa726; color: #fff; }

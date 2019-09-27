@@ -233,9 +233,13 @@
                                                     if($event->type_event($_POST['TypeEventSelect'])){
                                                         if($event->place($_POST['PlaceEvent']))
                                                         {
-                                                            $event->save();
-                                                            Binnacle::set()->user($_SESSION['idUser'])->action("ha ingresado un evento nuevo: ".$event->getEventName())->insert();
-                                                            $result['status']=1;
+                                                            if($event->persons($_POST['numberPersons'])){
+                                                                $event->save();
+                                                                Binnacle::set()->user($_SESSION['idUser'])->action("ha ingresado un evento nuevo: ".$event->getEventName())->insert();
+                                                                $result['status']=1;
+                                                            }else{
+                                                                $result['exception']='Personas ingresadas invalido';
+                                                            }
                                                         }
                                                         else{
                                                             $result['exception']='Mal formato de HTML';
@@ -331,6 +335,31 @@
                         else{
                             $result['exception']='No se ha identificado el evento';
                         }
+                    break;
+                    case 'updateCost':
+                    if($event->id($_POST['idEvent'])){
+                        if($event->pay_status(1)){
+                            if($event->updateCost()){
+                                $result['status']=1;
+                            }
+                            else{
+                                $result['exception']='No se ha podigo pagar el evento';
+                            }
+                        }  
+                        else{
+                            $result['exception']='No se definir el pago';
+                        }
+                    }else{
+                        $result['exception']='No hay información del evento';
+                    }
+                    break;
+                    case 'deleteComment':
+                    if($event->deleteComment($_POST['id'])){
+                        $result['status']=1;
+                    }
+                    else{
+                        $result['exception']='No se pudo eliminar el comentario';
+                    }
                     break;
                     default: 
                     exit('acción no disponible');

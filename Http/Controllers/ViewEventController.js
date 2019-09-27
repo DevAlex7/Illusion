@@ -1091,7 +1091,7 @@ function setMessages(messages, id_user){
                         <span id="TitleComment">${message.message}</span>
                         </div>
                         <a href="#ReplyesModal" class="modal-trigger" onClick="getReplyes(${message.idMessage})"> <i class="material-icons" id="IconReply">reply</i> </a>
-                        <a class="secondary-content"> <i class="material-icons blue-text modal-trigger" data-target="MessageUser" onClick="EditModalComment()">edit</i> <i class="material-icons red-text modal-trigger" data-target="DeleteMessageUser" onClick="DeleteComment()">delete</i> </a>
+                        <a class="secondary-content"> <i class="material-icons blue-text modal-trigger" data-target="MessageUser" onClick="EditModalComment()">edit</i> <i class="material-icons red-text modal-trigger" data-target="DeleteMessageUser" onClick="deleteComment(${message.idMessage})">delete</i> </a>
                         <div class="right" id="right">
                         <a class="grey-text"> ${message.trendingTotal} respuestas </a>
                         </div>
@@ -1379,4 +1379,67 @@ function loadRequest(id){
         catchError(jqXHR);
     })
 }
-
+const updatePay = () => {
+    $.ajax(
+        {
+            url:requestPOST('Events','updateCost'),
+            type:'POST',
+            data:{
+                idEvent
+            },
+            datatype:'JSON'
+        }
+    )
+    .done(function(response)
+        {
+            if(isJSONString(response)){
+                const result = JSON.parse(response);
+                if(result.status){
+                    ToastSucces('Evento pagado satisfactoriamente');
+                    getInformation();
+                }
+                else{
+                    ToastError(result.exception);
+                }
+            }
+            else{
+                console.log(response);
+            }
+        }
+    )
+    .fail(function(jqXHR){
+        catchError(jqXHR);
+    })
+}
+const deleteComment = (id) => {
+    $.ajax(
+        {
+            url:requestPOST('Events','deleteComment'),
+            type:'POST',
+            data:{
+                id
+            },
+            datatype:'JSON'
+        }
+    )
+    .done(function(response)
+        {
+            if(isJSONString(response)){
+                const result = JSON.parse(response);
+                if(result.status){
+                    ToastSucces('Comentario eliminado correctamente');
+                    ShowComments();
+                }
+                else{
+                    ToastError(result.exception);
+                }
+            }
+            else{
+                console.log(response);
+            }
+        }
+    )
+    .fail(function(jqXHR){
+        catchError(jqXHR);
+    })
+}

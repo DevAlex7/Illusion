@@ -71,6 +71,11 @@
                                     <label for="NameClient">Nombre del cliente</label>
                                 </div>
                                 <div class="input-field col s6">
+                                    <i class="material-icons prefix">person</i>
+                                    <input id="numberPersons" name="numberPersons" type="text">
+                                    <label for="numberPersons">Numero de personas</label>
+                                </div>
+                                <div class="input-field col s6">
                                     <i class="material-icons prefix">list</i>
                                     <select name="TypeEventSelect" id="TypeEventSelect"></select>
                                 </div>
@@ -91,16 +96,11 @@
                 </div>
             </div>    
         </main>
-        <footer class="red">
-            <?php ImportGlobal::ImportFooter(); ?>
-        </footer>
 <?php
     ImportGlobal::ImportJQuery();
     ImportGlobal::ImportMaterializeJS();
     ImportGlobal::ImportJSFunctions();
     ImportGlobal::ImportMomentJS();
-    ImportGlobal::ImportRoutesJs();
-    ImportGlobal::ImportInactivity();
     ImportGlobal::ImportControllerJs('EventsController');
 ?>
 </body>

@@ -5,34 +5,16 @@ class Database
     private static $connection = null;
     private static $statement = null;
     private static $id = null;
-    private static $config = array(
-
-        //servers
-        'localserver' => 'localhost',
-        'externalserver' => 'remotemysql.com',
-
-        //databases
-        'localdatabase' => 'illusion',
-        'externaldatabase' => '1ry69512YL',
-
-        //usernames
-        'localuser' => 'root',
-        'externalusername' => '1ry69512YL',
-
-        //passwords
-        'localpassword' => '',
-        'externalpassword' => 'hCKJaewQXE'
-
-    );
+   
 
 
 
     private function connect()
     {
-        $server = static::$config['localserver'];
-        $database = static::$config['localdatabase'];
-        $username = static::$config['localuser'];
-        $password = static::$config['localpassword'];
+        $server = 'localhost';
+        $database = 'illusion';
+        $username = 'expo2019';
+        $password = 'expotecnica2019';
         try {
             @self::$connection = new PDO('mysql:host='.$server.'; dbname='.$database.'; charset=utf8', $username, $password);
         } catch(PDOException $error) {

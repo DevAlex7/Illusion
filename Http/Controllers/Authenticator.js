@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    setSidenavItem('security-item','icon-security');
     verify();
 });
 const verify = () => {

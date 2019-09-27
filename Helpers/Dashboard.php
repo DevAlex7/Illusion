@@ -17,6 +17,7 @@ class AdminSideNav {
             if($filename != '../private/')
             {
                 if($_SESSION['Role']==0){
+                    //Imprime las opciones  
                     self::modals();
                     print('
                     <ul id="slide-out" class="sidenav sidenav-fixed">
@@ -30,26 +31,30 @@ class AdminSideNav {
                             </div>
                         </li>
                         <div id="OptionsBar">
-                        <li><a class="green-text accent-4" href="/Illusion/private/home.php"><i class="material-icons green-text accent-4">dashboard</i>Inicio</a></li>
-                        <li><a class="green-text accent-4" href="/Illusion/private/profile.php"><i class="material-icons green-text accent-4">person</i>Mi perfil</a></li>
-                        <li><a class="green-text accent-4" href="/Illusion/private/binnacle.php"><i class="material-icons green-text accent-4">drag_indicator</i>Bitácora</a></li>
-                        <li><a class="green-text accent-4" href="/Illusion/private/settings.php"><i class="material-icons green-text accent-4">block</i>Seguridad</a></li>
-                        <li><a class="green-text accent-4" href="/Illusion/private/notifications.php"><i class="material-icons green-text accent-4">notification_important</i>Notificaciones</a></li>
+                        <li><a id="home-item" class="" href="/Illusion/private/home.php"><i class="material-icons black-text" id="icon-home">dashboard</i> Inicio </a></li>
+                        <li><a id="profile-item" class="" href="/Illusion/private/profile.php"><i class="material-icons black-text" id="icon-profile">person</i>Mi perfil</a></li>
+                        <li><a id="binnacle-item" class="" href="/Illusion/private/binnacle.php"><i class="material-icons black-text" id="icon-binnacle" >drag_indicator</i>Bitácora</a></li>
+                        <li><a id="security-item" class="" href="/Illusion/private/settings.php"><i class="material-icons black-text" id="icon-security" >block</i>Seguridad</a></li>
+                        <li><a id="notify-item" class="" href="/Illusion/private/notifications.php"><i class="material-icons black-text" id="icon-notify">notification_important</i>Notificaciones</a></li>
                         <li><div class="divider"></div></li>
                         <li><a class="subheader grey-text">Menu</a></li>
-                        <li><a href="/Illusion/private/events.php"><i class="material-icons">calendar_today</i>Eventos</a></li>
-                        <li><a href="/Illusion/private/typeevents.php"><i class="material-icons">subject</i>Tipos de eventos</a></li>
-                        <li><a href="/Illusion/private/employees.php"><i class="material-icons">account_circle</i>Administradores</a></li>
-                        <li><a href="/Illusion/private/products.php"><i class="material-icons">local_mall</i>Productos</a></li>
-                        <li><a href="/Illusion/private/requests.php"><i class="material-icons">inbox</i>Solicitudes</a></li>
-                        <li><a href="/Illusion/private/charts.php"><i class="material-icons">assessment</i>Estadísticas</a></li>
+                        <li><a id="events-item" href="/Illusion/private/events.php"><i class="material-icons black-text" id="icon-event">calendar_today</i>Eventos</a></li>
+                        <li><a id="subject-item" href="/Illusion/private/typeevents.php"><i class="material-icons black-text" id="icon-subject">subject</i>Tipos de eventos</a></li>
+                        <li><a id="admin-item" href="/Illusion/private/employees.php"><i class="material-icons black-text" id="icon-admin">account_circle</i>Administradores</a></li>
+                        <li><a id="product-item" href="/Illusion/private/products.php"><i class="material-icons black-text" id="icon-product">local_mall</i>Productos</a></li>
+                        <li><a id="request-item" href="/Illusion/private/requests.php"><i class="material-icons black-text" id="icon-request">inbox</i>Solicitudes</a></li>
+                        <li><a id="graph-item" href="/Illusion/private/charts.php"><i class="material-icons black-text" id="icon-graph">assessment</i>Estadísticas</a></li>
                         <li><div class="divider"></div></li>
                         <li><a href="#ModalCloseSession" class="modal-trigger"><i class="material-icons">exit_to_app</i>Cerrar Sesión</a></li>
                         </div>
                     </ul>  
                     ');
                 }
+                else if($filename == 'employees.php' || $filename == 'notifications.php' || $filename=='charts.php' && $_SESSION['Role'] == 1 ){
+                    header('location:home.php');
+                }
                 else if($_SESSION['Role']==1){
+                    //Imprime las opciones del empleado
                     self::modals();
                     print('
                     <ul id="slide-out" class="sidenav sidenav-fixed">
@@ -63,15 +68,16 @@ class AdminSideNav {
                             </div>
                         </li>
                         <div id="OptionsBar">
-                        <li><a class="green-text accent-4" href="/Illusion/private/home.php"><i class="material-icons green-text accent-4">dashboard</i>Inicio</a></li>
-                        <li><a class="green-text accent-4" href="/Illusion/private/profile.php"><i class="material-icons green-text accent-4">person</i>Mi perfil</a></li>
-                        <li><a class="green-text accent-4" href="/Illusion/private/binnacle.php"><i class="material-icons green-text accent-4">drag_indicator</i>Bitacora</a></li>
+                        <li><a id="home-item" class="" href="/Illusion/private/home.php"><i class="material-icons black-text" id="icon-home">dashboard</i> Inicio </a></li>
+                        <li><a id="profile-item" class="" href="/Illusion/private/profile.php"><i class="material-icons black-text" id="icon-profile">person</i>Mi perfil</a></li>
+                        <li><a id="binnacle-item" class="" href="/Illusion/private/binnacle.php"><i class="material-icons black-text" id="icon-binnacle" >drag_indicator</i>Bitácora</a></li>
+                        <li><a id="security-item" class="" href="/Illusion/private/settings.php"><i class="material-icons black-text" id="icon-security" >block</i>Seguridad</a></li>
                         <li><div class="divider"></div></li>
-                        <li><a class="subheader grey-text">Menu Empleado</a></li>
-                        <li><a href="/Illusion/private/events.php"><i class="material-icons">calendar_today</i>Eventos</a></li>
-                        <li><a href="/Illusion/private/typeevents.php"><i class="material-icons">subject</i>Tipos de eventos</a></li>
-                        <li><a href="/Illusion/private/products.php"><i class="material-icons">local_mall</i>Productos</a></li>
-                        <li><a href="/PopMovies/feed/account/memberships.php"><i class="material-icons">inbox</i>Solicitudes</a></li>
+                        <li><a class="subheader grey-text">Menu</a></li>
+                        <li><a id="events-item" href="/Illusion/private/events.php"><i class="material-icons black-text" id="icon-event">calendar_today</i>Eventos</a></li>
+                        <li><a id="subject-item" href="/Illusion/private/typeevents.php"><i class="material-icons black-text" id="icon-subject">subject</i>Tipos de eventos</a></li>
+                        <li><a id="product-item" href="/Illusion/private/products.php"><i class="material-icons black-text" id="icon-product">local_mall</i>Productos</a></li>
+                        <li><a id="request-item" href="/Illusion/private/requests.php"><i class="material-icons black-text" id="icon-request">inbox</i>Solicitudes</a></li>
                         <li><div class="divider"></div></li>
                         <li><a href="#ModalCloseSession" class="modal-trigger"><i class="material-icons">exit_to_app</i>Cerrar Sesión</a></li>
                         </div>
@@ -123,9 +129,6 @@ class AdminSideNav {
             </div>
         </div>
         ');
-    }
-    public static function verifySession(){
-        
     }
 }
 ?>

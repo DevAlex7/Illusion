@@ -1,6 +1,5 @@
 $(document).ready(function () {
- 
-    
+    setSidenavItem('events-item','icon-event');   
     selectTypeEvents('TypeEventSelect',null);
     $('.modal').modal();
     CallEvents();
@@ -20,7 +19,6 @@ function setEvents(events){
                             <p>Evento: ${event.name_event}</p>
                             <blockquote id="DetailEvent"> <p>Cliente: ${event.client_name}</p> </blockquote>
                             <blockquote id="DetailEvent"> <p>Fecha de evento: ${ fecha.lang('es').format('dddd D MMMM , YYYY') }</p> </blockquote>
-                            <blockquote id="DetailEvent"> <p>Fecha de evento: ${ fecha.lang('es').format('dd MMM D YYYY') }</p> </blockquote>
                             <blockquote id="DetailEvent"> <a href="/Illusion/private/eventview.php?event=${event.id}">Ver evento</a></blockquote>
                         </blockquote>
                     </div>

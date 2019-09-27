@@ -2,170 +2,153 @@
  require_once('Imports/Global/Global.php');
 ?>
 <!DOCTYPE html>
-<!-- IDIOMA DE LA PÁGINA -->
-<html lang="es">
-    <head>
-        <!-- BEGIN: Head -->
-        <!-- CARACTERES ESPECIALES -->
-        <meta charset="UTF-8">
-        <!-- TÍTULO DE LA VENTANA -->
-        <title>Distribuidora Illussion | Inicio</title>
-        <!-- IMPORTACIONES kk -->
-        <?php
-            ImportGlobal::publicIco();
-            ImportGlobal::ImportFont();
-            ImportGlobal::ImportPublicMaterializeCss();
-            ImportGlobal::ImportPublicMaterialIcons();
-            ImportGlobal::publicStyle();
-        ?>
-        <!-- END: Head-->
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-
-    <!-- BEGIN: Navbar -->
-        <header>
-            <nav class="black">
-                <div class="brand-sidebar black">
-                    <a class="brand-logo center">
-                        <img src="Imports/resources/pics/utilities/ico.png" alt="ico-illusion" height="25">
-                        <span class="white-text">Illussion Party Supplies</span>
-                    </a>
-                </div>
-            </nav>
-        </header>
-    <!-- END: Navbar -->
-
-    <body>
-        <!-- BEGIN: Carousel -->
-        <div class="slider">
-            <ul class="slides">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Illussion Party Supplies </title>
+    <?php
+        
+        ImportGlobal::ImportFont();
+        ImportGlobal::ImportPublicMaterializeCss();
+        ImportGlobal::ImportPublicMaterialIcons();
+        ImportGlobal::ImportAnimateCSS();
+        ImportGlobal::ImportPublicFileCss('public-site');
+    ?>
+</head>
+<body>
+    <nav class="transparent">
+        <div class="nav-wrapper">
+            <ul>
                 <li>
-                    <img src="Imports/resources/pics/carousel/O1.png">
-                    <div class="caption center-align">
-                    </div>
+                    <a href="login.php" class="middle black-text"> <i class="material-icons left">near_me</i> Iniciar sesión</a>
                 </li>
                 <li>
-                    <img src="Imports/resources/pics/carousel/slider-1.jpg">
-                    <div class="caption center-align">
-                        <h3 class="white-text text-lighten-5">Bienvenido a la página oficial de</h3>
-                        <h5 class="light grey-text text-lighten-3">Illussion Party Supplies</h5>
-                    </div>
+                    <a href="signup.php" class="middle black-text"> <i class="material-icons left">supervisor_account</i> Registrarme</a>
                 </li>
                 <li>
-                    <img src="Imports/resources/pics/carousel/slider-2.jpg">
-                    <div class="caption left-align">
-                        <h3 class="white-text text-lighten-5">Para todo tipo de</h3>
-                        <h5 class="light grey-text text-lighten-3">celebraciones</h5>
-                    </div>
-                </li>
-                <li>
-                    <img src="Imports/resources/pics/carousel/slider-3.jpg">
-                    <div class="caption right-align">
-                        <h3 class="black-text text-lighten-5">La mejor calidad en</h3>
-                        <h5 class="black-text text-lighten-3">todos nuestros productos</h5>
-                    </div>
-                </li>
-                <li>
-                    <img src="Imports/resources/pics/carousel/slider-4.jpg">
-                    <div class="caption center-align">
-                        <h3 class="white-text text-lighten-5">Con la mejor atención y eficacia</h3>
-                        <h5 class="light grey-text text-lighten-3">para complacer a nuestros clientes</h5>
-                    </div>
-                </li>
-                <li>
-                    <img src="Imports/resources/pics/carousel/O3.png">
-                    <div class="caption center-align">
-                    </div>
-                </li>
-                <li>
-                    <img src="Imports/resources/pics/carousel/O2.png">
-                    <div class="caption center-align">
-                    </div>
+                    <a href="" class="middle black-text"> <i class="material-icons left">call</i> Contactanos</a>
                 </li>
             </ul>
         </div>
-        <!-- END: Carousel -->
-
-        <h4 class="center">Distribuidora Illussion</h4>
-
-        <!-- BEGIN: Acerca de -->
-        <div class="row">
-            <div class="col s12">
-                <div class="card amber lighten-4">
-                    <div class="card-content black-text">
-                        <span class="card-title">Quiénes somos.</span>
-                        <p>Somos una empresa que se dedica a la distribución de productos para fiestas infantiles, temáticas, cumpleaños, entre otros.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col s12">
-                <div class="card amber lighten-4">
-                    <div class="card-content black-text">
-                        <span class="card-title">Nuestra visión.</span>
-                        <p>Ser la distribuidora selecta salvadoreña preferida globalmente por su calidad y generación de bienestar a su entorno.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- END: Acerca de -->
-
-        <!-- BUTTON: Solicitud de evento. -->
-        <h5 class="center">Algunos de nuestros productos</h5>
-       
-        <div class="row">
+    </nav>
+    <div class="row" id="image-principal">
+        <div class="col s12 m6">
             <div class="center">
-                <a href="login.php" class="btn waves-effect waves-light black ">Solicitar reservación</a>
+                <span class="website-title">¡Bienvenido!</span>
+                <p>Estamos para hacer que tus eventos sean los mejores. ¡Unete a nosotros!</p>
             </div>
         </div>
-
-        <!-- BEGIN: Productos -->
-        <div class="carousel">
-            <a class="carousel-item" href="#one!"><img src="Imports/resources/pics/files/01.jpg"></a>
-                <a class="carousel-item" href="#two!"><img src="Imports/resources/pics/files/02.jpg"></a>
-                    <a class="carousel-item" href="#three!"><img src="Imports/resources/pics/files/03.jpg"></a>
-                        <a class="carousel-item" href="#four!"><img src="Imports/resources/pics/files/04.jpg"></a>
-                            <a class="carousel-item" href="#five!"><img src="Imports/resources/pics/files/05.jpg"></a>
-                        <a class="carousel-item" href="#six!"><img src="Imports/resources/pics/files/06.jpg"></a>
-                    <a class="carousel-item" href="#seven!"><img src="Imports/resources/pics/files/07.jpg"></a>
-                <a class="carousel-item" href="#eight!"><img src="Imports/resources/pics/files/08.jpg"></a>
-            <a class="carousel-item" href="#nine!"><img src="Imports/resources/pics/files/09.jpg"></a>
+        <div class="col s12 m5">
+            <div class="center">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="Imports/resources/pics/carousel/O1.png" alt="" srcset="" class="animated fadeIn">
+                    </div>
+                </div>
+            </div>
         </div>
-        <!-- END: Productos -->
-
-        <!-- BEGIN: Footer -->
-            <footer class="page-footer grey darken-4">
-                <div class="container">
-                    <div class="row">
-                        <div class="col 16 s12">
-                            <h5 class="white-text">Distribuidora Illussion</h5>
-                            <p class="grey-text text-lighten-4">Todo tipo de decoración y accesorios para fiestas y eventos.</p>
-                        </div>
-                        <div class="col l4 offset-l2 s12">
-                            <h5 class="white-text">¡Contáctanos!</h5>
-                            <ul>
-                                <li><a class="grey-text text-lighten-3" href="https://www.facebook.com/distribuidora.illussion">Facebook</a></li>
-                                <li><a class="grey-text text-lighten-3" href="https://www.instagram.com/">Instagram</a></li>
-                                <li><a class="grey-text text-lighten-3" href="https://www.twitter.com/">Twitter</a></li>
-                            </ul>
+    </div>
+    <div class="row">
+        <div class="slider">
+            <ul class="slides">
+            <li>
+                <img src="Imports/resources/pics/utilities/ballons3.jpg"> 
+                <div class="caption center-align">
+                <h3 class="black-text">Somos Illusion party</h3>
+                <h5 class="light black-text text-lighten-3"> <div class="chip white-text" id="chip-slider1">Organiza tus eventos con nosotros</div> </h5>
+                </div>
+            </li>
+            <li>
+                <img src="Imports/resources/pics/utilities/ballons5.jpg"> <!-- random image -->
+                <div class="caption right-align">
+                <h3 class="black-text">Clientes felices</h3>
+                <h5 class="black-text text-lighten-3"> <div class="chip white">Nuestra prioridad es la comodidad de tus invitados</div> </h5>
+                </div>
+            </li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="center">
+            <span class="website-service">Nuestra empresa </span>
+        </div>
+        <div class="row">
+            <div class="col s12 m6" id="content-information">
+                <div class="center">
+                    <span> <div class="chip white-text" id="chip-information">Compromiso</div> </span>
+                </div>
+                <div class="row" id="objectives">
+                    <div class="col s12 m6 offset-m3">
+                        <div class="card">
+                            <div class="card-content">
+                                <div class="center">
+                                    <i class="material-icons">done_all</i>
+                                </div>             
+                                <span class="black-text"> Nuestro equipo es comprometido en tus eventos, bastantes serviciales y puntuales </span>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="footer-copyright black">
-                    <div class="container">
-                    © 2014 Copyright Illussion Party Supplies
-                    <a class="grey-text text-lighten-4 right">Todos los derechos reservados</a>
+            </div>
+            <div class="col s12 m6" id="content-information">
+                <div class="center">
+                <span> <div class="chip white-text" id="chip-information">Accesibles</div> </span>
+                    <div class="row" id="objectives">
+                        <div class="col s12 m6 offset-m3">
+                            <div class="card">
+                                <div class="card-content">
+                                    <div class="center">
+                                        <i class="material-icons">emoji_people</i>
+                                    </div>
+                                    <span class="black-text">Si tu solicitas un producto, nosotros nos encargaremos de buscarlo por ti y agregarlo a tu evento</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </footer>
-        <!-- END: Footer -->
-
-        <!-- SCRIPTS -->
-        <?php
-            ImportGlobal::ImportPublicJQuery();
-            ImportGlobal::ImportPublicMaterializeJS();
-            ImportGlobal::ImportPublicInits();
-        ?>
-    </body>
+            </div>
+            <div class="col s12 m6" id="content-information">
+                <div class="center">
+                <span> <div class="chip white-text" id="chip-information"> Cercanos </div> </span>
+                    <div class="row" id="objectives">
+                        <div class="col s12 m6 offset-m3">
+                            <div class="card">
+                                <div class="card-content">
+                                    <div class="center">
+                                        <i class="material-icons">supervised_user_circle</i>
+                                    </div>
+                                    <span class="black-text">Hemos adquirido la manera de que puedas solicitar tu evento de la manera más facil y sencilla con nuestra plataforma</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m6" id="content-information">
+                <div class="center">
+                <span> <div class="chip white-text" id="chip-information"> Organizacion </div> </span>
+                    <div class="row" id="objectives">
+                        <div class="col s12 m6 offset-m3">
+                            <div class="card">
+                                <div class="card-content">
+                                    <div class="center">
+                                        <i class="material-icons">post_add</i>
+                                    </div>
+                                    <span>Nosotros como empresa sabemos que los eventos pueden ser grandes y robustos, pero hemos mejorado en ser detallistas con nuestros clientes.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php
+        ImportGlobal::ImportPublicJQuery();
+        ImportGlobal::ImportPublicMaterializeJS();
+        ImportGlobal::ImportPublicControllerJs('Home');
+    ?>
+</body>
 </html>

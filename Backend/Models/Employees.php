@@ -92,13 +92,8 @@ class Employee extends Validator{
         }
     }
     public function role($value){
-        if($this->validateId($value)){
             $this->role=$value;
             return true;
-        }
-        else{
-            return false;
-        }
     }
     public function getRole(){
         return $this->role;
@@ -136,7 +131,7 @@ class Employee extends Validator{
 
     public function checkUsername()
 	{
-		$sql = 'SELECT id, name, lastname, username, role, email ,status, google_secret_key,tries FROM employees WHERE username = ?';
+		$sql = 'SELECT id, name, lastname, username, role, email , status, google_secret_key,tries FROM employees WHERE username = ?';
 		$params = array($this->username);
 		$data = Database::getRow($sql, $params);
 		if ($data) {
@@ -149,6 +144,35 @@ class Employee extends Validator{
             $this->status = $data['status'];
             $this->google_secret_key = $data['google_secret_key'];
             $this->tries = $data['tries'];
+			return true;
+		} else {
+			return false;
+		}
+    }
+    public function checkEmail(){
+        $sql = 'SELECT email FROM employees WHERE id = ?';
+		$params = array($this->email);
+		$data = Database::getRow($sql, $params);
+		if ($data) {
+            $this->email = $data['email'];
+			return true;
+		} else {
+			return false;
+		}
+    }
+    public function checkEmployee()
+	{
+		$sql = 'SELECT name, lastname, username, role, email , status, google_secret_key FROM employees WHERE id = ?';
+		$params = array($this->id);
+		$data = Database::getRow($sql, $params);
+		if ($data) {
+			$this->name = $data['name'];
+            $this->lastname = $data['lastname'];
+            $this->username=$data['username'];
+            $this->role = $data['role'];
+            $this->email = $data['email'];
+            $this->status = $data['status'];
+            $this->google_secret_key = $data['google_secret_key'];
 			return true;
 		} else {
 			return false;
@@ -180,7 +204,8 @@ class Employee extends Validator{
 		$params = array($this->id);
 		$data = Database::getRow($sql, $params);
 		if (password_verify($this->password, $data['password'])) {
-			return true;
+            $this->updateTries(3);
+            return true;
 		} else {
 			return false;
 		}
@@ -197,6 +222,11 @@ class Employee extends Validator{
         $params=array(3, $this->id);
         return Database::executeRow($sql,$params);
     }
+    public function getRoles(){
+        $sql='SELECT * FROM roles WHERE roles.id NOT IN (2)';
+        $params = array(null);
+        return Database::getRows($sql,$params);
+    }
     public function findbyId(){
         $sql ='SELECT * FROM employees WHERE id=?';   
         $params=array($this->id);
@@ -205,6 +235,12 @@ class Employee extends Validator{
     public function editProfile(){
         $sql='UPDATE employees SET name=?, lastname=?, email=?, username=? WHERE id=?';
         $params=array($this->name, $this->lastname, $this->email, $this->username, $this->id);
+        return Database::executeRow($sql,$params);
+    }
+
+    public function updateState($status){
+        $sql='UPDATE employees SET status=? WHERE id=?';
+        $params = array($status, $this->id);
         return Database::executeRow($sql,$params);
     }
     
@@ -262,6 +298,17 @@ class Employee extends Validator{
         }
         else{
             return false;
+        }
+    }
+    public function countUsers(){
+        $sql='SELECT COUNT(*) as countU FROM employees LIMIT 1';
+        $params = array(null);
+        $data = Database::getRow($sql,$params);
+        if(!$data['countU'] > 0){
+            return false;
+        }
+        else{
+            return true;
         }
     }
     public function restoreUser(){

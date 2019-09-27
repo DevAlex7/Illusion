@@ -1,5 +1,6 @@
 $(document).ready(function () {
-    showProfile();
+  setSidenavItem('profile-item','icon-profile');
+  showProfile();
 });
 const data = {
     id : '',

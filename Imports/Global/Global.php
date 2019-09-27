@@ -168,6 +168,10 @@ class ImportGlobal{
         print 
         '<script src="Imports/resources/js/global/inits.js"></script>';
     }
+    public static function ImportAnimateCSS(){
+        print 
+        '<link rel="stylesheet" href="Imports/resources/css/Global/animate.css">';
+    } 
     
 }
 ?>

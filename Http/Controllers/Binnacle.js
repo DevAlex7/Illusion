@@ -1,7 +1,6 @@
 $(document).ready(function () {
-   
+    setSidenavItem('binnacle-item','icon-binnacle');
     CallTimeline();
-      
 });
 
 

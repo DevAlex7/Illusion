@@ -12,6 +12,7 @@ require_once('../Imports/Global/Global.php')?>
         ImportGlobal::ImportMaterializeCss();
         ImportGlobal::ImportMaterialIcons(); 
         ImportGlobal::ImportFileCss('binnacle'); 
+        ImportGlobal::ImportSidenavCss('sidenav');
         ImportGlobal::ImportIco();
         ImportGlobal::ImportFont();
     ?>
@@ -53,7 +54,6 @@ require_once('../Imports/Global/Global.php')?>
     ImportGlobal::ImportMaterializeJS();
     ImportGlobal::ImportJSFunctions();
     ImportGlobal::ImportMomentJS();
-    ImportGlobal::ImportRoutesJs();
     ImportGlobal::ImportControllerJs('Binnacle');
 ?>
 </body>
