@@ -81,7 +81,6 @@ if (isset($_GET['request']) && isset($_GET['action'])) {
                     }
                     break;
                 case 'CreateUser':
-<<<<<<< HEAD
                     if ($employe->name($_POST['NameUser'])) {
                         if ($employe->lastname($_POST['LastName'])) {
                             if ($employe->email($_POST['EmailUser'])) {
@@ -93,23 +92,6 @@ if (isset($_GET['request']) && isset($_GET['action'])) {
                                                     if (!$select->emailWhere("employees", $_POST['EmailUser'])) {
                                                         $employe->save();
                                                         $result['status'] = 1;
-=======
-                    if(!$employe->countUsers()){
-                        if ($employe->name($_POST['NameUser'])) {
-                            if ($employe->lastname($_POST['LastName'])) {
-                                if ($employe->email($_POST['EmailUser'])) {
-                                    if ($employe->username($_POST['Nickname'])) {
-                                        if ($_POST['pass'] == $_POST['pass2']) {
-                                            if ($_POST['Nickname'] != $_POST['pass']) {
-                                                if ($employe->password($_POST['pass'])) {
-                                                    if ($employe->role(0)) {
-                                                        if (!$select->emailWhere("employees", $_POST['EmailUser'])) {
-                                                            $employe->save();
-                                                            $result['status'] = 1;
-                                                        } else {
-                                                            $result['exception'] = 'Correo existente';
-                                                        }
->>>>>>> 40e7dbdd83676e3c3833599177bf8a9f6a369374
                                                     } else {
                                                         $result['exception'] = 'Cargo invalido';
                                                     }

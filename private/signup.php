@@ -75,12 +75,7 @@
                             <button type="submit" class="btn col s12 m6 offset-m3 green accent-4">Registrarme</button>
                         </form>
                     </div>
-<<<<<<< HEAD
                 </div>
-=======
-                    <button type="submit" id="btnSignUp" class="btn col s12 m6 offset-m3 green accent-4">Registrarme</button>
-                </form>
->>>>>>> 40e7dbdd83676e3c3833599177bf8a9f6a369374
             </div>
         </div>
     </main>
