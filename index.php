@@ -22,10 +22,10 @@
         <div class="nav-wrapper">
             <ul>
                 <li>
-                    <a href="" class="middle black-text"> <i class="material-icons left">near_me</i> Iniciar sesión</a>
+                    <a href="login.php" class="middle black-text"> <i class="material-icons left">near_me</i> Iniciar sesión</a>
                 </li>
                 <li>
-                    <a href="" class="middle black-text"> <i class="material-icons left">supervisor_account</i> Registrarme</a>
+                    <a href="signup.php" class="middle black-text"> <i class="material-icons left">supervisor_account</i> Registrarme</a>
                 </li>
                 <li>
                     <a href="" class="middle black-text"> <i class="material-icons left">call</i> Contactanos</a>

@@ -336,6 +336,31 @@
                             $result['exception']='No se ha identificado el evento';
                         }
                     break;
+                    case 'updateCost':
+                    if($event->id($_POST['idEvent'])){
+                        if($event->pay_status(1)){
+                            if($event->updateCost()){
+                                $result['status']=1;
+                            }
+                            else{
+                                $result['exception']='No se ha podigo pagar el evento';
+                            }
+                        }  
+                        else{
+                            $result['exception']='No se definir el pago';
+                        }
+                    }else{
+                        $result['exception']='No hay información del evento';
+                    }
+                    break;
+                    case 'deleteComment':
+                    if($event->deleteComment($_POST['id'])){
+                        $result['status']=1;
+                    }
+                    else{
+                        $result['exception']='No se pudo eliminar el comentario';
+                    }
+                    break;
                     default: 
                     exit('acción no disponible');
                 }

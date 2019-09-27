@@ -185,7 +185,7 @@ if (isset($_GET['request']) && isset($_GET['action'])) {
                                     if($employe->username($_POST['username'])){
                                         if(!$employe->checkEmail()){                                    
                                             if(!$employe->checkUsername()){
-                                                if(strlen($_POST['pass1'])> 7 ){
+                                                if(strlen($_POST['pass1']) > 7 ){
                                                     if($employe->password($_POST['pass1'])){
                                                         if ($employe->role($_POST['role'])) {
                                                                 $employe->save();

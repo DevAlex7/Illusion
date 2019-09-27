@@ -47,6 +47,7 @@
                                                     </div>
                                                     <div class="divider" id="Divider"></div>
                                                     <a href="javascript:viewReportEvent()" class="btn red" style="margin-top:1rem">Reporte PDF</a>
+                                                    <a href="javascript:updatePay()" class="btn green accent-4" style="margin-top:1rem">Pagar evento</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -405,7 +406,6 @@
     ImportGlobal::ImportJQuery();
     ImportGlobal::ImportMaterializeJS();
     ImportGlobal::ImportJSFunctions();
-    ImportGlobal::ImportRoutesJs();
     ImportGlobal::ImportControllerJs('ViewEventController');
 ?>
 </body>

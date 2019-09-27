@@ -24,17 +24,22 @@ require_once('../Imports/Global/Global.php')
     </header>
     <main>
         <div class="row" id="PresentationCard">
-           <div class="card col s12 m5 offset-m3">
-                <div class="card-content">
-                    <span class="card-title center">¡Bienvenido!</span>
-                    <span class="card-title center"> <?php print $_SESSION['UsernameActive']. ': ' .$_SESSION['NameUser']. ' '.$_SESSION['LastnameUser']   ?> </span>
+           <div class="card col s12 m5 offset-m3 red">
+                <div class="card-content white-text">
+                    <div class="row">
+                        <div class="col s12 m3">
+                            <i class="material-icons" id="iconHome">near_me</i>
+                        </div>
+                        <div class="col s12 m9">
+                            <span id="titleHome" >Bienvenido</span>
+                            <h6> <?php print $_SESSION['NameUser'].' '.$_SESSION['LastnameUser']  ?> </h6>
+                            <h6> <?php print $_SESSION['UsernameActive']  ?> </h6>
+                        </div>
+                    </div>
                 </div>
            </div>
         </div>
     </main>
-<footer class="red">
-    <?php ImportGlobal::ImportFooter();?>
-</footer>
 <?php
 
     ImportGlobal::ImportJQuery();

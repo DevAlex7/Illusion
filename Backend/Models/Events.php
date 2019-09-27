@@ -161,6 +161,16 @@ class Events extends Validator{
         return Database::getRows($sql,$params);
         
     }
+    public function updateCost(){
+        $sql='UPDATE events SET pay_status = ?  WHERE id=?';
+        $params = array($this->pay_status, $this->id);
+        return Database::executeRow($sql,$params);
+    }
+    public function deleteComment($id){
+        $sql='DELETE FROM comments_in_event WHERE id=?';
+        $params = array($id);
+        return Database::executeRow($sql,$params);
+    }
     public function getCostinEvent(){
         $sql='  SELECT SUM(products.price * list_products_event.count) AS Cost FROM ((list_products_event 
                 INNER JOIN products 

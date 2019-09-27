@@ -41,9 +41,9 @@ class AdminSideNav {
                         <li><a id="events-item" href="/Illusion/private/events.php"><i class="material-icons black-text" id="icon-event">calendar_today</i>Eventos</a></li>
                         <li><a id="subject-item" href="/Illusion/private/typeevents.php"><i class="material-icons black-text" id="icon-subject">subject</i>Tipos de eventos</a></li>
                         <li><a id="admin-item" href="/Illusion/private/employees.php"><i class="material-icons black-text" id="icon-admin">account_circle</i>Administradores</a></li>
-                        <li><a id="product-item" href="/Illusion/private/products.php"><i class="material-icons" id="icon-product">local_mall</i>Productos</a></li>
-                        <li><a id="request-item" href="/Illusion/private/requests.php"><i class="material-icons" id="icon-request">inbox</i>Solicitudes</a></li>
-                        <li><a id="graph-item" href="/Illusion/private/charts.php"><i class="material-icons" id="icon-graph">assessment</i>Estadísticas</a></li>
+                        <li><a id="product-item" href="/Illusion/private/products.php"><i class="material-icons black-text" id="icon-product">local_mall</i>Productos</a></li>
+                        <li><a id="request-item" href="/Illusion/private/requests.php"><i class="material-icons black-text" id="icon-request">inbox</i>Solicitudes</a></li>
+                        <li><a id="graph-item" href="/Illusion/private/charts.php"><i class="material-icons black-text" id="icon-graph">assessment</i>Estadísticas</a></li>
                         <li><div class="divider"></div></li>
                         <li><a href="#ModalCloseSession" class="modal-trigger"><i class="material-icons">exit_to_app</i>Cerrar Sesión</a></li>
                         </div>
@@ -76,8 +76,8 @@ class AdminSideNav {
                         <li><a class="subheader grey-text">Menu</a></li>
                         <li><a id="events-item" href="/Illusion/private/events.php"><i class="material-icons black-text" id="icon-event">calendar_today</i>Eventos</a></li>
                         <li><a id="subject-item" href="/Illusion/private/typeevents.php"><i class="material-icons black-text" id="icon-subject">subject</i>Tipos de eventos</a></li>
-                        <li><a id="product-item" href="/Illusion/private/products.php"><i class="material-icons" id="icon-product">local_mall</i>Productos</a></li>
-                        <li><a id="request-item" href="/Illusion/private/requests.php"><i class="material-icons" id="icon-request">inbox</i>Solicitudes</a></li>
+                        <li><a id="product-item" href="/Illusion/private/products.php"><i class="material-icons black-text" id="icon-product">local_mall</i>Productos</a></li>
+                        <li><a id="request-item" href="/Illusion/private/requests.php"><i class="material-icons black-text" id="icon-request">inbox</i>Solicitudes</a></li>
                         <li><div class="divider"></div></li>
                         <li><a href="#ModalCloseSession" class="modal-trigger"><i class="material-icons">exit_to_app</i>Cerrar Sesión</a></li>
                         </div>

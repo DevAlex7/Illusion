@@ -24,4 +24,12 @@ main {
 #TitleSidenav{
   background-color: rgb(245, 29, 47);
 }
+#iconHome{
+  position: relative;
+  top:2rem;
+}
+#titleHome{
+  font-weight: bold;
+  font-size: 20px;
+}
           
