@@ -304,7 +304,7 @@ class Employee extends Validator{
         $sql='SELECT COUNT(*) as countU FROM employees LIMIT 1';
         $params = array(null);
         $data = Database::getRow($sql,$params);
-        if(!$data['countU'] > 0){
+        if($data['countU'] > 0){
             return false;
         }
         else{

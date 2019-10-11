@@ -13,8 +13,8 @@ class Database
     {
         $server = 'localhost';
         $database = 'illusion';
-        $username = 'expo2019';
-        $password = 'expotecnica2019';
+        $username = 'root';
+        $password = '';
         try {
             @self::$connection = new PDO('mysql:host='.$server.'; dbname='.$database.'; charset=utf8', $username, $password);
         } catch(PDOException $error) {

@@ -37,13 +37,8 @@ $('#FormRegistrer').submit(function(){
         if(isJSONString(response)){
             const result = JSON.parse(response);
             if(result.status){
-<<<<<<< HEAD
-                M.toast({html:'Añadido correctamente'}, 'index.php');
-
-=======
                 M.toast({html:'Añadido correctamente'});
                 location.href='../private/';
->>>>>>> 40e7dbdd83676e3c3833599177bf8a9f6a369374
             }
             else{
                 M.toast({html:result.exception});

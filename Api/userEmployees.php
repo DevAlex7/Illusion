@@ -81,45 +81,50 @@ if (isset($_GET['request']) && isset($_GET['action'])) {
                     }
                     break;
                 case 'CreateUser':
-                    if ($employe->name($_POST['NameUser'])) {
-                        if ($employe->lastname($_POST['LastName'])) {
-                            if ($employe->email($_POST['EmailUser'])) {
-                                if ($employe->username($_POST['Nickname'])) {
-                                    if ($_POST['pass'] == $_POST['pass2']) {
-                                        if ($_POST['Nickname'] != $_POST['pass']) {
-                                            if ($employe->password($_POST['pass'])) {
-                                                if ($employe->role(1)) {
-                                                    if (!$select->emailWhere("employees", $_POST['EmailUser'])) {
-                                                        $employe->save();
-                                                        $result['status'] = 1;
+                    if($employe->countUsers()){
+                        if ($employe->name($_POST['NameUser'])) {
+                            if ($employe->lastname($_POST['LastName'])) {
+                                if ($employe->email($_POST['EmailUser'])) {
+                                    if ($employe->username($_POST['Nickname'])) {
+                                        if ($_POST['pass'] == $_POST['pass2']) {
+                                            if ($_POST['Nickname'] != $_POST['pass']) {
+                                                if ($employe->password($_POST['pass'])) {
+                                                    if ($employe->role(1)) {
+                                                        if (!$select->emailWhere("employees", $_POST['EmailUser'])) {
+                                                            $employe->save();
+                                                            $result['status'] = 1;
+                                                        } else {
+                                                            $result['exception'] = 'Cargo invalido';
+                                                        }
                                                     } else {
-                                                        $result['exception'] = 'Cargo invalido';
+                                                        $result['exception'] = 'La contraseña debe constar al menos de 8 carácteres';
                                                     }
                                                 } else {
-                                                    $result['exception'] = 'La contraseña debe constar al menos de 8 carácteres';
+                                                    $result['exception'] = 'La contraseña es igual al nombre de usuario';
                                                 }
                                             } else {
-                                                $result['exception'] = 'La contraseña es igual al nombre de usuario';
+                                                $result['exception'] = 'Las contraseñas ingresadas son iguales';
                                             }
                                         } else {
-                                            $result['exception'] = 'Las contraseñas ingresadas son iguales';
+                                            $result['exception'] = 'El nombre de usuario debe constar de 7 carácteres';
                                         }
                                     } else {
-                                        $result['exception'] = 'El nombre de usuario debe constar de 7 carácteres';
+                                        $result['exception'] = 'Correo invalido';
                                     }
                                 } else {
-                                    $result['exception'] = 'Correo invalido';
+                                    $result['exception'] = 'Apellido incorrecto debe llevar al menos 5 carácteres';
                                 }
                             } else {
-                                $result['exception'] = 'Apellido incorrecto debe llevar al menos 5 carácteres';
+                                $result['exception'] = 'Nombre incorrecto debe llevar al menos 5 carácteres';
                             }
-                        } else {
-                            $result['exception'] = 'Nombre incorrecto debe llevar al menos 5 carácteres';
                         }
-                    }
+                        else{
+                            $result['exception']='Nombre incorrecto';
+                        }
+                    }   
                     else{
                         $result['exception']='Ya hay usuarios en el sistema';
-                    }   
+                    }
                     break;
                 case 'Login':
                     if ($employe->username($_POST['Nickname'])) {

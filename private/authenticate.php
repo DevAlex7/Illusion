@@ -4,7 +4,6 @@ require_once('../Imports/Global/Global.php');
 require_once('../Helpers/Roles.php');    
 require_once('../Helpers/Dashboard.php');
 
-AdminSideNav::verifySession();
 
 ?>
 <!DOCTYPE html>
